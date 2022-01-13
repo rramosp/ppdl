@@ -1,7 +1,7 @@
 from setuptools import setup
 import setuptools
 
-#setuptools.setup(version_config=True, setup_requires=["setuptools-git-versioning"])
+##setuptools.setup(version_config=True, setup_requires=["setuptools-git-versioning"])
 
 setup(name='ppdl',
       install_requires=['matplotlib','numpy', 
