@@ -3,7 +3,7 @@ import setuptools
 
 #setuptools.setup(version_config=True, setup_requires=["setuptools-git-versioning"])
 
-setup(name='rlxutils',
+setup(name='ppdl',
       install_requires=['matplotlib','numpy', 
                         'progressbar2', 'sympy'
                        ],
