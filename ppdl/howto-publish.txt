@@ -1,3 +1,26 @@
-rm -rf dist/*
-python setup.py sdist
-twine upload dist/*
+make sure your repo is commited, tagged with the new version number and pushed.
+then do:
+
+   ppdl/bin/get_scm_version
+
+to verify the version with which the code will be published. Then do:
+
+   rm -rf dist/*
+   python setup.py sdist
+   twine upload dist/*
+
+if you have not tagged or commited your repo, the version on the package created
+by setup tools might be:
+
+   local changes not committed              0.1.dev0+g73731b3.d20220113
+   local changes committed (pushed or not)  0.1.dev1+g3ec6e04
+
+   with "0.1" being the last known tag
+
+git commands to manage tags:
+
+   create tag locally   git tag 0.1.2
+   push tag to repo     git push origin 0.1.2
+   delete tag locally   git tag -d 0.1.2
+   delete tag in repo   git push --delete origin 0.1.2
+
