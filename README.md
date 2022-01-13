@@ -1,5 +1,5 @@
 # Probabilistic Programming for Deep Learning
 
-for course material access http://rramosp.github.io/pp4dl
+for course material access http://rramosp.github.io/ppdl
 
-for libraries: `pip install pp4dl`
+for libraries: `pip install ppdl`

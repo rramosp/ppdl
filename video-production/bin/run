@@ -1,0 +1,4 @@
+#!/bin/sh
+
+docker run -it --rm --name manim -v "$(pwd):/manim" -v "$HOME/Media:/media" manim $*
+

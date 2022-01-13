@@ -1,0 +1,6 @@
+style:
+  font: "Consolas"
+  background_color: "#000000"
+
+directories:
+  pi_creature_images: "pi_creature_images"
