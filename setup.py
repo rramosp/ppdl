@@ -5,7 +5,7 @@ import setuptools
 
 setup(name='ppdl',
       install_requires=['matplotlib','numpy', 
-                        'progressbar2', 'sympy'
+                        'progressbar2', 'sympy', 'rlxutils'
                        ],
       use_scm_version=True,
       setup_requires=['setuptools_scm'],
