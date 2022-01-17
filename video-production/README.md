@@ -14,7 +14,7 @@ build the docker image
 
 make sure it is properly registered with your local docker installation (the image name is `manim`)
 
-      docker image ps
+      docker image ls
 
 
 render any video
