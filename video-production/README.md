@@ -19,7 +19,7 @@ make sure it is properly registered with your local docker installation (the ima
 
 render any video
 
-      ./bin/run manim -ql src/videos/talking_about_probability/talking_about_probability.py
+      ./bin/run manim -ql src/scripts/talking_about_probability/talking_about_probability.py
 
 notes:
 
