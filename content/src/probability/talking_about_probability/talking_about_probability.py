@@ -1,11 +1,11 @@
 import logging
 import os, sys
-sys.path.insert(0, "src")
 
+sys.path.insert(0, ".")
 from manim import *
-from common.scenes import *
-from common.objects import *
-from common.utils import *
+from lib.scenes import *
+from lib.objects import *
+from lib.utils import *
 
 def play_intro_wheely(scene):
     f1 = Wheely(mode="thinking").scale(0.3).move_to([-2,1,0])

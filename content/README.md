@@ -16,10 +16,9 @@ make sure it is properly registered with your local docker installation (the ima
 
       docker image ls
 
+render any video (runs in the container)
 
-render any video
-
-      ./bin/run manim -ql src/scripts/talking_about_probability/talking_about_probability.py
+      ./bin/manim -ql src/probability/talking_about_probability/talking_about_probability.py 
 
 notes:
 
@@ -27,9 +26,14 @@ notes:
 - the folder `$HOME/Media` is mounted on the container as `/media` by the run script `bin/run`.
 - place audio files under `$HOME/Media/audio` (thus, outside github)
 - place images under `src/imgs` and include them in the github commits
-- use `common.objects.find_imgfile` and `find_audiofile` in your code to locate imgs or audio  on those folders.
+- use `lib.objects.find_imgfile` and `lib.objects.find_audiofile` in your code to locate image or audio files on those folders.
 - place there any files you might need for rendering 
+- **output** will be rendered in `$HOME/Media/manim_output`
 
+
+interactive session in the container:
+
+    ./bin/run bash
 
 ## OBS configuration
 

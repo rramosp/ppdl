@@ -1,0 +1,5 @@
+#!/bin/bash
+
+DIRNAME=`dirname $0`
+mkdir -p $HOME/Media/manim_output
+$DIRNAME/run manim --media_dir /media/manim_output $*

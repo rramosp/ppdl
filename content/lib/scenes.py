@@ -3,8 +3,8 @@ logger = logging.getLogger('matplotlib')
 logger.setLevel(logging.INFO)
 
 from manim import *
-from common.objects import *
-from common.utils import *
+from .objects import *
+from .utils import *
 import pandas as pd
 class SceneTimer:
     """
