@@ -58,3 +58,6 @@ MANIFEST
 **/media/*
 **/.local/*
 **checkpoint.ipynb
+**/.cache
+**/.bash_history
+

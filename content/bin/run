@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mkdir -p $HOME/Media/manim_output
+docker run -it --rm -v "$(pwd):/manim" -v "$HOME/Media:/media" manim --media_dir /media/manim_output $*
