@@ -71,3 +71,16 @@ include these lines in the main scene file to avoid over logging of debug from o
      pyglet.options['debug_gl'] = False
 
 
+## Audio Files known working configuration
+
+If your video loses all audio or just a part try using the following `audio codec configuration` **tested on VLC media converter**
+
+- Audio File Type: `wav`
+- Codec: `MPEG Audio`
+- Bitrate: `512 kb/s`
+- Channels: `2`
+- Sample Rate: `48000 Hz`
+
+Since the original developers didnt intend for manim to be used with multiple large audio files, the internal audio libraries for `add_sound` do not implement audio parameters normalization.
+
+As such, to ensure a proper video file generation, the audio files must be fixed prior to their incorporation in the video.
