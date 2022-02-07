@@ -10,7 +10,7 @@
 
 **[00:35]** [<font color="red"> highlight **A** if i know **B** </font>]
 
-**[00:45]** [<font color="red"> Change scene and a screen in half with the two key elements </font>] Let's get down to it. Two key things to remember on Bayesian inference:
+**[00:45]** [<font color="red"> Change scene and split screen in half with the two key elements </font>] Let's get down to it. Two key things to remember on Bayesian inference:
 
 - **[01:36]** Probability is interpreted as belief, **not as an actual truth**. It represents our knowledge and uncertainty about something. It is very important to slow down and allow this to sink in well in our understanding. If **I KNOW** that it is going or has rain, then $P(rain)=1$. If, by whatever reason I am only 50% sure of that, then $P(rain)=0.5$.
 -  **[02:45]** Probability is updated as our uncertainty changes. When does our uncertainty change? When we have new observations, evidence, facts. <font color="red"> [list examples] </font>

@@ -1,7 +1,9 @@
 import logging
 import os, sys
+from unicodedata import decimal
 
 from numpy import vdot
+from scipy.fftpack import shift
 
 sys.path.insert(0, ".")
 from manim import *
@@ -12,7 +14,7 @@ from lib.utils import *
 ES_text_dict = {}
 
 def create_bayes_theorem_header(scene):
-    ES_text_dict["bayes_theorem_header"] = "Definición del Teorema de Bayes"
+    ES_text_dict["bayes_theorem_header"] = "bayes theorem definition"
     text_bayes = Text(ES_text_dict["bayes_theorem_header"], color=BLUE_E ).to_edge(UP)
     scene.play(Write(text_bayes))
     return text_bayes
@@ -28,13 +30,13 @@ def create_bayes_theorem_definition(scene,header):
     text_latex_bayes_def_left.next_to(text_latex_bayes_def_right,direction=LEFT)
     group_latex_bayes_def.next_to(header,direction=DOWN)
 
-    scene.play(Write(group_latex_bayes_def),lag_ratio=0.5)
+    scene.play(Write(group_latex_bayes_def),run_time=14,lag_ratio=0.5)
 
     return group_latex_bayes_def
 
 def create_bayesian_inference_header(scene, split_line):
-    ES_text_dict["bayesian_inference_1"] = "Inferencia Bayesiana 1"
-    ES_text_dict["bayesian_inference_2"] = "Inferencia Bayesiana 2"
+    ES_text_dict["bayesian_inference_1"] = "1. belief uncertainty"
+    ES_text_dict["bayesian_inference_2"] = "2. belief updates"
 
     text_keypoint_one = Text(ES_text_dict["bayesian_inference_1"],color=BLUE_E,font_size=24).to_edge(LEFT)
     text_keypoint_two = Text(ES_text_dict["bayesian_inference_2"],color=BLUE_E,font_size=24).to_edge(RIGHT)
@@ -49,8 +51,8 @@ def create_bayesian_inference_header(scene, split_line):
     return group_keypoints_inference
 
 def create_inference_bulletpoint_one(scene, inference_bulletpoints_header):
-    ES_text_dict["bayesian_inference_belief"] = "Conocimiento"
-    ES_text_dict["bayesian_inference_uncertainty"] = "Incertidumbre"
+    ES_text_dict["bayesian_inference_belief"] = "knowledge"
+    ES_text_dict["bayesian_inference_uncertainty"] = "uncertainty"
 
     text_belief = Text(ES_text_dict["bayesian_inference_belief"],color=BLACK,font_size=20).to_edge(LEFT,buff=1.5)
     text_uncertainty = Text(ES_text_dict["bayesian_inference_uncertainty"],color=BLACK,font_size=20)
@@ -86,15 +88,16 @@ def create_inference_bulletpoint_one_example(scene, inference_bulletpoint_one):
     
 
     scene.play(Write(text_latex_rain))
+    scene.wait(2)
     scene.play(FadeIn(decimal))
-    scene.wait(10)
+    scene.wait(8)
     scene.play(Indicate(inference_bulletpoint_one["uncertainty"],color=RED_E,run_time=4))
-    scene.wait(30)
+    scene.wait(22)
     scene.play(FadeOut(decimal))
     decimal.set_value(1.0)
     scene.play(FadeIn(decimal))
-    scene.wait(2)
-    scene.play(Indicate(inference_bulletpoint_one["belief"],color=RED_E,run_time=4))
+    scene.wait(1)
+    scene.play(Indicate(inference_bulletpoint_one["belief"],color=RED_E,run_time=8))
     return text_latex_rain,decimal
 
 def create_inference_bulletpoint_two(scene, inference_bulletpoints_header):
@@ -109,7 +112,7 @@ def create_inference_bulletpoint_two(scene, inference_bulletpoints_header):
 
     header_keypoint_two = VDict(pairs, show_keys=False)
 
-    scene.play(Write(text_belief))
+    scene.play(Write(text_belief,run_time=2))
     scene.play(Circumscribe(text_belief,color=BLUE_B,time_width=3,fade_out=True))
     scene.play(Circumscribe(text_belief,color=BLUE_B,time_width=3,fade_out=True))
     scene.play(Circumscribe(text_belief,color=BLUE_B,time_width=3))
@@ -120,15 +123,38 @@ def create_inference_bulletpoint_two(scene, inference_bulletpoints_header):
 
 
 def create_inference_bulletpoint_two_example(scene, inference_bulletpoints_header):
-    ES_text_dict["list_bulletpoint_two"] = "- Observaciones\n- Eventos\n- Información"
-
+    ES_text_dict["list_bulletpoint_two"] = "- observations\n- events\n- information"
+    
     txt = Text(ES_text_dict["list_bulletpoint_two"],color=BLACK,font_size=16).to_edge(RIGHT, buff= 5)
-
     txt.align_to(inference_bulletpoints_header["right_keypoint"],DOWN)
     txt.shift(DOWN*2)
 
-    scene.play(Write(txt,run_time=8.0))
+    text_latex_rain = Tex("$$P(rain) = $$").scale(1).to_corner(DR,buff= 3)
+    text_latex_rain.shift(DOWN*1)
+    
+    
+    decimal_rain = DecimalNumber(0.5, color = BLACK)
+    decimal_rain.next_to(text_latex_rain,direction=RIGHT)
 
+    pairs = [ ("list_txt", txt), ("txt_latex", text_latex_rain), ("decimal", decimal_rain) ]
+
+    bulletpoint_example_vdict = VDict(pairs,show_keys=False)
+
+    scene.play(Write(txt,run_time=8.0))
+    scene.wait(13)
+    scene.play(Write(text_latex_rain))
+    scene.play(Write(decimal_rain))
+    scene.wait(26)
+    scene.play(FadeOut(decimal_rain))
+    decimal_rain.set_value(0.8)
+    scene.play(FadeIn(decimal_rain))
+    scene.play(Circumscribe(text_latex_rain,color=BLUE_B,time_width=3,fade_out=True))
+    scene.play(Circumscribe(text_latex_rain,color=BLUE_B,time_width=3,fade_out=True))
+    scene.play(Circumscribe(text_latex_rain,color=BLUE_B,time_width=3))
+    scene.play(Indicate(txt), color=RED_E,run_time=14)
+    scene.wait(1)
+
+    return bulletpoint_example_vdict
 
 
 
@@ -137,17 +163,18 @@ def create_inference_bulletpoint_two_example(scene, inference_bulletpoints_heade
 class Main(Scene):
     def construct(self):
 
-        video_name = r"Bayes theorem intuition"
+        video_name = r"bayes theorem intuition"
         play_intro_scene(self,video_name)
-        timer = SceneTimer(self,debug_wait=True).reset()
+        timer = SceneTimer(self,debug_wait=False).reset()
 
-        sfile = find_soundfile("2022_01_12_15_40_29_bayes_theorem")
-        timer.wait_until(3)
+        sfile = find_soundfile("bayes_theorem_01") 
         self.add_sound(sfile)
         
+        self.next_section("1. Definition Bayes Theorem")
+        timer.wait_until(3)
         bayes_theorem_intro = create_bayes_theorem_header(self)
+        
         timer.wait_until(11)
-
         bayes_latex_theorem = create_bayes_theorem_definition(self, bayes_theorem_intro)
         timer.wait_until(35)
 
@@ -176,16 +203,28 @@ class Main(Scene):
 
         timer.wait_until("1min 55sec")
         inference_keypoint_one_example =  create_inference_bulletpoint_one_example(self,inference_bulletpoint_one)
-        
+
         timer.wait_until("2min 45sec")
-        self.play(Indicate(inference_bulletpoints_header["right_keypoint"]), color=RED_E,run_time=2)
+        self.play(Indicate(inference_bulletpoints_header["right_keypoint"]), color=RED_E,run_time=4)
 
         timer.wait_until("2min 51sec")
         inference_bulletpoint_two = create_inference_bulletpoint_two(self,inference_bulletpoints_header)
 
         timer.wait_until("2min 58sec")
-        create_inference_bulletpoint_two_example(self,inference_bulletpoints_header)
+        bulletpoint_two_example = create_inference_bulletpoint_two_example(self,inference_bulletpoints_header)
+
+
+        self.play(*[FadeOut(mobject) for mobject in self.mobjects])
 
         timer.wait_until("4min 9sec")
-        #timer.wait_until("17min 38sec")
+
+        sun_rain_example_title =  Text("sun and rain example", color=BLUE_E)
+        self.play(FadeIn(sun_rain_example_title))
+        timer.wait_until("4min 15sec")
+
+        self.play(FadeOut(sun_rain_example_title,shift=DOWN))
+        self.wait_until("4min 21sec")
+
+        
+        #timer.wait_until("17min 38sec")￼
         
