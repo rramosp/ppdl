@@ -1,0 +1,6 @@
+matplotlib
+numpy
+progressbar2
+sympy
+rlxutils
+pandas
