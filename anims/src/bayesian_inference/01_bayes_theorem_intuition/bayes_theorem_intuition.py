@@ -148,6 +148,8 @@ def create_inference_bulletpoint_two_example(scene, inference_bulletpoints_heade
     scene.play(FadeOut(decimal_rain))
     decimal_rain.set_value(0.8)
     scene.play(FadeIn(decimal_rain))
+    
+    scene.wait(2)
     scene.play(Circumscribe(text_latex_rain,color=BLUE_B,time_width=3,fade_out=True))
     scene.play(Circumscribe(text_latex_rain,color=BLUE_B,time_width=3,fade_out=True))
     scene.play(Circumscribe(text_latex_rain,color=BLUE_B,time_width=3))
@@ -167,7 +169,7 @@ class Main(Scene):
         play_intro_scene(self,video_name)
         timer = SceneTimer(self,debug_wait=False).reset()
 
-        sfile = find_soundfile("bayes_theorem_01") 
+        sfile = find_soundfile("01_bayes_theorem") 
         self.add_sound(sfile)
         
         self.next_section("1. Definition Bayes Theorem")
@@ -218,13 +220,17 @@ class Main(Scene):
 
         timer.wait_until("4min 9sec")
 
+        ### SECTION END ############
+
+        self.next_section("2. Sun and Rain Example")
+        
         sun_rain_example_title =  Text("sun and rain example", color=BLUE_E)
         self.play(FadeIn(sun_rain_example_title))
         timer.wait_until("4min 15sec")
 
         self.play(FadeOut(sun_rain_example_title,shift=DOWN))
         self.wait_until("4min 21sec")
-
+        
         
         #timer.wait_until("17min 38sec")￼
         
