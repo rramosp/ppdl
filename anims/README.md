@@ -84,3 +84,13 @@ If your video loses all audio or just a part try using the following `audio code
 Since the original developers didnt intend for manim to be used with multiple large audio files, the internal audio libraries for `add_sound` do not implement audio parameters normalization.
 
 As such, to ensure a proper video file generation, the audio files must be fixed prior to their incorporation in the video.
+
+## FAQ and Common Issues
+
+1. If video renders without audio, do the following:
+      - Be sure to check the audio files configuration
+      - Delete the specific video folder under `media/manim_output/videos/"YOUR_VIDEO_NAME"` to remove partial movie files that might be the cause of the issue
+2. If video is missing frames/has weird jumps on animations:
+      - Sometimes videos are rendered incorrectly, delete the video's folder and try again
+      - Using two different timer objects can cause conflict, be sure to not use `SceneTimer Class` alongside `Scene` built-in timer ( For example, using `self.wait_until` and `timer.wait_until` )
+
