@@ -65,7 +65,7 @@ class Main(Scene):
         timer.wait_until(51)
 
         self.play(bayes_with_sun_and_rain.animate.to_edge(UP).scale(0.8))
-        self.play(Write(SurroundingRectangle(bayes_with_sun_and_rain,color=BLACK)))
+        self.play(Write(SurroundingRectangle(bayes_with_sun_and_rain,color=BLACK,stroke_width=0.2)))
         self.play(Write(p_sun_rain_with_add_tex,run_time=14))
 
         timer.wait_until("1min 12sec")
@@ -144,7 +144,7 @@ class Main(Scene):
         probabilities_vgroup = VGroup(Tex("P(rain)",color=BLACK),Tex("P(sun+rain)",color=BLACK), Tex("P(sun)",color=BLACK))
         probabilities_vgroup.arrange(direction=DOWN)
         surrounder_probabilities = SurroundingRectangle(probabilities_vgroup,color=BLACK,buff=0.3,stroke_width=0.2)
-        header_probabilities_tex = MarkupText("non-conditional probabilities",color=BLACK).next_to(surrounder_probabilities,UP,buff=SMALL_BUFF)
+        header_probabilities_tex = Tex("non-conditional probabilities",color=BLACK).next_to(surrounder_probabilities,UP,buff=SMALL_BUFF)
         wrapper_probabilities_vgroup = VGroup(probabilities_vgroup,surrounder_probabilities,header_probabilities_tex).scale(0.5).to_edge(LEFT,MED_SMALL_BUFF)
 
         self.play(Write(probabilities_vgroup,run_time=6))
@@ -163,7 +163,7 @@ class Main(Scene):
         info_gain_vgroup = VGroup(Tex("- more observations",color=BLACK),Tex("- bigger dataset",color=BLACK),Tex("- data insights",color=BLACK),Tex("- parameter optimization",color=BLACK))
         info_gain_vgroup.arrange(direction=DOWN,buff=0.5)
         surrounder_info_gain = SurroundingRectangle(info_gain_vgroup,buff=0.3,color=BLACK,stroke_width=0.2)
-        header_info_gain_tex = MarkupText("when do I gain information?",color=BLACK).next_to(surrounder_info_gain,UP)
+        header_info_gain_tex = Tex("when do I gain information?",color=BLACK).next_to(surrounder_info_gain,UP)
         
         wrap_info_gain_vgroup = VGroup(header_info_gain_tex,surrounder_info_gain,info_gain_vgroup).scale(0.5).to_edge(RIGHT,buff=MED_SMALL_BUFF)
 
@@ -171,11 +171,11 @@ class Main(Scene):
 
         timer.wait_until("4min 50sec")
 
-        p_hyperparameters_to_data = MathTex("P(\\theta|data)",color=BLACK).next_to(p_rain_plus_sun,DOWN*1.4)
+        p_hyperparameters_to_data = MathTex("P(\\theta|data)",color=BLACK).next_to(p_rain_plus_sun,DOWN*2.2)
         self.play(Write(p_hyperparameters_to_data,run_time=4))
 
         timer.wait_until("4min 56sec")
-        p_data_to_hyperparameters = MathTex("P(data\\theta),color=BLACK").next_to(p_hyperparameters_to_data,DOWN)
+        p_data_to_hyperparameters = MathTex("P(data|\\theta)",color=BLACK).next_to(p_hyperparameters_to_data,DOWN)
         self.play(Write(p_data_to_hyperparameters,run_time=8))
 
 
