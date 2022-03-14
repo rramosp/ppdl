@@ -1,17 +1,18 @@
 [tool.poetry]
 name = "ppdl"
-version = "0.1.4"
+version = "0.1.5"
 description = "Source code for probabilistic deep learning course."
 authors = ["Juan Lara <julara@unal.edu.co>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<3.11"
 matplotlib = "^3.5.1"
 numpy = "^1.22.2"
 progressbar2 = "^4.0.0"
 sympy = "^1.9"
 rlxutils = "^0.1.7"
 pandas = "^1.4.0"
+tensorflow = "2.7.0"
 
 [tool.poetry.dev-dependencies]
 neovim = "^0.3.1"
