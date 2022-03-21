@@ -1,0 +1,54 @@
+format: jb-book
+root: content/intro
+parts:
+  - caption: Introduction
+    chapters:
+      - file: content/M01
+        title: -- module videos
+  
+  - caption: Fundamentals
+    chapters: 
+    - file: "content/M02.md"
+      title: -- module videos
+    - file: "content/02.01 - intro.md"
+      sections:
+        - file: "content/02.01 - NOTES 01 - test.ipynb"
+        - file: "content/02.01 - NOTES 02 - test2.ipynb"
+        - file: "content/02.01 - LAB 01 - test.ipynb"
+    - file: "content/02.02 - intro.md"
+      sections:
+        - file: "content/02.02 - NOTES 01 - Probabilities and distributions.ipynb"
+        - file: "content/02.02 - NOTES 02 - Montecarlo and expectations.ipynb"
+        - file: "content/02.02 - NOTES 03 - Data and models.ipynb"
+        - file: "content/02.02 - NOTES 04 - Probability and likelihood.ipynb"
+        - file: "content/02.02 - NOTES 05 - Similarity of distributions.ipynb"
+        - file: "content/02.02 - LAB 01 - Marginals, conditionals and joints.ipynb"
+    - file: "content/02.03 - intro.md"
+      sections: 
+        - file: "content/02.03 - NOTES 01 - Distribution Objects.ipynb"
+        - file: "content/02.03 - NOTES 02 - Distribution Layers.ipynb"
+        - file: "content/02.03 - NOTES 03 - Learning Distribution Parameters.ipynb"
+        - file: "content/02.03 - NOTES 04 - TFP DistributionLambda.ipynb"
+        - file: "content/02.03 - NOTES 05 - Understanding shapes.ipynb"
+        - file: "content/02.03 - NOTES 06 - More distribution objects.ipynb"
+        - file: "content/02.03 - NOTES 07 - Bijectors.ipynb"
+        - file: "content/02.03 - LAB 01 - TFP distributions.ipynb"
+        - file: "content/02.03 - LAB 02 - Distribution layers.ipynb"
+
+  - caption: Bayesian inference
+    chapters: 
+    - file: "content/M03.md"
+      title: -- module videos
+    - file: "content/03.01 - intro.md"
+    - file: "content/03.02 - intro.md"
+    - file: "content/03.03 - intro.md"
+    - file: "content/03.04 - intro.md"
+
+  - caption: Variational inference
+    chapters: 
+    - file: "content/M04.md"
+      title: -- module videos
+    - file: "content/04.01 - intro.md"
+    - file: "content/04.02 - intro.md"
+    - file: "content/04.03 - intro.md"
+    - file: "content/04.04 - intro.md"

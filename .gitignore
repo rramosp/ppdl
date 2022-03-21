@@ -11,6 +11,7 @@
 *.pot
 __pycache__/*
 .cache/*
+_build/*
 .*.swp
 */.ipynb_checkpoints/*
 .DS_Store
