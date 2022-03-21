@@ -492,8 +492,9 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
-<span class="o">!</span>git clone https://github.com/rramosp/ppdl.git
+<span class="o">!</span>git clone https://github.com/rramosp/ppdl.git &gt; /dev/null <span class="m">2</span>&gt; /dev/null
 <span class="o">!</span>mv ppdl/content/init.py ppdl/content/local .
+<span class="o">!</span>pip install -r content/requirements.txt &gt; /dev/null
 </pre></div>
 </div>
 </div>
@@ -510,14 +511,6 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">init</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">init</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
@@ -545,8 +538,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p><strong>MAYBE USE A SIMPLER EXAMPLE FIRST</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.externals._pilutil</span> <span class="kn">import</span> <span class="n">imread</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">local_</span><span class="p">(</span><span class="s2">&quot;imgs/sample_img.jpg&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s2">&quot;local/imgs/sample_img.jpg&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
@@ -556,7 +549,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(246, 360, 3)
 </pre></div>
 </div>
-<img alt="../_images/02.02 - NOTES 01 - Probabilities and distributions_6_1.png" src="../_images/02.02 - NOTES 01 - Probabilities and distributions_6_1.png" />
+<img alt="../_images/02.02 - NOTES 01 - Probabilities and distributions_5_1.png" src="../_images/02.02 - NOTES 01 - Probabilities and distributions_5_1.png" />
 </div>
 </div>
 <p>inspect the distribtuion of intensity values on each channel.</p>
@@ -572,7 +565,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02.02 - NOTES 01 - Probabilities and distributions_8_0.png" src="../_images/02.02 - NOTES 01 - Probabilities and distributions_8_0.png" />
+<img alt="../_images/02.02 - NOTES 01 - Probabilities and distributions_7_0.png" src="../_images/02.02 - NOTES 01 - Probabilities and distributions_7_0.png" />
 </div>
 </div>
 <p>some probabilities measured on the data (i.e. <strong>proportions</strong> existing in the data)</p>
