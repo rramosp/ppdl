@@ -463,7 +463,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
 <span class="o">!</span>git clone https://github.com/rramosp/ppdl.git &gt; /dev/null <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>mv ppdl/content/init.py ppdl/content/local .
+<span class="o">!</span>mv -n ppdl/content/init.py ppdl/content/local . <span class="m">2</span>&gt; /dev/null
 <span class="o">!</span>pip install -r ppdl/content/requirements.txt &gt; /dev/null
 </pre></div>
 </div>
