@@ -260,3 +260,20 @@ def function(func, x_range, **kwargs):
 
 def gaussian(**kwargs):
     return function(lambda x: 3*np.exp(-x**2), x_range=(-2,2), **kwargs).scale(1/3)
+
+
+def add_brackets(mobj):
+    bracket_pair = Tex("\\big[", "\\big]")
+    bracket_pair.scale(2)
+    bracket_pair.stretch_to_fit_height(
+        mobj.get_height() + 2 * 0.1
+    )
+    l_bracket, r_bracket = bracket_pair.split()
+    l_bracket.next_to(mobj, LEFT, .2)
+    r_bracket.next_to(mobj, RIGHT, .2)
+    return VGroup(l_bracket, mobj, r_bracket)
+
+def updating_animation(mobject,scene):
+    scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3,fade_out=True))
+    scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3,fade_out=True))
+    scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3))
