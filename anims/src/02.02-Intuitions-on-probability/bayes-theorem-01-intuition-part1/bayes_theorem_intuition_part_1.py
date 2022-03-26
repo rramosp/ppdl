@@ -51,7 +51,7 @@ def create_bayesian_inference_header(scene, split_line):
     return group_keypoints_inference
 
 def create_inference_bulletpoint_one(scene, inference_bulletpoints_header):
-    ES_text_dict["bayesian_inference_belief"] = "new knowledge"
+    ES_text_dict["bayesian_inference_belief"] = "knowledge"
     ES_text_dict["bayesian_inference_uncertainty"] = "uncertainty"
 
     text_belief = Text(ES_text_dict["bayesian_inference_belief"],color=BLACK,font_size=20).to_edge(LEFT,buff=1.5)
@@ -72,8 +72,8 @@ def create_inference_bulletpoint_one(scene, inference_bulletpoints_header):
     header_keypoint_one = VDict(pairs, show_keys=False)
 
     scene.play(Write(text_belief))
+    scene.play(Write(text_uncertainty))
     scene.play(Write(double_arrow_belief_uncertainty))
-    #scene.play(Write(text_uncertainty))
 
     return header_keypoint_one
 
@@ -288,6 +288,8 @@ class Main(Scene):
         timer.wait_until("4min 6sec")
         self.play(GrowFromCenter(circles_vdict, run_time=3))
         self.play(circles_vdict.animate.scale(0.4).to_edge(LEFT))
+        self.play(circles_vdict["sun_label"].animate.scale(1.4))
+        self.play(circles_vdict["rain_label"].animate.scale(1.4))
         self.wait(2)
         self.play(Write(p_rain_text.scale(
             0.6).to_corner(UR, buff=0.5).shift(LEFT*3)))
