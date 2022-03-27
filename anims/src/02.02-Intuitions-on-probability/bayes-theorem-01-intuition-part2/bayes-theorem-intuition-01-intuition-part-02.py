@@ -14,6 +14,9 @@ from lib.utils import *
 sys.path.insert(0, ".")
 
 
+config.max_files_cached = 1000
+
+
 def updating_animation(mobject,scene):
     scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3,fade_out=True))
     scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3,fade_out=True))
@@ -145,7 +148,7 @@ class Main(Scene):
         probabilities_vgroup.arrange(direction=DOWN)
         surrounder_probabilities = SurroundingRectangle(probabilities_vgroup,color=BLACK,buff=0.3,stroke_width=0.2)
         header_probabilities_tex = Tex("non-conditional probabilities",color=BLACK).next_to(surrounder_probabilities,UP,buff=SMALL_BUFF)
-        wrapper_probabilities_vgroup = VGroup(probabilities_vgroup,surrounder_probabilities,header_probabilities_tex).scale(0.5).to_edge(LEFT,MED_SMALL_BUFF)
+        wrapper_probabilities_vgroup = VGroup(probabilities_vgroup,surrounder_probabilities,header_probabilities_tex).scale(0.7).to_edge(LEFT,MED_SMALL_BUFF)
 
         self.play(Write(probabilities_vgroup,run_time=6))
         self.play(Create(surrounder_probabilities))
@@ -156,22 +159,58 @@ class Main(Scene):
         updating_animation(bayes_with_sun_and_rain[0],self)
 
         timer.wait_until("3min 8sec")
-        self.play(Indicate(p_rain_plus_sun,color=RED_E,run_time=3))
+        self.play(Indicate(p_rain_plus_sun,color=RED_E,run_time=4))
+
+        timer.wait_until("3min 15sec")
+        self.play(Indicate(p_rain_plus_sun[2], color=GREEN_E, run_time=5))
+
+        timer.wait_until("3min 21sec")
+        self.play(Indicate(p_rain_plus_sun[2], color=RED_E, run_time=3))
+
+        timer.wait_until("3min 25sec")
+        self.play(Indicate(p_rain_plus_sun[0], color=BLUE_E, run_time=6))
+
+        timer.wait_until("3min 36sec")
+        vgroup_equations = VGroup(p_sun_rain_with_add_tex,p_rain_plus_sun,no_observation_tex,observation_tex,right_side_indicate_01,right_side_indicate_02,left_side_indicate,no_observation_tex_left_side)
+
+        self.play(vgroup_equations.animate.shift(UP*2).scale(0.8))
+        p_sun_vertline_rain = p_rain_plus_sun.copy()
+        self.add(p_sun_vertline_rain)
+        self.play(p_sun_vertline_rain.animate.to_edge(DOWN,LARGE_BUFF))
+
+        timer.wait_until("3min 40sec")
+        integrate_generalize_label = Text("INTEGRATE",stroke_width=1,color = BLACK).next_to(p_sun_vertline_rain,UP,buff=MED_SMALL_BUFF)
+        generalize_text = Text("GENERALIZE",stroke_width=1,color = BLACK).next_to(p_sun_vertline_rain,DOWN,buff=MED_SMALL_BUFF)
+        vgroup_label_p_sun_vertline_rain = VGroup(p_sun_vertline_rain,integrate_generalize_label, generalize_text)   
+        surrounder_p_sun_vertline_rain = SurroundingRectangle(vgroup_label_p_sun_vertline_rain, color = BLACK, buff = MED_LARGE_BUFF) 
+        vgroup_wrapper_p_sun_vertline_rain = VGroup(surrounder_p_sun_vertline_rain,vgroup_label_p_sun_vertline_rain)
+
+        self.play(Write(integrate_generalize_label, run_time=2))
+        self.play(FadeIn(surrounder_p_sun_vertline_rain))
+
+        
+
+        timer.wait_until("3min 45sec")
+        self.play(Write(generalize_text, run_time=3))
+        self.play(Indicate(generalize_text,color=RED_E,run_time=2))
+        self.play(ReplacementTransform(generalize_text,integrate_generalize_label))
+        
+
 
         timer.wait_until("4min 9sec")
         
-        info_gain_vgroup = VGroup(Tex("- more observations",color=BLACK),Tex("- bigger dataset",color=BLACK),Tex("- data insights",color=BLACK),Tex("- parameter optimization",color=BLACK))
+        info_gain_vgroup = VGroup(Tex("- more observations",color=BLACK),Tex("- bigger dataset",color=BLACK),Tex("- data insights",color=BLACK),Tex("- parameter optimization",color=BLACK)).scale(1)
         info_gain_vgroup.arrange(direction=DOWN,buff=0.5)
         surrounder_info_gain = SurroundingRectangle(info_gain_vgroup,buff=0.3,color=BLACK,stroke_width=0.2)
         header_info_gain_tex = Tex("when do I gain information?",color=BLACK).next_to(surrounder_info_gain,UP)
         
-        wrap_info_gain_vgroup = VGroup(header_info_gain_tex,surrounder_info_gain,info_gain_vgroup).scale(0.5).to_edge(RIGHT,buff=MED_SMALL_BUFF)
+        wrap_info_gain_vgroup = VGroup(header_info_gain_tex,surrounder_info_gain,info_gain_vgroup).scale(0.7).to_edge(RIGHT,buff=MED_SMALL_BUFF)
 
         self.play(FadeIn(wrap_info_gain_vgroup))
 
         timer.wait_until("4min 50sec")
 
-        p_hyperparameters_to_data = MathTex("P(\\theta|data)",color=BLACK).next_to(p_rain_plus_sun,DOWN*2.2)
+        p_hyperparameters_to_data = MathTex("P(\\theta|data)",color=BLACK).next_to(p_rain_plus_sun,DOWN*3.5)
         self.play(Write(p_hyperparameters_to_data,run_time=4))
 
         timer.wait_until("4min 56sec")
