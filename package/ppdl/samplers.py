@@ -98,3 +98,38 @@ class AnimalsFrequenciesSampler(NumpySampler):
                 )
         return samples_df
 
+class LinearRegressionSampler(NumpySampler):
+    def __init__(
+            self,
+            n_features: int=1, w_mean: float=1.0,
+            w_std: float=1.0, noise_std: float=0.05
+            ):
+        self.n_features = n_features
+        self.w_mean = w_mean
+        self.w_std = w_std
+        self.noise_std = noise_std
+
+    def sample(self, n_samples: int) -> DataFrame:
+        w = np.random.normal(
+                self.w_mean,
+                self.w_std,
+                size=(self.n_features + 1, 1)
+                )
+        x = np.random.uniform(
+                -10,
+                10,
+                size=(n_samples, self.n_features)
+                )
+        x_ones = np.hstack([np.ones((n_samples, 1)), x])
+        noise = np.random.normal(
+                0,
+                self.noise_std,
+                size=(n_samples, 1)
+                )
+        y = x_ones @ w + noise
+        cols = ["x_" + str(i) for i in range(self.n_features)]
+        data = (
+                DataFrame(data=x, columns=cols)
+                .assign(y=y)
+                )
+        return data
