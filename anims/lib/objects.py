@@ -10,6 +10,8 @@ from manim import *
 from manim.constants import *
 from manim.mobject.svg.svg_mobject import *
 import manim
+from scipy import stats
+import pandas as pd
 
 config.background_color = WHITE
 
@@ -53,7 +55,7 @@ dirs = [os.path.dirname(inspect.getfile(get_imgmobject))+"/../", "/media"]
 
 def find_mediafile(file, media):
     assert media in ['imgs', 'audio']
-    fnames = [file] + [f"{file}.{ext}" for ext in ['png', 'jpg', 'gif', 'jpeg', 'wav']]
+    fnames = [file] + [f"{file}.{ext}" for ext in ['png', 'jpg', 'gif', 'jpeg', 'wav', 'mp3']]
     tried = []
     for d,f in itertools.product(dirs, fnames):
         fullname = f"{d}/{media}/{f}"
@@ -204,17 +206,30 @@ def neuralnet(layers, layers_buff=0.5, circle_kwargs={}, line_kwargs={}):
 
     return VGroup(neurons, connections)
     
-def histogram(bins, labels=None, binwidth=0.5, height=4, hlines=None, hlines_labels=None, position=[0,0,0], font_size=24, font_color=BLACK, **kwargs):
+def histogram(bins, 
+              labels=None, 
+              binwidth=0.5, 
+              bingap=0,
+              height=4, 
+              hlines=None, 
+              hlines_labels=None, 
+              position=[0,0,0], 
+              font_size=24, 
+              font_color=BLACK, 
+              title = None,
+              title_font_size=None,
+              **kwargs):
 
     assert labels is None or len(bins)==len(labels), "must have no labels or one per bin"
     hfactor = height/np.max(bins)
     bp = np.r_[position]
     bw = binwidth
+    barwidth = bw - bingap
 
     xaxis = Line(bp + np.r_[[-bw/2,0,0]], bp + np.r_[[bw*(0.5+len(bins)),0,0]])
     yaxis = Line(bp + np.r_[[0,-bw/2,0]], bp + np.r_[[0,height+bw/2,0]])
 
-    rects = [Rectangle(width=bw, height=hfactor*h, **kwargs).move_to(bp+np.r_[[bw*(i+0.5),hfactor*h/2,0]]) for i,h in enumerate(bins)]
+    rects = [Rectangle(width=barwidth, height=hfactor*h, **kwargs).move_to(bp+np.r_[[bw*(i+0.5),hfactor*h/2,0]]) for i,h in enumerate(bins)]
 
     r = VGroup()
 
@@ -239,6 +254,15 @@ def histogram(bins, labels=None, binwidth=0.5, height=4, hlines=None, hlines_lab
                 t = t.move_to(bp + np.r_[[-0.05 - t.width, hfactor*h, 0]])
                 ghlines.add(t)
         r.add(ghlines)
+
+    if title is not None:
+        if title_font_size is None:
+            title_font_size = font_size
+
+        t = MathTex(r"\text{"+title+"}", font_size=24)
+        t = t.next_to(r, UP)
+        r.add(t)
+
     return r
 
 
@@ -258,8 +282,121 @@ def function(func, x_range, **kwargs):
 
     return r
 
-def gaussian(**kwargs):
-    return function(lambda x: 3*np.exp(-x**2), x_range=(-2,2), **kwargs).scale(1/3)
+def graph_function(
+        fun, 
+        xmin, 
+        xmax, 
+        x_length = 4,
+        y_length = 3,
+        title = "", 
+        title_kwargs = {},
+        additional_x_axis_config={},
+        additional_y_axis_config={},
+        x_splits = 4,
+        y_splits = 4,
+        graph_color = BLACK,
+        show_y_numbers = False
+    ):
+    xr = np.linspace(xmin, xmax, 100)
+    ymin, ymax = np.min(fun(xr)), np.max(fun(xr))
+    x_range = [xmin, xmax, (xmax-xmin)/(x_splits-1)]
+    y_range = [ymin, ymax, (ymax-ymin)/(y_splits-1)]
+
+    x_axis_config = {
+                'numbers_with_elongated_ticks' : np.linspace(xmin, xmax, x_splits),
+                'include_numbers' : True,
+                'font_size' : 24,
+                'color' : BLACK,
+                'numbers_to_include' : np.linspace(xmin, xmax, x_splits),
+                'longer_tick_multiple' : 2,
+                'tick_size': .03,
+                'decimal_number_config' : { 
+                    'color': '#222222',
+                    'num_decimal_places': 0
+                }
+            }
+
+    y_axis_config = {
+                'include_numbers' : False,
+                'color' : BLACK,
+                'tick_size': .03,
+    }
+
+    if show_y_numbers:
+        y_axis_config.update({
+                'font_size' : 24,
+                'include_numbers' : True,
+                'numbers_to_include' : np.linspace(ymin, ymax, y_splits),
+                'numbers_with_elongated_ticks' : np.linspace(ymin, ymax, y_splits),
+                'decimal_number_config' : { 
+                    'color': '#222222',
+                    'num_decimal_places': 2
+                }
+            }
+        )
+
+    x_axis_config.update(additional_x_axis_config)            
+    y_axis_config.update(additional_y_axis_config)            
+
+    axes = Axes(
+            x_range=x_range,
+            y_range=y_range,
+            x_length=x_length,
+            y_length=y_length,
+            tips = False,
+            x_axis_config = x_axis_config,
+            y_axis_config = y_axis_config
+
+        )
+
+
+    # Create Graph
+    graph = axes.plot(fun)
+    graph.set_color(graph_color)
+
+    title = Tex(title, **title_kwargs).next_to(axes, DOWN*2)
+    g = VGroup(axes, graph, title)
+
+    return g
+
+
+def poisson_histogram(
+                mu=5, 
+                loc=5, 
+                binwidth = 0.3,
+                bingap = 0.1,
+                color = BLUE_E,
+                fill_opacity = 0.5,
+                font_size = 15,
+                stroke_width = 1,
+                show_xlabels = True,
+                show_ylabels = True,
+                height = 2.5,
+                title = None,
+                x_name = ""
+    ):
+
+    s = stats.poisson(mu=mu, loc=loc).rvs(10000)
+    s = (pd.Series(s).value_counts()/len(s)*100).sort_index()
+    labels = [f"{i} {x_name}" for i in s.index]
+    vals = list(s.values)
+
+    hlines = np.linspace(0,100,21)[1:]
+    hlines = hlines[hlines<s.max()]
+    hlines_labels = [f"{i:.0f}%" for i in hlines]
+
+    h = histogram(vals, 
+                    title=title,
+                    labels=labels if show_xlabels else None,
+                    hlines = hlines if show_ylabels else None,
+                    hlines_labels = hlines_labels if show_ylabels else None,
+                    font_size=font_size,
+                    height=height, 
+                    stroke_width=stroke_width,
+                    binwidth=binwidth,
+                    bingap=bingap, 
+                    color=color, fill_opacity=fill_opacity)
+    return h
 
 
 def add_brackets(mobj):
@@ -277,3 +414,32 @@ def updating_animation(mobject,scene):
     scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3,fade_out=True))
     scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3,fade_out=True))
     scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3))
+
+
+def fill_graph(scene, axes, graph, from_value, to_value, run_time=2):
+    area = axes.get_area(graph, [from_value,from_value], color=BLUE, fill_opacity=0.5)
+    scene.add(area)
+
+    moving_area = lambda:  axes.get_area(graph, [from_value,tracker.get_value()], color=BLUE, fill_opacity=0.5)
+    tracker = ValueTracker(from_value)
+    redraw = always_redraw(moving_area)
+    scene.add(redraw)
+    scene.play(tracker.animate.set_value(to_value), rate_func=smooth, run_time=run_time)
+    return redraw
+
+def gaussian(color=RED):
+    g = graph_function(fun = lambda x: stats.norm(loc=40, scale=10).pdf(x), 
+                       xmin=0, 
+                       xmax=80, 
+                       y_length=2,
+                       x_length=3,
+                       graph_color = color,
+                       x_splits = 5,
+                       additional_x_axis_config = {'tick_size': 0, 
+                                                   'include_numbers': False, 
+                                                   'numbers_with_elongated_ticks': None, 
+                                                   'numbers_to_include': None},
+                       additional_y_axis_config = {'tick_size': 0}
+
+            )    
+    return g

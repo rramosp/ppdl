@@ -6,6 +6,7 @@ from manim import *
 from lib.scenes import *
 from lib.objects import *
 from lib.utils import *
+from scipy import stats
 
 def play_intro_wheely(scene):
     f1 = Wheely(mode="thinking").scale(0.3).move_to([-2,1,0])
@@ -175,7 +176,7 @@ def play_parties(scene, position=[0,0,0]):
                     hlines_labels = ["5%", "10%", "15%", "20%", "25%", "30%"],
                     font_size=24,
                     height=4, stroke_width=1,
-                    binwidth=1, color=RED_E, fill_opacity=0.5).move_to([-3,0,0]).move_to(position)
+                    binwidth=1, color=BLUE_E, fill_opacity=0.5).move_to([-3,0,0]).move_to(position)
 
     scene.play(Create(h), run_time=3)
 
@@ -299,12 +300,18 @@ def play_patient_age_to_distribution(scene, position=[0,0,0]):
 
     number = Text("patient age = 32", color=RED, font_size=32).move_to(position)
 
-    g = gaussian(color=RED).scale(2).move_to(position)
-    t = Text("patient age", font_size=24).next_to(g, DOWN)
-    g = VGroup(g,t)
+    g = graph_function(fun = lambda x: stats.norm(loc=40, scale=10).pdf(x), 
+                       xmin=0, 
+                       xmax=80, 
+                       y_length=2,
+                       title = "patient age",
+                       graph_color = RED_E,
+                       x_splits = 9
+            ).move_to(position)
+
 
     scene.play(Write(number))
-    scene.wait(3)
+    scene.wait(7)
     scene.play(Transform(number, g))
     return number
 
@@ -335,30 +342,88 @@ def play_nn_with_funcs(scene, position=[0,0,0]):
                 circle_kwargs = circle_kwargs,
                 line_kwargs = line_kwargs).scale(2).move_to(position)
 
-    f1 = gaussian(color=RED).scale(.5).move_to(nn.get_center()+UR)
-    f2 = function(lambda x: np.exp(-4*(x-1)**2) + .8*np.exp(-5*(x)**2), x_range=(-1,2), color=RED).scale(.5).stretch_to_fit_width(0.5).move_to(nn.get_center()+RIGHT)
-    f3 = function(lambda x: np.exp(-(x+1)**2) + .8*np.exp(-5*(x-1)**2), x_range=(-2,2), color=RED).scale(.5).stretch_to_fit_width(0.5).move_to(nn.get_center()+DR)
+    f1 = graph_function(fun = lambda x: np.exp(-(x+1)**2) + .8*np.exp(-5*(x-1)**2), 
+                       xmin=-2, 
+                       xmax=2, 
+                       y_length=2,
+                       graph_color = RED_E,
+                       additional_x_axis_config = {'tick_size': 0, 
+                                                   'include_numbers': False, 
+                                                   'numbers_with_elongated_ticks': None, 
+                                                   'numbers_to_include': None},
+                       additional_y_axis_config = {'tick_size': 0}
+            ).scale(.2).move_to(nn.get_center()+UR)
+
+    f2 = graph_function(fun = lambda x: np.exp(-4*(x-1)**2) + .8*np.exp(-5*(x)**2), 
+                       xmin=-2, 
+                       xmax=2, 
+                       y_length=2,
+                       graph_color = RED_E,
+                       additional_x_axis_config = {'tick_size': 0, 
+                                                   'include_numbers': False, 
+                                                   'numbers_with_elongated_ticks': None, 
+                                                   'numbers_to_include': None},
+                        additional_y_axis_config = {'tick_size': 0}            
+            ).scale(.2).move_to(nn.get_center()+RIGHT)
+
+    f3 = graph_function(fun = lambda x: np.exp(-10*(x/2)**2), 
+                       xmin=-2, 
+                       xmax=2, 
+                       y_length=2,
+                       graph_color = RED_E,
+                       additional_x_axis_config = {'tick_size': 0, 
+                                                   'include_numbers': False, 
+                                                   'numbers_with_elongated_ticks': None, 
+                                                   'numbers_to_include': None},
+                       additional_y_axis_config = {'tick_size': 0}                       
+            ).scale(.2).move_to(nn.get_center()+DR)
+
 
     fg = VGroup(f1,f2,f3)    
     scene.play(FadeIn(nn), Create(fg))
 
     return VGroup(nn,fg)
 
-def play_wheely_bye(scene, position=[0,0,0]):
-    w = Wheely(mode="smile").scale(0.3).move_to(position)
-    scene.play(FadeIn(w))
-    scene.wait(10)
-    scene.play(*w.rotate_wheel(), *w.change_mode("thinking"))
-
-    return w
-
 
 def play_transform_func(scene, position=[0,0,0]):
 
-    f1 = gaussian(color=RED).scale(3).move_to(position)
-    f2 = function(lambda x: np.exp(-(x+1)**2) + .8*np.exp(-5*(x-1)**2), x_range=(-2,2), color=RED).scale(2).move_to(position).shift(DOWN*0.5)
-    f3 = function(lambda x: np.exp(-4*(x-1)**2) + .8*np.exp(-5*(x)**2), x_range=(-1,2), color=RED).scale(2).move_to(position).shift(DOWN*0.5)
-    f4 = function(lambda x: np.exp(-10*x**2), x_range=(-1,1), color=RED).scale(2).stretch_to_fit_width(2).move_to(position).shift(DOWN*0.5)
+    x_splits = 5
+
+    f1 = graph_function(fun = lambda x: np.exp(-(x+1)**2) + .8*np.exp(-5*(x-1)**2), 
+                       xmin=-2, 
+                       xmax=2, 
+                       y_length=2,
+                       title = "distance to target",
+                       graph_color = RED_E,
+                       x_splits = x_splits
+            ).move_to(position)
+
+    f2 = graph_function(fun = lambda x: np.exp(-4*(x-1)**2) + .8*np.exp(-5*(x)**2), 
+                       xmin=-2, 
+                       xmax=2, 
+                       y_length=2,
+                       title = "distance to target",
+                       graph_color = RED_E,
+                       x_splits = x_splits
+            ).move_to(position)
+
+    f3 = graph_function(fun = lambda x: np.exp(-10*(x/2)**2), 
+                       xmin=-2, 
+                       xmax=2, 
+                       y_length=2,
+                       title = "distance to target",
+                       graph_color = RED_E,
+                       x_splits = x_splits
+            ).move_to(position)
+
+    f4 = graph_function(fun = lambda x: np.exp(-4*(x/1.5-1)**2) , 
+                       xmin=-2, 
+                       xmax=2, 
+                       y_length=2,
+                       title = "distance to target",
+                       graph_color = RED_E,
+                       x_splits = x_splits 
+            ).move_to(position)
 
     scene.play(Create(f1))
     scene.wait(2)
@@ -387,10 +452,12 @@ def play_nn_with_gaussian(scene, position=[0,0,0]):
 
 class Main(Scene):
     def construct(self):
-        video_name = r"talking about probability"
+        video_name = r"what is probability?"
+
+
         play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
-        sfile = find_soundfile('thinking_about_probability')
+        sfile = find_soundfile('basics-00-what-is-probability')
 
         self.add_sound(sfile)
         intro = play_intro_video(self)
@@ -445,24 +512,23 @@ class Main(Scene):
         self.play(FadeOut(nns))
         pa = play_patient_age_to_distribution(self)
 
-        timer.wait_until("7min 15sec")
+        timer.wait_until("6min 51sec")
         self.play(FadeOut(pa))
         ng = play_nn_with_gaussian(self)
 
-        timer.wait_until("8min 15sec")
+        timer.wait_until("7min 51sec")
         self.play(FadeOut(ng))
         ff = play_transform_func(self)
 
 
-        timer.wait_until("9min 00sec")
+        timer.wait_until("8min 36sec")
         self.play(FadeOut(ff))
         self.wait(2)
         
         nf = play_nn_with_funcs(self)
-        self.wait(10)
-        self.play(nf.animate.move_to([3.5,.5,0]))
-        w = play_wheely_bye(self, [-1,-1,0])
 
-        timer.wait_until("9min 35sec")
-        self.play(FadeOut(nf, w))
+        timer.wait_until("8min 53sec")
+        self.play(FadeOut(nf))
+        play_credits(self)
+        self.wait(5)
 
