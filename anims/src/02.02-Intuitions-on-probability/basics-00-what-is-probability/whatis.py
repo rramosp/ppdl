@@ -457,7 +457,7 @@ class Main(Scene):
 
         play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
-        sfile = find_soundfile('basics-00-what-is-probability')
+        sfile = find_soundfile('basics-00-what-is-probability-ES')
 
         self.add_sound(sfile)
         intro = play_intro_video(self)
