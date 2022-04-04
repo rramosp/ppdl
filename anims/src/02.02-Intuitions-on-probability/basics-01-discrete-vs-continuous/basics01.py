@@ -21,7 +21,7 @@ def play_professions(scene):
 
 def play_cities_histogram(scene, position, transform_from=None):
 
-    c = pd.read_csv("src/02.02-Intuitions-on-probability/intro-probability/basics-01-discrete-vs-continuous/data/cities_colombia.csv")
+    c = pd.read_csv("src/02.02-Intuitions-on-probability/basics-01-discrete-vs-continuous/data/cities_colombia.csv")
     c['2022'] = c['2022']/c['2022'].sum()*100
     c = c.head(20)
     c = c.sort_values(by="name")
@@ -123,7 +123,7 @@ def play_prob_inerpretations(scene):
 class Main(Scene):
     def construct(self):
         video_name = r"distributions and probabilities"
-        sfile = find_soundfile('basics-01-discrete-vs-continuous_v2')
+        sfile = find_soundfile('basics-01-discrete-vs-continuous_ES')
 
         play_intro_scene(self, video_name)
         
