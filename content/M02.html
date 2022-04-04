@@ -61,15 +61,13 @@ const thebe_selector_output = ".output, .cell_output"
 
     <!-- Google Analytics -->
     
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
 <script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-43235448-3', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MBFEZ3PF64');
+                </script>
 
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -161,26 +159,6 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="02.02%20-%20NOTES%2001%20-%20Probabilities%20and%20distributions.html">
      1. Probabilities and distributions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02.02%20-%20NOTES%2002%20-%20Montecarlo%20and%20expectations.html">
-     2. Montecarlo and expectations
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02.02%20-%20NOTES%2003%20-%20Data%20and%20models.html">
-     3. Data and models
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02.02%20-%20NOTES%2004%20-%20Probability%20and%20likelihood.html">
-     4. Probability and likelihood
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02.02%20-%20NOTES%2005%20-%20Similarity%20of%20distributions.html">
-     5. Similarity of distributions
     </a>
    </li>
    <li class="toctree-l2">
@@ -377,6 +355,19 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intuitions-on-probability">
+   2.2 Intuitions on probability
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -389,6 +380,19 @@ const thebe_selector_output = ".output, .cell_output"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intuitions-on-probability">
+   2.2 Intuitions on probability
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -397,10 +401,11 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="fundamentals">
 <h1>2. Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>video 1</p></li>
-<li><p>video 2</p></li>
-</ul>
+<div class="section" id="intuitions-on-probability">
+<h2>2.2 Intuitions on probability<a class="headerlink" href="#intuitions-on-probability" title="Permalink to this headline">¶</a></h2>
+<p><strong>01 - What is probability</strong>: <font color="red">Video 9mis]</font> <a class="reference external" href="https://www.youtube.com/watch?v=b0AC-ZXeOZ0&amp;ab_channel=MathintheTropics">ES</a> [EN]   Una aproximación intuitiva a la noción de probabilidad. <em>An intuitive approach to the notion of probability</em></p>
+<p><strong>02 - Probability and distributions</strong>: <font color="red">Video 8mins</font> <a class="reference external" href="https://www.youtube.com/watch?v=0_OdGL2Aiok">ES</a> <a class="reference external" href="https://www.youtube.com/watch?v=yZ8HWICHRrw">EN</a> ¿Cómo se organizan las probabilidades en distribuciones de probabilidad? <em>How do probabilities get organized into probability distributions?</em></p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
