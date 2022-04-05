@@ -30,7 +30,7 @@ class Main(Scene):
         play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
 
-        sfile = find_soundfile("bayes-theorem-01-intuition-part2")
+        sfile = find_soundfile("bayes-theorem-01-intuition-part-02-ES")
         self.add_sound(sfile)
 
         bayes_definition_tex = MathTex(
@@ -219,3 +219,8 @@ class Main(Scene):
 
 
         timer.wait_until("6min 11sec")
+
+        self.wait(5)
+        play_credits(self)
+
+        self.wait(5)

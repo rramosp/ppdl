@@ -25,7 +25,7 @@ class Main(Scene):
         play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
 
-        sfile = find_soundfile("bayes-theorem-02-example-part1")
+        sfile = find_soundfile("bayes-theorem-02-example-part-01-ES")
         self.add_sound(sfile)
 
         population_tex = MathTex(
@@ -174,7 +174,7 @@ class Main(Scene):
 
         p_positive = MathTex(
             "P(","positive", ")", "=", "P(", "positive", "|disease)","\cdot",
-            "P(disease)", "+", "P(", "positive", "|!disease)","\cdot", "P(!disease)"
+            "P(disease)", "+", "P(", "positive", "|", "\lnot" ,"disease)","\cdot", "P(", "\lnot" ,"disease)"
             , color=BLACK
         ).next_to(bayes_p_disease_to_positive,DOWN,buff=MED_LARGE_BUFF).scale(0.7)
 
@@ -200,7 +200,7 @@ class Main(Scene):
 
         timer.wait_until("4min 14sec")
 
-        self.play(Write(p_positive[-1]))
+        self.play(Write(p_positive[-3:]))
 
         timer.wait_until("4min 18sec")
 
@@ -224,7 +224,7 @@ class Main(Scene):
             "P(disease|", "positive", ")", "=" , "{P(", "positive", "|disease)", "\cdot", "P(disease)",
             "\\over",
             "P(", "positive", "|disease)","\cdot",
-            "P(disease)", "+", "P(", "positive", "|!disease)","\cdot", "P(!disease)}"
+            "P(disease)", "+", "P(", "positive", "|", "\lnot" ,"disease)","\cdot", "P(", "\lnot", "disease)}"
             , color=BLACK
 
         ).next_to(p_positive,DOWN,buff=MED_LARGE_BUFF).scale(0.8)
@@ -271,7 +271,7 @@ class Main(Scene):
 
         timer.wait_until("5min 9sec")
 
-        lower_fraction_p_not_disease_underline = Underline(p_disease_to_positive_long_equation[-1],color=GREEN_E)
+        lower_fraction_p_not_disease_underline = Underline(p_disease_to_positive_long_equation[-3:],color=GREEN_E)
         tex_p_not_disease_underline = MathTex(
             "0.7", color=BLACK
             ).scale(0.5).next_to(lower_fraction_p_not_disease_underline,DOWN)
@@ -302,16 +302,16 @@ class Main(Scene):
 
         timer.wait_until("5min 29sec")
 
-        updating_animation(VGroup(*p_disease_to_positive_long_equation[-5:-2]), self)
-        updating_animation(VGroup(*p_disease_to_positive_long_equation[-5:-2]), self)
-        updating_animation(VGroup(*p_disease_to_positive_long_equation[-5:-2]), self)
-        updating_animation(VGroup(*p_disease_to_positive_long_equation[-5:-2]), self)
-        updating_animation(VGroup(*p_disease_to_positive_long_equation[-5:-2]), self)
+        updating_animation(VGroup(*p_disease_to_positive_long_equation[-9:-4]), self)
+        updating_animation(VGroup(*p_disease_to_positive_long_equation[-9:-4]), self)
+        updating_animation(VGroup(*p_disease_to_positive_long_equation[-9:-4]), self)
+        updating_animation(VGroup(*p_disease_to_positive_long_equation[-9:-4]), self)
+        updating_animation(VGroup(*p_disease_to_positive_long_equation[-9:-4]), self)
 
         timer.wait_until("6min 9sec")
 
         lower_fraction_p_pos_not_disease_underline = Underline(
-            VGroup(*p_disease_to_positive_long_equation[-5:-2]), color = GREEN_E
+            VGroup(*p_disease_to_positive_long_equation[-9:-4]), color = GREEN_E
         )
 
         tex_p_pos_not_disease_underline = MathTex(
@@ -352,6 +352,9 @@ class Main(Scene):
 
         timer.wait_until("7min 55sec")
 
-        
+        self.wait(5)
+        play_credits(self)
+
+        self.wait(5)
 
         
