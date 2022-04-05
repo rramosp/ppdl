@@ -123,7 +123,7 @@ def play_prob_inerpretations(scene):
 class Main(Scene):
     def construct(self):
         video_name = r"distributions and probabilities"
-        sfile = find_soundfile('basics-01-discrete-vs-continuous_ES')
+        sfile = find_soundfile('basics-01-discrete-vs-continuous-ES')
 
         play_intro_scene(self, video_name)
         
