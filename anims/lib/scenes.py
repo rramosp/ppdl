@@ -97,7 +97,7 @@ def play_intro_scene(scene, video_name):
 def play_credits(scene):
     scene.clear()
     t0 = Text(r"Probabilistic Programming for Deep Learning", font_size=36, color=BLUE_E).move_to([-0.5,2.5,0])
-    t1 = Text(r"Course design", color=BLACK, font_size=24).next_to(t0, DOWN*1.5).align_to(t0, LEFT)
+    t1 = MathTex(r"\text{Course design}", color=BLACK, font_size=24).next_to(t0, DOWN*1.5).align_to(t0, LEFT)
     t2a  = MathTex(r"\text{Raúl Ramos}", color=BLUE_E, font_size=36).next_to(t1, DOWN).align_to(t1, LEFT)
     t2aa = MathTex(r"\text{Universidad de Antioquia}", color=RED_C, font_size=24).next_to(t2a, RIGHT)
     t2b = MathTex(r"\text{Fabio González}", color=BLUE_E, font_size=36).next_to(t2a, DOWN).align_to(t2a, LEFT)
