@@ -52,6 +52,10 @@ seek for music which is royalty free, with no copyright.
 
 https://www.youtube.com/watch?v=5_ps9cvmiTs&ab_channel=OblivionEpiphany
 
+salsa intro from:
+
+https://www.youtube.com/watch?v=0h7PMkiiqoA&ab_channel=LiborioConti
+
 
 ## manimgl
 
