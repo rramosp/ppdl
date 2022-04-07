@@ -84,7 +84,7 @@ def play_intro_scene(scene, video_name):
               .move_to([6,-3.2, 0])
     #logo_google = get_imgmobject("logo-std-google").scale(0.3).next_to(t4, RIGHT)
 
-    scene.add_sound(find_soundfile("intro_salsa"))
+    scene.add_sound(find_soundfile("intro-salsa"))
     scene.play(FadeIn(t1), FadeIn(t2), FadeIn(logo_udea), FadeIn(logo_unal), FadeIn(t4), FadeIn(logo_tf))
     scene.play(Write(t3), FadeIn(l)) 
     scene.wait(2)

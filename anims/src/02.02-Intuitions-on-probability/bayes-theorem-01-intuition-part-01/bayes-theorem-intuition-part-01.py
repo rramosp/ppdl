@@ -319,16 +319,37 @@ class Main(Scene):
             0.6).move_to(p_rain_sun_text).shift(DOWN))
         self.play(Indicate(intersection_rain_sun, color=GREEN_D))
         self.play(FadeOut(intersection_rain_sun))
-        timer.wait_until("5min 18sec")
 
-        self.wait(4)
+        timer.wait_until("5min 16sec")
+
+        intersection_rain_sun_v2 = Intersection(
+            rain_circle, sun_circle, color=GREEN_E, fill_opacity=0.4, stroke_width=3)
+
+        self.play(Write(intersection_rain_sun_v2))
+        self.play(Indicate(intersection_rain_sun_v2, color= GREEN_E))
+
+        timer.wait_until("5min 25sec")
+
+        self.play(Indicate(rain_circle,color=BLUE_E), Indicate(sun_circle,color=YELLOW_E))
+
+        timer.wait_until("5min 28sec")
+
+        self.play(Indicate(p_rain_text, color=BLUE_E), Indicate(p_sun_text,color=YELLOW_E))
+
+        timer.wait_until("5min 30sec")
+
+        self.play(Indicate(intersection_rain_sun_v2, color= GREEN_E))
+
+        timer.wait_until("5min 35sec")
+
+        circles_vdict.add([("copy_intersection",intersection_rain_sun_v2)])
+
         self.play(circles_vdict.animate.scale(1.2).shift(RIGHT*1.5))
         surrounder_circles = SurroundingRectangle(
             circles_vdict, color=GRAY, buff=LARGE_BUFF)
 
         self.play(Write(surrounder_circles))
 
-        self.wait(4)
         timer.wait_until("5min 44sec")
         self.play(FadeIn(fog_group))
 
@@ -389,6 +410,78 @@ class Main(Scene):
         self.play(
             Create(Arrow(p_sun_if_rain[-2], p_rain_full_tex, color=BLUE_E, buff=.1).scale(0.3)))
 
+        timer.wait_until("7min 4sec")
+
+        self.play(Indicate(p_rain_full_tex,color= BLUE_E, run_time=4))
+        self.play(Indicate(p_sun_text,color=YELLOW_E),run_time=3)
+
+        timer.wait_until("7min 12sec")
+
+        self.play(Indicate(p_rain_full_tex,color= BLUE_E, run_time=6))
+
+        timer.wait_until("7min 24sec")
+
+        self.play(Indicate(rain_circle,color=BLUE_E),run_time=10)
+
+        timer.wait_until("7min 39sec")
+
+        self.play(Indicate(rain_circle,color=BLUE_E),run_time=5)
+
+        timer.wait_until("7min 45sec")
+
+        self.play(Indicate(p_rain_text,color=BLUE_E),run_time=2)
+
+        timer.wait_until("7min 48sec")
+
+        rain_scaled_circle = rain_circle.copy()
+
+        self.play(rain_scaled_circle.animate.next_to(meaning_arrow,DOWN).shift(DOWN*1.8).scale(0.7))
+
+        timer.wait_until("7min 50sec")
+
+        tex_one = MathTex("0.6",color=BLACK).scale(0.8).next_to(rain_scaled_circle, RIGHT)
+
+        timer.wait_until("8min")
+
+        self.play(Write(tex_one))
+
+        timer.wait_until("8min 7sec")
+
+        tex_point_three = MathTex("0.3", color=BLACK).scale(0.8).next_to(rain_scaled_circle,LEFT)
+
+        self.play(Write(tex_point_three))
+
+        timer.wait_until("8min 9sec")
+
+        self.play(tex_one.animate.shift(UP,0.3).shift(LEFT*0.15), tex_point_three.animate.shift(UP,0.3).shift(LEFT*0.3))
+
+        timer.wait_until("8min 12sec")
+
+        tex_point_six = MathTex("1.0", color=BLACK).scale(0.8).move_to(tex_one.get_center()).shift(DOWN*1.6)
+        arrow_psix_to_one = Arrow(start=tex_one.get_center(),end=tex_point_six.get_center(),color=BLACK)
+
+        self.play(Write(tex_point_six))
+
+        self.play(Write(arrow_psix_to_one))
+
+        timer.wait_until("8min 16sec")  
+
+        tex_point_five  = MathTex("0.5", color=BLACK).scale(0.8).move_to(tex_point_three.get_center()).shift(DOWN*1.6)
+
+        arrow_pthree_to_pfive = Arrow(start= tex_point_three.get_center(),end=tex_point_five.get_center(), color=BLACK)
+
+        self.play(Write(tex_point_five))
+
+        self.play(Write(arrow_pthree_to_pfive))
+
+        timer.wait_until("8min 26sec")
+
+        vgroup_scaled_circle_rain = VGroup(arrow_pthree_to_pfive,tex_point_five,
+                                     arrow_psix_to_one,tex_point_six,tex_point_three, tex_one,
+                                       rain_scaled_circle)
+
+        self.play(FadeOut(vgroup_scaled_circle_rain))
+
         timer.wait_until("8min 29sec")
         self.play(Write(p_sun_if_rain_longer.scale(0.6).move_to(
             p_sun_if_rain, DOWN).shift(DOWN*2).shift(RIGHT*0.5)),run_time=16)
@@ -443,6 +536,6 @@ class Main(Scene):
         
         timer.wait_until("11min 21sec")
         play_credits(self)
+
         self.wait(5)
-        
         
