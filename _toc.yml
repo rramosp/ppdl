@@ -1,4 +1,4 @@
-format: jb-book
+format: jb-book 
 root: content/intro
 parts:
   - caption: Introduction
