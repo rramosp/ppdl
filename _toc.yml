@@ -17,9 +17,9 @@ parts:
         - file: "content/02.01 - LAB 01 - test.ipynb"
     - file: "content/02.02 - intro.md"
       sections:
-        - file: "content/02.02 - NOTES 01 - Probabilities and distributions.ipynb"
-        - file: "content/02.02 - NOTES 02 - Montecarlo and expectations.ipynb"
-        - file: "content/02.02 - NOTES 03 - Data and models.ipynb"
+        - file: "content/02.02 - NOTES 01 - Discrete distiributions.ipynb"
+        - file: "content/02.02 - NOTES 02 - Continuous distributions.ipynb"
+        - file: "content/02.02 - NOTES 03 - Distributions of data and model parameters.ipynb"
         - file: "content/02.02 - NOTES 04 - Probability and likelihood.ipynb"
         - file: "content/02.02 - NOTES 05 - Similarity of distributions.ipynb"
         - file: "content/02.02 - LAB 01 - Marginals, conditionals and joints.ipynb"
