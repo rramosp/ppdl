@@ -15,6 +15,8 @@ parser.add_argument('--destination_file', dest='destination_file', type=str,
 parser.add_argument('--background_file', dest='background_file', type=str,
                     help='png file with the background')
 
+parser.add_argument('--font_size', dest='font_size', type=int, default=120,
+                    help='font size for the video name')
 
 args = parser.parse_args()
 
@@ -22,7 +24,7 @@ assert args.destination_file.endswith(".png"), "destination_file name must end w
 assert args.background_file.endswith(".png"), "background_file name must end with '.png'"
 
 video_name = args.video_name.replace("\\n", "\n")
-
+font_size = args.font_size
 background = imread(args.background_file)
 background = resize(background, (1080, 1920), anti_aliasing=True)
 h,w,_ = background.shape
@@ -42,7 +44,7 @@ for i,t in enumerate(course_name.split("\n")):
     txt = plt.text(50,200+100*i, t, ha='left', va='top', wrap=False, fontsize=60)
 
 for i,t in enumerate(video_name.split("\n")):
-    txt = plt.text(50,550+200*i, t, ha='left', va='top', wrap=False, fontsize=120)
+    txt = plt.text(50,550+200*i, t, ha='left', va='top', wrap=False, fontsize=font_size)
 
 plt.axis("off")
 plt.savefig(args.destination_file, dpi=my_dpi, pad_inches=0, bbox_inches='tight')

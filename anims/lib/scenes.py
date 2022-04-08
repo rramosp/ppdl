@@ -63,7 +63,7 @@ def play_intro_scene(scene, video_name):
     l = Line([-5,0,0], [5,0,0], color=GRAY_C, stroke_width=0.5).next_to(t2, 2*DOWN)
 
     video_names = [i for i in video_name.split("\n") if len(i.strip())!=0]
-
+    print (video_names)
     m = 2
     t3 = VGroup()
     prev = l
@@ -122,6 +122,7 @@ def play_credits(scene):
     g2 = Group(logo_udea, logo_unal, logo_tf, sponsored)
 
     scene.play(Write(g1), FadeIn(g2))
+    scene.wait(5)
 
 
 def play_continuous_function(
