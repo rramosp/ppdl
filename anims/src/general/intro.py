@@ -10,7 +10,7 @@ from lib.utils import *
 
 class Main(Scene):
     def construct(self):
-        video_name = "joint, marginals and conditionals\nfor discrete distributions"
+        video_name = "joint, marginals and conditionals\nfor continuous distributions"
 
         play_intro_scene(self, video_name)
 
