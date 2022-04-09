@@ -63,7 +63,7 @@ def play_intro_scene(scene, video_name):
     l = Line([-5,0,0], [5,0,0], color=GRAY_C, stroke_width=0.5).next_to(t2, 2*DOWN)
 
     video_names = [i for i in video_name.split("\n") if len(i.strip())!=0]
-
+    print (video_names)
     m = 2
     t3 = VGroup()
     prev = l
@@ -97,7 +97,7 @@ def play_intro_scene(scene, video_name):
 def play_credits(scene):
     scene.clear()
     t0 = Text(r"Probabilistic Programming for Deep Learning", font_size=36, color=BLUE_E).move_to([-0.5,2.5,0])
-    t1 = Text(r"Course design", color=BLACK, font_size=24).next_to(t0, DOWN*1.5).align_to(t0, LEFT)
+    t1 = MathTex(r"\text{Course design}", color=BLACK).next_to(t0, DOWN*1.5).align_to(t0, LEFT)
     t2a  = MathTex(r"\text{Raúl Ramos}", color=BLUE_E, font_size=36).next_to(t1, DOWN).align_to(t1, LEFT)
     t2aa = MathTex(r"\text{Universidad de Antioquia}", color=RED_C, font_size=24).next_to(t2a, RIGHT)
     t2b = MathTex(r"\text{Fabio González}", color=BLUE_E, font_size=36).next_to(t2a, DOWN).align_to(t2a, LEFT)
@@ -122,6 +122,7 @@ def play_credits(scene):
     g2 = Group(logo_udea, logo_unal, logo_tf, sponsored)
 
     scene.play(Write(g1), FadeIn(g2))
+    scene.wait(5)
 
 
 def play_continuous_function(

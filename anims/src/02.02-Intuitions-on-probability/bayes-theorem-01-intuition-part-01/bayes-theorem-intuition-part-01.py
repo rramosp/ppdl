@@ -163,8 +163,6 @@ def create_inference_bulletpoint_two_example(scene, inference_bulletpoints_heade
 
 
 
-
-
 class Main(Scene):
     def construct(self):
 
@@ -280,7 +278,7 @@ class Main(Scene):
 
         bayes_definition_tex = MathTex("P","(","A","|","B",")","=","{P(B|A)","P(A)","\\over","P(B)} "," ; ",color=BLACK)
 
-        rain_sun_to_definition = MathTex(r"If\ ",r"A = sun",r"\\",r"B = rainn",color=BLACK)
+        rain_sun_to_definition = MathTex(r"If\ ",r"A = sun",r"\\",r"    B = rain",color=BLACK)
 
         expression_value_tex = Tex("value", color=BLACK)
         expression_meaning_tex = Tex("meaning", color=BLACK)
@@ -389,9 +387,9 @@ class Main(Scene):
         timer.wait_until("6min 23sec")
 
         value_arrow = Arrow(p_sun_if_rain, expression_value_tex,
-                            color=BLACK, buff=0.2).scale(0.6)
+                            color=BLACK, buff=0.1, max_tip_length_to_length_ratio=.1).scale(0.6)
         meaning_arrow = Arrow(
-            p_sun_if_rain, expression_meaning_tex, color=BLACK, buff=0.2).scale(0.6)
+            p_sun_if_rain, expression_meaning_tex, color=BLACK, buff=0.1, max_tip_length_to_length_ratio=.1).scale(0.6)
         arrow_vgroup = VGroup(value_arrow, meaning_arrow)
         self.play(Write(arrow_vgroup))
 
@@ -410,7 +408,7 @@ class Main(Scene):
         self.play(Write(p_rain_full_tex.scale(0.6).move_to(
             p_sun_if_rain, DOWN).shift(DOWN*0.6).shift(LEFT*0.1)),run_time=7)
         self.play(
-            Create(Arrow(p_sun_if_rain[-2], p_rain_full_tex, color=BLUE_E).scale(0.3)))
+            Create(Arrow(p_sun_if_rain[-2], p_rain_full_tex, color=BLUE_E, buff=.1).scale(0.3)))
 
         timer.wait_until("7min 4sec")
 
@@ -537,7 +535,6 @@ class Main(Scene):
         self.play(Indicate(p_rain_text,color=BLUE_E))
         
         timer.wait_until("11min 21sec")
-        self.wait(5)
         play_credits(self)
 
         self.wait(5)

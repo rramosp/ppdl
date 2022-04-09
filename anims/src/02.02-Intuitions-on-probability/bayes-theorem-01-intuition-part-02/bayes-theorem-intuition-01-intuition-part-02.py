@@ -147,7 +147,7 @@ class Main(Scene):
         probabilities_vgroup = VGroup(Tex("P(rain)",color=BLACK),Tex("P(sun+rain)",color=BLACK), Tex("P(sun)",color=BLACK))
         probabilities_vgroup.arrange(direction=DOWN)
         surrounder_probabilities = SurroundingRectangle(probabilities_vgroup,color=BLACK,buff=0.3,stroke_width=0.2)
-        header_probabilities_tex = Tex("non-conditional probabilities",color=BLACK).next_to(surrounder_probabilities,UP,buff=SMALL_BUFF)
+        header_probabilities_tex = Tex("non-conditional probabilities",color=BLACK, font_size=40).next_to(surrounder_probabilities,UP,buff=SMALL_BUFF)
         wrapper_probabilities_vgroup = VGroup(probabilities_vgroup,surrounder_probabilities,header_probabilities_tex).scale(0.7).to_edge(LEFT,MED_SMALL_BUFF)
 
         self.play(Write(probabilities_vgroup,run_time=6))
@@ -199,10 +199,13 @@ class Main(Scene):
 
         timer.wait_until("4min 9sec")
         
-        info_gain_vgroup = VGroup(Tex("- more observations",color=BLACK),Tex("- bigger dataset",color=BLACK),Tex("- data insights",color=BLACK),Tex("- parameter optimization",color=BLACK)).scale(1)
+        info_gain_vgroup = VGroup(Tex("more observations",color=BLUE_E),
+                                  Tex("bigger dataset",color=BLUE_E),
+                                  Tex("data insights",color=BLUE_E),
+                                  Tex("parameter optimization",color=BLUE_E)).scale(1)
         info_gain_vgroup.arrange(direction=DOWN,buff=0.5)
         surrounder_info_gain = SurroundingRectangle(info_gain_vgroup,buff=0.3,color=BLACK,stroke_width=0.2)
-        header_info_gain_tex = Tex("when do I gain information?",color=BLACK).next_to(surrounder_info_gain,UP)
+        header_info_gain_tex = Tex("when do I gain information?",color=BLACK, font_size=40).next_to(surrounder_info_gain,UP)
         
         wrap_info_gain_vgroup = VGroup(header_info_gain_tex,surrounder_info_gain,info_gain_vgroup).scale(0.7).to_edge(RIGHT,buff=MED_SMALL_BUFF)
 
@@ -219,8 +222,5 @@ class Main(Scene):
 
 
         timer.wait_until("6min 11sec")
-
-        self.wait(5)
         play_credits(self)
-
         self.wait(5)

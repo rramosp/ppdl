@@ -156,29 +156,44 @@ def play_2_dice(scene, position):
     for i in [six_plus_one, eq4, five_plus_two, eq5, four_plus_three, eq6 ]:
         scene.play(FadeIn(i), run_time=0.5)
 
+    scene.wait(3)
+
+    k = pd.Series([i+j for i,j in itertools.product(range(1,7), range(1,7))]).value_counts().sort_index()
+    h = histogram(k.values, 
+                    labels=[str(i) for i in k.index],
+                    title=r"number of dice combinations producing each outcome",
+                    title_font_size=12,
+                    hlines = [1,2,3,4,5,6],
+                    hlines_labels = ["1 combs"] + [f"{i} combs" for i in range(2,7)],
+                    font_size=18,
+                    height=2, stroke_width=.3,
+                    binwidth=.3, color=BLUE_E, fill_opacity=0.5).move_to([2,1  ,0])
+
+    scene.play(Create(h), run_time=3)
     r = Group()
     for i in [one_plus_one, six_plus_six, 
               one_plus_six, eq1, two_plus_five, eq2, three_plus_four, eq3,
-              six_plus_one, eq4, five_plus_two, eq5, four_plus_three, eq6]:
+              six_plus_one, eq4, five_plus_two, eq5, four_plus_three, eq6, h]:
         r.add(i)
 
 
     return r
 
-
 def play_parties(scene, position=[0,0,0]):
 
 
+    vals = np.r_[[5,33, 29, 12, 21]] + np.random.randint(15, size=5)
+    vals = 30*vals/np.max(vals)
 
-    h = histogram([5,33, 29, 12, 21], 
+    h = histogram(  vals, 
                     labels=["Party A  ", "Party B  ", "Party C  ", "Party D  ", "Party E  "],
+                    title="Percentage of people that voted each party",
+                    title_font_size=12,
                     hlines = [5,10,15,20,25,30],
                     hlines_labels = ["5%", "10%", "15%", "20%", "25%", "30%"],
-                    font_size=24,
-                    height=4, stroke_width=1,
-                    binwidth=1, color=BLUE_E, fill_opacity=0.5).move_to([-3,0,0]).move_to(position)
-
-    scene.play(Create(h), run_time=3)
+                    font_size=18,
+                    height=3, stroke_width=.3,
+                    binwidth=.8, color=BLUE_E, fill_opacity=0.5).move_to(position)
 
     return h
 
@@ -209,17 +224,20 @@ def play_rain(scene, position=[0,0,0]):
     cs5 = Text(") = 0.3").next_to(cs4, RIGHT)
     g4 = Group(cs1, cs2, cs3, cs4, cs5)
 
-    newinfo = Text ("new information", font_size=32).next_to(g3, UP, buff=0.5)
+    newinfo = MathTex (r"\text{new information}", font_size=32).next_to(g3, UP, buff=0.5)
     a1 = MathTex(r"\rightarrow").next_to(g1, buff=1)
     a2 = MathTex(r"\rightarrow").next_to(g2, buff=1)
 
     scene.play(FadeIn(g1))
+    scene.wait(2)
     scene.play(FadeIn(g2))
-    scene.wait(1)
+    scene.wait(5)
     scene.play(Write(VGroup(a1,a2)))
+    scene.wait(2)
     scene.play(Write(newinfo))
-    scene.wait(1)
+    scene.wait(2)
     scene.play(FadeIn(g3))
+    scene.wait(2)
     scene.play(FadeIn(g4))
 
     return Group(g1, g2, newinfo, g3, g4, a1, a2)
@@ -227,10 +245,11 @@ def play_rain(scene, position=[0,0,0]):
 def play_model_predict_wrong(scene, position= [0,0,0]):
 
     r = play_model_predict(scene, position)
+    scene.wait(5)
     a = MathTex(r"\rightarrow").next_to(r, RIGHT, buff=0.5).shift(UP*0.3)
     t = Text("WRONG PREDICTION\nthe patient was healthy!!!", font_size=24, color=RED).next_to(a, RIGHT)
 
-    scene.wait(2)
+    scene.wait(5)
 
     scene.play(Write(a), Write(t))
 
@@ -242,9 +261,9 @@ def play_mixed_dataset(scene, position=[0,0,0]):
     g2 = VGroup()
 
     l1 = Circle(.07, color=RED, fill_opacity=0.5).move_to(position+np.r_[[-1,3,0]])
-    t1 = Text("patients with pathology", font_size=14).next_to(l1, RIGHT)
+    t1 = MathTex(r"\text{patients with pathology}", font_size=14).next_to(l1, RIGHT)
     l2 = Circle(.07, color=BLUE, fill_opacity=0.5).next_to(l1, DOWN)
-    t2 = Text("healthy patients", font_size=14).next_to(l2, RIGHT)
+    t2 = MathTex(r"\text{healthy patients}", font_size=14).next_to(l2, RIGHT)
     legend = VGroup(l1,t1,l2,t2)
 
 
@@ -259,9 +278,6 @@ def play_mixed_dataset(scene, position=[0,0,0]):
     for x,y in c2:
         g2.add(Circle(.07, color=BLUE, fill_opacity=0.5).move_to([x,y,0]))
 
-    scene.play(Create(g1))
-    scene.play(Create(g2))
-    scene.play(FadeIn(legend))
     return VGroup(g1,g2, legend)
 
 
@@ -289,9 +305,9 @@ def play_nns(scene, position=[0,0,0]):
     t3 = Text("too complex", color=RED_E, font_size=24).next_to(nn3, DOWN)
 
     scene.play(Create(nn1), Write(t1))
-    scene.wait(5)
+    scene.wait(10)
     scene.play(Create(nn2), Write(t2))
-    scene.wait(5)
+    scene.wait(10)
     scene.play(Create(nn3), Write(t3))
     
     return VGroup(nn1,nn2,nn3, t1, t2, t3)
@@ -393,7 +409,7 @@ def play_transform_func(scene, position=[0,0,0]):
                        xmin=-2, 
                        xmax=2, 
                        y_length=2,
-                       title = "distance to target",
+                       title = "a person's age",
                        graph_color = RED_E,
                        x_splits = x_splits
             ).move_to(position)
@@ -402,7 +418,7 @@ def play_transform_func(scene, position=[0,0,0]):
                        xmin=-2, 
                        xmax=2, 
                        y_length=2,
-                       title = "distance to target",
+                       title = "a weight between two neurons of a neural network",
                        graph_color = RED_E,
                        x_splits = x_splits
             ).move_to(position)
@@ -411,7 +427,7 @@ def play_transform_func(scene, position=[0,0,0]):
                        xmin=-2, 
                        xmax=2, 
                        y_length=2,
-                       title = "distance to target",
+                       title = "uncertainty in prediction",
                        graph_color = RED_E,
                        x_splits = x_splits
             ).move_to(position)
@@ -420,17 +436,17 @@ def play_transform_func(scene, position=[0,0,0]):
                        xmin=-2, 
                        xmax=2, 
                        y_length=2,
-                       title = "distance to target",
+                       title = "updated probability after an observation",
                        graph_color = RED_E,
                        x_splits = x_splits 
             ).move_to(position)
 
     scene.play(Create(f1))
-    scene.wait(2)
+    scene.wait(5)
     scene.play(Transform(f1, f2))
-    scene.wait(2)
+    scene.wait(5)
     scene.play(Transform(f1, f3))
-    scene.wait(2)
+    scene.wait(5)
     scene.play(Transform(f1, f4))
     return VGroup(f1)
 
@@ -454,10 +470,9 @@ class Main(Scene):
     def construct(self):
         video_name = r"what is probability?"
 
-
         play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
-        sfile = find_soundfile('basics-00-what-is-probability-ES')
+        sfile = find_soundfile('basics-00-what-is-probability-EN')
 
         self.add_sound(sfile)
         intro = play_intro_video(self)
@@ -485,15 +500,33 @@ class Main(Scene):
         timer.wait_until("2min 15sec")
         self.play(FadeOut(twodice))
         self.wait(5)
-        parties = play_parties(self, position=[0,-0.5,0])
+
+
+        parties1 = play_parties(self, position=[0,-0.5,0])
+        self.play(Create(parties1), run_time=3)
+        self.wait(5)
+
+        for _ in range(10):
+            parties2 = play_parties(self, position=[0,-0.5,0]) 
+            self.play(Transform(parties1, parties2))
+            self.wait(2)
+
+        timer.wait_until("3min 5sec")
+        self.play(FadeOut(parties1))
+        t1 = MathTex(r"\text{Bayesian statistics} \rightarrow \text{probability represents OUR uncertainty}", 
+                       color=BLUE_E, 
+                       font_size=36)
+
+        self.play(Write(t1))     
 
         timer.wait_until("3min 20sec")
-        self.play(FadeOut(parties))
-        self.wait(5)
+        self.play(FadeOut(t1))
         prain = play_rain(self, [-5,0,0])
 
-        timer.wait_until("4min 10sec")
+        timer.wait_until("4min 5sec")
         self.play(FadeOut(prain))        
+
+
         r = play_model_predict_wrong(self,[-3,0,0])
 
         timer.wait_until("5min 5sec")
@@ -502,10 +535,15 @@ class Main(Scene):
         self.play(Write(tml))
 
         timer.wait_until("5min 20sec")
-        ds = play_mixed_dataset(self, position=[-1.5,-1,0])
+        ds1 = play_mixed_dataset(self, position=[-1.5,-1,0])
+        self.play(Create(ds1))
+        for _ in range(5):
+            self.wait(5)
+            ds2 = play_mixed_dataset(self, position=[-1.5,-1,0])
+            self.play(Transform(ds1, ds2))
 
         timer.wait_until("5min 50sec")
-        self.play(FadeOut(ds))
+        self.play(FadeOut(ds1))
         nns = play_nns(self, position=[-4,0,0])
 
         timer.wait_until("6min 33sec")
@@ -521,10 +559,10 @@ class Main(Scene):
         ff = play_transform_func(self)
 
 
-        timer.wait_until("8min 36sec")
+        timer.wait_until("8min 30sec")
         self.play(FadeOut(ff))
-        self.wait(2)
-        
+         
+        self.wait(7)
         nf = play_nn_with_funcs(self)
 
         timer.wait_until("8min 53sec")
