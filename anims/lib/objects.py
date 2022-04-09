@@ -443,3 +443,78 @@ def gaussian(color=RED):
 
             )    
     return g
+
+
+def generate_stickman(size = 1,fill_opacity=0 ,general_color = BLACK, color_head = BLACK,
+                     color_torso = BLACK, color_left_arm = BLACK,
+                     color_right_arm = BLACK, color_left_leg = BLACK, color_right_leg = BLACK
+                     ):
+
+    """
+    A representation of a person using simple shapes. 
+
+    Will be converted to a stand alone class  if later its needed to implement custom animations for stickmans
+
+    returns: a VDict with each bodypart of the stickman. Bodyparts pairs below
+
+            *   pairs = [ 
+                ("head", stickman_head) ,
+                ("torso", stickman_torso) ,
+                ("left arm", stickman_left_arm),
+                ("right arm", stickman_right_arm), 
+                ("left leg", stickman_left_leg), 
+                ("right leg", stickman_right_leg)
+                ]
+
+    function variables:
+
+    size: default 1.0 - represents the general scale of the generated stickman
+    color: default BLACK - the general color used for all body parts of the stickman.
+    
+    The rest of the variables are self explanatory, if you want to change the color of a specific body part just provide a color
+
+    i.g: generate_stickman(color_head = RED,fill_opacity=0.5)
+    """
+
+    if general_color != BLACK:
+        color_head = general_color
+        color_torso = general_color
+        color_left_arm = general_color
+        color_right_arm = general_color
+        color_left_leg = general_color
+        color_right_leg = general_color
+    
+    stickman_head = Circle(radius = 0.5, color= color_head, fill_opacity = fill_opacity)
+
+    ref_point_torso = Dot().move_to(stickman_head.get_bottom()).shift(DOWN)
+    ref_point_left_leg = Dot().move_to(ref_point_torso).shift(DOWN+LEFT)
+    ref_point_right_leg = Dot().move_to(ref_point_torso).shift(DOWN+RIGHT)
+
+    stickman_torso = Line(start=stickman_head.get_bottom(),end=ref_point_torso.get_center(),buff=0, color=color_torso)
+
+    ref_point_left_arm = Dot().move_to(stickman_torso.get_center()).shift(UP+LEFT)
+    ref_point_right_arm = Dot().move_to(stickman_torso.get_center()).shift(UP+RIGHT)
+
+
+    stickman_left_arm = Line(start=stickman_torso.get_center(), end = ref_point_left_arm, buff = 0, color = color_left_arm)
+    stickman_right_arm = Line(start=stickman_torso.get_center(), end = ref_point_right_arm, buff = 0, color = color_right_arm)
+
+    stickman_left_leg = Line(start=stickman_torso.get_end(), end=ref_point_left_leg, buff= 0, color= color_left_leg)
+    stickman_right_leg = Line(start = stickman_torso.get_end(), end = ref_point_right_leg, buff = 0, color = color_right_leg)
+
+
+
+    pairs = [ 
+        ("head", stickman_head) ,
+        ("torso", stickman_torso) ,
+        ("left arm", stickman_left_arm),
+        ("right arm", stickman_right_arm), 
+        ("left leg", stickman_left_leg), 
+        ("right leg", stickman_right_leg)
+        ]
+
+    stickman_vdict = VDict(pairs)
+
+    stickman_vdict.scale(size)
+
+    return stickman_vdict
