@@ -104,7 +104,7 @@ def play_credits(scene):
     t2bb = MathTex(r"\text{Universidad Nacional de Colombia}", color=RED_C, font_size=24).next_to(t2b, RIGHT)
 
     t3 = MathTex(r"\text{With the collaboration of}").move_to([0,2,0]).next_to(t2b, DOWN*2).align_to(t2b, LEFT)
-    t4 = MathTex(r"\text{Felipe Ángel}", color=BLUE_E, font_size=36).next_to(t3, DOWN).align_to(t3, LEFT)
+    t4 = MathTex(r"\text{Felipe R. Ángel}", color=BLUE_E, font_size=36).next_to(t3, DOWN).align_to(t3, LEFT)
     t4a = MathTex(r"\text{animations}", color=RED_C, font_size=24).next_to(t4, RIGHT)
     t5 = MathTex(r"\text{Sebastián Lara}", color=BLUE_E, font_size=36).next_to(t4, DOWN).align_to(t4, LEFT)
     t5a = MathTex(r"\text{graders and notebooks}", color=RED_C, font_size=24).next_to(t5, RIGHT)

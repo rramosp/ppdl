@@ -38,7 +38,7 @@ class Main(Scene):
         p_positive.set_color_by_tex("positive",RED_E)
 
         p_disease = MathTex(
-            "P(disease), ", "=", "0.3"
+            "P(disease)",  "=", "0.3"
             ,color=RED_E
         ).to_edge(UP,buff=MED_SMALL_BUFF).shift(LEFT*0.2).scale(0.7)
 
@@ -73,7 +73,63 @@ class Main(Scene):
         sick_to_test_difference = Difference(sick_rectangle,test_population_circle, color=RED_E,fill_opacity=0.2)
         not_sick_to_test_difference = Difference(not_sick_rectangle,test_population_circle,color=GREEN_E,fill_opacity=0.2)
 
+
         timer.wait_until(3)
+
+        sick_stickman_matrix = []
+        
+        rows = 4
+        columns = 2
+
+        for i in range(rows):
+            row_list = []
+            for j in range(columns):
+                row_list.append(generate_stickman(size = 0.2, fill_opacity = 0.5,color_head = RED_E))
+                if i == 0:
+                    if j == 0:
+                        row_list[j].to_corner(LEFT+UP,buff=MED_SMALL_BUFF)
+                        self.play(Write(row_list[j]),run_time=0.4)
+                    else:
+                        row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
+                        self.play(Write(row_list[j]),run_time=0.4)         
+                else:
+                    if j == 0:
+                        row_list[j].next_to(sick_stickman_matrix[i-1][0],DOWN, buff = 0.1)
+                        self.play(Write(row_list[j]),run_time=0.4) 
+                    else:
+                        row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
+                        self.play(Write(row_list[j],run_time=0.3))     
+
+            sick_stickman_matrix.append(row_list)
+
+        not_sick_stickman_matrix = []
+        
+        rows = 4
+        columns = 4
+
+        for i in range(rows):
+            row_list = []
+            for j in range(columns):
+                row_list.append(generate_stickman(size = 0.2, fill_opacity = 0.5,color_head = GREEN_E))
+                if i == 0:
+                    if j == 0:
+                        row_list[j].next_to(sick_stickman_matrix[0][1],RIGHT,buff=0.3)
+                        self.play(Write(row_list[j]),run_time=0.3)
+                    else:
+                        row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
+                        self.play(Write(row_list[j]),run_time=0.3)         
+                else:
+                    if j == 0:
+                        row_list[j].next_to(not_sick_stickman_matrix[i-1][0],DOWN, buff = 0.1)
+                        self.play(Write(row_list[j]),run_time=0.1) 
+                    else:
+                        row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
+                        self.play(Write(row_list[j],run_time=0.1))     
+
+            not_sick_stickman_matrix.append(row_list)
+
+
+        timer.wait_until(11)
 
         self.play(FadeIn(p_positive))
 
@@ -92,6 +148,33 @@ class Main(Scene):
         timer.wait_until(56)
 
         self.play(Write(false_positive_tex),run_time=3)
+
+        timer.wait_until("1min 5sec")
+
+        ### start picking up stickmans
+        stickman_test_list = [sick_stickman_matrix[0][0], sick_stickman_matrix[0][1],
+                             sick_stickman_matrix[1][0], sick_stickman_matrix[1][1],
+                             sick_stickman_matrix[2][0], sick_stickman_matrix[2][1],
+                             sick_stickman_matrix[3][1], not_sick_stickman_matrix[3][0]
+                            ]
+
+        self.play(Indicate(Group(*stickman_test_list),scale_factor=1.1,run_time=9 ))
+        
+        timer.wait_until("1min 17sec")
+
+        self.play(Indicate(Group(p_positive_to_disease, false_positive_tex), color=BLUE_E, run_time=3))
+
+        timer.wait_until("1min 25sec")
+
+        updating_animation(sick_stickman_matrix[3][0], self)
+        
+        timer.wait_until("1min 34sec")
+
+        updating_animation(not_sick_stickman_matrix[3][0], self)
+
+        timer.wait_until("1min 41sec")
+
+        updating_animation(false_positive_tex, self)
 
         timer.wait_until("2min 8sec")
 

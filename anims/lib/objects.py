@@ -445,7 +445,7 @@ def gaussian(color=RED):
     return g
 
 
-def generate_stickman(size = 1,fill_opacity=0 ,general_color = BLACK, color_head = BLACK,
+def generate_stickman(size = 1.0,fill_opacity=0.0 ,general_color = BLACK, color_head = BLACK,
                      color_torso = BLACK, color_left_arm = BLACK,
                      color_right_arm = BLACK, color_left_leg = BLACK, color_right_leg = BLACK
                      ):
