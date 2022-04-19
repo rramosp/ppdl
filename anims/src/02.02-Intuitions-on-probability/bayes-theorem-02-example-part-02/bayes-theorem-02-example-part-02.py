@@ -18,6 +18,62 @@ sys.path.insert(0, ".")
 
 config.max_files_cached = 1000
 
+
+def stickman_population(scene):
+
+    sick_stickman_matrix = []
+        
+    rows = 4
+    columns = 2
+
+    for i in range(rows):
+        row_list = []
+        for j in range(columns):
+            row_list.append(generate_stickman(size = 0.2, fill_opacity = 0.5,general_color = RED_E))
+            if i == 0:
+                if j == 0:
+                    row_list[j].to_edge(UP,buff=MED_SMALL_BUFF).shift(LEFT)
+                    scene.play(Write(row_list[j]),run_time=0.4)
+                else:
+                    row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
+                    scene.play(Write(row_list[j]),run_time=0.4)         
+            else:
+                if j == 0:
+                    row_list[j].next_to(sick_stickman_matrix[i-1][0],DOWN, buff = 0.15)
+                    scene.play(Write(row_list[j]),run_time=0.4) 
+                else:
+                    row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
+                    scene.play(Write(row_list[j],run_time=0.3))     
+
+        sick_stickman_matrix.append(row_list)
+
+    not_sick_stickman_matrix = []
+    
+    rows = 4
+    columns = 4
+
+    for i in range(rows):
+        row_list = []
+        for j in range(columns):
+            row_list.append(generate_stickman(size = 0.2, fill_opacity = 0.5,general_color = GREEN_E))
+            if i == 0:
+                if j == 0:
+                    row_list[j].next_to(sick_stickman_matrix[0][1],RIGHT,buff=0.3)
+                    scene.play(Write(row_list[j]),run_time=0.3)
+                else:
+                    row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
+                    scene.play(Write(row_list[j]),run_time=0.3)         
+            else:
+                if j == 0:
+                    row_list[j].next_to(not_sick_stickman_matrix[i-1][0],DOWN, buff = 0.15)
+                    scene.play(Write(row_list[j]),run_time=0.1) 
+                else:
+                    row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
+                    scene.play(Write(row_list[j],run_time=0.1))     
+
+        not_sick_stickman_matrix.append(row_list)
+    return sick_stickman_matrix,not_sick_stickman_matrix
+
 class Main(Scene):
     def construct(self):
         
@@ -40,7 +96,7 @@ class Main(Scene):
         p_disease = MathTex(
             "P(disease)",  "=", "0.3"
             ,color=RED_E
-        ).to_edge(UP,buff=MED_SMALL_BUFF).shift(LEFT*0.2).scale(0.7)
+        ).to_corner(UP+LEFT,buff=MED_SMALL_BUFF).shift(RIGHT*0.2).scale(0.7)
 
         p_not_disease = MathTex(
             "P(\lnot", "disease)", "=", "0.7" 
@@ -60,12 +116,20 @@ class Main(Scene):
             "P(disease|","positive",")", " = ", "{P(", "positive", "|disease)", "\\cdot", "P(disease)",
              "\\over" ,
              "P(","positive",")}", color=BLACK
-        ).next_to(p_positive,DOWN).scale(0.6)
+        ).to_edge(DOWN,buff=SMALL_BUFF).scale(0.6)
 
+        bayes_theorem_disease.set_color_by_tex("positive",RED_E)
+
+        bayes_p_disease_to_positive = MathTex(
+            "P","(","disease","|","positive", ")" , "=", 
+            "{P(","positive", "|", "disease", ")", "\cdot", "P(disease)",
+            "\\over", "P(", "positive", ")}" , color= BLACK
+        ).scale(0.7).shift(UP)
+        bayes_p_disease_to_positive.set_color_by_tex("positive",RED_E)
 
         ## HERE WE HAVE ALL THE SHAPES FOR THE BENN-LIKE DIAGRAMS
 
-        not_sick_rectangle = Rectangle(width=2.8, height=3,color=GREEN_E, fill_opacity=0.1).to_corner(RIGHT+UP,buff=MED_SMALL_BUFF)
+        not_sick_rectangle = Rectangle(width=2.8, height=3,color=GREEN_E, fill_opacity=0.1).to_corner(RIGHT+UP,buff=MED_SMALL_BUFF).shift(LEFT*4)
         sick_rectangle = Rectangle(width=1.3, height=3, color=RED_E, fill_opacity=0.1).next_to(not_sick_rectangle,LEFT,buff=0)
         test_population_circle = Circle(color=BLACK).scale(0.7).move_to(sick_rectangle.get_edge_center(RIGHT)).shift(LEFT*0.3)
         test_to_sick_intersection = Intersection(sick_rectangle,test_population_circle,color=ORANGE,fill_opacity=0.7)
@@ -76,58 +140,8 @@ class Main(Scene):
 
         timer.wait_until(3)
 
-        sick_stickman_matrix = []
-        
-        rows = 4
-        columns = 2
-
-        for i in range(rows):
-            row_list = []
-            for j in range(columns):
-                row_list.append(generate_stickman(size = 0.2, fill_opacity = 0.5,color_head = RED_E))
-                if i == 0:
-                    if j == 0:
-                        row_list[j].to_corner(LEFT+UP,buff=MED_SMALL_BUFF)
-                        self.play(Write(row_list[j]),run_time=0.4)
-                    else:
-                        row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
-                        self.play(Write(row_list[j]),run_time=0.4)         
-                else:
-                    if j == 0:
-                        row_list[j].next_to(sick_stickman_matrix[i-1][0],DOWN, buff = 0.1)
-                        self.play(Write(row_list[j]),run_time=0.4) 
-                    else:
-                        row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
-                        self.play(Write(row_list[j],run_time=0.3))     
-
-            sick_stickman_matrix.append(row_list)
-
-        not_sick_stickman_matrix = []
-        
-        rows = 4
-        columns = 4
-
-        for i in range(rows):
-            row_list = []
-            for j in range(columns):
-                row_list.append(generate_stickman(size = 0.2, fill_opacity = 0.5,color_head = GREEN_E))
-                if i == 0:
-                    if j == 0:
-                        row_list[j].next_to(sick_stickman_matrix[0][1],RIGHT,buff=0.3)
-                        self.play(Write(row_list[j]),run_time=0.3)
-                    else:
-                        row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
-                        self.play(Write(row_list[j]),run_time=0.3)         
-                else:
-                    if j == 0:
-                        row_list[j].next_to(not_sick_stickman_matrix[i-1][0],DOWN, buff = 0.1)
-                        self.play(Write(row_list[j]),run_time=0.1) 
-                    else:
-                        row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
-                        self.play(Write(row_list[j],run_time=0.1))     
-
-            not_sick_stickman_matrix.append(row_list)
-
+        #self.play(FadeIn(bayes))
+        sick_stickman_matrix,not_sick_stickman_matrix = stickman_population(self)
 
         timer.wait_until(11)
 
@@ -176,6 +190,14 @@ class Main(Scene):
 
         updating_animation(false_positive_tex, self)
 
+        timer.wait_until("2min 5sec")
+
+        for i in sick_stickman_matrix:
+            self.play(FadeOut(*i),run_time=0.1)
+        for i in not_sick_stickman_matrix:
+            self.play(FadeOut(*i),run_time=0.07)
+
+
         timer.wait_until("2min 8sec")
 
         self.play(Write(sick_rectangle,run_time=4))
@@ -215,13 +237,18 @@ class Main(Scene):
 
         self.play(Write(surrounder_1))
 
+        #p_positive = MathTex(
+        #    "P(","positive", ")", "=", "P(", "positive", "|disease)","\cdot",
+        #    "P(disease)", "+", "P(", "positive", "|", "\lnot" ,"disease)","\cdot", "P(", "\lnot" ,"disease)"
+        #    , color=BLACK
+    
         timer.wait_until("3min 29sec")
 
         self.play(Indicate(test_to_sick_intersection,color=ORANGE),run_time=4)
 
         timer.wait_until("3min 39sec")
 
-        division_line = Line(ORIGIN, LEFT*2).to_edge(DOWN,buff=MED_SMALL_BUFF).shift(UP*1)
+        division_line = Line(ORIGIN, LEFT*2).next_to(p_positive[4:7],DOWN,buff=MED_SMALL_BUFF).shift(DOWN*1)
 
         copy_sick_rectangle = sick_rectangle.copy()
         copy_test_to_sick_intersection = test_to_sick_intersection.copy()
@@ -236,7 +263,7 @@ class Main(Scene):
 
         timer.wait_until("4min 22sec")
 
-        self.play(copy_test_to_sick_intersection.animate.next_to(division_line,UP,buff=0).shift(DOWN*0.3).scale(0.5))
+        self.play(copy_test_to_sick_intersection.animate.next_to(division_line,UP,buff=0).shift(DOWN*0.2).scale(0.5))
 
         timer.wait_until("4min 27sec")
 
@@ -252,6 +279,14 @@ class Main(Scene):
 
         self.play(Indicate(sick_rectangle,color=RED_E), run_time = 2)
 
+        timer.wait_until("4min 42sec")
+
+        copy_2_sick_rectangle = copy_sick_rectangle.copy().next_to(p_positive[8],DOWN,buff=MED_SMALL_BUFF).shift(DOWN*0.3)
+
+        self.play(Write(MathTex("\\cdot", color=BLACK).scale(2).next_to(division_line,RIGHT).shift(RIGHT*0.35)),
+                 ReplacementTransform(copy_sick_rectangle.copy(), copy_2_sick_rectangle)
+        )
+
         timer.wait_until("4min 44sec")
 
         self.play(FadeOut(surrounder_1,surrounder_2))
@@ -264,27 +299,31 @@ class Main(Scene):
 
         self.play(Write(ppos_first_half_underline),run_time=1)
         self.play(Write(ppos_second_half_underline),run_time=2)
+        
 
         timer.wait_until("5min 6sec")
 
-        self.play(Indicate(p_positive[4:7],scale_factor=1.05,run_time=2))
-        self.play(Indicate(p_pos_to_disease_division, run_time=2))
+        self.play(Indicate(p_positive[4:7],color=RED_E, scale_factor=1.05,run_time=2))
+        self.play(Indicate(p_pos_to_disease_division,color=BLUE_E ,run_time=2))
         
         timer.wait_until("5min 10sec")
 
-        self.play(Indicate(p_positive[-9:-4],scale_factor=1.05,run_time=4))
+        self.play(Indicate(p_positive[-9:-4],color=GREEN_E, scale_factor=1.05,run_time=4))
 
         timer.wait_until("5min 19sec")
 
         surrounder_p_pos_1 = SurroundingRectangle(p_positive[-9:-4],buff=0.06)
 
         self.play(Write(surrounder_p_pos_1))
-        self.play(p_pos_to_disease_division.animate.shift(LEFT))
+        #self.play(p_pos_to_disease_division.animate.shift(LEFT))
 
-        division_line_2 = Line(ORIGIN, LEFT*2).scale(0.3).next_to(division_line,RIGHT).shift(RIGHT)
+        division_line_2 = Line(ORIGIN, LEFT*2).scale(0.5).next_to(p_positive[-9:-4],DOWN,buff=MED_SMALL_BUFF).shift(DOWN*1)
         not_sick_rectangle_copy = not_sick_rectangle.copy()
         test_to_not_sick_intersection_copy = test_to_not_sick_intersection.copy()
         second_division_vgroup = VGroup(division_line_2,not_sick_rectangle_copy,test_to_not_sick_intersection)
+
+        self.play(Write(MathTex("+",color=BLACK).scale(1.5).next_to(division_line_2,LEFT).shift(LEFT*0.35))
+        )
 
         self.play(Write(division_line_2))
         self.play(not_sick_rectangle_copy.animate.next_to(division_line_2,DOWN,buff=0).shift(UP).scale(0.3).scale(0.7))
@@ -303,13 +342,19 @@ class Main(Scene):
 
         self.play(test_to_not_sick_intersection_copy.animate.next_to(division_line_2,UP,buff=0).shift(DOWN*0.2).scale(0.5))
 
-        timer.wait_until("5min 45sec")
+        not_sick_rectangle_copy_2 = not_sick_rectangle_copy.copy().next_to(p_positive[-3:],DOWN,buff=MED_SMALL_BUFF).shift(DOWN*0.65)
 
-        self.play(Indicate(p_positive[4:9]))
+        self.play(Write(MathTex("\\cdot", color=BLACK).scale(2).next_to(division_line_2,RIGHT).shift(RIGHT*0.35)),
+                 ReplacementTransform(not_sick_rectangle_copy.copy(), not_sick_rectangle_copy_2)
+        )
+
+        timer.wait_until("5min 44sec")
+
+        self.play(Indicate(p_positive[4:9],scale_factor=1.11, run_time= 2, color=RED_E))
 
         timer.wait_until("5min 47sec")
 
-        self.play(Indicate(p_positive[0:3]))
+        self.play(Indicate(p_positive[0:3],scale_factor=1.1 ,run_time=2, color=RED_E))
 
         timer.wait_until("5min 49sec")
 
@@ -324,11 +369,12 @@ class Main(Scene):
         copy_2_test_to_sick_intersection = test_to_sick_intersection.copy()
         copy_2_test_to_not_sick_intersection = test_to_not_sick_intersection.copy()
 
-        self.play(copy_2_test_to_sick_intersection.animate.next_to(division_line_2,RIGHT).shift(RIGHT))
+        self.play(copy_2_test_to_sick_intersection.animate.next_to(p_positive[0],DOWN,buff=MED_SMALL_BUFF).shift(DOWN*0.3))
 
         timer.wait_until("6min 6sec")
 
         self.play(copy_2_test_to_not_sick_intersection.animate.next_to(copy_2_test_to_sick_intersection,RIGHT,buff=0))
+        self.play(Write(MathTex("=", color=BLACK).scale(1.4).next_to(copy_2_test_to_not_sick_intersection, RIGHT, buff=MED_SMALL_BUFF)))
 
 
         timer.wait_until("6min 28sec")
@@ -340,12 +386,12 @@ class Main(Scene):
             "\\over",
             "P(" , "positive", "|disease)", "\\cdot", "P(disease) " , " + ", "P(", "positive", "|" ,"\lnot" ,"disease)", "\\cdot" , "P(", "\lnot" ,"disease)}"
             , color= BLACK
-        ).shift(UP*0.5).scale(0.6)
+        ).shift(UP*0.5).scale(0.7)
         p_disease_to_pos_fracc.set_color_by_tex("positive", RED_E)
 
         p_disease = MathTex(
             "P(disease) = 0.01", color=BLACK
-        ).next_to(p_disease_to_pos_fracc[0:3],DOWN).scale(0.7)
+        ).next_to(p_disease_to_pos_fracc[0:3],DOWN).scale(0.7).shift(DOWN*2)
 
         self.play(FadeIn(p_disease_to_pos_fracc))
 
@@ -383,7 +429,7 @@ class Main(Scene):
 
         p_pos_dis_9_12_underline = Underline(p_disease_to_pos_fracc[9:12],color=RED_E)
 
-        tex_underline_1 = MathTex("0.85",color=BLACK).scale(0.5).next_to(p_pos_dis_9_12_underline,DOWN,buff=SMALL_BUFF)
+        tex_underline_1 = MathTex("0.85",color=BLACK).scale(0.6).next_to(p_pos_dis_9_12_underline,DOWN,buff=SMALL_BUFF)
 
         self.play(Write(p_pos_dis_9_12_underline))
         self.play(Write(tex_underline_1,run_time=3))
@@ -392,7 +438,7 @@ class Main(Scene):
 
         p_pos_dis_13_underline = Underline(p_disease_to_pos_fracc[13],color=RED_E)
 
-        tex_underline_2 = MathTex("0.01",color=BLACK).scale(0.5).next_to(p_pos_dis_13_underline,DOWN,buff=SMALL_BUFF)
+        tex_underline_2 = MathTex("0.01",color=BLACK).scale(0.6).next_to(p_pos_dis_13_underline,DOWN,buff=SMALL_BUFF)
 
         self.play(Write(p_pos_dis_13_underline))
         self.play(Write(tex_underline_2,run_time=2))
@@ -401,7 +447,8 @@ class Main(Scene):
 
         p_pos_dis_m9_m4_underline = Underline(p_disease_to_pos_fracc[-9:-4],color=RED_E)
 
-        tex_underline_3 = MathTex("0.05",color=BLACK).scale(0.5).next_to(p_pos_dis_m9_m4_underline,DOWN,buff=SMALL_BUFF)
+        tex_underline_3 = MathTex("0.05",color=BLACK).scale(0.6).next_to(p_pos_dis_m9_m4_underline,DOWN,buff=SMALL_BUFF)
+        tex_underline_3.set_color_by_tex("positive",RED_E)
 
         self.play(Write(p_pos_dis_m9_m4_underline))
         self.play(Write(tex_underline_3,run_time=2))
@@ -410,36 +457,71 @@ class Main(Scene):
 
         p_pos_dis_m1_underline = Underline(p_disease_to_pos_fracc[-3:],color=RED_E)
 
-        tex_underline_4 = MathTex("0.99",color=BLACK).scale(0.5).next_to(p_pos_dis_m1_underline,DOWN,buff=SMALL_BUFF)
+        tex_underline_4 = MathTex("0.99",color=BLACK).scale(0.6).next_to(p_pos_dis_m1_underline,DOWN,buff=SMALL_BUFF)
+        tex_underline_4.set_color_by_tex("positive",RED_E)
 
         self.play(Write(p_pos_dis_m1_underline))
         self.play(Write(tex_underline_4,run_time=2))
 
         timer.wait_until("8min 16sec")
 
-        tex_underline_5 = MathTex("0.85",color=BLACK).scale(0.5).next_to(p_disease_to_pos_fracc[3:6],UP,buff=SMALL_BUFF+0.1)
-        tex_underline_6 = MathTex("0.01",color=BLACK).scale(0.5).next_to(p_disease_to_pos_fracc[7],UP,buff=SMALL_BUFF+0.1)
+        tex_underline_5 = MathTex("0.85",color=BLACK).scale(0.6).next_to(p_disease_to_pos_fracc[3:6],UP,buff=SMALL_BUFF+0.1)
+        tex_underline_6 = MathTex("0.01",color=BLACK).scale(0.6).next_to(p_disease_to_pos_fracc[7],UP,buff=SMALL_BUFF+0.1)
 
         self.play(Write(tex_underline_5,run_time=2))
         self.play(Write(tex_underline_6,run_time=2))
 
+        timer.wait_until("8min 22sec")
+
+        p_disease_to_pos_fracc_upper_copy = p_disease_to_pos_fracc[3:8].copy()
+        p_disease_to_pos_fracc_lower_copy = p_disease_to_pos_fracc[9:].copy()
+
+        result_disease_to_positive = MathTex(
+            "P(disease|", "positive",") = ", "{0.0085", "\\over", "0.058}", "=", "0.147"
+            , color= BLACK
+        ).scale(0.8).next_to(p_disease_to_pos_fracc,DOWN*4)
+        result_disease_to_positive.set_color_by_tex("positive", RED_E)
+
+        self.play(Write(result_disease_to_positive[:3]), Write(result_disease_to_positive[4]))
+        self.play(ReplacementTransform(p_disease_to_pos_fracc_upper_copy,result_disease_to_positive[-5]),
+                  ReplacementTransform(p_disease_to_pos_fracc_lower_copy,result_disease_to_positive[-3])    
+        )        
+
         timer.wait_until("8min 24sec")
+
+        self.play(Circumscribe(result_disease_to_positive[-3],color=BLUE_B,time_width=3,fade_out=True),
+                 Circumscribe(p_disease_to_pos_fracc[9:],color=BLUE_B,time_width=3,fade_out=True)
+        )
+
+        self.play(Circumscribe(result_disease_to_positive[-3],color=BLUE_B,time_width=3),
+                 Circumscribe(p_disease_to_pos_fracc[9:],color=BLUE_B,time_width=3)
+        )
+
+        timer.wait_until("8min 27sec")
 
         tex_p_pos_final = MathTex(
             "P(", "positive", ") = ", "0.058",color=BLACK
         ).next_to(p_disease,DOWN).scale(0.7)
-
         tex_p_pos_final.set_color_by_tex("positive", RED_E)
 
-        self.play(Write(tex_p_pos_final,run_time=7))
+        self.play(Write(tex_p_pos_final,run_time=3))
 
         timer.wait_until("8min 33sec")
 
         tex_p_pos_disease_final = MathTex(
-            "P(disease|", "positive", ") = ", "0.147",color=BLACK
+            "P(disease|", "positive", ")", " = ", "0.147",color=BLACK
         ).next_to(tex_p_pos_final,DOWN).scale(0.7)
+        tex_p_pos_disease_final.set_color_by_tex("positive",color=RED_E)
 
-        self.play(Write(tex_p_pos_disease_final,run_time=14))
+        self.play(Write(tex_p_pos_disease_final[:-2],run_time=4))
+
+        timer.wait_until("8min 44sec")
+
+        self.play(Write(tex_p_pos_disease_final[-2:]), Write(result_disease_to_positive[-2:]))
+        self.play(Indicate(tex_p_pos_disease_final[-1], color=BLUE_E),
+                 Indicate(result_disease_to_positive[-1], color=BLUE_E),
+                 run_time=3
+        )
 
         timer.wait_until("8min 50sec")
 
