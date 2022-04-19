@@ -492,12 +492,12 @@ def generate_stickman(size = 1.0,fill_opacity=0.0 ,general_color = BLACK, color_
 
     stickman_torso = Line(start=stickman_head.get_bottom(),end=ref_point_torso.get_center(),buff=0, color=color_torso)
 
-    ref_point_left_arm = Dot().move_to(stickman_torso.get_center()).shift(UP+LEFT)
-    ref_point_right_arm = Dot().move_to(stickman_torso.get_center()).shift(UP+RIGHT)
+    ref_point_left_arm = Dot().move_to(stickman_torso.get_center()).shift(DOWN*(0.7)+LEFT*(0.7))
+    ref_point_right_arm = Dot().move_to(stickman_torso.get_center()).shift(DOWN*(0.7)+RIGHT*(0.7))
 
 
-    stickman_left_arm = Line(start=stickman_torso.get_center(), end = ref_point_left_arm, buff = 0, color = color_left_arm)
-    stickman_right_arm = Line(start=stickman_torso.get_center(), end = ref_point_right_arm, buff = 0, color = color_right_arm)
+    stickman_left_arm = Line(start=stickman_torso.get_center()+UP*size, end = ref_point_left_arm, buff = 0, color = color_left_arm)
+    stickman_right_arm = Line(start=stickman_torso.get_center()+UP*size, end = ref_point_right_arm, buff = 0, color = color_right_arm)
 
     stickman_left_leg = Line(start=stickman_torso.get_end(), end=ref_point_left_leg, buff= 0, color= color_left_leg)
     stickman_right_leg = Line(start = stickman_torso.get_end(), end = ref_point_right_leg, buff = 0, color = color_right_leg)

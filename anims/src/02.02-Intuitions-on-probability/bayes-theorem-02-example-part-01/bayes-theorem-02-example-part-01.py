@@ -39,15 +39,15 @@ class Main(Scene):
         timer.wait_until(27)
 
         with_medical_condition_circle = Circle(0.5, color = RED_E, fill_opacity = 0.6).shift(LEFT*1.2)
-        without_medical_condition_circle = Circle(0.5,color= GREEN_E, fill_opacity = 0.6).next_to(with_medical_condition_circle,RIGHT,buff=1)
+        without_medical_condition_circle = Circle(0.5,color= GREEN_E, fill_opacity = 0.6).next_to(with_medical_condition_circle,RIGHT,buff=1).shift(RIGHT*0.2)
 
         medical_condition_tex = MathTex(
-            "medical condition" , color= BLACK
-        ).next_to(with_medical_condition_circle,DOWN).scale(0.5)
+            r"\text{medical condition}" , color= BLACK
+        ).next_to(with_medical_condition_circle,DOWN).scale(0.6)
 
         no_medical_condition_tex = MathTex(
-            "non medical condition" , color= BLACK
-        ).next_to(without_medical_condition_circle,DOWN).scale(0.5)
+            r"\text{non medical condition}" , color= BLACK
+        ).next_to(without_medical_condition_circle,DOWN).scale(0.6)
 
         with_medical_condition_vgroup = VGroup(with_medical_condition_circle,medical_condition_tex)
         without_medical_condition_vgroup = VGroup(without_medical_condition_circle, no_medical_condition_tex)
@@ -65,19 +65,19 @@ class Main(Scene):
 
         wrapper_population_with_definitions_vgroup = VGroup(wrapper_circles_with_label_vgroup, population_tex)
         wrapper_circles_with_label_vgroup.shift(UP*1.2)
-        surrounder_wrapper_popul_defs = SurroundingRectangle(wrapper_population_with_definitions_vgroup,color=BLACK,stroke_width=0.8)
-        complete_pop_def_vgroup = VGroup(wrapper_population_with_definitions_vgroup, surrounder_wrapper_popul_defs)
+        #surrounder_wrapper_popul_defs = SurroundingRectangle(wrapper_population_with_definitions_vgroup,color=BLACK,stroke_width=0.8)
+        #complete_pop_def_vgroup = VGroup(wrapper_population_with_definitions_vgroup, surrounder_wrapper_popul_defs)
+        complete_pop_def_vgroup = VGroup(wrapper_population_with_definitions_vgroup)
         
-        
-        self.play(complete_pop_def_vgroup.animate.to_edge(UP,buff=0.1).scale(0.7))
+        self.play(complete_pop_def_vgroup.animate.to_edge(UP,buff=0.1).scale(0.9))
 
         p_disease = MathTex(
             "P(disease)", "=", "0.3", color=BLACK
         )
 
-        timer.wait_until("1min 3sec")
+        timer.wait_until("1min 7sec")
 
-        self.play(Write(p_disease,run_time=5))
+        self.play(Write(p_disease,run_time=3))
 
         timer.wait_until("1min 24sec")
 
@@ -138,7 +138,7 @@ class Main(Scene):
 
         equations_part_01 = VGroup(p_disease,p_disease_to_positive,p_positive_to_disease)
 
-        self.play(equations_part_01.animate.to_edge(LEFT,SMALL_BUFF).shift(UP*2).shift(LEFT*0.8).scale(0.6))
+        self.play(equations_part_01.animate.to_corner(LEFT+UP,MED_SMALL_BUFF).shift(LEFT*0.5).scale(0.8))
 
         timer.wait_until("2min 45sec")
 
@@ -149,12 +149,12 @@ class Main(Scene):
         ).scale(0.7).shift(UP)
         bayes_p_disease_to_positive.set_color_by_tex("positive",RED_E)
 
-        self.play(Write(VGroup(*bayes_p_disease_to_positive[0:7]),run_time=5))
-        self.play(Write(VGroup(*bayes_p_disease_to_positive[7:]), run_time=9))
+        self.play(Write(VGroup(*bayes_p_disease_to_positive[0:7]),run_time=4))
+        self.play(Write(VGroup(*bayes_p_disease_to_positive[7:]), run_time=6))
 
         timer.wait_until("3min 8sec")
 
-        self.play(Indicate(VGroup(*bayes_p_disease_to_positive[0:7]),color=RED_E,run_time=2))
+        self.play(Indicate(VGroup(*bayes_p_disease_to_positive[0:6]),color=RED_E,run_time=2))
 
         timer.wait_until("3min 11sec")
 
@@ -164,7 +164,7 @@ class Main(Scene):
         timer.wait_until("3min 16sec")
 
         self.play(Indicate(VGroup(*bayes_p_disease_to_positive[13]),color=RED_E,run_time=2))
-        updating_animation(p_disease,self)
+        updating_animation(p_disease[-1],self)
 
         timer.wait_until("3min 22sec")
 
@@ -190,9 +190,9 @@ class Main(Scene):
 
         self.play(Write(p_positive[8],run_time=3))
 
-        timer.wait_until("4min 2sec")
+        timer.wait_until("4min 7sec")
 
-        self.play(Write(p_positive[4:8],run_time=7))
+        self.play(Write(p_positive[4:8],run_time=3))
 
         timer.wait_until("4min 12sec")
 
@@ -202,13 +202,13 @@ class Main(Scene):
 
         self.play(Write(p_positive[-3:]))
 
-        timer.wait_until("4min 18sec")
+        timer.wait_until("4min 20sec")
 
-        self.play(Write(VGroup(*p_positive[10:-1]), run_time=5))
+        self.play(Write(VGroup(*p_positive[10:-3]), run_time=3))
 
         timer.wait_until("4min 25sec")
 
-        self.play(Indicate(VGroup(*p_positive[0:3]),color=BLUE_E,scale_factor=1.1,run_time=2))
+        self.play(Indicate(VGroup(*p_positive[0:3]),color=BLUE_E,scale_factor=1.1,run_time=3))
 
         timer.wait_until("4min 29sec")
 
@@ -235,46 +235,48 @@ class Main(Scene):
 
         timer.wait_until("4min 46sec")
 
-        p_positive_underline = Underline(VGroup(*p_disease_to_positive_long_equation[10:]), color=BLUE_E)
+        p_positive_brace = Brace(VGroup(*p_disease_to_positive_long_equation[10:]), color=BLUE_E)
 
-        self.play(Write(p_positive_underline))
+        self.play(Write(p_positive_brace))
 
         timer.wait_until("4min 48sec")
 
-        trash_underline_p_positive_subtext = MathTex("P(positive)",color=BLACK).next_to(p_positive_underline,DOWN).scale(0.6)
+        trash_underline_p_positive_subtext = MathTex("P(positive)",color=BLACK).next_to(p_positive_brace,DOWN).scale(0.6)
 
         self.play(FadeIn(trash_underline_p_positive_subtext))
 
         timer.wait_until("4min 55sec")
 
-        self.play(FadeOut(VGroup(p_positive_underline, trash_underline_p_positive_subtext)))
+        self.play(FadeOut(VGroup(p_positive_brace, trash_underline_p_positive_subtext)))
         
         timer.wait_until("4min 58sec")
 
         
         #upper_fraction_underline = Underline(VGroup(*p_disease_to_positive_long_equation[4:9], color= BLUE_E ))
 
-        self.play(Indicate(VGroup(*p_disease_to_positive_long_equation[4:9], color= BLUE_E)))
+        self.play(Indicate(VGroup(*p_disease_to_positive_long_equation[4:9]), color= BLUE_E),run_time=3)
 
         timer.wait_until("5min 1sec")
 
         lower_fraction_p_disease_underline = Underline(p_disease_to_positive_long_equation[14],color=RED_E)
         tex_p_disease_underline = MathTex(
             "0.3", color=BLACK
-            ).scale(0.5).next_to(lower_fraction_p_disease_underline,DOWN)
+            ).scale(0.7).next_to(lower_fraction_p_disease_underline,DOWN)
+
+        tex_p_disease_underline_copy = tex_p_disease_underline.copy().next_to(p_disease_to_positive_long_equation[8],UP,buff=SMALL_BUFF)
 
         self.play(Write(lower_fraction_p_disease_underline,run_time=3))
 
         timer.wait_until("5min 6sec")
 
-        self.play(Write(tex_p_disease_underline))
+        self.play(Write(tex_p_disease_underline), Write(tex_p_disease_underline_copy))
 
         timer.wait_until("5min 9sec")
 
         lower_fraction_p_not_disease_underline = Underline(p_disease_to_positive_long_equation[-3:],color=GREEN_E)
         tex_p_not_disease_underline = MathTex(
             "0.7", color=BLACK
-            ).scale(0.5).next_to(lower_fraction_p_not_disease_underline,DOWN)
+            ).scale(0.7).next_to(lower_fraction_p_not_disease_underline,DOWN)
 
         self.play(Write(lower_fraction_p_not_disease_underline))
         self.play(Write(tex_p_not_disease_underline))
@@ -288,9 +290,11 @@ class Main(Scene):
         tex_p_pos_disease_underline = MathTex(
             "0.85",
              color=BLACK
-        ).scale(0.5).next_to(lower_fraction_p_positive_to_disease_underline,DOWN)
+        ).scale(0.7).next_to(lower_fraction_p_positive_to_disease_underline,DOWN)
 
-        self.play(Write(lower_fraction_p_positive_to_disease_underline))
+        tex_p_pos_disease_underline_copy = tex_p_pos_disease_underline.copy().next_to(p_disease_to_positive_long_equation[4:7],UP,buff=SMALL_BUFF)
+
+        self.play(Write(lower_fraction_p_positive_to_disease_underline), Write(tex_p_pos_disease_underline_copy))
 
         timer.wait_until("5min 18sec")
 
@@ -316,19 +320,33 @@ class Main(Scene):
 
         tex_p_pos_not_disease_underline = MathTex(
             "0.05", color=BLACK
-            ).scale(0.5).next_to(lower_fraction_p_pos_not_disease_underline,DOWN)
+            ).scale(0.7).next_to(lower_fraction_p_pos_not_disease_underline,DOWN)
 
         self.play(Write(lower_fraction_p_pos_not_disease_underline))
         self.play(Write(tex_p_pos_not_disease_underline))
 
-        timer.wait_until("6min 42sec")
+        timer.wait_until("6min 35sec")
 
         result_tex = MathTex(
-            "P(disease|","positive)","=", "0.879", color=BLACK
+            "P(disease|", "positive", ")" , "=", "{0.255",
+             "\\over",
+             "0.29}", "=", "0.879", color=BLACK
         ).next_to(p_disease_to_positive_long_equation,DOWN,buff=LARGE_BUFF)
         result_tex.set_color_by_tex("positive",RED_E)
 
-        self.play(Write(result_tex[2:]))
+        self.play(Write(result_tex[:4]),Write(result_tex[5]), run_time = 2)
+
+        timer.wait_until("6min 38sec")
+        
+        self.play(ReplacementTransform(p_disease_to_positive_long_equation[4:9].copy(),
+                                    result_tex[4]),
+                 ReplacementTransform(p_disease_to_positive_long_equation[10:].copy(),
+                                    result_tex[-3]) 
+                )
+        
+        timer.wait_until("6min 42sec")
+
+        self.play(Write(result_tex[-2:]))
 
         timer.wait_until("6min 48sec")
 
@@ -336,7 +354,7 @@ class Main(Scene):
 
         timer.wait_until("6min 59sec")
 
-        self.play(Write(result_tex[0:2]))
+        self.play(Indicate(result_tex[0:3],color=BLUE_E,run_time=4))
 
         timer.wait_until("7min 21sec")
 
