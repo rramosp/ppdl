@@ -237,7 +237,7 @@ class Main(Scene):
         timer.wait_until("2min 6sec")
 
         #brace_second_test_to_sick_intersection = Brace(second_test_to_sick_intersection,color=BLACK,direction=DOWN,buff=0)
-        second_test_to_sick_intersection_brace_tex = MathTex("0.85", color=BLACK).s.cale(0.4).move_to(second_test_to_sick_intersection.get_center())
+        second_test_to_sick_intersection_brace_tex = MathTex("0.85", color=BLACK).scale(0.4).move_to(second_test_to_sick_intersection.get_center())
         #self.play(Write(brace_second_test_to_sick_intersection))
         self.play(Write(second_test_to_sick_intersection_brace_tex))
 
