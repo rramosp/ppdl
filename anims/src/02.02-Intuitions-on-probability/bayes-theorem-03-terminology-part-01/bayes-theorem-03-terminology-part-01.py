@@ -45,16 +45,16 @@ class Main(Scene):
 
         timer.wait_until(35)
 
-        self.play(Indicate(bayes_p_disease_to_positive[2], color=BLUE_E, run_time=4,scale_factor=1.1),
-                 Indicate(bayes_p_disease_to_positive[4], color=BLUE_E,run_time=4,scale_factor=1.1)
+        self.play(Indicate(bayes_p_disease_to_positive[2], color=BLUE_E, run_time=4,scale_factor=1.05),
+                 Indicate(bayes_p_disease_to_positive[4], color=BLUE_E,run_time=4,scale_factor=1.05)
         )
 
         timer.wait_until(40)
 
-        self.play(Indicate(bayes_p_disease_to_positive[:6],color= BLUE_E, run_time=4,scale_factor=1.1),
-                  Indicate(bayes_p_disease_to_positive[7:12],color= BLUE_E, run_time=4,scale_factor=1.1),
-                  Indicate(bayes_p_disease_to_positive[-5],color= BLUE_E, run_time=4,scale_factor=1.1),
-                  Indicate(bayes_p_disease_to_positive[-3:],color= BLUE_E, run_time=4,scale_factor=1.1)
+        self.play(Indicate(bayes_p_disease_to_positive[:6],color= RED_E, run_time=4,scale_factor=1.05),
+                  Indicate(bayes_p_disease_to_positive[7:12],color= RED_E, run_time=4,scale_factor=1.05),
+                  Indicate(bayes_p_disease_to_positive[-5],color= RED_E, run_time=4,scale_factor=1.05),
+                  Indicate(bayes_p_disease_to_positive[-3:],color= RED_E, run_time=4,scale_factor=1.05)
         )
 
         timer.wait_until(46)
@@ -237,13 +237,14 @@ class Main(Scene):
         timer.wait_until("6min 7sec")
 
         self.play(Circumscribe(p_disease_to_pos_fracc[1],color=BLUE_B,time_width=3,fade_out=True),
-                  Circumscribe(p_disease_to_pos_fracc[1],color=BLUE_B,time_width=3)
+                Circumscribe(p_disease_to_pos_fracc[1],color=BLUE_B,time_width=3,fade_out=True),
+                Circumscribe(p_disease_to_pos_fracc[1],color=BLUE_B,time_width=3)
         )
 
         timer.wait_until("6min 17sec")
 
         self.play(Circumscribe(generalization_p_pos,color=BLUE_B,time_width=3,fade_out=True),
-                  Circumscribe(p_disease_to_pos_fracc,color=BLUE_B,time_width=3)
+                  Circumscribe(generalization_p_pos,color=BLUE_B,time_width=3)
         )
 
         timer.wait_until("6min 28sec")

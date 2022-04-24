@@ -32,7 +32,7 @@ def stickman_population(scene):
             row_list.append(generate_stickman(size = 0.2, fill_opacity = 0.5,general_color = RED_E))
             if i == 0:
                 if j == 0:
-                    row_list[j].to_edge(UP,buff=MED_SMALL_BUFF).shift(LEFT)
+                    row_list[j].to_edge(UP,buff=MED_SMALL_BUFF).shift(LEFT*0.8).shift(DOWN*0.15)
                     scene.play(Write(row_list[j]),run_time=0.4)
                 else:
                     row_list[j].next_to(row_list[j-1],RIGHT ,buff=0.2)
@@ -188,20 +188,25 @@ class Main(Scene):
 
         timer.wait_until("1min 41sec")
 
-        updating_animation(false_positive_tex, self)
+        updating_animation(p_positive_to_disease[-1], self)
 
-        timer.wait_until("2min 5sec")
-
-        for i in sick_stickman_matrix:
-            self.play(FadeOut(*i),run_time=0.1)
-        for i in not_sick_stickman_matrix:
-            self.play(FadeOut(*i),run_time=0.07)
-
-
-        timer.wait_until("2min 8sec")
+        timer.wait_until("2min")
 
         self.play(Write(sick_rectangle,run_time=4))
         self.play(Write(not_sick_rectangle))
+        
+
+        timer.wait_until("2min 8sec")
+
+        for i in sick_stickman_matrix:
+            self.play(FadeOut(*i),run_time=0.2)
+        for i in not_sick_stickman_matrix:
+            self.play(FadeOut(*i),run_time=0.1)
+
+        timer.wait_until("2min 9sec")
+
+        self.play(Indicate(sick_rectangle,color=RED_E, run_time=3))
+        self.play(Indicate(not_sick_rectangle,color=GREEN_E, run_time=3))
 
         timer.wait_until("2min 19sec")
 
@@ -375,6 +380,16 @@ class Main(Scene):
 
         self.play(copy_2_test_to_not_sick_intersection.animate.next_to(copy_2_test_to_sick_intersection,RIGHT,buff=0))
         self.play(Write(MathTex("=", color=BLACK).scale(1.4).next_to(copy_2_test_to_not_sick_intersection, RIGHT, buff=MED_SMALL_BUFF)))
+
+        timer.wait_until("6min 9sec")
+
+        cancel_line_1 = Line(start=LEFT, end=UP+RIGHT*1.3).move_to(not_sick_rectangle_copy.get_center_of_mass()).scale(0.5)
+        cancel_line_2 = Line(start=LEFT, end=UP+RIGHT*1.3).move_to(not_sick_rectangle_copy_2.get_center()).scale(0.5)
+
+        cancel_line_3 = Line(start=LEFT, end=UP+RIGHT*1.3).move_to(copy_sick_rectangle.get_center_of_mass()).scale(0.5)
+        cancel_line_4 = Line(start=LEFT, end=UP+RIGHT*1.3).move_to(copy_2_sick_rectangle.get_center()).scale(0.5)
+
+        self.play(FadeIn(cancel_line_1), FadeIn(cancel_line_2), FadeIn(cancel_line_3), FadeIn(cancel_line_4) )
 
 
         timer.wait_until("6min 28sec")
