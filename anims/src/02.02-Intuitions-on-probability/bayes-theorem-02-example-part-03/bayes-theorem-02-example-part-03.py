@@ -75,6 +75,8 @@ class Main(Scene):
         tex_underline_3 = MathTex("0.05",color=BLACK).scale(0.6).next_to(p_pos_dis_m9_m4_underline,DOWN,buff=SMALL_BUFF)
         tex_underline_3.set_color_by_tex("positive",RED_E)
 
+        self.play(Write(p_pos_dis_m9_m4_underline), Write(tex_underline_3))
+
         p_pos_dis_m1_underline = Underline(p_disease_to_pos_fracc[-3:],color=RED_E)
 
         tex_underline_4 = MathTex("0.99",color=BLACK).scale(0.6).next_to(p_pos_dis_m1_underline,DOWN,buff=SMALL_BUFF)
@@ -144,11 +146,11 @@ class Main(Scene):
 
         timer.wait_until(35)
 
-        not_sick_rectangle_brace = Brace(not_sick_rectangle,direction=UP,buff=0,color=BLACK)
-        not_sick_brace_label = MathTex("0.05", color =BLACK).scale(0.5).next_to(not_sick_rectangle_brace,UP,buff=0.1)
+        not_sick_rectangle_brace = Brace(test_to_not_sick_intersection,direction=RIGHT,buff=0,color=BLACK)
+        not_sick_brace_label = MathTex("0.05", color =BLACK).scale(0.5).next_to(not_sick_rectangle_brace,RIGHT,buff=0.1)
 
-        self.play(Write(not_sick_rectangle_brace),run_time=2)
-        self.play(Write(not_sick_brace_label))
+        self.play(FadeIn(not_sick_rectangle_brace),run_time=2)
+        self.play(FadeIn(not_sick_brace_label))
 
         timer.wait_until(41)
 
@@ -156,11 +158,11 @@ class Main(Scene):
 
         timer.wait_until(44)
 
-        sick_rectangle_brace = Brace(sick_rectangle,direction=UP,buff=0,color=BLACK)
-        sick_brace_label = MathTex("0.85", color =BLACK).scale(0.5).next_to(sick_rectangle_brace,UP,buff=0.1)
+        #sick_rectangle_brace = Brace(sick_rectangle,direction=UP,buff=0,color=BLACK)
+        sick_brace_label = MathTex("0.85", color =BLACK).scale(0.5).move_to(test_to_sick_intersection.get_center())
 
-        self.play(Write(sick_rectangle_brace), run_time=2)
-        self.play(Write(sick_brace_label))
+        #self.play(FadeIn(sick_rectangle_brace), run_time=2)
+        self.play(FadeIn(sick_brace_label))
 
         timer.wait_until(51)
 
@@ -178,24 +180,28 @@ class Main(Scene):
 
         ## start second example of benn diagrams mobjects
 
-        second_sick_rectangle = Rectangle(width=0.255, height=3, color=RED_E, fill_opacity=0.1
+        second_sick_rectangle = Rectangle(width=0.555, height=3, color=RED_E, fill_opacity=0.1
                          ).scale(0.65
                         ).next_to(not_sick_rectangle,RIGHT,buff=0).shift(RIGHT)
 
-        second_sick_rectangle_brace = Brace(second_sick_rectangle,direction=UP,color=BLACK,buff=0)
-        second_sick_rectangle_brace_tex = MathTex("0.01", color=BLACK).scale(0.5).next_to(second_sick_rectangle_brace,UP,buff=0.1)
+        
 
-        second_not_sick_rectangle = Rectangle(width=3.845, height=3,color=GREEN_E, fill_opacity=0.1
+        second_not_sick_rectangle = Rectangle(width=3.545, height=3,color=GREEN_E, fill_opacity=0.1
                         ).scale(0.65).next_to(second_sick_rectangle,RIGHT,buff=0)
 
-        second_not_sick_rectangle_brace = Brace(second_not_sick_rectangle,direction=UP,color=BLACK,buff=0)
-        second_not_sick_rectangle_brace_tex = MathTex("0.99", color=BLACK).scale(0.5).next_to(second_not_sick_rectangle_brace,UP,buff=0.1)
+        
 
-        second_test_population_circle = Circle(color=BLACK).scale(0.7).move_to(second_sick_rectangle.get_edge_center(RIGHT)).shift(RIGHT*0.3).scale(0.65)
+        second_test_population_circle = Circle(color=BLACK).scale(0.7).move_to(second_sick_rectangle.get_edge_center(RIGHT)).shift(RIGHT*0.18).scale(0.65)
         second_test_to_sick_intersection = Intersection(second_sick_rectangle,second_test_population_circle,color=ORANGE,fill_opacity=0.7)
         second_test_to_not_sick_intersection = Intersection(second_not_sick_rectangle,second_test_population_circle,color=PURPLE_A,fill_opacity=0.7)
         second_sick_to_test_difference = Difference(second_sick_rectangle,second_test_population_circle, color=RED_E,fill_opacity=0.2)
         second_not_sick_to_test_difference = Difference(second_not_sick_rectangle,second_test_population_circle,color=GREEN_E,fill_opacity=0.2)
+
+        second_sick_rectangle_brace = Brace(second_sick_rectangle,direction=UP,color=BLACK,buff=0)
+        second_sick_rectangle_brace_tex = MathTex("0.01", color=BLACK).scale(0.5).next_to(second_sick_rectangle_brace,UP,buff=0.1)
+
+        second_not_sick_rectangle_brace = Brace(second_not_sick_rectangle,direction=UP,color=BLACK,buff=0)
+        second_not_sick_rectangle_brace_tex = MathTex("0.99", color=BLACK).scale(0.5).next_to(second_not_sick_rectangle_brace,UP,buff=0.1)
 
         arrow_1 = Arrow(start=not_sick_rectangle.get_edge_center(RIGHT),end = second_sick_rectangle.get_edge_center(LEFT),color=BLACK )
         
@@ -207,7 +213,7 @@ class Main(Scene):
         timer.wait_until("1min 38sec")
 
         self.play(Write(second_not_sick_rectangle,run_time=5))
-        self.play(Write(second_not_sick_rectangle_brace), Write(second_not_sick_rectangle_brace_tex))
+        self.play(FadeIn(second_not_sick_rectangle_brace), FadeIn(second_not_sick_rectangle_brace_tex))
 
         timer.wait_until("1min 46sec")
 
@@ -219,13 +225,21 @@ class Main(Scene):
 
         timer.wait_until("1min 55sec")
 
+        tex_inside_second_intersection_not_sick = MathTex("0.05", color=BLACK).scale(0.5).move_to(second_test_to_not_sick_intersection.get_center())
+
+        self.play(Write(tex_inside_second_intersection_not_sick))
         self.play(Indicate(second_test_to_not_sick_intersection,color=PURPLE_A),run_time=4)
 
         timer.wait_until("2min")
 
         self.play(Write(second_test_to_sick_intersection))
 
-        timer.wait_until("2min 2sec")
+        timer.wait_until("2min 6sec")
+
+        #brace_second_test_to_sick_intersection = Brace(second_test_to_sick_intersection,color=BLACK,direction=DOWN,buff=0)
+        second_test_to_sick_intersection_brace_tex = MathTex("0.85", color=BLACK).s.cale(0.4).move_to(second_test_to_sick_intersection.get_center())
+        #self.play(Write(brace_second_test_to_sick_intersection))
+        self.play(Write(second_test_to_sick_intersection_brace_tex))
 
         self.play(Indicate(second_test_to_sick_intersection,color=ORANGE,run_time=8))
 
