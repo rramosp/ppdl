@@ -1,3 +1,6 @@
 #!/bin/sh
-
 docker run -it --rm -v "$(pwd):/manim" -v "$HOME/Media:/media" manim $*
+
+# use the following line (comment/uncomment) to run in an existing container
+CONTAINER_ID=e5b2
+#docker exec -it $CONTAINER_ID $*
