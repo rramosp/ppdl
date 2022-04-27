@@ -1,7 +1,7 @@
 # Book settings
 title: Probabilistic Programming for Deep Learning
 author: Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
-logo: content/local/imgs/fudea.jpg
+logo: content/local/imgs/logo-tf-udea-unal.png
 only_build_toc_files: true
 
 repository:
