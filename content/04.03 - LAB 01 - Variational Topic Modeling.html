@@ -1,0 +1,856 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 04.03.2: Variational Neural Topic Modeling &#8212; Probabilistic Programming for Deep Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. VI on latent parameters" href="04.04%20-%20intro.html" />
+    <link rel="prev" title="Variational Inference for Text Modeling" href="04.03%20-%20NOTES%2002%20-%20Variational%20Inference%20for%20Text%20Modeling.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MBFEZ3PF64');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Deep Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="frontpage.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1.1.html">
+   1.1 Probabilistic programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1.2.html">
+   1.2 Course mechanics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  2. Fundamentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="02.01%20-%20intro.html">
+   2.1 Tensorflow core
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20NOTES%2001%20-%20Simbolic%20computing%20for%20ML.html">
+     1 Symbolic computing for ML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20NOTES%2002%20-%20TF%20for%20symbolic%20computing.html">
+     2 TF for symbolic computing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20NOTES%2003%20-%20Using%20tf.function.html">
+     3 Using `tf.function`
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20LAB%2001%20-%20Tensorflow%20model%20subclassing.html">
+     LAB 1. Model subclassing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20LAB%2002%20-%20Low%20level%20Tensorflow.html">
+     LAB 2. Low level Tensorflow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="02.02%20-%20intro.html">
+   2.2 Intuitions on probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2001%20-%20Discrete%20distiributions.html">
+     1 Discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2002%20-%20Continuous%20distributions.html">
+     2 Continuous distribuions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2003%20-%20Distributions%20of%20data%20and%20model%20parameters.html">
+     3 Distributions of data and model paramters
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2004%20-%20Probability%20and%20likelihood.html">
+     4 Probability and likelihood
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2005%20-%20Similarity%20of%20distributions.html">
+     5 Similarity of distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20LAB%2001%20-%20Marginals%2C%20conditionals%20and%20joints.html">
+     LAB 1. Marginals, conditionals and joints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20LAB%2002%20-%20Likelihood.html">
+     LAB 2. Likelihood
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="02.03%20-%20intro.html">
+   2.3 Tensorflow probability basics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2001%20-%20Distribution%20Objects.html">
+     1 Distribution objects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2002%20-%20Distribution%20Layers.html">
+     2 Distribution layers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2003%20-%20Learning%20Distribution%20Parameters.html">
+     3 Learnable parameters
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2004%20-%20TFP%20DistributionLambda.html">
+     4 Distribution Lambda
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2005%20-%20Understanding%20shapes.html">
+     5 Understanding shapes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2006%20-%20More%20distribution%20objects.html">
+     6 More distribution objects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2007%20-%20Bijectors.html">
+     4 Bijectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20LAB%2001%20-%20TFP%20distributions.html">
+     LAB 1. TFP Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20LAB%2002%20-%20Distribution%20layers.html">
+     LAB 2. Distribution layers
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  3. Bayesian inference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20-%20intro.html">
+   3.1 Model based reasoning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.02%20-%20intro.html">
+   3.2 Bayesian inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.03%20-%20intro.html">
+   3.3 Bayesian hard classifier
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.04%20-%20intro.html">
+   3.4 Probabilisitc linear regression
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  4. Variational inference
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20-%20intro.html">
+   4.1 Revisiting uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.02%20-%20intro.html">
+   4.2 Variational inference
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="04.03%20-%20intro.html">
+   4.3 VI on latent variables
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="04.03%20-%20NOTES%2001%20-%20Dirichlet%20Distribution.html">
+     1 Dirichlet distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04.03%20-%20NOTES%2002%20-%20Variational%20Inference%20for%20Text%20Modeling.html">
+     2 VI for text modeling
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     LAB 1. Variational topic modeling
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.04%20-%20intro.html">
+   4.4 VI on latent parameters
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/04.03 - LAB 01 - Variational Topic Modeling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#topic-models">
+   Topic Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-1">
+   Task 1:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-2">
+   Task 2:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-3">
+   Task 3:
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Lab 04.03.2: Variational Neural Topic Modeling</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#topic-models">
+   Topic Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-1">
+   Task 1:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-2">
+   Task 2:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-3">
+   Task 3:
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># init repo notebook
+!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
+!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
+!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="lab-04-03-2-variational-neural-topic-modeling">
+<h1>Lab 04.03.2: Variational Neural Topic Modeling<a class="headerlink" href="#lab-04-03-2-variational-neural-topic-modeling" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>## Ignore this cell
+!pip install ppdl==0.1.5 rlxmoocapi==0.1.0 --quiet
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">nltk</span><span class="o">,</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+<span class="kn">from</span> <span class="nn">rlxmoocapi</span> <span class="kn">import</span> <span class="n">submit</span><span class="p">,</span> <span class="n">session</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Layer</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.initializers</span> <span class="kn">import</span> <span class="n">GlorotNormal</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_20newsgroups</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
+<span class="n">tfpl</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">layers</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;popular&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="topic-models">
+<h2>Topic Models<a class="headerlink" href="#topic-models" title="Permalink to this headline">¶</a></h2>
+<p>In this lab, we will use a neural network for variational topic modeling. First, let us introduce a general topic model:</p>
+<p><img alt="Topic model" src="../_images/topic_model.png" /></p>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(N\)</span> is the number of documents in the corpus.</p></li>
+<li><p><span class="math notranslate nohighlight">\(V\)</span> is the vocabulary size.</p></li>
+<li><p><span class="math notranslate nohighlight">\(K\)</span> is the number of topics.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(V=v_j|D=d_i)\)</span> is the probability of word <span class="math notranslate nohighlight">\(v_j\)</span> in document <span class="math notranslate nohighlight">\(d_i\)</span> (a Bag-of-Words representation).</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(K=k|D=d_i)\)</span> is the probability of topic <span class="math notranslate nohighlight">\(k\)</span> in document <span class="math notranslate nohighlight">\(d_i\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(V=v_j|K=k)\)</span> is the probability of document <span class="math notranslate nohighlight">\(d_i\)</span> belonging to topic <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+</ul>
+<p>In this case, we will use a probabilistic encoder-decoder neural network to approximate <span class="math notranslate nohighlight">\(P(K=k|D=d_i)\)</span> and <span class="math notranslate nohighlight">\(P(V=v_j|K=k)\)</span>.</p>
+<p>First, let us load the 20 newsgroups dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">newsgroups</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+<span class="n">corpus</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">newsgroups</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">newsgroups</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us preprocess the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_doc</span><span class="p">(</span><span class="n">doc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    preprocess a document.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lower_doc</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">clean_doc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^a-z]&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">lower_doc</span><span class="p">)</span>
+    <span class="n">clean_doc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">clean_doc</span><span class="p">)</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">clean_doc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">sw</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
+    <span class="n">filtered_tokens</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">token</span><span class="p">:</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sw</span><span class="p">,</span>
+            <span class="n">tokens</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered_tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessed_corpus</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">preprocess_doc</span><span class="p">,</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">corpus</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">preprocessed_corpus</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The BoW representation of the documents is a matrix of size <span class="math notranslate nohighlight">\(N \times V\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bow</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">min_df</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">preprocessed_corpus</span><span class="p">)</span>
+        <span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">bow</span>
+        <span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">preprocessed_corpus</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+        <span class="p">)</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">bow</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-1">
+<h2>Task 1:<a class="headerlink" href="#task-1" title="Permalink to this headline">¶</a></h2>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">Encoder</span></code> class that takes the BoW of a document (<span class="math notranslate nohighlight">\(P(V=v_j|D=d_i)\)</span>) as input and outputs a probability distribution over topics (<span class="math notranslate nohighlight">\(P(K=k|D=d_i)\)</span>), you must:</p>
+<ul class="simple">
+<li><p>Implement the constructor, adding the <code class="docutils literal notranslate"><span class="pre">Dense</span></code> layers that you will need.</p></li>
+<li><p>Implement the <code class="docutils literal notranslate"><span class="pre">call</span></code> method to connect the input and the layers, and return the output of the last layer.</p></li>
+<li><p>The last layer must be a <code class="docutils literal notranslate"><span class="pre">Dense</span></code> layer with a <code class="docutils literal notranslate"><span class="pre">clipped_softplus</span></code> activation with <code class="docutils literal notranslate"><span class="pre">n_topics</span></code> units.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clipped_softplus</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">clip_by_value</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following <code class="docutils literal notranslate"><span class="pre">DecodingLayer</span></code> class is used to decode the topics distributions into a BoW representation.</p>
+</div>
+<div class="section" id="task-2">
+<h2>Task 2:<a class="headerlink" href="#task-2" title="Permalink to this headline">¶</a></h2>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">prior</span></code> function to describe the prior distribution of the topics.</p>
+<p>You must:</p>
+<ul class="simple">
+<li><p>Create a constant tensor of shape <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">n_topics)</span></code> with the <code class="docutils literal notranslate"><span class="pre">init_val</span></code></p></li>
+<li><p>Use a <code class="docutils literal notranslate"><span class="pre">Softplus</span></code> bijetor to transform the constant tensor.</p></li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">Dirichlet</span></code> distribution with the bijector result as concentration.</p></li>
+</ul>
+<p>The following model uses a prior distribution, the <code class="docutils literal notranslate"><span class="pre">Encoder</span></code> and the <code class="docutils literal notranslate"><span class="pre">DecodingLayer</span></code> to build the variational neural topic model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NeuralTopicModel</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">prior_dist</span><span class="p">,</span>
+            <span class="n">n_topics</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+            <span class="n">hidden_layers</span><span class="o">=</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span>
+            <span class="n">vocab_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+            <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prior_dist</span> <span class="o">=</span> <span class="n">prior_dist</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_topics</span> <span class="o">=</span> <span class="n">n_topics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layers</span> <span class="o">=</span> <span class="n">hidden_layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">activation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span> <span class="o">=</span> <span class="n">vocab_size</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elbo</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">):</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">),))</span>
+        <span class="n">encoded</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span>
+                <span class="n">n_topics</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_topics</span><span class="p">,</span>
+                <span class="n">hidden_layers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_layers</span><span class="p">,</span>
+                <span class="n">activation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activation</span>
+                <span class="p">)(</span><span class="nb">input</span><span class="p">)</span>
+
+        <span class="n">topics_layer</span> <span class="o">=</span> <span class="n">tfpl</span><span class="o">.</span><span class="n">DistributionLambda</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Dirichlet</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+                <span class="n">convert_to_tensor_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+                <span class="p">)(</span><span class="n">encoded</span><span class="p">)</span>
+
+        <span class="n">decoded</span> <span class="o">=</span> <span class="n">DecodingLayer</span><span class="p">(</span>
+                <span class="n">n_topics</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_topics</span><span class="p">,</span>
+                <span class="n">vocab_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vocab_size</span><span class="p">,</span>
+                <span class="p">)(</span><span class="n">topics_layer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topics_dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Dirichlet</span><span class="p">(</span>
+                <span class="n">concentration</span><span class="o">=</span><span class="n">encoded</span>
+                <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rec_dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">OneHotCategorical</span><span class="p">(</span>
+                <span class="n">probs</span><span class="o">=</span><span class="n">decoded</span>
+                <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rec_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">decoded</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">encoded</span><span class="p">)</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">elbo</span><span class="p">(</span>
+                <span class="nb">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">topics_dist</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rec_dist</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">prior_dist</span>
+                <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rec_model</span><span class="o">.</span><span class="n">add_loss</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rec_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">counts</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rec_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+                <span class="n">counts</span><span class="p">,</span>
+                <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
+                <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">get_topics_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Dirichlet</span><span class="p">(</span><span class="n">concentration</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dist</span>
+    
+    <span class="k">def</span> <span class="nf">get_topics_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rec_model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_topic_words</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-3">
+<h2>Task 3:<a class="headerlink" href="#task-3" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">build</span></code> method of the <code class="docutils literal notranslate"><span class="pre">NeuralTopicModel</span></code>, uses the <code class="docutils literal notranslate"><span class="pre">elbo</span></code> function, for our model it’s given by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span><span class="p">(</span><span class="n">log_prob</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="n">kl</span><span class="p">(</span><span class="n">prior</span> <span class="o">||</span> <span class="n">topics_posterior</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code> is the BoW representation of the document.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topics_posterior</span></code> is the posterior distribution of the topics (encoder distribution output).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rec_dist</span></code> is the distribution of the reconstruction of the document (decoder distribution output).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prior</span></code> is the prior distribution of the topics.</p></li>
+</ul>
+<p>Let us train the model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># hyperparameters</span>
+<span class="n">N_TOPICS</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">HIDDEN_LAYERS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+<span class="n">ACTIVATION</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span>
+<span class="n">prior_dist</span> <span class="o">=</span> <span class="n">prior</span><span class="p">(</span><span class="n">n_topics</span><span class="o">=</span><span class="n">N_TOPICS</span><span class="p">,</span> <span class="n">init_val</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NeuralTopicModel</span><span class="p">(</span>
+            <span class="n">prior_dist</span><span class="o">=</span><span class="n">prior_dist</span><span class="p">,</span>
+            <span class="n">n_topics</span><span class="o">=</span><span class="n">N_TOPICS</span><span class="p">,</span>
+            <span class="n">hidden_layers</span><span class="o">=</span><span class="n">HIDDEN_LAYERS</span><span class="p">,</span>
+            <span class="n">activation</span><span class="o">=</span><span class="n">ACTIVATION</span><span class="p">,</span>
+            <span class="n">vocab_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">elbo</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, let us review the learned distributions.</p>
+<ul class="simple">
+<li><p>The posterior distribution of the topics:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">topics_posterior</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_topics_dist</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">topics_posterior</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">topics_posterior</span><span class="o">.</span><span class="n">stddev</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The probabilities of the words in the topics:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">topics_words</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_topics_words</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">topics_words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Finally, We can view the 15 most relevant terms for each topic:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">topics_words</span><span class="o">.</span><span class="n">numpy</span><span class="p">()):</span>
+    <span class="n">terms_comp</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">comp</span><span class="p">)</span>
+    <span class="n">sorted_terms</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="n">terms_comp</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)[:</span><span class="mi">15</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">i</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">sorted_terms</span>
+                <span class="p">)</span>
+             <span class="p">)</span>
+         <span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="04.03%20-%20NOTES%2002%20-%20Variational%20Inference%20for%20Text%20Modeling.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Variational Inference for Text Modeling</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04.04%20-%20intro.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4. VI on latent parameters</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

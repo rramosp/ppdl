@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Variational Inference for Text Modeling &#8212; Probabilistic Programming for Deep Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lab 04.03.2: Variational Neural Topic Modeling" href="04.03%20-%20LAB%2001%20-%20Variational%20Topic%20Modeling.html" />
+    <link rel="prev" title="Dirichlet Distribution" href="04.03%20-%20NOTES%2001%20-%20Dirichlet%20Distribution.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MBFEZ3PF64');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Deep Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="frontpage.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  1. Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1.1.html">
+   1.1 Probabilistic programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1.2.html">
+   1.2 Course mechanics
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  2. Fundamentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="02.01%20-%20intro.html">
+   2.1 Tensorflow core
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20NOTES%2001%20-%20Simbolic%20computing%20for%20ML.html">
+     1 Symbolic computing for ML
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20NOTES%2002%20-%20TF%20for%20symbolic%20computing.html">
+     2 TF for symbolic computing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20NOTES%2003%20-%20Using%20tf.function.html">
+     3 Using `tf.function`
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20LAB%2001%20-%20Tensorflow%20model%20subclassing.html">
+     LAB 1. Model subclassing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20LAB%2002%20-%20Low%20level%20Tensorflow.html">
+     LAB 2. Low level Tensorflow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="02.02%20-%20intro.html">
+   2.2 Intuitions on probability
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2001%20-%20Discrete%20distiributions.html">
+     1 Discrete distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2002%20-%20Continuous%20distributions.html">
+     2 Continuous distribuions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2003%20-%20Distributions%20of%20data%20and%20model%20parameters.html">
+     3 Distributions of data and model paramters
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2004%20-%20Probability%20and%20likelihood.html">
+     4 Probability and likelihood
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2005%20-%20Similarity%20of%20distributions.html">
+     5 Similarity of distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20LAB%2001%20-%20Marginals%2C%20conditionals%20and%20joints.html">
+     LAB 1. Marginals, conditionals and joints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20LAB%2002%20-%20Likelihood.html">
+     LAB 2. Likelihood
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="02.03%20-%20intro.html">
+   2.3 Tensorflow probability basics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2001%20-%20Distribution%20Objects.html">
+     1 Distribution objects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2002%20-%20Distribution%20Layers.html">
+     2 Distribution layers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2003%20-%20Learning%20Distribution%20Parameters.html">
+     3 Learnable parameters
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2004%20-%20TFP%20DistributionLambda.html">
+     4 Distribution Lambda
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2005%20-%20Understanding%20shapes.html">
+     5 Understanding shapes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2006%20-%20More%20distribution%20objects.html">
+     6 More distribution objects
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20NOTES%2007%20-%20Bijectors.html">
+     4 Bijectors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20LAB%2001%20-%20TFP%20distributions.html">
+     LAB 1. TFP Distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.03%20-%20LAB%2002%20-%20Distribution%20layers.html">
+     LAB 2. Distribution layers
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  3. Bayesian inference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.01%20-%20intro.html">
+   3.1 Model based reasoning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.02%20-%20intro.html">
+   3.2 Bayesian inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.03%20-%20intro.html">
+   3.3 Bayesian hard classifier
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03.04%20-%20intro.html">
+   3.4 Probabilisitc linear regression
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  4. Variational inference
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.01%20-%20intro.html">
+   4.1 Revisiting uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.02%20-%20intro.html">
+   4.2 Variational inference
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="04.03%20-%20intro.html">
+   4.3 VI on latent variables
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="04.03%20-%20NOTES%2001%20-%20Dirichlet%20Distribution.html">
+     1 Dirichlet distributions
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2 VI for text modeling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04.03%20-%20LAB%2001%20-%20Variational%20Topic%20Modeling.html">
+     LAB 1. Variational topic modeling
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04.04%20-%20intro.html">
+   4.4 VI on latent parameters
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/04.03 - NOTES 02 - Variational Inference for Text Modeling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distributions-in-a-corpus-of-documents">
+   Distributions in a Corpus of Documents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-modeling-for-the-corpus-distribution">
+   Bayesian Modeling for the Corpus Distribution
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Variational Inference for Text Modeling</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distributions-in-a-corpus-of-documents">
+   Distributions in a Corpus of Documents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-modeling-for-the-corpus-distribution">
+   Bayesian Modeling for the Corpus Distribution
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># init repo notebook
+!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
+!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
+!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="variational-inference-for-text-modeling">
+<h1>Variational Inference for Text Modeling<a class="headerlink" href="#variational-inference-for-text-modeling" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook, we will implement the variational inference algorithm for topic modeling using a neural network and Latent Dirichlet Allocation (LDA). We’ll review the bayesian concepts behind LDA, and its implementation using tensorflow probability.</p>
+<p>First, let us import the necessary libraries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;ggplot&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="distributions-in-a-corpus-of-documents">
+<h2>Distributions in a Corpus of Documents<a class="headerlink" href="#distributions-in-a-corpus-of-documents" title="Permalink to this headline">¶</a></h2>
+<p>Let us consider the following simple corpus of documents:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;the cat sat on the mat the mat was on the cat the cat was on the mat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;the dog sat on the mat the mat was on the dog the dog was on the mat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;when the cat was on the roof the roof was on the cat the cat was on the roof&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;the bird sang a song the song sang the bird the bird sang a song&quot;</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we’ll compute the words distribution for a the first document in the corpus.</p>
+<p>Let us tokenize the document into words by splitting on the space characters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we’ll compute words occurences in the document and the vocabulary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we’ll estimate the parameters of the multinomial distribution for this document:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dist_params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+<span class="n">dist_params</span> <span class="o">=</span> <span class="n">dist_params</span> <span class="o">/</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">dist_params</span><span class="p">)</span>
+
+<span class="n">document_dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Multinomial</span><span class="p">(</span>
+        <span class="n">total_count</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)),</span>
+        <span class="n">probs</span><span class="o">=</span><span class="n">dist_params</span><span class="p">,</span>
+        <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">document_dist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using this distribution, we can sample documents counts with the counts distribution of the first document:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">document_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can convert the sample into a list of words, here, We repeat each word in the vocabulary the number of times it appears in the <code class="docutils literal notranslate"><span class="pre">sample</span></code> matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_np</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">sample</span>
+        <span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="k">for</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">doc_counts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_np</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc_counts</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">count</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, We’ll compute the parameters of the multinomial distribution for each document in the corpus.</p>
+<p>First, we’ll compute the vocabulary for the corpus:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vocab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">corpus</span>
+            <span class="p">])</span>
+        <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Also, we need a mapping from the vocabulary to the indices of the parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">word2idx</span> <span class="o">=</span> <span class="p">{</span><span class="n">w</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocab</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can compute the counts for each document:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">doc</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">corpus</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[[</span><span class="n">word2idx</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">Counter</span><span class="p">,</span> <span class="n">tokens</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now compute the parameters of the multinomial distribution for each document:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counts</span><span class="p">):</span>
+    <span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="o">/</span> <span class="n">params</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The distribution for each document in the corpus:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">document_dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Multinomial</span><span class="p">(</span>
+        <span class="n">total_count</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)),</span>
+        <span class="n">probs</span><span class="o">=</span><span class="n">params</span>
+        <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">document_dist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us generate two sample corpuses from the distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">document_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sample_np</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">sample</span>
+        <span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_np</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_np</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">document_id</span><span class="p">,</span> <span class="n">doc_counts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Document </span><span class="si">{</span><span class="n">document_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc_counts</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">count</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This approach always generates a corpus with 4 documents that have the same distribution of the original documents. However, there are some questions that enmark some limitations of this approach:</p>
+<ul class="simple">
+<li><p>What would happen if we had a large corpus?</p></li>
+</ul>
+<blockquote>
+<div><p>Under this approach, we would have to sample the distribution for each document in the corpus. This would be a very expensive operation.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>What happens to documents with similar distributions, is it necessary to save equivalent vectors multiple times?</p></li>
+</ul>
+<blockquote>
+<div><p>We would have to save the same vector multiple times. Which is memory inefficient.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Is there any way to generate a corpus with a different number of documents?</p></li>
+</ul>
+<blockquote>
+<div><p>There is no way to generate a corpus with a different number of documents, since we have positional distributions for a fixed-length corpus.</p>
+</div></blockquote>
+<p>To address these problems, we can use a distribution for the parameters of the multinomial distribution (Bayesian modeling), which allows us to: save the parameters for the parameters’ distribution only; summarize multiple distributions in one; and to generate corpuses with different number of documents.</p>
+<p>However, what kind of distribution is the parameters’ distribution?</p>
+<blockquote>
+<div><p>Let us recap about Bayesian conjugates. First, consider the Bernoulli distribution (special case of the Multinomial distribution), its conjugate is the Beta distribution. We need a multivariate distribution that generalizes the beta distribution and that can be used for the Multinomial’s parameters distribution (Dirichlet).</p>
+</div></blockquote>
+</div>
+<div class="section" id="bayesian-modeling-for-the-corpus-distribution">
+<h2>Bayesian Modeling for the Corpus Distribution<a class="headerlink" href="#bayesian-modeling-for-the-corpus-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Let us implement the following two-level hierarchical model for the corpus distribution:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+p \sim Dirichlet(\alpha)\\
+x \sim Multinomial(p)
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">corpus_dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionNamed</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Dirichlet</span><span class="p">(</span>
+                <span class="n">concentration</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)))</span>
+                <span class="p">),</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Multinomial</span><span class="p">(</span>
+                <span class="n">total_count</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)),</span>
+                <span class="n">probs</span><span class="o">=</span><span class="n">p</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can generate some samples from this distribution, notice that the <code class="docutils literal notranslate"><span class="pre">JointDistributionNamed</span></code> object generates a sample for each of the levels:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">corpus_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s view the corpus for this case:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_np</span> <span class="o">=</span> <span class="n">corpus_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">document_id</span><span class="p">,</span> <span class="n">doc_counts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_np</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Document </span><span class="si">{</span><span class="n">document_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc_counts</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">count</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can solve this problem using variational inference, in this matter, We would need a surrogate posterior distribution, whose parameters can be easily estimated with tensorflow’s automatic differentiation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">surrogate_posterior</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionNamedAutoBatched</span><span class="p">({</span>
+    <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">()(</span>
+        <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
+            <span class="n">loc</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))),</span>
+            <span class="n">scale</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need the bag-of-words representation of the corpus:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counts_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counts</span><span class="p">):</span>
+    <span class="n">counts_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">counts_mat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">counts_mat</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now compute the log-likelihood of the corpus distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prob</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">corpus_dist</span><span class="o">.</span><span class="n">log_prob</span><span class="p">({</span><span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">counts_mat</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we solve the problem using variational inference:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">vi</span><span class="o">.</span><span class="n">fit_surrogate_posterior</span><span class="p">(</span>
+        <span class="n">target_log_prob_fn</span><span class="o">=</span><span class="n">log_prob</span><span class="p">,</span>
+        <span class="n">surrogate_posterior</span><span class="o">=</span><span class="n">surrogate_posterior</span><span class="p">,</span>
+        <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+        <span class="n">num_steps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e3</span><span class="p">),</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s view a sample of documents:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">surrogate_posterior</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s2">&quot;p&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="o">/</span> <span class="n">params</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Multinomial</span><span class="p">(</span>
+        <span class="n">total_count</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)),</span>
+        <span class="n">probs</span><span class="o">=</span><span class="n">params</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_np</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_np</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">document_id</span><span class="p">,</span> <span class="n">doc_counts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Document </span><span class="si">{</span><span class="n">document_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc_counts</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">count</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="04.03%20-%20NOTES%2001%20-%20Dirichlet%20Distribution.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Dirichlet Distribution</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04.03%20-%20LAB%2001%20-%20Variational%20Topic%20Modeling.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 04.03.2: Variational Neural Topic Modeling</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

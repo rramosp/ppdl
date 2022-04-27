@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. Probability and likelihood &#8212; Probabilistic Programming for Deep Learning</title>
+    <title>Probability and likelihood &#8212; Probabilistic Programming for Deep Learning</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -55,8 +55,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Lab 02.02.1: Marginals, Conditionals, and Joints" href="02.02%20-%20LAB%2001%20-%20Marginals%2C%20conditionals%20and%20joints.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="02.02%20-%20NOTES%2003%20-%20Distributions%20of%20data%20and%20model%20parameters.html" />
+    <link rel="next" title="5. Similarity of distributions" href="02.02%20-%20NOTES%2005%20-%20Similarity%20of%20distributions.html" />
+    <link rel="prev" title="Distributions of data and model paramters" href="02.02%20-%20NOTES%2003%20-%20Distributions%20of%20data%20and%20model%20parameters.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -86,6 +86,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Probabilistic Programming for Deep Learning</h1>
@@ -98,37 +103,37 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Course information
+  <a class="reference internal" href="frontpage.html">
+   Welcome
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Introduction
+  1. Introduction
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="M01.html">
-   -- module videos
+  <a class="reference internal" href="M1.1.html">
+   1.1 Probabilistic programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1.2.html">
+   1.2 Course mechanics
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Fundamentals
+  2. Fundamentals
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="M02.html">
-   -- module videos
-  </a>
- </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="02.01%20-%20intro.html">
-   1. TF recap
+   2.1 Tensorflow core
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -137,20 +142,35 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="02.01%20-%20NOTES%2001%20-%20test.html">
-     test notes
+    <a class="reference internal" href="02.01%20-%20NOTES%2001%20-%20Simbolic%20computing%20for%20ML.html">
+     1 Symbolic computing for ML
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="02.01%20-%20NOTES%2002%20-%20test2.html">
-     test notes
+    <a class="reference internal" href="02.01%20-%20NOTES%2002%20-%20TF%20for%20symbolic%20computing.html">
+     2 TF for symbolic computing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20NOTES%2003%20-%20Using%20tf.function.html">
+     3 Using `tf.function`
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20LAB%2001%20-%20Tensorflow%20model%20subclassing.html">
+     LAB 1. Model subclassing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.01%20-%20LAB%2002%20-%20Low%20level%20Tensorflow.html">
+     LAB 2. Low level Tensorflow
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="02.02%20-%20intro.html">
-   2. Intuitions on probability
+   2.2 Intuitions on probability
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -160,29 +180,44 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="02.02%20-%20NOTES%2001%20-%20Discrete%20distiributions.html">
-     1. Discrete distributions
+     1 Discrete distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02.02%20-%20NOTES%2002%20-%20Continuous%20distributions.html">
-     2. Continuous distributions
+     2 Continuous distribuions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2003%20-%20Distributions%20of%20data%20and%20model%20parameters.html">
+     3 Distributions of data and model paramters
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3. Probability and likelihood
+     4 Probability and likelihood
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20NOTES%2005%20-%20Similarity%20of%20distributions.html">
+     5 Similarity of distributions
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02.02%20-%20LAB%2001%20-%20Marginals%2C%20conditionals%20and%20joints.html">
-     Lab 02.02.1: Marginals, Conditionals, and Joints
+     LAB 1. Marginals, conditionals and joints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02.02%20-%20LAB%2002%20-%20Likelihood.html">
+     LAB 2. Likelihood
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="02.03%20-%20intro.html">
-   3. TFP basics
+   2.3 Tensorflow probability basics
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -192,37 +227,37 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="02.03%20-%20NOTES%2001%20-%20Distribution%20Objects.html">
-     1. Distribution objects
+     1 Distribution objects
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02.03%20-%20NOTES%2002%20-%20Distribution%20Layers.html">
-     2. Distribution Layers
+     2 Distribution layers
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02.03%20-%20NOTES%2003%20-%20Learning%20Distribution%20Parameters.html">
-     3. Learnable parameters
+     3 Learnable parameters
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02.03%20-%20NOTES%2004%20-%20TFP%20DistributionLambda.html">
-     4. DistributionLambda
+     4 Distribution Lambda
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02.03%20-%20NOTES%2005%20-%20Understanding%20shapes.html">
-     5. Understanding shapes
+     5 Understanding shapes
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02.03%20-%20NOTES%2006%20-%20More%20distribution%20objects.html">
-     6. More distribution objects
+     6 More distribution objects
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02.03%20-%20NOTES%2007%20-%20Bijectors.html">
-     7. Bijectors
+     4 Bijectors
     </a>
    </li>
    <li class="toctree-l2">
@@ -240,65 +275,77 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Bayesian inference
+  3. Bayesian inference
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="M03.html">
-   -- module videos
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="03.01%20-%20intro.html">
-   1. Model based reasoning
+   3.1 Model based reasoning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03.02%20-%20intro.html">
-   2. Bayesian inference
+   3.2 Bayesian inference
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03.03%20-%20intro.html">
-   3. Bayesian hard classifier
+   3.3 Bayesian hard classifier
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03.04%20-%20intro.html">
-   4. Probabilistic linear regression
+   3.4 Probabilisitc linear regression
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Variational inference
+  4. Variational inference
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="M04.html">
-   -- module videos
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="04.01%20-%20intro.html">
-   1. Revisitng uncertainty
+   4.1 Revisiting uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04.02%20-%20intro.html">
-   2. Variational inference
+   4.2 Variational inference
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="04.03%20-%20intro.html">
-   3. VI on latent variables
+   4.3 VI on latent variables
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04.03%20-%20NOTES%2001%20-%20Dirichlet%20Distribution.html">
+     1 Dirichlet distributions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04.03%20-%20NOTES%2002%20-%20Variational%20Inference%20for%20Text%20Modeling.html">
+     2 VI for text modeling
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04.03%20-%20LAB%2001%20-%20Variational%20Topic%20Modeling.html">
+     LAB 1. Variational topic modeling
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="04.04%20-%20intro.html">
-   4. VI on latent parameters
+   4.4 VI on latent parameters
   </a>
  </li>
 </ul>
@@ -388,39 +435,30 @@ const thebe_selector_output = ".output, .cell_output"
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   3. Probability and likelihood
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability">
+   Probability
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#probability">
-     Probability
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#likelihood">
-     Likelihood
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#maximum-likelihood-estimation">
-     Maximum likelihood estimation
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#likelihood">
+   Likelihood
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation">
+   Maximum likelihood estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#likelihood-on-continuous-distributions">
    Likelihood on continuous distributions
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#likelihood-intuition">
-     Likelihood intuition
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#likelihood-intuition">
+   Likelihood intuition
+  </a>
  </li>
 </ul>
 
@@ -432,7 +470,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>3. Probability and likelihood</h1>
+                <h1>Probability and likelihood</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -442,39 +480,30 @@ const thebe_selector_output = ".output, .cell_output"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   3. Probability and likelihood
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability">
+   Probability
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#probability">
-     Probability
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#likelihood">
-     Likelihood
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#maximum-likelihood-estimation">
-     Maximum likelihood estimation
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#likelihood">
+   Likelihood
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood-estimation">
+   Maximum likelihood estimation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#likelihood-on-continuous-distributions">
    Likelihood on continuous distributions
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#likelihood-intuition">
-     Likelihood intuition
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#likelihood-intuition">
+   Likelihood intuition
+  </a>
  </li>
 </ul>
 
@@ -496,7 +525,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="probability-and-likelihood">
-<h1>3. Probability and likelihood<a class="headerlink" href="#probability-and-likelihood" title="Permalink to this headline">¶</a></h1>
+<h1>Probability and likelihood<a class="headerlink" href="#probability-and-likelihood" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -766,9 +795,8 @@ check sum of probabilities 0.9999999999999998
 </div>
 </div>
 </div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="likelihood-on-continuous-distributions">
-<h1>Likelihood on continuous distributions<a class="headerlink" href="#likelihood-on-continuous-distributions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="likelihood-on-continuous-distributions">
+<h2>Likelihood on continuous distributions<a class="headerlink" href="#likelihood-on-continuous-distributions" title="Permalink to this headline">¶</a></h2>
 <p>let’s consider the data from the UCI ML repository, <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Abalone">Abalone dataset</a></p>
 <p>we will focus only on the marginal distribution of the variable <strong>length</strong>, and we will scale it so that it has values between 0 and 1</p>
 <div class="cell docutils container">
@@ -818,6 +846,7 @@ check sum of probabilities 0.9999999999999998
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/02.02 - NOTES 04 - Probability and likelihood_28_0.png" src="../_images/02.02 - NOTES 04 - Probability and likelihood_28_0.png" />
+</div>
 </div>
 </div>
 <div class="section" id="likelihood-intuition">
@@ -922,13 +951,13 @@ check sum of probabilities 0.9999999999999998
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">&lt;no title&gt;</p>
+            <p class="prev-next-title">Distributions of data and model paramters</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="02.02%20-%20LAB%2001%20-%20Marginals%2C%20conditionals%20and%20joints.html" title="next page">
+    <a class='right-next' id="next-link" href="02.02%20-%20NOTES%2005%20-%20Similarity%20of%20distributions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 02.02.1: Marginals, Conditionals, and Joints</p>
+        <p class="prev-next-title">5. Similarity of distributions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
