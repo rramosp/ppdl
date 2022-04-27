@@ -32,16 +32,23 @@ class Main(Scene):
         self.add_sound(sfile)
 
         p_disease_to_pos_fracc = MathTex(
-            "P(disease|", "positive",") = ", "{P(", "positive", "|disease)", "\\cdot" , "P(disease)",
+            "P(", "disease", "|", "positive",") = ", 
+            "{P(", "positive", "|", "disease", ")", "\\cdot" , 
+            "P(","disease",")",
             "\\over",
-            "P(" , "positive", "|disease)", "\\cdot", "P(disease) " , " + ", "P(", "positive", "|" ,"\lnot" ,"disease)", "\\cdot" , "P(", "\lnot" ,"disease)}"
+            "P(" , "positive", "|","disease",")", "\\cdot", 
+            "P(","disease",") " , " + ", 
+            "P(", "positive", "|" ,"\lnot disease",")", "\\cdot" , 
+            "P(", "\lnot disease",")}"
             , color= BLACK
         ).shift(UP*0.5).scale(0.7)
-        p_disease_to_pos_fracc.set_color_by_tex("positive", RED_E)
+        p_disease_to_pos_fracc.set_color_by_tex("disease", RED_E)
+        p_disease_to_pos_fracc.set_color_by_tex("\lnot disease", GREEN_E)
 
         p_disease = MathTex(
-            "P(disease) = 0.01", color=BLACK
-        ).next_to(p_disease_to_pos_fracc[0:3],DOWN).scale(0.7).shift(DOWN*2)
+            "P(", "disease",") = 0.01", color=BLACK
+        ).next_to(p_disease_to_pos_fracc[0:5],DOWN).scale(0.7).shift(DOWN*2)
+        p_disease.set_color_by_tex("disease", RED_E)
 
 
         not_sick_rectangle = Rectangle(width=2.8, height=3,color=GREEN_E, fill_opacity=0.1).shift(RIGHT*1).shift(UP*0.4).scale(0.65)
@@ -58,19 +65,19 @@ class Main(Scene):
 
         self.play(Write(p_disease,run_time=0.2))
 
-        p_pos_dis_9_12_underline = Underline(p_disease_to_pos_fracc[9:12],color=RED_E)
+        p_pos_dis_9_12_underline = Underline(p_disease_to_pos_fracc[15:20],color=RED_E)
 
         tex_underline_1 = MathTex("0.85",color=BLACK).scale(0.6).next_to(p_pos_dis_9_12_underline,DOWN,buff=SMALL_BUFF)
 
         self.play(Write(p_pos_dis_9_12_underline), Write(tex_underline_1), run_time=0.2)
 
-        p_pos_dis_13_underline = Underline(p_disease_to_pos_fracc[13],color=RED_E)
+        p_pos_dis_13_underline = Underline(p_disease_to_pos_fracc[21:24],color=RED_E)
 
         tex_underline_2 = MathTex("0.01",color=BLACK).scale(0.6).next_to(p_pos_dis_13_underline,DOWN,buff=SMALL_BUFF)
 
         self.play(Write(p_pos_dis_13_underline),Write(tex_underline_2), run_time=0.2)
 
-        p_pos_dis_m9_m4_underline = Underline(p_disease_to_pos_fracc[-9:-4],color=RED_E)
+        p_pos_dis_m9_m4_underline = Underline(p_disease_to_pos_fracc[25:-4],color=RED_E)
 
         tex_underline_3 = MathTex("0.05",color=BLACK).scale(0.6).next_to(p_pos_dis_m9_m4_underline,DOWN,buff=SMALL_BUFF)
         tex_underline_3.set_color_by_tex("positive",RED_E)
@@ -84,13 +91,13 @@ class Main(Scene):
 
         self.play(Write(p_pos_dis_m1_underline),Write(tex_underline_4))
 
-        tex_underline_5 = MathTex("0.85",color=BLACK).scale(0.6).next_to(p_disease_to_pos_fracc[3:6],UP,buff=SMALL_BUFF+0.1)
-        tex_underline_6 = MathTex("0.01",color=BLACK).scale(0.6).next_to(p_disease_to_pos_fracc[7],UP,buff=SMALL_BUFF+0.1)
+        tex_underline_5 = MathTex("0.85",color=BLACK).scale(0.6).next_to(p_disease_to_pos_fracc[5:9],UP,buff=SMALL_BUFF+0.1)
+        tex_underline_6 = MathTex("0.01",color=BLACK).scale(0.6).next_to(p_disease_to_pos_fracc[11:14],UP,buff=SMALL_BUFF+0.1)
 
         self.play(Write(tex_underline_5),Write(tex_underline_6), run_time=0.2)
 
-        p_disease_to_pos_fracc_upper_copy = p_disease_to_pos_fracc[3:8].copy()
-        p_disease_to_pos_fracc_lower_copy = p_disease_to_pos_fracc[9:].copy()
+        p_disease_to_pos_fracc_upper_copy = p_disease_to_pos_fracc[5:10].copy()
+        p_disease_to_pos_fracc_lower_copy = p_disease_to_pos_fracc[15:].copy()
 
         result_disease_to_positive = MathTex(
             "P(disease|", "positive",") = ", "{0.0085", "\\over", "0.058}", "=", "0.147"
@@ -323,12 +330,12 @@ class Main(Scene):
         surrounder_right_division = SurroundingRectangle(right_division_vgroup,color=BLUE_E)
 
         self.play(Write(surrounder_left_division))
-        self.play(Write(MathTex("0.88",color=BLACK).scale(0.7).next_to(surrounder_left_division,DOWN,buff=0.1)))
+        self.play(Write(MathTex("0.879",color=BLACK).scale(0.7).next_to(surrounder_left_division,DOWN,buff=0.1)))
 
         timer.wait_until("4min 44sec")
 
         self.play(Write(surrounder_right_division))
-        self.play(Write(MathTex("0.15",color=BLACK).scale(0.7).next_to(surrounder_right_division,DOWN,buff=0.1)))
+        self.play(Write(MathTex("0.147",color=BLACK).scale(0.7).next_to(surrounder_right_division,DOWN,buff=0.1)))
 
 
         timer.wait_until("5min 13sec")

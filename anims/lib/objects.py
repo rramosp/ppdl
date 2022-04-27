@@ -12,6 +12,7 @@ from manim.mobject.svg.svg_mobject import *
 import manim
 from scipy import stats
 import pandas as pd
+import matplotlib.pyplot as plt
 
 config.background_color = WHITE
 
@@ -50,6 +51,13 @@ class {classname}(manim.{classname}):
 def get_imgmobject(name):
     return ImageMobject(find_imgfile(name), image_mode="RGBA")
 
+
+def get_matplotlibfig(fig):
+    fname = "/tmp/xx.png"
+    plt.savefig(fname)
+    mo = ImageMobject(fname, image_mode="RGBA")
+    os.remove(fname)
+    return mo
 
 dirs = [os.path.dirname(inspect.getfile(get_imgmobject))+"/../", "/media"]
 
@@ -282,10 +290,133 @@ def function(func, x_range, **kwargs):
 
     return r
 
+
+
+def get_axes(
+        xmin, 
+        xmax, 
+        ymin, 
+        ymax,
+        x_length = 4,
+        y_length = 3,
+        xlabel = "", 
+        xlabel_kwargs = {},
+        additional_x_axis_config={},
+        additional_y_axis_config={},
+        x_splits = 4,
+        y_splits = 4,
+        show_y_numbers = False
+    ):
+        
+    x_range = [xmin, xmax, (xmax-xmin)/(x_splits-1)]
+    y_range = [ymin, ymax, (ymax-ymin)/(y_splits-1)]
+
+    x_axis_config = {
+                'numbers_with_elongated_ticks' : np.linspace(xmin, xmax, x_splits),
+                'include_numbers' : True,
+                'font_size' : 24,
+                'color' : BLACK,
+                'numbers_to_include' : np.linspace(xmin, xmax, x_splits),
+                'longer_tick_multiple' : 2,
+                'tick_size': .03,
+                'decimal_number_config' : { 
+                    'color': '#222222',
+                    'num_decimal_places': 0
+                }
+            }
+
+    y_axis_config = {
+                'include_numbers' : False,
+                'color' : BLACK,
+                'tick_size': .03,
+    }
+
+    if show_y_numbers:
+        y_axis_config.update({
+                'font_size' : 24,
+                'include_numbers' : True,
+                'numbers_to_include' : np.linspace(ymin, ymax, y_splits),
+                'numbers_with_elongated_ticks' : np.linspace(ymin, ymax, y_splits),
+                'decimal_number_config' : { 
+                    'color': '#222222',
+                    'num_decimal_places': 0
+                }
+            }
+        )
+
+    x_axis_config.update(additional_x_axis_config)            
+    y_axis_config.update(additional_y_axis_config)            
+
+    axes = Axes(
+            x_range=x_range,
+            y_range=y_range,
+            x_length=x_length,
+            y_length=y_length,
+            tips = False,
+            x_axis_config = x_axis_config,
+            y_axis_config = y_axis_config
+
+        )
+
+    xlabel_mobject = Tex(xlabel, **xlabel_kwargs).next_to(axes, DOWN)
+    g = VGroup(axes, xlabel_mobject)
+
+    return g
+
+class TransformFunction(Animation):
+    def __init__(self, plane, get_function_for_value, start: float, end: float, **kwargs) -> None:
+        """
+        plane: the plane (Axes, NumberPlane, etc.) that holds the function graph
+        get_function_for_value: a function that returns a the function to plot for each
+                                value of the animation between start and end
+        """
+        # Pass number as the mobject of the animation
+        self.plane = plane
+        self.function_graph = self.plane.plot(get_function_for_value(start), color=RED)
+        super().__init__(self.function_graph,  **kwargs)
+        self.start = start
+        self.end = end
+        self.get_function_for_value = get_function_for_value
+        self.inverse = False
+
+    def switch_direction(self):
+        self.inverse = False if self.inverse else True
+
+    def interpolate_mobject(self, alpha: float) -> None:
+        if self.inverse:
+            alpha = 1-alpha
+        value = self.start + (alpha * (self.end - self.start))
+        self.mobject.function =lambda x: [x, self.get_function_for_value(value)(x),0]
+        self.mobject.clear_points()
+        self.mobject.init_points()
+        self.mobject.points = np.r_[[self.plane.coords_to_point(*p) for p in self.mobject.points]]
+
+class CountAnimation(Animation):
+    def __init__(self, number: DecimalNumber, start: float, end: float, **kwargs) -> None:
+        # Pass number as the mobject of the animation
+        super().__init__(number,  **kwargs)
+        # Set start and end
+        self.start = start
+        self.end = end
+        self.inverse = False
+
+    def switch_direction(self):
+        self.inverse = False if self.inverse else True
+
+    def interpolate_mobject(self, alpha: float) -> None:
+        if self.inverse:
+            alpha = 1-alpha
+        # Set value of DecimalNumber according to alpha
+        value = self.start + (alpha * (self.end - self.start))
+        self.mobject.set_value(value)
+
+
 def graph_function(
         fun, 
         xmin, 
         xmax, 
+        ymin = None, 
+        ymax = None,
         x_length = 4,
         y_length = 3,
         title = "", 
@@ -297,8 +428,12 @@ def graph_function(
         graph_color = BLACK,
         show_y_numbers = False
     ):
+    
     xr = np.linspace(xmin, xmax, 100)
-    ymin, ymax = np.min(fun(xr)), np.max(fun(xr))
+
+    if ymin is None or ymax is None:
+        ymin, ymax = np.min(fun(xr)), np.max(fun(xr))
+    
     x_range = [xmin, xmax, (xmax-xmin)/(x_splits-1)]
     y_range = [ymin, ymax, (ymax-ymin)/(y_splits-1)]
 
@@ -358,6 +493,7 @@ def graph_function(
     g = VGroup(axes, graph, title)
 
     return g
+
 
 
 def poisson_histogram(
