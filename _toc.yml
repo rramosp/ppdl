@@ -55,7 +55,7 @@ parts:
         - file: "content/02.03 - NOTES 06 - More distribution objects.ipynb"
           title: 6 More distribution objects
         - file: "content/02.03 - NOTES 07 - Bijectors.ipynb"
-          title: 4 Bijectors
+          title: 7 Bijectors
         - file: "content/02.03 - LAB 01 - TFP distributions.ipynb"
           title: LAB 1. TFP Distributions
         - file: "content/02.03 - LAB 02 - Distribution layers.ipynb"
