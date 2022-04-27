@@ -13,10 +13,10 @@
 
 #### NEWEST ADDITIONS
 
-- notebooks and labs on section **2.1 Tensorflow core** [click here](02.01%20-%20NOTES%2001%20-%20Simbolic%20computing%20for%20ML)
-- videos and labs on section **2.2 Intuitions on probability** [click here](./02.02%20-%20intro)
-- labs **2.3 Tensorflow core** [click here](02.01%20-%20LAB%2001%20-%20Tensorflow%20model%20subclassing)
-- lab on **Variational topic modelling** [click here](04.03%20-%20LAB%2001%20-%20Variational%20Topic%20Modeling)
+- notebooks and labs on section **2.1 Tensorflow core** [click here](content/02.01%20-%20NOTES%2001%20-%20Simbolic%20computing%20for%20ML)
+- videos and labs on section **2.2 Intuitions on probability** [click here](content/02.02%20-%20intro)
+- labs **2.3 Tensorflow core** [click here](content/02.01%20-%20LAB%2001%20-%20Tensorflow%20model%20subclassing)
+- lab on **Variational topic modelling** [click here](content/04.03%20-%20LAB%2001%20-%20Variational%20Topic%20Modeling)
 
 <!---
 
