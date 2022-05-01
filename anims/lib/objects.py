@@ -546,10 +546,10 @@ def add_brackets(mobj):
     r_bracket.next_to(mobj, RIGHT, .2)
     return VGroup(l_bracket, mobj, r_bracket)
 
-def updating_animation(mobject,scene):
-    scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3,fade_out=True))
-    scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3,fade_out=True))
-    scene.play(Circumscribe(mobject,color=BLUE_B,time_width=3))
+def updating_animation(mobject,scene,color=BLUE_E, time_width=3):
+    scene.play(Circumscribe(mobject,color=color,time_width=time_width,fade_out=True))
+    scene.play(Circumscribe(mobject,color=color,time_width=time_width,fade_out=True))
+    scene.play(Circumscribe(mobject,color=color,time_width=time_width))
 
 
 def fill_graph(scene, axes, graph, from_value, to_value, run_time=2):
@@ -654,3 +654,16 @@ def generate_stickman(size = 1.0,fill_opacity=0.0 ,general_color = BLACK, color_
     stickman_vdict.scale(size)
 
     return stickman_vdict
+
+def get_cancel_line(mobject, color=BLACK):
+    """
+    Returns a Line Mobject that goes from the left corner of a Mobject up to
+    the right corner of that same mobject.
+
+    Useful to show the simplification of fractions/equations
+
+    Default color: BLACK
+    
+    """
+
+    return Line(start=mobject.get_corner(DL), end=mobject.get_corner(UR), color=color  )
