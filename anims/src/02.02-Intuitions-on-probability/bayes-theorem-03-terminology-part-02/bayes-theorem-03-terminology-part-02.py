@@ -1,9 +1,7 @@
 from __future__ import division
 from gzip import WRITE
 import logging
-from multiprocessing.connection import wait
 import os, sys
-from tkinter import Image
 from unicodedata import decimal
 from unittest import result
 
