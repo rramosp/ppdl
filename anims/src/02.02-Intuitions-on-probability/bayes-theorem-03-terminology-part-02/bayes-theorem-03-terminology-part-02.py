@@ -23,7 +23,7 @@ config.max_files_cached = 1000
 class Main(Scene):
     def construct(self):
 
-        video_name = r"bayes-theorem-03-terminology-part-02"
+        video_name = r"bayes theorem 03 terminology part 02"
         play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
 
@@ -129,11 +129,11 @@ class Main(Scene):
         post_obs1_to_prior_obs_2_arrow = Arrow(start=post_obs_1_tex.get_edge_center(DOWN),end=prior_obs_2_tex.get_edge_center(UP),color=BLACK,buff=0.1)
 
         
-        self.play(ReplacementTransform(p_d_prior_copy,post_obs_1_tex))
+        self.play(ReplacementTransform(test_1_posterior_copy,post_obs_1_tex))
 
         timer.wait_until("1min 34sec")
         self.play(Write(post_obs1_to_prior_obs_2_arrow))
-        self.play(ReplacementTransform(test_1_posterior_copy, prior_obs_2_tex))
+        self.play(Write(prior_obs_2_tex))
 
         timer.wait_until("1min 42sec")
 
@@ -299,7 +299,7 @@ class Main(Scene):
         timer.wait_until("4min 48sec")
 
         p_pos_d_TP = MathTex(
-            "P(", "positive", "|", "disease)" , "=", "TP", color=BLACK
+            "P(", "positive", "|", "disease)" , "=", "TPR", color=BLACK
         ).scale(1)
         p_pos_d_TP.set_color_by_tex("positive", RED_E)
 
@@ -429,6 +429,7 @@ class Main(Scene):
                     
         fnr_image = ImageMobject(find_imgfile("p_cancer_to_pos_FNR")).scale(2).to_edge(LEFT).shift(RIGHT)
         fpr_image = ImageMobject(find_imgfile("p_cancer_to_pos_FPR")).scale(2).to_edge(RIGHT).shift(LEFT)
+        fpr_xlabel = Tex("FPR", color=BLACK).scale(0.5).next_to(fpr_image,DOWN,buff=0).shift(RIGHT*0.2)
 
         test_1_posterior_copy_3.to_corner(UR).shift(DOWN)
         p_d_prior_copy_2.next_to(test_1_posterior_copy_3,DOWN)
@@ -511,7 +512,7 @@ class Main(Scene):
 
         timer.wait_until("8min 57sec")
 
-        self.play(FadeIn(fpr_image))
+        self.play(FadeIn(fpr_image), FadeIn(fpr_xlabel))
 
         timer.wait_until("9min 1sec")
 
