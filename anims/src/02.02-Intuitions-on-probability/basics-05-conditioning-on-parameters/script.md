@@ -1,9 +1,3 @@
-en cierta forma las distribuciones conjuntas, marginales y condicionales son distintas perspectivas de una misma realidad
-
-podemos pensar que:
-- la distribución conjunta contiene toda la información
-- una distribución marginal es la conjunta agregada sobre una de las variables
-- y una distribución condicional es un corte de la conjunta
 
 el flujo que hemos seguido en los ejemplos de los notebooks es que desde la distribución conjunta obtenemos las marginales y la condicionales que queramos.
 
@@ -66,4 +60,39 @@ y puedes comprobarlo con este código
 
     >> 0.99999
 
-- relación variables (quizá no)
+Fíjate que podemos considerar $w$ como un parámetro sobre el cual se construye la distribución de $l$.
+
+En muchas ocasiones nos dan la distribución de UNA variable, como dependiente de unos parámetros.
+
+Por ejemplo, nos dicen que $l$ sigue una distribución normal con $\mu$=2 y $\sigma$=0.5.
+
+Esto es una distribución unidimensional, de una variable, que depende de dos parámetros para los que nos dan valores fíjos.
+
+Una forma muy generalizada de expresar esto es la siguiente:
+
+$P(l|\mu,\sigma) \sim \mathcal{N}(\mu, \sigma)$
+
+Fíjate que la notación es la misma que la de probabilidad condicional. Como si tuviéramos una distribución conjunta de tres variables y condicionáramos en dos de ellas.
+
+O si nos dan valores explícitos para $\mu$ y $\sigma$ sería
+
+$P(l|\mu,\sigma) \sim \mathcal{N}(2, 0.5)$
+
+De alguna manera estamos abusando de la notación, ya que $\mu$ y $\sigma$ NO SON variables aleatorias, sino parámetros.
+
+Pero igual, yo puedo usar esta expresión para hacer muchas cosas. Por ejemplo, si yo tengo una observación de $l$ y expreso
+
+
+$\text{argmax}_{\mu, \sigma}\;\; P(l|\mu, \sigma)$
+
+yo estoy pidiendo los valores de $\mu$ y $\sigma$ que hacen que mi observación tenga la mayor probabilidad posible.
+
+Veremos en los siguientes vídeos que esto nos va a ser de mucha utilidad cuando consideremos los conceptos de LIKELIHOOD.
+
+Una cosa SUPER importante. En un momento dado, sí que podríamos considerar los parámetros como valores aleatorias y en este caso, estarían sujetos a sus propias distribuciones de probabilidad, y podríamos manejarlos dentro de cualquier aparato estadístico como cualquier otra variable.
+
+Como por ejemplo dentro del teorema de bayes.
+
+ESTO ES EL ASPECTO CENTRAL de la inferencia Bayesiana. Al considerar los parámetros de un modelo como distribuciones entramos en otr mundo. Cada parámetro ya no es un valor, sino una distribución completa, que es algo más complejo.
+
+Esto lo veremos a partir del módulo 3.
