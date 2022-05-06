@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bayes theorem Continuous distributions &#8212; Probabilistic Programming for Deep Learning</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MBFEZ3PF64');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Deep Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../content/M1.html">
+   Introduction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M1.1.html">
+     1.1 Probabilistic programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M1.2.html">
+     1.2 Course mechanics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../content/M2.html">
+   2. Fundamentals
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M2.1.html">
+     2.1 Tensorflow core
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M2.2-videolist.html">
+     2.2 Intuitions on probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M2.3.html">
+     2.3 Tensorflow probability basics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../content/M3.html">
+   3. Bayesian Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M3.1.html">
+     3.1 Model based reasoning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M3.2.html">
+     3.2 Bayesian inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M3.3.html">
+     3.3 Bayesian hard classifier
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../content/M4.html">
+   4. Variational Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M4.1.html">
+     4.1 Revisiting uncertainty
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M4.2.html">
+     4.2 Variational inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M4.3.html">
+     4.3 VI on latent variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M4.4.html">
+     4.4 VI on latent parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../../_sources/anims/src/02.02-Intuitions-on-probability/02.02-ANIM-13-bayes-theorem-continuous-part-01/script.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bayes theorem Continuous distributions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="bayes-theorem-continuous-distributions">
+<h1>Bayes theorem Continuous distributions<a class="headerlink" href="#bayes-theorem-continuous-distributions" title="Permalink to this headline">¶</a></h1>
+<p>As we see, the great discovery of ways was that we can relate different observations (information gain) with existing knowledge in a very precise way.</p>
+<p>We are in the middle of our journey to effectively use bayes inference in ML</p>
+<p>Let’s now move to a more complex example. We want to estimate our position from consecutive measurements from a noise position sensor. To make thins simple, the sensor gives us our position in 1D.</p>
+<p>We <strong>know</strong> the sensor is noisy, it gives us the position in meters with respect to a certain origin and the manufacturer tells us that the sensor has a standard deviation 1.</p>
+<p>We will call:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(z\)</span> our actual position</p></li>
+<li><p><span class="math notranslate nohighlight">\(s_i\)</span> with <span class="math notranslate nohighlight">\(i \ge 0\)</span> the consecutive measurements we do.</p></li>
+</ul>
+<p>with this <span class="math notranslate nohighlight">\(P(z)\)</span> represents <strong>our knowledge</strong> (or uncertainty) of where we are (<span class="math notranslate nohighlight">\(z\)</span>), and <span class="math notranslate nohighlight">\(P(z|s_i)\)</span> would be our knowledge <strong>after</strong> seeing measurement <span class="math notranslate nohighlight">\(s_i\)</span></p>
+<p>Let’s start with the first measurement: <span class="math notranslate nohighlight">\(s_0\)</span> and let’s imagine the sensor reading is <span class="math notranslate nohighlight">\(s_0=22.3m\)</span></p>
+<p>We want to estimate <span class="math notranslate nohighlight">\(P(z|s_0=22.3m)\)</span>, so let’s use Bayes:</p>
+<div class="math notranslate nohighlight">
+\[P(z|s_0=22.3m) = \frac{P(s_0=22.3m|z) P(z)}{P(s_0=22.3m)}\]</div>
+<p>The key thing here is to understand that we are <strong>dealing with distributions</strong>. This means:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(z|s_0=22.3m)\)</span> is a distribution (<strong>not a number as before</strong>), and in fact, we can see it as a function of <span class="math notranslate nohighlight">\(z\)</span> (a probability distribution), because we have a precise measurement, a value for <span class="math notranslate nohighlight">\(s_0\)</span>. We could also write it as <span class="math notranslate nohighlight">\(P(z|s_0)\)</span> for short, but we <strong>must remember</strong> that it is a <strong>function</strong> of <span class="math notranslate nohighlight">\(z\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(s_0=22.3m|z)\)</span> is a distribution (<strong>not a number as before</strong>), also a function of <span class="math notranslate nohighlight">\(z\)</span>, because <span class="math notranslate nohighlight">\(s_0\)</span> is fixed.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(z)\)</span> is a distribution also a function of <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(s_0=22.3m)\)</span> is <strong>a number</strong>, we are asking about the probability of observing <span class="math notranslate nohighlight">\(s_0=22.3m\)</span>. This <strong>does not</strong> depend on <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
+</ul>
+<p>What do we use for the different terms:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(z)\)</span> is the <strong>prior</strong>, our initial guess of the position. We could use a very uninformative prior, such as <span class="math notranslate nohighlight">\(\mathcal{N}(0,100)\)</span>, which a large std. Or if we somehow have some prior information, that <span class="math notranslate nohighlight">\(x\)</span> position is about 20m we could use <span class="math notranslate nohighlight">\(\mathcal{N}(20,5)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(s_0|z)\)</span> es el <strong>likelihood</strong>, es decir, qué probable sería ver lo que he visto en función de <span class="math notranslate nohighlight">\(x\)</span>, o sea, si yo estuviera ubicado en distintos lugares.</p></li>
+<li><p>Intuitively, if my real position <span class="math notranslate nohighlight">\(z\)</span> is far from 22.3, the likelihood of my observation (<span class="math notranslate nohighlight">\(s_0=22.3m\)</span>) would be lower than if I was closer. Como el fabricante nos dice el fabricante que el sensor tiene una std=1m, por tanto lo modelamos como <span class="math notranslate nohighlight">\(\mathcal{N}(z,1)\)</span>, es decir, una normal centrada en <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(s_0)\)</span> is the normalization constant. <strong>This is hard</strong> and we do not know it beforehand, so we use the trick of summing over all possible values of <span class="math notranslate nohighlight">\(z\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(s_0=22.3m) = \int_{-\infty}^\infty P(s_0=22.3m|z)P(z)dz\]</div>
+<p>observe that the numeration is <strong>always</strong> just one item of the infinite sum that is the normalization constant. So this is really a normalization constant.</p>
+<p>Now, since we are <strong>dealing with distributions</strong>, let’s use the PDFs of the different distributions that we have. Remember that if <span class="math notranslate nohighlight">\(x\sim \mathcal{N}(\mu, \sigma)\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[P(x)= \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(x-\mu)^2/\sigma^2}\]</div>
+<p>so let’s substitute in our case for bayes theorem, we will use <span class="math notranslate nohighlight">\(\mathcal{N}(20,5)\)</span> s our prior.</p>
+<div class="math notranslate nohighlight">
+\[P(z|s_0=22.3m) = \frac{\frac{1}{1 \cdot \sqrt{2\pi}}e^{-\frac{1}{2}(s_0-z)^2/1^2} \frac{1}{3\cdot \sqrt{2\pi}}e^{-\frac{1}{2}(z-20)^2/3^2} }{P(s_0=22.3m)}\]</div>
+<p><strong>small detail</strong>, observe how we use <span class="math notranslate nohighlight">\((s_0-z)^2\)</span> in the likelihood, and <span class="math notranslate nohighlight">\((z-20)^2\)</span> in the prior. Since we are squaring the order of <span class="math notranslate nohighlight">\(z\)</span> does not matter, but observe that in the likelihood <span class="math notranslate nohighlight">\(z\)</span> is acting as the parameter <span class="math notranslate nohighlight">\(\mu\)</span> of normal distribution (i.e. the normal is <strong>centered</strong> at <span class="math notranslate nohighlight">\(z\)</span>), and in the prior it is acting as the pdf argument (the normal is <strong>centered</strong> at 20). If our distribution PDF was not symmetric in <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(x\)</span>, we would have to be very careful on this.</p>
+<p>and finally</p>
+<div class="math notranslate nohighlight">
+\[P(z|s_0=22.3m) = \frac{\frac{1}{1 \cdot \sqrt{2\pi}}e^{-\frac{1}{2}(22.3-z)^2/1^2} \frac{1}{3\cdot \sqrt{2\pi}}e^{-\frac{1}{2}(z-20)^2/3^2} }{\int \Big[ \frac{1}{1 \cdot \sqrt{2\pi}}e^{-\frac{1}{2}(22.3-z)^2/1^2} \frac{1}{3\cdot \sqrt{2\pi}}e^{-\frac{1}{2}(z-20)^2/3^2} \Big]dz}\]</div>
+<p>observe:</p>
+<ul class="simple">
+<li><p>the numerator (likelihood*prior) is a function of <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
+<li><p>the normalization factor is a <strong>number</strong> since it is an integral over <span class="math notranslate nohighlight">\(z\)</span> of a function of <span class="math notranslate nohighlight">\(z\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(z|s_0=22.3m)\)</span> is therefore a function of <span class="math notranslate nohighlight">\(z\)</span> which is a probability distribution itself.</p></li>
+</ul>
+<p>and finally, we can of course handle <strong>new observations</strong>, using the newly computed posterior as the prior of the next observation.</p>
+<div class="math notranslate nohighlight">
+\[P(z|s_i) = \frac{P(s_i|z)P(s_{i-1})}{P(s)}\]</div>
+<p>We are going to see this now in a notebook</p>
+<p>LAB: Estimate the position with velocity and position estimates (i.e. do kalman filter by hand)</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./anims/src/02.02-Intuitions-on-probability/02.02-ANIM-13-bayes-theorem-continuous-part-01"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

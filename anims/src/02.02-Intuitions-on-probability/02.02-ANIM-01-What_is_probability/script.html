@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>talking about probability &#8212; Probabilistic Programming for Deep Learning</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MBFEZ3PF64');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../../../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Deep Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../content/M1.html">
+   Introduction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M1.1.html">
+     1.1 Probabilistic programming
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M1.2.html">
+     1.2 Course mechanics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../content/M2.html">
+   2. Fundamentals
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M2.1.html">
+     2.1 Tensorflow core
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M2.2-videolist.html">
+     2.2 Intuitions on probability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M2.3.html">
+     2.3 Tensorflow probability basics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../content/M3.html">
+   3. Bayesian Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M3.1.html">
+     3.1 Model based reasoning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M3.2.html">
+     3.2 Bayesian inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M3.3.html">
+     3.3 Bayesian hard classifier
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../content/M4.html">
+   4. Variational Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M4.1.html">
+     4.1 Revisiting uncertainty
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M4.2.html">
+     4.2 Variational inference
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M4.3.html">
+     4.3 VI on latent variables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../content/M4.4.html">
+     4.4 VI on latent parameters
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../../../_sources/anims/src/02.02-Intuitions-on-probability/02.02-ANIM-01-What_is_probability/script.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>talking about probability</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="talking-about-probability">
+<h1>talking about probability<a class="headerlink" href="#talking-about-probability" title="Permalink to this headline">¶</a></h1>
+<p><strong>[00:00]</strong> De manera general una distribución de probabilidad parte de un conjunto de objetos o propiedades o eventos o lo que sea con lo que estamos trabajando y les asigna porcentajes  [<strong>anim x -&gt; p(x)</strong>]</p>
+<p><strong>[00:12]</strong> Por ejemplo, la distribución de probabilidad de un dado no trucado le asigna 1/6 de probabilidad a que salga cualquiera de los números. [<strong>anim tabla 1-6 con probs</strong>]</p>
+<p><strong>[00:21]</strong> Un distribución de probabilidad de las edades de una población, le puede asignar la frecuencia con la que se observan personas con cada rango de edad. [<strong>anim histograma población</strong>]</p>
+<p><strong>[00:30]</strong> Un modelo que clasifica imágenes de pacientes tratando de detectar una cierta patología nos puede dar una estimación de probabilidad que un caso tenga o no dicha patología [<strong>anim modelo emitiendo predicción</strong>]</p>
+<p><strong>[00:42]</strong> Por coherencia, y solemos expresar la probabilidad como un número entre cero y uno (a veces también como un porcentaje entre 0 y 100) y hay dos propiedades que cualquier distirbución de probabilidad debe de cumplir [<strong>anim formulas</strong>]</p>
+<p><strong>[00:50]</strong></p>
+<ul class="simple">
+<li><p>0 &lt; p &lt; 1</p></li>
+<li><p>sum 1</p></li>
+</ul>
+<p>Pero no todas las distribuciones de probabilidad tienen el mismo significado y es muy importante saber qué estamos representando con una distribución de probabilidad</p>
+<p>por ejemplo</p>
+<p><strong>[01:37]</strong> podemos usar una distribución de probabilidad para describir todas las posibles sumas de dos dados lanzados al azar. hay 36 posibles combinaciones, sólo una de ellas suma 12, sólo otra una 2, pero hay 6 combinaciones que suman 7,  esta distribución describiría una realidad objetiva. [<strong>anim combinaciones</strong> ]</p>
+<p><strong>[02:15]</strong> también podemos usar una distribución de probabilidad para comunicar los resultados de un censo de la población, o de una encuesta de opinión. Fíjate que en estos casos la distribución representa una estimación de la realidad y, según el procedimiento que hayamos seguido, puede ser más o menos cercana a la misma. [**anim list of party A -&gt; 50%, party B -&gt; 40%, .. **]</p>
+<p><strong>[03:20]</strong> también podemos representar con una distribución de probabilidad nuestro grado de conocimiento o incertidumbre de algo, y actualizarla según aprendo cosas. por ejemplo, puedo representar mi desconocimiento de si llueve o no asignando un 0.5 a cada caso, pero si miro la ventana y veo nubes, a lo mejor le asigno 0.7 al caso con lluvia. Fíjate que en este caso, la distribución de probabilidad representa algo subjetivo (mi conocimiento o incertidumbre). [<strong>anim sun/rain</strong>]</p>
+<p><strong>[04:10]</strong> y ¿que representa la distribución de probabilidad que un modelo predictivo le asigna a una imagen de un paciente acerca de si tiene o no una patología? … es una estimación … un cálculo, que puede estar más o menos errado según muchas condiciones distintas … si los datos eran suficientes, si el modelo es suficientemente complejo, si la patología es intrínsecamente difícil de separar, etc. [<strong>anim model again</strong>]</p>
+<ul class="simple">
+<li><p>y hay muchas otras circunstancias de uso de una distribución de probabilidad, a veces con significados muy diferentes. Así que siempre tenemos que tener cuidado de fijarnos bien en qué representa cualquier distribución de probabilidad que estemos manejando</p></li>
+</ul>
+<p><strong>[05:05]</strong> En el caso de machine learning, nos gustaría hacer varias cosas. Una de ellas es tratar adecuadamente la incertidumbre que rodea cualquier proceso con los datos.  [<strong>anim clear, show “machine learning”</strong>]</p>
+<p><strong>[05:20]</strong> puede que los datos tengan una aleatoriedad natural de la que no nos podemos deshacer (p.ej. con sensores ruidosos, o poblacines heterogéneas, etc.) … pero nos gustaría poder manejarla, en el sentido de que nuestros modelos respondan distinto si esa incertidumbre es mayor o menor. [<strong>some anim</strong>]</p>
+<p><strong>[05:52]</strong> puede que la incertidumbre sea introducida por nuestro modelo, por la forma en la que los parametros del mismo capturan mejor o peor las relaciones entre los datos. [<strong>anim model predict squigly</strong>]</p>
+<p>Podemos manejar todas estas incertidumbres con distribuciones de probabilidad. Si lo piensas, cada vez que tengamos un número podríamos tener una distribución de probabilidad, que represente nuestra incertidumbre sobre lo que representa ese número:</p>
+<p><strong>[06:33]</strong> La edad de un paciente –&gt; la distribución de edades de los pacientes que estamos tratando [<strong>number 32 transforming in gaussian</strong>]
+Un pixel en la posición x,y de una imagen –&gt; la distribución de posibles valores de ese pixel</p>
+<p>e incluso:
+<strong>[07:15]</strong> e incluso un peso de una conexión entre dos neuronas –&gt; una distribución de posibles valores para esa conexión [<strong>anim neural network with distribuion</strong>]</p>
+<p><strong>[07:43]</strong> el reto: que una distribución de probabilidad es algo más complejo que un sólo número. Un número es un escalar, una sola cantidad, pero una distribución de probabilidad son muchos números con una asignación de probabilidad a cada uno de ellos.</p>
+<p><strong>[08:15]</strong> por tanto, vamos a tener que generar toda la maquinaria necesaria para manipular, procesar, transformar, combinar, … distribuciones de probabilidad. [<strong>anim transforming prob distributions</strong>]</p>
+<p><strong>[09:00]</strong> imagínate una red neuronal en la que cada peso es una distribución de probabilidad, en vez de un número … cómo generas una predicción?, cómo entrenas la red? [<strong>anim wheely</strong>]</p>
+<p>esto es lo que vamos a aprender en este curso.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./anims/src/02.02-Intuitions-on-probability/02.02-ANIM-01-What_is_probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
