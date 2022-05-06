@@ -23,7 +23,7 @@ config.max_files_cached = 1000
 class Main(Scene):
     def construct(self):
 
-        video_name = r"bayes-theorem-03-terminology-part-01"
+        video_name = r"Terminology on Bayes theorem"
         play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
 
@@ -188,7 +188,7 @@ class Main(Scene):
         timer.wait_until("5min 28sec")
 
         norm_factor_brace = Brace(bayes_p_disease_to_positive[-3:],direction=DOWN, color=BLACK )
-        norm_factor_tex = MathTex("Normalization \hspace{0.2cm} Factor", color=BLACK).scale(0.8).scale(0.8).next_to(norm_factor_brace,DOWN)
+        norm_factor_tex = MathTex(r"\text{Normalization Factor (the evidence, the observation)}", color=BLACK).scale(0.8).scale(0.8).next_to(norm_factor_brace,DOWN)
         
 
         self.play(FadeIn(norm_factor_brace))

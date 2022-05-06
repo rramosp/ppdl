@@ -23,7 +23,7 @@ config.max_files_cached = 1000
 class Main(Scene):
     def construct(self):
 
-        video_name = r"bayes theorem 03 terminology part 02"
+        video_name = r"Priors and posteriors on consecutive observations"
         play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
 
