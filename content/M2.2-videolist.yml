@@ -1,0 +1,15 @@
+title: 2.2 Intuitions on probability
+videos:
+- description: "a long \n description\n\
+    \     "
+  name: Probability basics
+  order: 1
+  videos:
+  - name: "What is probability? / ¿Qué es probabilidad?"
+    video_duration: 9min
+    video_youtubeid_EN: 6od5jjKPDIM
+    video_youtubeid_ES: 19vaIp4AbvA
+  - name: Marginalizing and conditioning on discrete distributions
+    video_duration: 11min
+    video_youtubeid_ES: ica5rtg-GXc
+    notebook: 02.02%20-%20NOTES%2001%20-%20Discrete%20distiributions.html
