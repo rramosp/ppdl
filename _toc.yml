@@ -2,7 +2,7 @@ format: jb-book
 root: intro
 chapters:
   - file: content/M1.md
-    title:
+    title: 1. Introduction
     sections: 
     - file: content/M1.1
       title: 1.1 Probabilistic programming
@@ -11,11 +11,11 @@ chapters:
   - file: content/M2
     title: 2. Fundamentals
     sections: 
-    - file: content/M2.1
+    - file: content/M2.1-videolist
       title: 2.1 Tensorflow core
     - file: content/M2.2-videolist
       title: 2.2 Intuitions on probability
-    - file: content/M2.3
+    - file: content/M2.3-videolist
       title: 2.3 Tensorflow probability basics
   - file: content/M3
     title: 3. Bayesian Inference

@@ -1,0 +1,9 @@
+.bd-sidebar .nav li>a {
+    display: block;
+    padding: 0rem 0rem; 
+    color: rgba(var(--pst-color-sidebar-link),1);
+}
+
+.bd-sidebar .nav ul {
+    padding: 0 0 0 0rem; 
+}
