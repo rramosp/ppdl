@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -107,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -138,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -148,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -345,12 +349,6 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-03-08 07:08:55.749277: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library &#39;libcudart.so.11.0&#39;; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
-2022-03-08 07:08:55.749312: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -397,19 +395,19 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_1&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_2&quot;
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
 =================================================================
- input_2 (InputLayer)        [(None, 1)]               0         
+ input_3 (InputLayer)        [(None, 1)]               0         
                                                                  
- dense_3 (Dense)             (None, 10)                20        
+ dense_6 (Dense)             (None, 10)                20        
                                                                  
- dense_4 (Dense)             (None, 10)                110       
+ dense_7 (Dense)             (None, 10)                110       
                                                                  
- dense_5 (Dense)             (None, 2)                 22        
+ dense_8 (Dense)             (None, 2)                 22        
                                                                  
- independent_normal_1 (Indep  ((None,),                0         
+ independent_normal_2 (Indep  ((None,),                0         
  endentNormal)                (None,))                           
                                                                  
 =================================================================

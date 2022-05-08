@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../M2.1.html">
+    <a class="reference internal" href="../M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../M2.3.html">
+    <a class="reference internal" href="../M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -392,14 +394,13 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="our-model">
 <h1>Our model<a class="headerlink" href="#our-model" title="Permalink to this headline">¶</a></h1>
-<p>We observe <span class="math notranslate nohighlight">\(X_i\)</span>, which is the number of messages arrived at a certain location at day <span class="math notranslate nohighlight">\(i\)</span> with <span class="math notranslate nohighlight">\(i \in \{0,...,n-1\}\)</span>, so that we have <span class="math notranslate nohighlight">\(n\)</span> days.</p>
-<p>We were usually receiving the messages following <span class="math notranslate nohighlight">\(\sim \text{Poisson}(2)\)</span>, but after a certain day the behaviour changed and we received more messages per day, following <span class="math notranslate nohighlight">\(\sim \text{Poisson}(4)\)</span>.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-\tau &amp;\in (0,1)\\
-\text{for }  i &amp;= 1\ldots N: \\
-X_i &amp;= \begin{cases} \text{Poisson}(2), &amp; \tau &gt; i/N \\ \text{Poisson}(4), &amp; \text{otherwise}\end{cases}\\
-\end{align*}\end{split}\]</div>
+<p>We observe $X_i$, which is the number of messages arrived at a certain location at day $i$ with $i \in {0,…,n-1}$, so that we have $n$ days.</p>
+<p>We were usually receiving the messages following $\sim \text{Poisson}(2)$, but after a certain day the behaviour changed and we received more messages per day, following $\sim \text{Poisson}(4)$.</p>
+<p>$$\begin{align*}
+\tau &amp;\in (0,1)\
+\text{for }  i &amp;= 1\ldots N: \
+X_i &amp;= \begin{cases} \text{Poisson}(2), &amp; \tau &gt; i/N \ \text{Poisson}(4), &amp; \text{otherwise}\end{cases}\
+\end{align*}$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># real (and unknown) parameter</span>

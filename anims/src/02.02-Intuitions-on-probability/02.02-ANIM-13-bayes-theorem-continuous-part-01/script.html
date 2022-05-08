@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../../../content/M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.1.html">
+    <a class="reference internal" href="../../../../content/M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.3.html">
+    <a class="reference internal" href="../../../../content/M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -307,50 +309,44 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We <strong>know</strong> the sensor is noisy, it gives us the position in meters with respect to a certain origin and the manufacturer tells us that the sensor has a standard deviation 1.</p>
 <p>We will call:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(z\)</span> our actual position</p></li>
-<li><p><span class="math notranslate nohighlight">\(s_i\)</span> with <span class="math notranslate nohighlight">\(i \ge 0\)</span> the consecutive measurements we do.</p></li>
+<li><p>$z$ our actual position</p></li>
+<li><p>$s_i$ with $i \ge 0$ the consecutive measurements we do.</p></li>
 </ul>
-<p>with this <span class="math notranslate nohighlight">\(P(z)\)</span> represents <strong>our knowledge</strong> (or uncertainty) of where we are (<span class="math notranslate nohighlight">\(z\)</span>), and <span class="math notranslate nohighlight">\(P(z|s_i)\)</span> would be our knowledge <strong>after</strong> seeing measurement <span class="math notranslate nohighlight">\(s_i\)</span></p>
-<p>Let’s start with the first measurement: <span class="math notranslate nohighlight">\(s_0\)</span> and let’s imagine the sensor reading is <span class="math notranslate nohighlight">\(s_0=22.3m\)</span></p>
-<p>We want to estimate <span class="math notranslate nohighlight">\(P(z|s_0=22.3m)\)</span>, so let’s use Bayes:</p>
-<div class="math notranslate nohighlight">
-\[P(z|s_0=22.3m) = \frac{P(s_0=22.3m|z) P(z)}{P(s_0=22.3m)}\]</div>
+<p>with this $P(z)$ represents <strong>our knowledge</strong> (or uncertainty) of where we are ($z$), and $P(z|s_i)$ would be our knowledge <strong>after</strong> seeing measurement $s_i$</p>
+<p>Let’s start with the first measurement: $s_0$ and let’s imagine the sensor reading is $s_0=22.3m$</p>
+<p>We want to estimate $P(z|s_0=22.3m)$, so let’s use Bayes:</p>
+<p>$$P(z|s_0=22.3m) = \frac{P(s_0=22.3m|z) P(z)}{P(s_0=22.3m)}$$</p>
 <p>The key thing here is to understand that we are <strong>dealing with distributions</strong>. This means:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(z|s_0=22.3m)\)</span> is a distribution (<strong>not a number as before</strong>), and in fact, we can see it as a function of <span class="math notranslate nohighlight">\(z\)</span> (a probability distribution), because we have a precise measurement, a value for <span class="math notranslate nohighlight">\(s_0\)</span>. We could also write it as <span class="math notranslate nohighlight">\(P(z|s_0)\)</span> for short, but we <strong>must remember</strong> that it is a <strong>function</strong> of <span class="math notranslate nohighlight">\(z\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(s_0=22.3m|z)\)</span> is a distribution (<strong>not a number as before</strong>), also a function of <span class="math notranslate nohighlight">\(z\)</span>, because <span class="math notranslate nohighlight">\(s_0\)</span> is fixed.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(z)\)</span> is a distribution also a function of <span class="math notranslate nohighlight">\(x\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(s_0=22.3m)\)</span> is <strong>a number</strong>, we are asking about the probability of observing <span class="math notranslate nohighlight">\(s_0=22.3m\)</span>. This <strong>does not</strong> depend on <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
+<li><p>$P(z|s_0=22.3m)$ is a distribution (<strong>not a number as before</strong>), and in fact, we can see it as a function of $z$ (a probability distribution), because we have a precise measurement, a value for $s_0$. We could also write it as $P(z|s_0)$ for short, but we <strong>must remember</strong> that it is a <strong>function</strong> of $z$</p></li>
+<li><p>$P(s_0=22.3m|z)$ is a distribution (<strong>not a number as before</strong>), also a function of $z$, because $s_0$ is fixed.</p></li>
+<li><p>$P(z)$ is a distribution also a function of $x$</p></li>
+<li><p>$P(s_0=22.3m)$ is <strong>a number</strong>, we are asking about the probability of observing $s_0=22.3m$. This <strong>does not</strong> depend on $z$.</p></li>
 </ul>
 <p>What do we use for the different terms:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(z)\)</span> is the <strong>prior</strong>, our initial guess of the position. We could use a very uninformative prior, such as <span class="math notranslate nohighlight">\(\mathcal{N}(0,100)\)</span>, which a large std. Or if we somehow have some prior information, that <span class="math notranslate nohighlight">\(x\)</span> position is about 20m we could use <span class="math notranslate nohighlight">\(\mathcal{N}(20,5)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(s_0|z)\)</span> es el <strong>likelihood</strong>, es decir, qué probable sería ver lo que he visto en función de <span class="math notranslate nohighlight">\(x\)</span>, o sea, si yo estuviera ubicado en distintos lugares.</p></li>
-<li><p>Intuitively, if my real position <span class="math notranslate nohighlight">\(z\)</span> is far from 22.3, the likelihood of my observation (<span class="math notranslate nohighlight">\(s_0=22.3m\)</span>) would be lower than if I was closer. Como el fabricante nos dice el fabricante que el sensor tiene una std=1m, por tanto lo modelamos como <span class="math notranslate nohighlight">\(\mathcal{N}(z,1)\)</span>, es decir, una normal centrada en <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(s_0)\)</span> is the normalization constant. <strong>This is hard</strong> and we do not know it beforehand, so we use the trick of summing over all possible values of <span class="math notranslate nohighlight">\(z\)</span></p></li>
+<li><p>$P(z)$ is the <strong>prior</strong>, our initial guess of the position. We could use a very uninformative prior, such as $\mathcal{N}(0,100)$, which a large std. Or if we somehow have some prior information, that $x$ position is about 20m we could use $\mathcal{N}(20,5)$</p></li>
+<li><p>$P(s_0|z)$ es el <strong>likelihood</strong>, es decir, qué probable sería ver lo que he visto en función de $x$, o sea, si yo estuviera ubicado en distintos lugares.</p></li>
+<li><p>Intuitively, if my real position $z$ is far from 22.3, the likelihood of my observation ($s_0=22.3m$) would be lower than if I was closer. Como el fabricante nos dice el fabricante que el sensor tiene una std=1m, por tanto lo modelamos como $\mathcal{N}(z,1)$, es decir, una normal centrada en $z$.</p></li>
+<li><p>$P(s_0)$ is the normalization constant. <strong>This is hard</strong> and we do not know it beforehand, so we use the trick of summing over all possible values of $z$</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[P(s_0=22.3m) = \int_{-\infty}^\infty P(s_0=22.3m|z)P(z)dz\]</div>
+<p>$$P(s_0=22.3m) = \int_{-\infty}^\infty P(s_0=22.3m|z)P(z)dz$$</p>
 <p>observe that the numeration is <strong>always</strong> just one item of the infinite sum that is the normalization constant. So this is really a normalization constant.</p>
-<p>Now, since we are <strong>dealing with distributions</strong>, let’s use the PDFs of the different distributions that we have. Remember that if <span class="math notranslate nohighlight">\(x\sim \mathcal{N}(\mu, \sigma)\)</span>, then</p>
-<div class="math notranslate nohighlight">
-\[P(x)= \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(x-\mu)^2/\sigma^2}\]</div>
-<p>so let’s substitute in our case for bayes theorem, we will use <span class="math notranslate nohighlight">\(\mathcal{N}(20,5)\)</span> s our prior.</p>
-<div class="math notranslate nohighlight">
-\[P(z|s_0=22.3m) = \frac{\frac{1}{1 \cdot \sqrt{2\pi}}e^{-\frac{1}{2}(s_0-z)^2/1^2} \frac{1}{3\cdot \sqrt{2\pi}}e^{-\frac{1}{2}(z-20)^2/3^2} }{P(s_0=22.3m)}\]</div>
-<p><strong>small detail</strong>, observe how we use <span class="math notranslate nohighlight">\((s_0-z)^2\)</span> in the likelihood, and <span class="math notranslate nohighlight">\((z-20)^2\)</span> in the prior. Since we are squaring the order of <span class="math notranslate nohighlight">\(z\)</span> does not matter, but observe that in the likelihood <span class="math notranslate nohighlight">\(z\)</span> is acting as the parameter <span class="math notranslate nohighlight">\(\mu\)</span> of normal distribution (i.e. the normal is <strong>centered</strong> at <span class="math notranslate nohighlight">\(z\)</span>), and in the prior it is acting as the pdf argument (the normal is <strong>centered</strong> at 20). If our distribution PDF was not symmetric in <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(x\)</span>, we would have to be very careful on this.</p>
+<p>Now, since we are <strong>dealing with distributions</strong>, let’s use the PDFs of the different distributions that we have. Remember that if $x\sim \mathcal{N}(\mu, \sigma)$, then</p>
+<p>$$P(x)= \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(x-\mu)^2/\sigma^2}$$</p>
+<p>so let’s substitute in our case for bayes theorem, we will use $\mathcal{N}(20,5)$ s our prior.</p>
+<p>$$P(z|s_0=22.3m) = \frac{\frac{1}{1 \cdot \sqrt{2\pi}}e^{-\frac{1}{2}(s_0-z)^2/1^2} \frac{1}{3\cdot \sqrt{2\pi}}e^{-\frac{1}{2}(z-20)^2/3^2} }{P(s_0=22.3m)}$$</p>
+<p><strong>small detail</strong>, observe how we use $(s_0-z)^2$ in the likelihood, and $(z-20)^2$ in the prior. Since we are squaring the order of $z$ does not matter, but observe that in the likelihood $z$ is acting as the parameter $\mu$ of normal distribution (i.e. the normal is <strong>centered</strong> at $z$), and in the prior it is acting as the pdf argument (the normal is <strong>centered</strong> at 20). If our distribution PDF was not symmetric in $\mu$ and $x$, we would have to be very careful on this.</p>
 <p>and finally</p>
-<div class="math notranslate nohighlight">
-\[P(z|s_0=22.3m) = \frac{\frac{1}{1 \cdot \sqrt{2\pi}}e^{-\frac{1}{2}(22.3-z)^2/1^2} \frac{1}{3\cdot \sqrt{2\pi}}e^{-\frac{1}{2}(z-20)^2/3^2} }{\int \Big[ \frac{1}{1 \cdot \sqrt{2\pi}}e^{-\frac{1}{2}(22.3-z)^2/1^2} \frac{1}{3\cdot \sqrt{2\pi}}e^{-\frac{1}{2}(z-20)^2/3^2} \Big]dz}\]</div>
+<p>$$P(z|s_0=22.3m) = \frac{\frac{1}{1 \cdot \sqrt{2\pi}}e^{-\frac{1}{2}(22.3-z)^2/1^2} \frac{1}{3\cdot \sqrt{2\pi}}e^{-\frac{1}{2}(z-20)^2/3^2} }{\int \Big[ \frac{1}{1 \cdot \sqrt{2\pi}}e^{-\frac{1}{2}(22.3-z)^2/1^2} \frac{1}{3\cdot \sqrt{2\pi}}e^{-\frac{1}{2}(z-20)^2/3^2} \Big]dz}$$</p>
 <p>observe:</p>
 <ul class="simple">
-<li><p>the numerator (likelihood*prior) is a function of <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
-<li><p>the normalization factor is a <strong>number</strong> since it is an integral over <span class="math notranslate nohighlight">\(z\)</span> of a function of <span class="math notranslate nohighlight">\(z\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(z|s_0=22.3m)\)</span> is therefore a function of <span class="math notranslate nohighlight">\(z\)</span> which is a probability distribution itself.</p></li>
+<li><p>the numerator (likelihood*prior) is a function of $z$.</p></li>
+<li><p>the normalization factor is a <strong>number</strong> since it is an integral over $z$ of a function of $z$</p></li>
+<li><p>$P(z|s_0=22.3m)$ is therefore a function of $z$ which is a probability distribution itself.</p></li>
 </ul>
 <p>and finally, we can of course handle <strong>new observations</strong>, using the newly computed posterior as the prior of the next observation.</p>
-<div class="math notranslate nohighlight">
-\[P(z|s_i) = \frac{P(s_i|z)P(s_{i-1})}{P(s)}\]</div>
+<p>$$P(z|s_i) = \frac{P(s_i|z)P(s_{i-1})}{P(s)}$$</p>
 <p>We are going to see this now in a notebook</p>
 <p>LAB: Estimate the position with velocity and position estimates (i.e. do kalman filter by hand)</p>
 </div>

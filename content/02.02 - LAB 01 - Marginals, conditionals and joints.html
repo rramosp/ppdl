@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -403,11 +405,11 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="task-1-marginal-probabilities">
 <h2>Task 1: Marginal Probabilities<a class="headerlink" href="#task-1-marginal-probabilities" title="Permalink to this headline">¶</a></h2>
 <p>Consider the following probabilistic graphical model that represents the relationship between three random variables:</p>
-<img src="img/1_graphical_model.svg" width="500px">
+<a class="reference internal image-reference" href="content/img/1_graphical_model.svg"><img alt="content/img/1_graphical_model.svg" src="content/img/1_graphical_model.svg" width="500px" /></a>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathcal{X}_1 \in \{&quot;Winter&quot;, &quot;Spring&quot;, &quot;Summer&quot;, &quot;Autumn&quot;\}\)</span>: the current season.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathcal{X}_2 \in \{0, 1\}\)</span>: if a person had contact with another person with flu in the last week.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathcal{Y} \in \{0, 1\}\)</span>: if a person has flu.</p></li>
+<li><p>$\mathcal{X}_1 \in {“Winter”, “Spring”, “Summer”, “Autumn”}$: the current season.</p></li>
+<li><p>$\mathcal{X}_2 \in {0, 1}$: if a person had contact with another person with flu in the last week.</p></li>
+<li><p>$\mathcal{Y} \in {0, 1}$: if a person has flu.</p></li>
 </ul>
 <p>Consider the following historical data:</p>
 <div class="cell docutils container">
@@ -496,7 +498,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p><strong>CHALLENGE</strong>: Implement the <code class="docutils literal notranslate"><span class="pre">conditional</span></code> function, so that it returns the conditional probability <span class="math notranslate nohighlight">\(P(\mathcal{Y}|\mathcal{X}_1, \mathcal{X}_2)\)</span>.</p>
+<p><strong>CHALLENGE</strong>: Implement the <code class="docutils literal notranslate"><span class="pre">conditional</span></code> function, so that it returns the conditional probability $P(\mathcal{Y}|\mathcal{X}_1, \mathcal{X}_2)$.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conditional</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x_1_value</span><span class="p">,</span> <span class="n">x_2_value</span><span class="p">,</span> <span class="n">y_value</span><span class="p">):</span>
@@ -578,7 +580,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p><strong>CHALLENGE</strong>: Implement the <code class="docutils literal notranslate"><span class="pre">joint</span></code> function, so that it returns the joint probability <span class="math notranslate nohighlight">\(P(\mathcal{Y}, \mathcal{X}_1, \mathcal{X}_2)\)</span> for any input variable, you must use the functions from the task 1 and 2 by deducing an expression from the graphical model.</p>
+<p><strong>CHALLENGE</strong>: Implement the <code class="docutils literal notranslate"><span class="pre">joint</span></code> function, so that it returns the joint probability $P(\mathcal{Y}, \mathcal{X}_1, \mathcal{X}_2)$ for any input variable, you must use the functions from the task 1 and 2 by deducing an expression from the graphical model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">joint</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x_1_value</span><span class="p">,</span> <span class="n">x_2_value</span><span class="p">,</span> <span class="n">y_value</span><span class="p">):</span>

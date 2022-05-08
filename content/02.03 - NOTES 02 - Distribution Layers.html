@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -397,12 +399,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>the <strong>input</strong> are regular tensors</p></li>
 <li><p>the <strong>output</strong> are distributions objects that are use the input tensors as parameters</p></li>
 <li><p>the <strong>event_shape</strong> is the number of dimensions</p></li>
-<li><p>each <strong>dimension</strong> will be modelled by an independent Normal distribution <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma)\)</span></p></li>
+<li><p>each <strong>dimension</strong> will be modelled by an independent Normal distribution $\mathcal{N}(\mu, \sigma)$</p></li>
 <li><p>each independent normal is governed by <strong>two parameters</strong></p></li>
 </ul>
 <p>for instance, a 2D independent normal distribution with</p>
-<div class="math notranslate nohighlight">
-\[(x,y) \sim \mathcal{N}_x(-10, 5) \times \mathcal{N}_y(20, 8)\]</div>
+<p>$$(x,y) \sim \mathcal{N}_x(-10, 5) \times \mathcal{N}_y(20, 8)$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inormal_layer</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">IndependentNormal</span><span class="p">(</span><span class="n">event_shape</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -640,9 +641,8 @@ stds  [9.426311 6.080694]
 </div>
 </div>
 <p>the probability of the <code class="docutils literal notranslate"><span class="pre">output_distribution</span></code> is the probability for each distribution in the generated batch.</p>
-<div class="math notranslate nohighlight">
-\[\texttt{distribution.log_prob(x)}= \sum_d \sum_k \log P_d(x_k) \; \; \; \forall x_k \in \mathbf{x}\text{ and each distribution }d\text{ in the batch}\]</div>
-<p>and <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> must comply with the <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> of the distribution batch,</p>
+<p>$$\texttt{distribution.log_prob(x)}= \sum_d \sum_k \log P_d(x_k) ; ; ; \forall x_k \in \mathbf{x}\text{ and each distribution }d\text{ in the batch}$$</p>
+<p>and $\mathbf{x}$ must comply with the <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> of the distribution batch,</p>
 <p>note the difference between</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">input_x</span></code>, which is the input data to the distribution layer and produces a distribution (a batch of distributions)</p></li>
@@ -825,7 +825,7 @@ stds  [8.997255  8.847788  7.1187677]
 </div>
 </div>
 <p>the sample means and stds correspond to the <strong>transformed</strong> <code class="docutils literal notranslate"><span class="pre">input_x</span></code> according to the intermediate dense layer.</p>
-<p>observe that in this setting, the <code class="docutils literal notranslate"><span class="pre">IndependantNormal</span></code> layer passes the std parameter through a <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/activations/softplus"><code class="docutils literal notranslate"><span class="pre">tf.keras.activations.softplus</span></code></a> transformation to ensure the standard deviation is <span class="math notranslate nohighlight">\(&gt;0\)</span></p>
+<p>observe that in this setting, the <code class="docutils literal notranslate"><span class="pre">IndependantNormal</span></code> layer passes the std parameter through a <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/activations/softplus"><code class="docutils literal notranslate"><span class="pre">tf.keras.activations.softplus</span></code></a> transformation to ensure the standard deviation is $&gt;0$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;means&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>

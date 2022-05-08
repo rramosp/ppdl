@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -367,28 +369,28 @@ const thebe_selector_output = ".output, .cell_output"
 <h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
 <p>The Dirichlet distribution is mainly used in Bayesian statistics, specially, it’s the conjugate of the multinomial and the categorical distributions. In the following list you can find some relevant concepts from this distribution:</p>
 <ul class="simple">
-<li><p>It’s a multivariate distribution over a random vector <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb{R}^K\)</span> such that each component takes values in:</p></li>
+<li><p>It’s a multivariate distribution over a random vector $\mathbf{x} \in \mathbb{R}^K$ such that each component takes values in:</p></li>
 </ul>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(x_i \in [0, 1]\)</span>.</p>
+<div><p>$x_i \in [0, 1]$.</p>
 </div></blockquote>
 <ul class="simple">
 <li><p>The support for this distribution is constrained to be a simplex, i.e.:</p></li>
 </ul>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(\sum_i{x_i} = 1\)</span>.</p>
+<div><p>$\sum_i{x_i} = 1$.</p>
 </div></blockquote>
 <ul class="simple">
 <li><p>The probability density function is given by:</p></li>
 </ul>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(\text{P}(\mathbf{x}) = \frac{1}{\beta(\mathbf{\alpha})} \prod_{i = 1} ^ K x_i ^ {\alpha - 1}\)</span></p>
+<div><p>$\text{P}(\mathbf{x}) = \frac{1}{\beta(\mathbf{\alpha})} \prod_{i = 1} ^ K x_i ^ {\alpha - 1}$</p>
 </div></blockquote>
 <ul class="simple">
 <li><p>It’s a multivariate generalization of the Beta distribution.</p></li>
-<li><p>It has a vector of parameters <span class="math notranslate nohighlight">\(\alpha \in \mathbb{R} ^ K\)</span> which controls the <code class="docutils literal notranslate"><span class="pre">sparsity</span></code> of the distribution.</p></li>
+<li><p>It has a vector of parameters $\alpha \in \mathbb{R} ^ K$ which controls the <code class="docutils literal notranslate"><span class="pre">sparsity</span></code> of the distribution.</p></li>
 </ul>
-<p>Let us show an emample of samples generated from the Dirichlet distribution for different <span class="math notranslate nohighlight">\(\alpha\)</span> values:</p>
+<p>Let us show an emample of samples generated from the Dirichlet distribution for different $\alpha$ values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_dirichlet_samples</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
@@ -426,7 +428,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>Similar to the Beta distribution, the Dirichlet distribution is used to model rates, multivariate proportions or variables in <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+<p>Similar to the Beta distribution, the Dirichlet distribution is used to model rates, multivariate proportions or variables in $[0, 1]$.</p>
 <p>Let us consider the following example:</p>
 <blockquote>
 <div><p>In a survey, we measured the relative frequencies of pets per house, the experiment considered the following animals:</p>

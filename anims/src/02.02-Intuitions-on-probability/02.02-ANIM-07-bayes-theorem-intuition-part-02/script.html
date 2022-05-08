@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../../../content/M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.1.html">
+    <a class="reference internal" href="../../../../content/M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.3.html">
+    <a class="reference internal" href="../../../../content/M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -328,16 +330,16 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="bayes-theorem">
 <h1>Bayes theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this headline">¶</a></h1>
 <p>but let’s stop and understand what this means</p>
-<p><font color="red">animation inverse to substitute <span class="math notranslate nohighlight">\(rain\)</span> and <span class="math notranslate nohighlight">\(sun\)</span> by <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</font></p>
+<p><font color="red">animation inverse to substitute $rain$ and $sun$ by $A$ and $B$.</font></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(sun|rain)P(rain)\)</span>: it is obviously the probability of both rain and sun according to the formulas above.</p></li>
-<li><p>Another way to look at it: we are in the world where <span class="math notranslate nohighlight">\(rain\)</span> has been confirmed and we are expressing our belief about <span class="math notranslate nohighlight">\(sun\)</span> (<span class="math notranslate nohighlight">\(P(sun|rain)\)</span>) <span class="math notranslate nohighlight">\(\rightarrow\)</span> how do we transform this belief into a world where <span class="math notranslate nohighlight">\(rain\)</span> has <strong>NOT</strong> been confirmed?</p></li>
-<li><p>This is, If I start with <span class="math notranslate nohighlight">\(P(sun|rain)\)</span>, What can I say about <span class="math notranslate nohighlight">\(sun\)</span> and <span class="math notranslate nohighlight">\(rain\)</span> in a world where <span class="math notranslate nohighlight">\(rain\)</span> has <strong>NOT</strong> been confirmed? [<font color="red">show diagram with only <span class="math notranslate nohighlight">\(rain\)</span> and <span class="math notranslate nohighlight">\(sun|rain\)</span></font>] … I cannot state anything about <span class="math notranslate nohighlight">\(¬rain\)</span> because I have no information about it. Somewhat, <span class="math notranslate nohighlight">\(P(sun\text{ and }rain)\)</span> is the best I can do</p></li>
+<li><p>$P(sun|rain)P(rain)$: it is obviously the probability of both rain and sun according to the formulas above.</p></li>
+<li><p>Another way to look at it: we are in the world where $rain$ has been confirmed and we are expressing our belief about $sun$ ($P(sun|rain)$) $\rightarrow$ how do we transform this belief into a world where $rain$ has <strong>NOT</strong> been confirmed?</p></li>
+<li><p>This is, If I start with $P(sun|rain)$, What can I say about $sun$ and $rain$ in a world where $rain$ has <strong>NOT</strong> been confirmed? [<font color="red">show diagram with only $rain$ and $sun|rain$</font>] … I cannot state anything about $¬rain$ because I have no information about it. Somewhat, $P(sun\text{ and }rain)$ is the best I can do</p></li>
 </ul>
 <p>observe the game we are playing: What happens if I gain some information (observed that rains)? What happens if I loose information (move to a world where rain has <strong>NOT</strong> been confirmed).</p>
 <ul class="simple">
-<li><p>the equation <span class="math notranslate nohighlight">\(P(sun|rain)=P(sun\text{ and }rain) / P(rain)\)</span> represents the case when we <strong>GAIN</strong> information (observed <span class="math notranslate nohighlight">\(rain\)</span>)</p></li>
-<li><p>the equation <span class="math notranslate nohighlight">\(P(sun\text{ and }rain)=P(sun|rain)P(rain)\)</span> represents the case when we want to <strong>INTEGRATE</strong> the information gained into a larger context where <span class="math notranslate nohighlight">\(rain\)</span> has not been confirmed.</p></li>
+<li><p>the equation $P(sun|rain)=P(sun\text{ and }rain) / P(rain)$ represents the case when we <strong>GAIN</strong> information (observed $rain$)</p></li>
+<li><p>the equation $P(sun\text{ and }rain)=P(sun|rain)P(rain)$ represents the case when we want to <strong>INTEGRATE</strong> the information gained into a larger context where $rain$ has not been confirmed.</p></li>
 <li><p>observe that this is just a very simple algebraic manipulation … but its interpretation is <strong>VERY</strong> profound.</p></li>
 </ul>
 <div class="section" id="this-is-bayesian-thinking">

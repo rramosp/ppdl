@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -601,20 +603,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><strong>event components</strong>: are <strong>NOT</strong> independant and <strong>NOT</strong> identiclly distributed</p></li>
 </ul>
 <p>The following table might help make sense of this. It is based on <a class="reference external" href="https://bochang.me/blog/posts/pytorch-distributions/">this post</a> and <a class="reference external" href="https://ericmjl.github.io/blog/2019/5/29/reasoning-about-shapes-and-probability-distributions/">this post</a>.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<p>$$
 \begin{array}{|c|c|c|c|l|}\hline
-\textbf{sample shape}&amp;\textbf{batch shape}&amp;\textbf{event shape} &amp; \textbf{distribution for samples}  \\\hline
-\texttt{[2]}&amp;\texttt{[]}  &amp;\texttt{[]} &amp; X_0, X_1 \overset{iid}{\sim} \mathcal{N}(\mu, \sigma)&amp;\text{one single variable distribution}\\\hline
-\texttt{[2]}&amp;\texttt{[3]}  &amp;\texttt{[]} &amp; X_{0,0}, X_{1,0} \overset{iid}{\sim} \mathcal{N}(\mu_0, \sigma_0)&amp;\text{three single variable distributions}\\
-&amp;&amp;&amp; X_{0,1}, X_{1,1} \overset{iid}{\sim} \mathcal{N}(\mu_1, \sigma_1)\\
-&amp;&amp;&amp; X_{0,2}, X_{1,2} \overset{iid}{\sim} \mathcal{N}(\mu_2, \sigma_2)\\\hline
-\texttt{[2]}&amp;\texttt{[]}  &amp;\texttt{[4]} &amp; \mathbf{X}_0, \mathbf{X}_1 \overset{iid}{\sim} \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\sigma})\;\;\;\;\;\mathbf{X}_i\in\mathbb{R}^4&amp;\text{one mutivariate distribution}\\\hline
-\texttt{[2]}&amp;\texttt{[3]}  &amp;\texttt{[4]} &amp; \mathbf{X}_{0,0}, \mathbf{X}_{1,0} \overset{iid}{\sim} \mathcal{N}(\boldsymbol{\mu}_0, \boldsymbol{\sigma}_0)\;\;\;\;\;\mathbf{X}_i\in\mathbb{R}^4&amp;\text{three multivariate distributions}\\
-&amp;&amp;&amp; \mathbf{X}_{0,1}, \mathbf{X}_{1,1} \overset{iid}{\sim} \mathcal{N}(\boldsymbol{\mu}_1, \boldsymbol{\sigma}_1)\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\\
-&amp;&amp;&amp; \mathbf{X}_{0,2}, \mathbf{X}_{1,2} \overset{iid}{\sim} \mathcal{N}(\boldsymbol{\mu}_2, \boldsymbol{\sigma}_2)\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\\\hline
+\textbf{sample shape}&amp;\textbf{batch shape}&amp;\textbf{event shape} &amp; \textbf{distribution for samples}  \hline
+\texttt{[2]}&amp;\texttt{[]}  &amp;\texttt{[]} &amp; X_0, X_1 \overset{iid}{\sim} \mathcal{N}(\mu, \sigma)&amp;\text{one single variable distribution}\hline
+\texttt{[2]}&amp;\texttt{[3]}  &amp;\texttt{[]} &amp; X_{0,0}, X_{1,0} \overset{iid}{\sim} \mathcal{N}(\mu_0, \sigma_0)&amp;\text{three single variable distributions}\
+&amp;&amp;&amp; X_{0,1}, X_{1,1} \overset{iid}{\sim} \mathcal{N}(\mu_1, \sigma_1)\
+&amp;&amp;&amp; X_{0,2}, X_{1,2} \overset{iid}{\sim} \mathcal{N}(\mu_2, \sigma_2)\hline
+\texttt{[2]}&amp;\texttt{[]}  &amp;\texttt{[4]} &amp; \mathbf{X}_0, \mathbf{X}<em>1 \overset{iid}{\sim} \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\sigma});;;;;\mathbf{X}<em>i\in\mathbb{R}^4&amp;\text{one mutivariate distribution}\hline
+\texttt{[2]}&amp;\texttt{[3]}  &amp;\texttt{[4]} &amp; \mathbf{X}</em>{0,0}, \mathbf{X}</em>{1,0} \overset{iid}{\sim} \mathcal{N}(\boldsymbol{\mu}_0, \boldsymbol{\sigma}<em>0);;;;;\mathbf{X}<em>i\in\mathbb{R}^4&amp;\text{three multivariate distributions}\
+&amp;&amp;&amp; \mathbf{X}</em>{0,1}, \mathbf{X}</em>{1,1} \overset{iid}{\sim} \mathcal{N}(\boldsymbol{\mu}<em>1, \boldsymbol{\sigma}<em>1);;;;;;;;;;;;;;;;\
+&amp;&amp;&amp; \mathbf{X}</em>{0,2}, \mathbf{X}</em>{1,2} \overset{iid}{\sim} \mathcal{N}(\boldsymbol{\mu}_2, \boldsymbol{\sigma}_2);;;;;;;;;;;;;;;;\hline
 \end{array}
-\end{split}\]</div>
+$$</p>
 <p>observe how we deal with each case in the code below</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

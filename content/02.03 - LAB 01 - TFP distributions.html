@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -450,12 +452,12 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="task-2-batch-distributions">
 <h2>Task 2: Batch distributions<a class="headerlink" href="#task-2-batch-distributions" title="Permalink to this headline">¶</a></h2>
-<p>the probability for a person to default on a credit depends on his income, and it is modeled with an exponential distribution depending on the person’s age <span class="math notranslate nohighlight">\(x_i\)</span>, older people have flatter exponentials, meaning that as you get older the probability of default for higher incomes is higher than we you are younger.</p>
+<p>the probability for a person to default on a credit depends on his income, and it is modeled with an exponential distribution depending on the person’s age $x_i$, older people have flatter exponentials, meaning that as you get older the probability of default for higher incomes is higher than we you are younger.</p>
 <p>Observe how we want to <strong>assign a distribution to each data point</strong></p>
-<p>Make a function that, given a set of <span class="math notranslate nohighlight">\(x\in\mathbb{R}^n\)</span>, returns a batched distribution of <code class="docutils literal notranslate"><span class="pre">batch_size</span></code><span class="math notranslate nohighlight">\(=n\)</span> that assigns to each <span class="math notranslate nohighlight">\(x_i\)</span> a <span class="math notranslate nohighlight">\(\mathcal{N}(\mu_i, \sigma_i)\)</span> so that:</p>
+<p>Make a function that, given a set of $x\in\mathbb{R}^n$, returns a batched distribution of <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>$=n$ that assigns to each $x_i$ a $\mathcal{N}(\mu_i, \sigma_i)$ so that:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mu_i = 2x_i\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\sigma_i = \text{softplus}(2x_i/10) = \log(e^{x_i/10}+1)\)</span></p></li>
+<li><p>$\mu_i = 2x_i$</p></li>
+<li><p>$\sigma_i = \text{softplus}(2x_i/10) = \log(e^{x_i/10}+1)$</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -485,22 +487,20 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="task-4-bijector-probability">
 <h2>Task 4: Bijector probability<a class="headerlink" href="#task-4-bijector-probability" title="Permalink to this headline">¶</a></h2>
 <p>Compute the probability of a scale transformation by hand</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<p>$$
 \begin{align}
-X &amp;\sim \mathcal{Beta}(a,b)\\
-Y &amp; = f(x) = kX\\
-    \log P_y(Y) &amp;= \log P_x(f^{-1}(Y)) + \log \text{det}\Big[\frac{\partial}{\partial y} f^{-1}(y) \Big] \\
+X &amp;\sim \mathcal{Beta}(a,b)\
+Y &amp; = f(x) = kX\
+\log P_y(Y) &amp;= \log P_x(f^{-1}(Y)) + \log \text{det}\Big[\frac{\partial}{\partial y} f^{-1}(y) \Big] \
 \end{align}
-\end{split}\]</div>
-<p>And in this case, since <span class="math notranslate nohighlight">\(Y\)</span> is a scalar (single variable distribution)</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+$$</p>
+<p>And in this case, since $Y$ is a scalar (single variable distribution)</p>
+<p>$$
 \begin{align}
-f^{-1}(Y) &amp;= Y/k\\
+f^{-1}(Y) &amp;= Y/k\
 \text{det}\Big[\frac{\partial}{\partial y} f^{-1}(y) \Big] &amp;= \frac{\partial}{\partial y} f^{-1}(y) = 1/k
 \end{align}
-\end{split}\]</div>
+$$</p>
 <p>you <strong>CANNOT</strong> user Tensorflow</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

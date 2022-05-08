@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../M2.1.html">
+    <a class="reference internal" href="../M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../M2.3.html">
+    <a class="reference internal" href="../M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -457,19 +459,14 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>we want <span class="math notranslate nohighlight">\(q(\tau)\)</span> which is an approximation for <span class="math notranslate nohighlight">\(P(\tau|X)\)</span></p>
-<div class="math notranslate nohighlight">
-\[q(\tau) \approx P(\tau|X) = \frac{P(X|\tau)P(\tau)}{P(X)} \]</div>
+<p>we want $q(\tau)$ which is an approximation for $P(\tau|X)$</p>
+<p>$$q(\tau) \approx P(\tau|X) = \frac{P(X|\tau)P(\tau)}{P(X)} $$</p>
 <p>so we maximixe the ELBO</p>
-<div class="math notranslate nohighlight">
-\[\underset{\theta}{\text{arg max}}\;\; \mathbb{E}_{q_\theta(z)}\Big[\log P(X|\tau)\Big] - \text{KL}\Big[q_\theta(\tau)|P(\tau)\Big]\]</div>
-<div class="math notranslate nohighlight">
-\[\underset{\theta}{\text{arg max}}\;\; \int q_\theta(z) \log P(X|\tau) d\tau - \int q_\theta(\tau) \log \frac{q_\theta(\tau)}{P(\tau)} d\tau\]</div>
-<div class="math notranslate nohighlight">
-\[\underset{\theta}{\text{arg max}}\;\; \int \Big[ q_\theta(z) \log P(X|\tau)\Big] d\tau - \int q_\theta(\tau) \Big[ \log q_\theta(\tau)- \log P(\tau) \Big] d\tau\]</div>
-<p>We’ll do naive numerical integration splitting the interval <span class="math notranslate nohighlight">\([0,1]\)</span> for <span class="math notranslate nohighlight">\(\tau\)</span> and summing up. Also, since we are using a uniform uninformative prior <span class="math notranslate nohighlight">\(P(\tau)=1\)</span> and <span class="math notranslate nohighlight">\(\log P(\tau) = 0\)</span></p>
-<div class="math notranslate nohighlight">
-\[\underset{\theta}{\text{arg max}}\;\; \sum q_\theta(z) \log P(X|\tau) \Delta\tau - \sum q_\theta(\tau) \log q_\theta(\tau)  \Delta\tau\]</div>
+<p>$$\underset{\theta}{\text{arg max}};; \mathbb{E}<em>{q</em>\theta(z)}\Big[\log P(X|\tau)\Big] - \text{KL}\Big[q_\theta(\tau)|P(\tau)\Big]$$</p>
+<p>$$\underset{\theta}{\text{arg max}};; \int q_\theta(z) \log P(X|\tau) d\tau - \int q_\theta(\tau) \log \frac{q_\theta(\tau)}{P(\tau)} d\tau$$</p>
+<p>$$\underset{\theta}{\text{arg max}};; \int \Big[ q_\theta(z) \log P(X|\tau)\Big] d\tau - \int q_\theta(\tau) \Big[ \log q_\theta(\tau)- \log P(\tau) \Big] d\tau$$</p>
+<p>We’ll do naive numerical integration splitting the interval $[0,1]$ for $\tau$ and summing up. Also, since we are using a uniform uninformative prior $P(\tau)=1$ and $\log P(\tau) = 0$</p>
+<p>$$\underset{\theta}{\text{arg max}};; \sum q_\theta(z) \log P(X|\tau) \Delta\tau - \sum q_\theta(\tau) \log q_\theta(\tau)  \Delta\tau$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rtau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>

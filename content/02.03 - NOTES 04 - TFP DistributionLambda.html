@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -889,17 +891,15 @@ array([[-1.0067325,  1.0000728],
 <h2>Learning distribution parameters<a class="headerlink" href="#learning-distribution-parameters" title="Permalink to this headline">¶</a></h2>
 <p>We have not fit any model yet, but we can use this machinery to <strong>learn</strong> the distribution parameters for each input data point with a small <code class="docutils literal notranslate"><span class="pre">Dense</span></code> layer.</p>
 <p>We are trying to learn this model</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<p>$$
 \begin{align}
-\mu_x, \sigma_x &amp;= D_\theta(x) \\
+\mu_x, \sigma_x &amp;= D_\theta(x) \
 y &amp;\sim \mathcal{N}(\mu_x, \sigma_x)
 \end{align}
-\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(D_\theta\)</span> is a regular neural network with parameters <span class="math notranslate nohighlight">\(\theta\)</span> which, given an input <span class="math notranslate nohighlight">\(x\)</span>, returns two values <span class="math notranslate nohighlight">\(\mu_x\)</span> and <span class="math notranslate nohighlight">\(\sigma_x\)</span>. These two values will be used to parametrize a gaussian distribution for that specific <span class="math notranslate nohighlight">\(x\)</span>.</p>
-<p>and we want <span class="math notranslate nohighlight">\(\theta\)</span> that maximizes the log likelihood.</p>
-<div class="math notranslate nohighlight">
-\[\underset{\theta}{\text{arg min}}\;\; - \frac{1}{N} \sum_{x_i} \log P_{\mathcal{N}(\mu_{x_i}, \sigma_{x_i})}(x_i)\]</div>
+$$</p>
+<p>where $D_\theta$ is a regular neural network with parameters $\theta$ which, given an input $x$, returns two values $\mu_x$ and $\sigma_x$. These two values will be used to parametrize a gaussian distribution for that specific $x$.</p>
+<p>and we want $\theta$ that maximizes the log likelihood.</p>
+<p>$$\underset{\theta}{\text{arg min}};; - \frac{1}{N} \sum_{x_i} \log P_{\mathcal{N}(\mu_{x_i}, \sigma_{x_i})}(x_i)$$</p>
 <p>Observe that, this way, we have a <strong>predictive distribution</strong> for each input data point.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

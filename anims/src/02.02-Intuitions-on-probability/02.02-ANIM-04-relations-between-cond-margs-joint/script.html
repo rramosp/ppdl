@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../../../content/M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.1.html">
+    <a class="reference internal" href="../../../../content/M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.3.html">
+    <a class="reference internal" href="../../../../content/M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -328,74 +330,70 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Por ejemplo, solemos decir “tenemos la distribución P(Xc|Xp)”, sin decir respecto a qué partido en concreto.</p>
 <p>Es importante darse cuenta que esto se hace como parte de algún argumento o planteamiento de un problema o solución. Cuando hacemos esto, en realidad estamos ASUMIENDO que en algún momento, se determinará un valor concreto para el valor que condiciona (un partido concreto si es Xp como en P(Xc|Xp) ), y de esta manera lo que hacemos es válido para cualquier valor.</p>
 <p>Por ejemplo, si expreso</p>
-<div class="math notranslate nohighlight">
-\[max_{X_p}\;\; P(X_p|X_c)\]</div>
+<p>$$max_{X_p};; P(X_p|X_c)$$</p>
 <p>estoy preguntando por el porcentaje de votos del partido que ganó ASUMIENDO que fijo una ciudad.</p>
 <p>Fíjate ahora cómo, a partir de la distribución conjunta, construímos las distribuciones marginales</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(X_p) = \sum_i P(X_p,X_c=c_i)\)</span> con <span class="math notranslate nohighlight">\(i \in \{1,2,3\}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(X_c) = \sum_i P(X_p=p_i,X_c)\)</span> con <span class="math notranslate nohighlight">\(i \in \{1,2,3,4\}\)</span></p></li>
+<li><p>$P(X_p) = \sum_i P(X_p,X_c=c_i)$ con $i \in {1,2,3}$</p></li>
+<li><p>$P(X_c) = \sum_i P(X_p=p_i,X_c)$ con $i \in {1,2,3,4}$</p></li>
 </ul>
 <p>y las condicionales:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(X_p|X_c=acity) = \frac{P(X_p, X_c=acity)}{\sum_i P(X_p, X_c=c_i)} = \frac{P(X_p, X_c=acity)}{P(X_c=acity)}\)</span></p></li>
+<li><p>$P(X_p|X_c=acity) = \frac{P(X_p, X_c=acity)}{\sum_i P(X_p, X_c=c_i)} = \frac{P(X_p, X_c=acity)}{P(X_c=acity)}$</p></li>
 </ul>
-<p>fíjate que el denominador de esta última expresión es un valor de distribución marginal de <span class="math notranslate nohighlight">\(X_c\)</span></p>
+<p>fíjate que el denominador de esta última expresión es un valor de distribución marginal de $X_c$</p>
 <p>Por ejemplo,</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(X_p|X_c=city2) = \frac{P(X_p, X_c=city2)}{\sum_i P(X_p, X_c=c_i)}\)</span> = <span class="math notranslate nohighlight">\(\frac{P(X_p, X_c=city2)}{0.142 + 0.241 + 0.031 + 0.099}\)</span> = <span class="math notranslate nohighlight">\(\frac{P(X_p, X_c=city2)}{0.513}\)</span></p></li>
+<li><p>$P(X_p|X_c=city2) = \frac{P(X_p, X_c=city2)}{\sum_i P(X_p, X_c=c_i)}$ = $\frac{P(X_p, X_c=city2)}{0.142 + 0.241 + 0.031 + 0.099}$ = $\frac{P(X_p, X_c=city2)}{0.513}$</p></li>
 </ul>
-<p>Por tanto <span class="math notranslate nohighlight">\(P(X_p|X_c=city2)\)</span> =</p>
+<p>Por tanto $P(X_p|X_c=city2)$ =</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\frac{0.142}{0.513}=0.277\)</span> si <span class="math notranslate nohighlight">\(X_p=p1\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\frac{0.241}{0.513}=0.470\)</span> si <span class="math notranslate nohighlight">\(X_p=p2\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\frac{0.031}{0.513}=0.060\)</span> si <span class="math notranslate nohighlight">\(X_p=p2\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(\frac{0.099}{0.513}=0.193\)</span> si <span class="math notranslate nohighlight">\(X_p=p2\)</span></p></li>
+<li><p>$\frac{0.142}{0.513}=0.277$ si $X_p=p1$</p></li>
+<li><p>$\frac{0.241}{0.513}=0.470$ si $X_p=p2$</p></li>
+<li><p>$\frac{0.031}{0.513}=0.060$ si $X_p=p2$</p></li>
+<li><p>$\frac{0.099}{0.513}=0.193$ si $X_p=p2$</p></li>
 </ul>
 <p>En el sentido que acabamos de hablar, la relación</p>
-<p><span class="math notranslate nohighlight">\(P(X_p|X_c=acity) = \frac{P(X_p, X_c=acity)}{P(X_c=acity)}\)</span></p>
+<p>$P(X_p|X_c=acity) = \frac{P(X_p, X_c=acity)}{P(X_c=acity)}$</p>
 <p>se suele expresar de forma generalizada y abreviada de la siguiente manera</p>
-<div class="math notranslate nohighlight">
-\[P(X_p|X_c) = \frac{P(X_p, X_c)}{P(X_c)}\]</div>
+<p>$$P(X_p|X_c) = \frac{P(X_p, X_c)}{P(X_c)}$$</p>
 <p>y es la expresión que nos da la relación concreta que existe entre las distirbuciones conjuntas, marginales y condicionales.</p>
 <p>que podemos escribir también de la siguiente manera</p>
-<div class="math notranslate nohighlight">
-\[P(X_p|X_c)P(X_c) = P(X_p, X_c)\]</div>
-<p>y también para la distribución condicional de <span class="math notranslate nohighlight">\(X_c\)</span></p>
-<div class="math notranslate nohighlight">
-\[P(X_c|X_p)P(X_p) = P(X_p, X_c)\]</div>
+<p>$$P(X_p|X_c)P(X_c) = P(X_p, X_c)$$</p>
+<p>y también para la distribución condicional de $X_c$</p>
+<p>$$P(X_c|X_p)P(X_p) = P(X_p, X_c)$$</p>
 <p>y de donde surge de manera natural el teorema de bayes, que más adelante vamos a inspeccionar en detalle.</p>
-<p><span class="math notranslate nohighlight">\(P(X_p|X_c)P(X_c) = P(X_c|X_p)P(X_p)\)</span></p>
-<p><span class="math notranslate nohighlight">\(\Rightarrow P(X_p|X_c) = \frac{P(X_c|X_p)P(X_p)}{P(X_c)}\)</span></p>
-<p><span class="math notranslate nohighlight">\(\Rightarrow P(X_c|X_p) = \frac{P(X_p|X_c)P(X_c)}{P(X_p
-)}\)</span></p>
+<p>$P(X_p|X_c)P(X_c) = P(X_c|X_p)P(X_p)$</p>
+<p>$\Rightarrow P(X_p|X_c) = \frac{P(X_c|X_p)P(X_p)}{P(X_c)}$</p>
+<p>$\Rightarrow P(X_c|X_p) = \frac{P(X_p|X_c)P(X_c)}{P(X_p
+)}$</p>
 <p>Finalmente, ten en cuenta que esto lo podemos extender a distribuciones conjuntas de cualquier número de variables</p>
-<p><span class="math notranslate nohighlight">\(P(x,y,z,w)\)</span></p>
+<p>$P(x,y,z,w)$</p>
 <p>y podemos plantearnos por ejemplo marginalizar sobre cualquier número de ellas, simplemente tenemos que prestar atención a sumar bien sobre las variables adecuadas</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(x,y,z) = \sum_i P(x,y,z,w=w_i)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(x,y) = \sum_i \sum_j P(x,y,z=z_j,w=w_i)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(y,w) = \sum_l \sum_j P(x=x_l,y,z=z_j,w)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(x) = \sum_i \sum_j \sum_k P(x,y=y_k,z=z_j,w=w_i)\)</span></p></li>
+<li><p>$P(x,y,z) = \sum_i P(x,y,z,w=w_i)$</p></li>
+<li><p>$P(x,y) = \sum_i \sum_j P(x,y,z=z_j,w=w_i)$</p></li>
+<li><p>$P(y,w) = \sum_l \sum_j P(x=x_l,y,z=z_j,w)$</p></li>
+<li><p>$P(x) = \sum_i \sum_j \sum_k P(x,y=y_k,z=z_j,w=w_i)$</p></li>
 <li><p>etc.</p></li>
 </ul>
-<p>donde cada índice recorre todos los posibles valores de la variable correspondiente. Si <span class="math notranslate nohighlight">\(x\)</span> tiene 5 valores, <span class="math notranslate nohighlight">\(l\)</span> va de 1 a 5, si <span class="math notranslate nohighlight">\(y\)</span> tiene 2 posibles valores, <span class="math notranslate nohighlight">\(k\)</span> va de 1 a 2, etc.</p>
-<p>Fíjate que, por ejemplo, <span class="math notranslate nohighlight">\(P(x,y,z)\)</span> es una distribución conjunta de tres variables, obtenida MARGINALIZANDO sobre <span class="math notranslate nohighlight">\(w\)</span> una distribución conjunta de cuatro variables, o que <span class="math notranslate nohighlight">\(P(x,y)\)</span> es una distribución conjunta de 2 variables, obtenida marginalizando la distribución conjunta original sobre <span class="math notranslate nohighlight">\(z\)</span> y <span class="math notranslate nohighlight">\(w\)</span>.</p>
+<p>donde cada índice recorre todos los posibles valores de la variable correspondiente. Si $x$ tiene 5 valores, $l$ va de 1 a 5, si $y$ tiene 2 posibles valores, $k$ va de 1 a 2, etc.</p>
+<p>Fíjate que, por ejemplo, $P(x,y,z)$ es una distribución conjunta de tres variables, obtenida MARGINALIZANDO sobre $w$ una distribución conjunta de cuatro variables, o que $P(x,y)$ es una distribución conjunta de 2 variables, obtenida marginalizando la distribución conjunta original sobre $z$ y $w$.</p>
 <p>Y sucede lo mismo con las distribuciones condicionales. Podemos condicionar sobre el número de variables que queramos.</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(x,y,z|w=w_i) = \frac{P(x,y,z,w=w_i)}{\sum_i P(x,y,z,w=w_i)}\)</span></p></li>
+<li><p>$P(x,y,z|w=w_i) = \frac{P(x,y,z,w=w_i)}{\sum_i P(x,y,z,w=w_i)}$</p></li>
 </ul>
 <p>o expresado de forma abreviada</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(x,y,z|w) = \frac{P(x,y,z,w)}{P(w)}\)</span></p></li>
+<li><p>$P(x,y,z|w) = \frac{P(x,y,z,w)}{P(w)}$</p></li>
 </ul>
-<p>asumiendo que se fija el valor de <span class="math notranslate nohighlight">\(w\)</span></p>
+<p>asumiendo que se fija el valor de $w$</p>
 <p>si seguimos condicionando</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(x,z|y,w) = \frac{P(x,y,z,w)}{P(y,w)}\)</span>, asumiendo que fijamos valores para <span class="math notranslate nohighlight">\(y\)</span> y <span class="math notranslate nohighlight">\(w\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(x|z,y,w) = \frac{P(x,y,z,w)}{P(z,y,w)}\)</span>, asumiendo que fijamos los valores de <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(w\)</span> y <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
+<li><p>$P(x,z|y,w) = \frac{P(x,y,z,w)}{P(y,w)}$, asumiendo que fijamos valores para $y$ y $w$</p></li>
+<li><p>$P(x|z,y,w) = \frac{P(x,y,z,w)}{P(z,y,w)}$, asumiendo que fijamos los valores de $y$, $w$ y $z$.</p></li>
 </ul>
-<p>observa que, por ejemplo, <span class="math notranslate nohighlight">\(P(x,y,z|w)\)</span> es a su vez una distribución conjunta de 3 variables y <span class="math notranslate nohighlight">\( P(x,y|z,w)\)</span> es una distirbución conjunta de 2 variables.</p>
+<p>observa que, por ejemplo, $P(x,y,z|w)$ es a su vez una distribución conjunta de 3 variables y $ P(x,y|z,w)$ es una distirbución conjunta de 2 variables.</p>
 
     <script type="text/x-thebe-config">
     {

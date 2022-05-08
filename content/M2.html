@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -53,7 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.2 Intuitions on probability" href="M2.1.html" />
+    <link rel="next" title="2.1 Tensorflow core refresher" href="M2.1-videolist.html" />
     <link rel="prev" title="Course mechanics" href="M1.2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -109,7 +113,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +144,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -301,114 +305,57 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="fundamentals">
 <h1>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this headline">¶</a></h1>
+<!-- workaround for jupyterbook to actually copy the imgs -->
 <div class="docs-demo columns">
-    <div class="column col-6 col-xs-12">
-    <div class="panel">
-        <div class="panel-header text-center">
-        <figure class="avatar avatar-lg"><img src="../img/avatar-2.png" alt="Avatar"></figure>
-        <div class="panel-title h5 mt-10">Bruce Banner</div>
-        <div class="panel-subtitle">THE HULK</div>
+    <div class="column col-4 col-xs-12">
+        <div class="card">
+        <div class="card-image">
+            <img src="../_static/tfcore.png" class="img-responsive">
         </div>
-        <nav class="panel-nav">
-        <ul class="tab tab-block">
-            <li class="tab-item active"><a href="#panels">Profile</a></li>
-            <li class="tab-item"><a href="#panels">Files</a></li>
-            <li class="tab-item"><a href="#panels">Tasks</a></li>
-        </ul>
-        </nav>
-        <div class="panel-body">
-        <div class="tile tile-centered">
-            <div class="tile-content">
-            <div class="tile-title text-bold">E-mail</div>
-            <div class="tile-subtitle">bruce.banner@hulk.com</div>
-            </div>
-            <div class="tile-action">
-            <button class="btn btn-link btn-action btn-lg tooltip tooltip-left" data-tooltip="Edit E-mail"><i class="icon icon-edit"></i></button>
-            </div>
+        <div class="card-header">
+            <div class="card-title"><b>2.1 Tensorflow Core Refresher</b></div>
         </div>
-        <div class="tile tile-centered">
-            <div class="tile-content">
-            <div class="tile-title text-bold">Skype</div>
-            <div class="tile-subtitle">bruce.banner</div>
-            </div>
-            <div class="tile-action">
-            <button class="btn btn-link btn-action btn-lg"><i class="icon icon-edit"></i></button>
-            </div>
+        <div class="card-body" style="font-size:0.7rem;">
+            What is symbolic computing? Functional and sequential APIs. Custom models.
         </div>
-        <div class="tile tile-centered">
-            <div class="tile-content">
-            <div class="tile-title text-bold">Location</div>
-            <div class="tile-subtitle">Dayton, Ohio</div>
-            </div>
-            <div class="tile-action">
-            <button class="btn btn-link btn-action btn-lg"><i class="icon icon-edit"></i></button>
-            </div>
-        </div>
-        </div>
-        <div class="panel-footer">
-        <button class="btn btn-primary btn-block">Save</button>
-        </div>
-    </div>
-    </div>
-    <div class="column col-6 col-xs-12">
-    <div class="panel">
-        <div class="panel-header">
-        <div class="panel-title h6">Comments</div>
-        </div>
-        <div class="panel-body">
-        <div class="tile">
-            <div class="tile-icon">
-            <figure class="avatar"><img src="../img/avatar-1.png" alt="Avatar"></figure>
-            </div>
-            <div class="tile-content">
-            <p class="tile-title text-bold">Thor Odinson</p>
-            <p class="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
-            </div>
-        </div>
-        <div class="tile">
-            <div class="tile-icon">
-            <figure class="avatar"><img src="../img/avatar-2.png" alt="Avatar"></figure>
-            </div>
-            <div class="tile-content">
-            <p class="tile-title text-bold">Bruce Banner</p>
-            <p class="tile-subtitle">The Strategic Homeland Intervention, Enforcement, and Logistics Division...</p>
-            </div>
-        </div>
-        <div class="tile">
-            <div class="tile-icon">
-            <figure class="avatar" data-initial="TS"></figure>
-            </div>
-            <div class="tile-content">
-            <p class="tile-title text-bold">Tony Stark</p>
-            <p class="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
-            </div>
-        </div>
-        <div class="tile">
-            <div class="tile-icon">
-            <figure class="avatar"><img src="../img/avatar-4.png" alt="Avatar"></figure>
-            </div>
-            <div class="tile-content">
-            <p class="tile-title text-bold">Steve Rogers</p>
-            <p class="tile-subtitle">The Strategic Homeland Intervention, Enforcement, and Logistics Division...</p>
-            </div>
-        </div>
-        <div class="tile">
-            <div class="tile-icon">
-            <figure class="avatar"><img src="../img/avatar-3.png" alt="Avatar"></figure>
-            </div>
-            <div class="tile-content">
-            <p class="tile-title text-bold">Natasha Romanoff</p>
-            <p class="tile-subtitle">Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...</p>
-            </div>
-        </div>
-        </div>
-        <div class="panel-footer">
-        <div class="input-group">
-            <input class="form-input" type="text" placeholder="Hello">
-            <button class="btn btn-primary input-group-btn">Send</button>
+        <div class="card-footer">
+            <a href="M2.1-videolist.html"><button class="btn btn-primary">Go</button></a>
         </div>
         </div>
     </div>
+    <div class="column col-4 col-xs-12">
+        <div class="card">
+        <div class="card-image">
+            <img src="../_static/joint-marginal.png" class="img-responsive">
+        </div>
+        <div class="card-header">
+            <div class="card-title"><b>2.2 Intuitions on Probability</b></div>
+        </div>
+        <div class="card-body" style="font-size:0.7rem;">
+            Marginal, conditional and joint distributions. Bayes theorem. Likelihood. Markov chain Montecarlo.
+        </div>
+        <div class="card-footer">
+            <a href="M2.2-videolist.html">
+            <button class="btn btn-primary">Go</button>
+            </a>
+        </div>
+        </div>
+    </div>
+    <div class="column col-4 col-xs-12">
+        <div class="card">
+        <div class="card-image">
+            <img src="../_static/tfprob.png" class="img-responsive">
+        </div>
+        <div class="card-header">
+            <div class="card-title"><b>2.3 Tensorflow Probability Basics</b></div>
+        </div>
+        <div class="card-body" style="font-size:0.7rem;">
+            TFP distributionn shapes, objects and layers. Learning distribution parameters. Bijectors.
+        </div>
+        <div class="card-footer">
+            <a href="M2.3-videolist.html"><button class="btn btn-primary">Go</button></a>
+        </div>
+        </div>
     </div>
 </div>
 <div class="toctree-wrapper compound">
@@ -447,10 +394,10 @@ const thebe_selector_output = ".output, .cell_output"
             <p class="prev-next-title">Course mechanics</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="M2.1.html" title="next page">
+    <a class='right-next' id="next-link" href="M2.1-videolist.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2.2 Intuitions on probability</p>
+        <p class="prev-next-title">2.1 Tensorflow core refresher</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

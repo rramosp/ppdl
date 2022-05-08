@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -109,7 +113,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +144,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../M2.1.html">
+    <a class="reference internal" href="../../M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../M2.3.html">
+    <a class="reference internal" href="../../M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -324,14 +328,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#now-p-z-is-also-parametrized-by-theta">
-     Now,
-     <span class="math notranslate nohighlight">
-      \(p(z)\)
-     </span>
-     is also parametrized by
-     <span class="math notranslate nohighlight">
-      \(\theta\)
-     </span>
+     Now, $p(z)$ is also parametrized by $\theta$
     </a>
    </li>
   </ul>
@@ -378,14 +375,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#now-p-z-is-also-parametrized-by-theta">
-     Now,
-     <span class="math notranslate nohighlight">
-      \(p(z)\)
-     </span>
-     is also parametrized by
-     <span class="math notranslate nohighlight">
-      \(\theta\)
-     </span>
+     Now, $p(z)$ is also parametrized by $\theta$
     </a>
    </li>
   </ul>
@@ -414,10 +404,10 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="tex2jax_ignore mathjax_ignore section" id="gradients-of-expectations">
 <h1>Gradients of expectations<a class="headerlink" href="#gradients-of-expectations" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p><a class="reference external" href="https://gregorygundersen.com/blog/2018/04/29/reparameterization/">https://gregorygundersen.com/blog/2018/04/29/reparameterization/</a></p></li>
-<li><p><a class="reference external" href="https://ermongroup.github.io/cs228-notes/">https://ermongroup.github.io/cs228-notes/</a></p></li>
-<li><p><a class="reference external" href="https://ermongroup.github.io/cs228-notes/extras/vae/">https://ermongroup.github.io/cs228-notes/extras/vae/</a></p></li>
-<li><p><a class="reference external" href="https://stats.stackexchange.com/questions/199605/how-does-the-reparameterization-trick-for-vaes-work-and-why-is-it-important">https://stats.stackexchange.com/questions/199605/how-does-the-reparameterization-trick-for-vaes-work-and-why-is-it-important</a></p></li>
+<li><p>https://gregorygundersen.com/blog/2018/04/29/reparameterization/</p></li>
+<li><p>https://ermongroup.github.io/cs228-notes/</p></li>
+<li><p>https://ermongroup.github.io/cs228-notes/extras/vae/</p></li>
+<li><p>https://stats.stackexchange.com/questions/199605/how-does-the-reparameterization-trick-for-vaes-work-and-why-is-it-important</p></li>
 </ul>
 <p><strong>OUR GOAL</strong>: We want to maximize an expectation of a function with respect to a probability distribution</p>
 <p><strong>OUR PLAN</strong>: Obtain the gradient of the expectation and minimize</p>
@@ -425,17 +415,16 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="computing-an-expectation">
 <h2>Computing an expectation<a class="headerlink" href="#computing-an-expectation" title="Permalink to this headline">¶</a></h2>
 <p>recall the montecarlo aproximation of an expectation</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<p>$$
 \begin{align}
-\mathbb{E}_{z\sim p(z)} \big[f(z)\big] &amp;= \int_0^\infty p(z)f(z) dz &amp; (1)\\
-&amp;\approx \frac{1}{N}\sum_{z_i \sim p(z)}^N f(z_i)  &amp; (2)
+\mathbb{E}<em>{z\sim p(z)} \big[f(z)\big] &amp;= \int_0^\infty p(z)f(z) dz &amp; (1)\
+&amp;\approx \frac{1}{N}\sum</em>{z_i \sim p(z)}^N f(z_i)  &amp; (2)
 \end{align}
-\end{split}\]</div>
-<p>we check it with a custom distribution, and any <span class="math notranslate nohighlight">\(f(z)\)</span>:</p>
+$$</p>
+<p>we check it with a custom distribution, and any $f(z)$:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(z \in [1, 2]\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(p(z) = m (z-3/2) + 1\)</span>, with <span class="math notranslate nohighlight">\(m \in [-2,2]\)</span></p></li>
+<li><p>$z \in [1, 2]$</p></li>
+<li><p>$p(z) = m (z-3/2) + 1$, with $m \in [-2,2]$</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -587,7 +576,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="computing-an-expectation-of-a-parametrized-function">
 <h2>Computing an expectation of a parametrized function<a class="headerlink" href="#computing-an-expectation-of-a-parametrized-function" title="Permalink to this headline">¶</a></h2>
-<p>Let’s have <span class="math notranslate nohighlight">\(f(z)\)</span> depending on a parameter <span class="math notranslate nohighlight">\(\theta\)</span>, and we denote it with <span class="math notranslate nohighlight">\(f_\theta(z)\)</span> to emphasize it, for instance</p>
+<p>Let’s have $f(z)$ depending on a parameter $\theta$, and we denote it with $f_\theta(z)$ to emphasize it, for instance</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\theta&quot;</span><span class="p">)</span>
@@ -601,14 +590,13 @@ const thebe_selector_output = ".output, .cell_output"
 \[\displaystyle - \theta^{2} + 2 \theta\]</div>
 </div>
 </div>
-<p>the above expectation will naturally become a function of <span class="math notranslate nohighlight">\(\theta\)</span></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<p>the above expectation will naturally become a function of $\theta$</p>
+<p>$$
 \begin{align}
-\mathbb{E}_{z\sim p(z)} \big[f_\theta(z)\big] &amp;= \int p(z)f_\theta(z) dz \\
+\mathbb{E}<em>{z\sim p(z)} \big[f</em>\theta(z)\big] &amp;= \int p(z)f_\theta(z) dz \
 &amp;\approx \frac{1}{N}\sum_{z_i \sim p(z)}^N f_\theta(z_i)  &amp; (2)
 \end{align}
-\end{split}\]</div>
+$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expectation_integral</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">pdf</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">m</span><span class="p">:</span> <span class="n">mn</span><span class="p">})</span><span class="o">*</span><span class="n">f</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
@@ -622,7 +610,7 @@ const thebe_selector_output = ".output, .cell_output"
 \[\displaystyle - \theta^{2} + 2 \theta\]</div>
 </div>
 </div>
-<p>observe how the value of the expectation depends on the parameter <span class="math notranslate nohighlight">\(\theta\)</span> (and the probability <span class="math notranslate nohighlight">\(p(z)\)</span>)</p>
+<p>observe how the value of the expectation depends on the parameter $\theta$ (and the probability $p(z)$)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
@@ -639,7 +627,7 @@ const thebe_selector_output = ".output, .cell_output"
 <img alt="../../../_images/gradients of expectations_22_0.png" src="../../../_images/gradients of expectations_22_0.png" />
 </div>
 </div>
-<p>which we can evaluate for a specific value of <span class="math notranslate nohighlight">\(\theta\)</span>, directly on the analytic integral, or with the montecarlo simulation</p>
+<p>which we can evaluate for a specific value of $\theta$, directly on the analytic integral, or with the montecarlo simulation</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_val</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
@@ -668,35 +656,31 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="computing-the-gradient-of-an-expectation">
 <h2>Computing the gradient of an expectation<a class="headerlink" href="#computing-the-gradient-of-an-expectation" title="Permalink to this headline">¶</a></h2>
-<p>so we can ask for its gradient (which must be with respect to the parameter <span class="math notranslate nohighlight">\(\theta\)</span>).</p>
+<p>so we can ask for its gradient (which must be with respect to the parameter $\theta$).</p>
 <p>The gradient naturally slips into the integral, or the montecarlo approximation sum (the derivative of a sum is the sum of the derivatives)</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<p>$$
 \begin{align}
-\nabla_\theta \mathbb{E}_{p_z(z)}[f_\theta(z)] &amp;= \nabla_\theta \Big[\int p_z(z) f_\theta(z)dz\Big]\\
-&amp;= \int \nabla_\theta \Big[ p_z(z) f_\theta(z)\Big] dz &amp;\;\;\;\;\;(1)\\
-&amp;= \int p_z(z) \nabla_\theta \Big[ f_\theta(z)\Big] dz &amp;\;\;\;\;\;(2)
+\nabla_\theta \mathbb{E}<em>{p_z(z)}[f</em>\theta(z)] &amp;= \nabla_\theta \Big[\int p_z(z) f_\theta(z)dz\Big]\
+&amp;= \int \nabla_\theta \Big[ p_z(z) f_\theta(z)\Big] dz &amp;;;;;;(1)\
+&amp;= \int p_z(z) \nabla_\theta \Big[ f_\theta(z)\Big] dz &amp;;;;;;(2)
 \end{align}
-\end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+$$</p>
+<p>$$
 \begin{align}
-\nabla_\theta \mathbb{E}_{p_z(z)}[f_\theta(z)] &amp;\approx \nabla_\theta \Big[ \frac{1}{N}\sum_{z_i \sim p(z)}^N f_\theta(z_i) \Big] &amp; &amp;\;\;\;\;\;(3)\\
-&amp;=   \frac{1}{N}\sum_{z_i \sim p(z)}^N \nabla_\theta f_\theta(z_i)  &amp; &amp;\;\;\;\;\;(4)\\
+\nabla_\theta \mathbb{E}<em>{p_z(z)}[f</em>\theta(z)] &amp;\approx \nabla_\theta \Big[ \frac{1}{N}\sum_{z_i \sim p(z)}^N f_\theta(z_i) \Big] &amp; &amp;;;;;;(3)\
+&amp;=   \frac{1}{N}\sum_{z_i \sim p(z)}^N \nabla_\theta f_\theta(z_i)  &amp; &amp;;;;;;(4)\
 \end{align}
-\end{split}\]</div>
+$$</p>
 <p><strong>OBSERVATIONS</strong></p>
 <ul class="simple">
-<li><p>We can take <span class="math notranslate nohighlight">\(p_z(z)\)</span> out of <span class="math notranslate nohighlight">\(\nabla_\theta\)</span> in <span class="math notranslate nohighlight">\((2)\)</span> because <span class="math notranslate nohighlight">\(p_z(z)\)</span> does not depend on <span class="math notranslate nohighlight">\(\theta\)</span> so it appears as a constant for <span class="math notranslate nohighlight">\(\nabla_\theta\)</span></p></li>
-<li><p>Eqs <span class="math notranslate nohighlight">\((1)\)</span> through <span class="math notranslate nohighlight">\((4)\)</span> show that the gradient of this expectation is equal to the expectation of the gradient</p></li>
+<li><p>We can take $p_z(z)$ out of $\nabla_\theta$ in $(2)$ because $p_z(z)$ does not depend on $\theta$ so it appears as a constant for $\nabla_\theta$</p></li>
+<li><p>Eqs $(1)$ through $(4)$ show that the gradient of this expectation is equal to the expectation of the gradient</p></li>
 <li><p>Regularly, in ML, a loss function is defined in terms of each data point in a mini-batch and then averaged:</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\mathcal{L}_\theta = \frac{1}{N}\sum_i^N l_\theta(x^{(i)})\]</div>
-<p>where <span class="math notranslate nohighlight">\(\theta\)</span> are the model parameters. We then use the gradient of the loss function to optimize</p>
-<div class="math notranslate nohighlight">
-\[\nabla_\theta \mathcal {L}_\theta = \frac{1}{N}\sum_i^N \nabla_\theta l_\theta(x^{(i)})\]</div>
-<p>which is analogous to eq. <span class="math notranslate nohighlight">\((4)\)</span> except that we are not explicitly sampling from a known or target distribution, but using the samples on the dataset available. So <strong>what we are doing is not specially new</strong>.</p>
+<p>$$\mathcal{L}<em>\theta = \frac{1}{N}\sum_i^N l</em>\theta(x^{(i)})$$</p>
+<p>where $\theta$ are the model parameters. We then use the gradient of the loss function to optimize</p>
+<p>$$\nabla_\theta \mathcal {L}<em>\theta = \frac{1}{N}\sum_i^N \nabla</em>\theta l_\theta(x^{(i)})$$</p>
+<p>which is analogous to eq. $(4)$ except that we are not explicitly sampling from a known or target distribution, but using the samples on the dataset available. So <strong>what we are doing is not specially new</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span>
@@ -801,7 +785,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="now-p-z-is-also-parametrized-by-theta">
-<h3>Now, <span class="math notranslate nohighlight">\(p(z)\)</span> is also parametrized by <span class="math notranslate nohighlight">\(\theta\)</span><a class="headerlink" href="#now-p-z-is-also-parametrized-by-theta" title="Permalink to this headline">¶</a></h3>
+<h3>Now, $p(z)$ is also parametrized by $\theta$<a class="headerlink" href="#now-p-z-is-also-parametrized-by-theta" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\theta&quot;</span><span class="p">)</span>

@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../../../content/M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.1.html">
+    <a class="reference internal" href="../../../../content/M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.3.html">
+    <a class="reference internal" href="../../../../content/M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -346,9 +348,9 @@ dblquad(p_lw, 0, 1, lambda w: 0, lambda l: 5)
 &gt;&gt; 0.99999
 </pre></div>
 </div>
-<p><span class="math notranslate nohighlight">\(\int\int P(l|w)P(w)dldw = 1\)</span> la integral da 1</p>
+<p>$\int\int P(l|w)P(w)dldw = 1$ la integral da 1</p>
 <p>y la marginal</p>
-<p><span class="math notranslate nohighlight">\(P(l) = \int P(l|w)dw\)</span></p>
+<p>$P(l) = \int P(l|w)dw$</p>
 <p>y puedes comprobarlo con este código</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>p_l = lambda l: quad(lambda w: p_l_given_w(w)(l), 0,1)[0]
 quad(p_l, 0,5)
@@ -356,19 +358,19 @@ quad(p_l, 0,5)
 &gt;&gt; 0.99999
 </pre></div>
 </div>
-<p>Fíjate que podemos considerar <span class="math notranslate nohighlight">\(w\)</span> como un parámetro sobre el cual se construye la distribución de <span class="math notranslate nohighlight">\(l\)</span>.</p>
+<p>Fíjate que podemos considerar $w$ como un parámetro sobre el cual se construye la distribución de $l$.</p>
 <p>En muchas ocasiones nos dan la distribución de UNA variable, como dependiente de unos parámetros.</p>
-<p>Por ejemplo, nos dicen que <span class="math notranslate nohighlight">\(l\)</span> sigue una distribución normal con <span class="math notranslate nohighlight">\(\mu\)</span>=2 y <span class="math notranslate nohighlight">\(\sigma\)</span>=0.5.</p>
+<p>Por ejemplo, nos dicen que $l$ sigue una distribución normal con $\mu$=2 y $\sigma$=0.5.</p>
 <p>Esto es una distribución unidimensional, de una variable, que depende de dos parámetros para los que nos dan valores fíjos.</p>
 <p>Una forma muy generalizada de expresar esto es la siguiente:</p>
-<p><span class="math notranslate nohighlight">\(P(l|\mu,\sigma) \sim \mathcal{N}(\mu, \sigma)\)</span></p>
+<p>$P(l|\mu,\sigma) \sim \mathcal{N}(\mu, \sigma)$</p>
 <p>Fíjate que la notación es la misma que la de probabilidad condicional. Como si tuviéramos una distribución conjunta de tres variables y condicionáramos en dos de ellas.</p>
-<p>O si nos dan valores explícitos para <span class="math notranslate nohighlight">\(\mu\)</span> y <span class="math notranslate nohighlight">\(\sigma\)</span> sería</p>
-<p><span class="math notranslate nohighlight">\(P(l|\mu,\sigma) \sim \mathcal{N}(2, 0.5)\)</span></p>
-<p>De alguna manera estamos abusando de la notación, ya que <span class="math notranslate nohighlight">\(\mu\)</span> y <span class="math notranslate nohighlight">\(\sigma\)</span> NO SON variables aleatorias, sino parámetros.</p>
-<p>Pero igual, yo puedo usar esta expresión para hacer muchas cosas. Por ejemplo, si yo tengo una observación de <span class="math notranslate nohighlight">\(l\)</span> y expreso</p>
-<p><span class="math notranslate nohighlight">\(\text{argmax}_{\mu, \sigma}\;\; P(l|\mu, \sigma)\)</span></p>
-<p>yo estoy pidiendo los valores de <span class="math notranslate nohighlight">\(\mu\)</span> y <span class="math notranslate nohighlight">\(\sigma\)</span> que hacen que mi observación tenga la mayor probabilidad posible.</p>
+<p>O si nos dan valores explícitos para $\mu$ y $\sigma$ sería</p>
+<p>$P(l|\mu,\sigma) \sim \mathcal{N}(2, 0.5)$</p>
+<p>De alguna manera estamos abusando de la notación, ya que $\mu$ y $\sigma$ NO SON variables aleatorias, sino parámetros.</p>
+<p>Pero igual, yo puedo usar esta expresión para hacer muchas cosas. Por ejemplo, si yo tengo una observación de $l$ y expreso</p>
+<p>$\text{argmax}_{\mu, \sigma};; P(l|\mu, \sigma)$</p>
+<p>yo estoy pidiendo los valores de $\mu$ y $\sigma$ que hacen que mi observación tenga la mayor probabilidad posible.</p>
 <p>Veremos en los siguientes vídeos que esto nos va a ser de mucha utilidad cuando consideremos los conceptos de LIKELIHOOD.</p>
 <p>Una cosa SUPER importante. En un momento dado, sí que podríamos considerar los parámetros como valores aleatorias y en este caso, estarían sujetos a sus propias distribuciones de probabilidad, y podríamos manejarlos dentro de cualquier aparato estadístico como cualquier otra variable.</p>
 <p>Como por ejemplo dentro del teorema de bayes.</p>

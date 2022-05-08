@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -431,14 +433,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p><img alt="Topic model" src="../_images/topic_model.png" /></p>
 <p>Where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(N\)</span> is the number of documents in the corpus.</p></li>
-<li><p><span class="math notranslate nohighlight">\(V\)</span> is the vocabulary size.</p></li>
-<li><p><span class="math notranslate nohighlight">\(K\)</span> is the number of topics.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(V=v_j|D=d_i)\)</span> is the probability of word <span class="math notranslate nohighlight">\(v_j\)</span> in document <span class="math notranslate nohighlight">\(d_i\)</span> (a Bag-of-Words representation).</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(K=k|D=d_i)\)</span> is the probability of topic <span class="math notranslate nohighlight">\(k\)</span> in document <span class="math notranslate nohighlight">\(d_i\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(V=v_j|K=k)\)</span> is the probability of document <span class="math notranslate nohighlight">\(d_i\)</span> belonging to topic <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p>$N$ is the number of documents in the corpus.</p></li>
+<li><p>$V$ is the vocabulary size.</p></li>
+<li><p>$K$ is the number of topics.</p></li>
+<li><p>$P(V=v_j|D=d_i)$ is the probability of word $v_j$ in document $d_i$ (a Bag-of-Words representation).</p></li>
+<li><p>$P(K=k|D=d_i)$ is the probability of topic $k$ in document $d_i$.</p></li>
+<li><p>$P(V=v_j|K=k)$ is the probability of document $d_i$ belonging to topic $k$.</p></li>
 </ul>
-<p>In this case, we will use a probabilistic encoder-decoder neural network to approximate <span class="math notranslate nohighlight">\(P(K=k|D=d_i)\)</span> and <span class="math notranslate nohighlight">\(P(V=v_j|K=k)\)</span>.</p>
+<p>In this case, we will use a probabilistic encoder-decoder neural network to approximate $P(K=k|D=d_i)$ and $P(V=v_j|K=k)$.</p>
 <p>First, let us load the 20 newsgroups dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -478,7 +480,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<p>The BoW representation of the documents is a matrix of size <span class="math notranslate nohighlight">\(N \times V\)</span>:</p>
+<p>The BoW representation of the documents is a matrix of size $N \times V$:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bow</span> <span class="o">=</span> <span class="p">(</span>
@@ -499,7 +501,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="task-1">
 <h2>Task 1:<a class="headerlink" href="#task-1" title="Permalink to this headline">¶</a></h2>
-<p>Implement the <code class="docutils literal notranslate"><span class="pre">Encoder</span></code> class that takes the BoW of a document (<span class="math notranslate nohighlight">\(P(V=v_j|D=d_i)\)</span>) as input and outputs a probability distribution over topics (<span class="math notranslate nohighlight">\(P(K=k|D=d_i)\)</span>), you must:</p>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">Encoder</span></code> class that takes the BoW of a document ($P(V=v_j|D=d_i)$) as input and outputs a probability distribution over topics ($P(K=k|D=d_i)$), you must:</p>
 <ul class="simple">
 <li><p>Implement the constructor, adding the <code class="docutils literal notranslate"><span class="pre">Dense</span></code> layers that you will need.</p></li>
 <li><p>Implement the <code class="docutils literal notranslate"><span class="pre">call</span></code> method to connect the input and the layers, and return the output of the last layer.</p></li>
@@ -538,11 +540,10 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="task-2">
 <h2>Task 2<a class="headerlink" href="#task-2" title="Permalink to this headline">¶</a></h2>
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">DecodingLayer</span></code>, it will receive the latent representation and return the reconstructed input, the layer should implement the following opperation:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 f(\mathbf{L}, \mathbf{W}) = \mathbf{L} \cdot \text{softmax}(\mathbf{W})
-\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\mathbf{L}\)</span> is the latent representation (output of the encoder) and <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> are the parameters of the layer.</p>
+$$</p>
+<p>Where $\mathbf{L}$ is the latent representation (output of the encoder) and $\mathbf{W}$ are the parameters of the layer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_decoder</span><span class="p">():</span>

@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -398,7 +400,7 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="model-based-reasoning-and-bayesian-inference">
 <h1>Model-based reasoning and Bayesian inference<a class="headerlink" href="#model-based-reasoning-and-bayesian-inference" title="Permalink to this headline">¶</a></h1>
 <p>In model-based reasoning we assume a model of the process that generated our data. In Bayesian inference this model is probabilistic in nature, i.e. it encodes our knowledge (or asumptions) of the world in terms of ramdom variables, probabilistic distributions of these random variables and dependence/independence realtionships.</p>
-<p>The following is a summary of the Bayesian approach to machine learning (<a class="reference external" href="https://www.cs.toronto.edu/~radford/ftp/bayes-tut.pdf">https://www.cs.toronto.edu/~radford/ftp/bayes-tut.pdf</a>):</p>
+<p>The following is a summary of the Bayesian approach to machine learning (https://www.cs.toronto.edu/~radford/ftp/bayes-tut.pdf):</p>
 <ol class="simple">
 <li><p><strong>Model formulation</strong>: We formulate our knowledge about the world (or the mechanism that generated our data) probabilistically:</p></li>
 </ol>
@@ -424,19 +426,18 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="model-formulation">
 <h2>1. Model formulation<a class="headerlink" href="#model-formulation" title="Permalink to this headline">¶</a></h2>
 <p>Our model will have two random variables:</p>
-<p><span class="math notranslate nohighlight">\(Y\)</span>: random variable representing the outcome of a coin toss</p>
-<p><span class="math notranslate nohighlight">\(\Theta\)</span>: probability of getting a head (<span class="math notranslate nohighlight">\(Y=1\)</span>)</p>
-<p>The distribution of <span class="math notranslate nohighlight">\(Y\)</span> is Bernoulli:
-$<span class="math notranslate nohighlight">\(
+<p>$Y$: random variable representing the outcome of a coin toss</p>
+<p>$\Theta$: probability of getting a head ($Y=1$)</p>
+<p>The distribution of $Y$ is Bernoulli:
+$$
 P(Y = y\ |\ \theta) = \theta^{y}(1 - \theta)^{1 - y}
-\)</span>$</p>
-<p>An experiment consists of performing several coin tosses. The resulting data, <span class="math notranslate nohighlight">\(D\)</span>, from the experiment can be summarized by two values: <span class="math notranslate nohighlight">\(#heads\)</span> and <span class="math notranslate nohighlight">\(#tails\)</span>. The likelihood of a particular experiment outcome is given by the binomila distribution:</p>
-<div class="math notranslate nohighlight">
-\[
+$$</p>
+<p>An experiment consists of performing several coin tosses. The resulting data, $D$, from the experiment can be summarized by two values: $#heads$ and $#tails$. The likelihood of a particular experiment outcome is given by the binomila distribution:</p>
+<p>$$
 \begin{align}
-P(D\ |\ \theta) &amp;= \binom{\#heads + \#tails}{\#heads} \theta^{\#heads}(1 - \theta)^{\#tails}
+P(D\ |\ \theta) &amp;= \binom{#heads + #tails}{#heads} \theta^{#heads}(1 - \theta)^{#tails}
 \end{align}
-\]</div>
+$$</p>
 <p>This term is called the <em>likelihood</em>, the conditional probability of the data given the parameters. The following Python function calculates it:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -449,7 +450,7 @@ P(D\ |\ \theta) &amp;= \binom{\#heads + \#tails}{\#heads} \theta^{\#heads}(1 - \
 </div>
 </div>
 </div>
-<p>For instance if <span class="math notranslate nohighlight">\(\theta = 0.3\)</span>, the probability of getting 6 heads and 4 tails in 10 coin tosses would be:</p>
+<p>For instance if $\theta = 0.3$, the probability of getting 6 heads and 4 tails in 10 coin tosses would be:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">likelihood</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
@@ -462,7 +463,7 @@ P(D\ |\ \theta) &amp;= \binom{\#heads + \#tails}{\#heads} \theta^{\#heads}(1 - \
 </div>
 </div>
 </div>
-<p>But if <span class="math notranslate nohighlight">\(\theta=0.8\)</span> the likelihood would be:</p>
+<p>But if $\theta=0.8$ the likelihood would be:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">likelihood</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
@@ -475,12 +476,11 @@ P(D\ |\ \theta) &amp;= \binom{\#heads + \#tails}{\#heads} \theta^{\#heads}(1 - \
 </div>
 </div>
 </div>
-<p>As part of our modeling we have to also represent our prior knowledge of the possible values of <span class="math notranslate nohighlight">\(\theta\)</span>. This is encoded by a distribution of <span class="math notranslate nohighlight">\(\theta\)</span> values which is called the prior distribution:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>As part of our modeling we have to also represent our prior knowledge of the possible values of $\theta$. This is encoded by a distribution of $\theta$ values which is called the prior distribution:</p>
+<p>$$
 P(\theta)
-\]</div>
-<p>If we don’t have any prior knowledge, this can be encoded as a uniform prior distribution. Since we are dealing with a coin, we can assume that coins that are closer to be fair are more likely, this means that we give higher probabilities to values of <span class="math notranslate nohighlight">\(\theta\)</span> closer to <span class="math notranslate nohighlight">\(0.5\)</span>. Also we will assume a discrete probability since it will simplify our calculations:</p>
+$$</p>
+<p>If we don’t have any prior knowledge, this can be encoded as a uniform prior distribution. Since we are dealing with a coin, we can assume that coins that are closer to be fair are more likely, this means that we give higher probabilities to values of $\theta$ closer to $0.5$. Also we will assume a discrete probability since it will simplify our calculations:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -518,23 +518,21 @@ P(\theta)
 <div class="section" id="data-collection">
 <h2>2. Data collection<a class="headerlink" href="#data-collection" title="Permalink to this headline">¶</a></h2>
 <p>Two collect data we can toss a real coin a number of times and record how many
-heads (<span class="math notranslate nohighlight">\(\# heads\)</span>) and tails (<span class="math notranslate nohighlight">\(\# tails\)</span>) we get. This is our data <span class="math notranslate nohighlight">\(D\)</span>. For this exercise let’s assume we got  <span class="math notranslate nohighlight">\(\# heads = 15\)</span> and <span class="math notranslate nohighlight">\(\# tails = 5\)</span>.</p>
+heads ($# heads$) and tails ($# tails$) we get. This is our data $D$. For this exercise let’s assume we got  $# heads = 15$ and $# tails = 5$.</p>
 </div>
 <div class="section" id="posterior-calculation">
 <h2>3. Posterior calculation<a class="headerlink" href="#posterior-calculation" title="Permalink to this headline">¶</a></h2>
 <p>To calculate the posterior we will use the the Bayes theorem:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 P(\theta|D) = \frac{P(D|\theta)P(\theta)}{P(D)}
-\]</div>
-<p>We already have the prior distribution and the likelihood function. We need to calculate the probability of the evidence (our data <span class="math notranslate nohighlight">\(D\)</span>). For this we will use the law to total probability, taking advantage of the fact that the prior distribution is discrete and only takes values greater than 0 for a finite set of theta values <span class="math notranslate nohighlight">\(\{\theta_0\dots\theta_{n-1}\}\)</span> :</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+$$</p>
+<p>We already have the prior distribution and the likelihood function. We need to calculate the probability of the evidence (our data $D$). For this we will use the law to total probability, taking advantage of the fact that the prior distribution is discrete and only takes values greater than 0 for a finite set of theta values ${\theta_0\dots\theta_{n-1}}$ :</p>
+<p>$$
 \begin{align}
-P(D) &amp;= \sum_{i}{P(D,\theta=\theta_i)} \\
- &amp; = \sum_{i}{P(D\ |\ \theta=\theta_i)P(\theta = \theta_i)} \\
+P(D) &amp;= \sum_{i}{P(D,\theta=\theta_i)} \
+&amp; = \sum_{i}{P(D\ |\ \theta=\theta_i)P(\theta = \theta_i)} \
 \end{align}
-\end{split}\]</div>
+$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evidence</span><span class="p">(</span><span class="n">num_heads</span><span class="p">,</span> <span class="n">num_tails</span><span class="p">,</span> <span class="n">theta_vals</span><span class="p">):</span>
@@ -545,7 +543,7 @@ P(D) &amp;= \sum_{i}{P(D,\theta=\theta_i)} \\
 </div>
 </div>
 </div>
-<p>Now, we are prepared for defining the posterior distribution function (<span class="math notranslate nohighlight">\(P(\theta|D)\)</span>):</p>
+<p>Now, we are prepared for defining the posterior distribution function ($P(\theta|D)$):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">posterior</span><span class="p">(</span><span class="n">num_heads</span><span class="p">,</span> <span class="n">num_tails</span><span class="p">,</span> <span class="n">theta_vals</span><span class="p">):</span>
@@ -575,12 +573,11 @@ P(D) &amp;= \sum_{i}{P(D,\theta=\theta_i)} \\
 </div>
 <div class="section" id="model-application">
 <h2>4. Model application<a class="headerlink" href="#model-application" title="Permalink to this headline">¶</a></h2>
-<p>We can see that the resulting posterior distribution gives higher probability to values of the parameter around <span class="math notranslate nohighlight">\(0.7\)</span>, this is consistent with the fact that the data from the experiment has more heads than tails.</p>
+<p>We can see that the resulting posterior distribution gives higher probability to values of the parameter around $0.7$, this is consistent with the fact that the data from the experiment has more heads than tails.</p>
 <p>If we want to make a prediction of the outcome of a new coin toss, we can do it in different ways. We can use the mode of the posterior distribution, i.e.:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 \theta_{\text{MAP}} = \arg \max_\theta P(\theta|D)
-\]</div>
+$$</p>
 <p>This is called maximum a posteriori estimation (MAP). The following Python function calculates the MAP estimator for a given posterior distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -611,15 +608,13 @@ P(D) &amp;= \sum_{i}{P(D,\theta=\theta_i)} \\
 </div>
 </div>
 <p>Which means that the probability of getting heads in the new experiment will be:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 P(Y=1|\theta = \theta_{\text{MAP}}) = \theta_{\text{MAP}} = 0.7
-\]</div>
-<p>Another possibility is to calculate the expected value of <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
+$$</p>
+<p>Another possibility is to calculate the expected value of $\theta$:</p>
+<p>$$
 \theta_{\text{Bayes}} = E[\theta]
-\]</div>
+$$</p>
 <p>This is called the Bayes estimator. The following Python function calculates the Bayes estimator:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -645,10 +640,9 @@ P(Y=1|\theta = \theta_{\text{MAP}}) = \theta_{\text{MAP}} = 0.7
 </div>
 </div>
 <p>The probability of getting heads in the new experiment according to this estimator will be:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 P(Y=1|\theta = \theta_{\text{Bayes}}) = \theta_{\text{Bayes}} = 0.6961
-\]</div>
+$$</p>
 </div>
 </div>
 

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>a normal distribution, parametrized by \(\mu=a\) &#8212; Probabilistic Programming for Deep Learning</title>
+    <title>a normal distribution, parametrized by $\mu=a$ &#8212; Probabilistic Programming for Deep Learning</title>
     
   <link href="../../../_static/css/theme.css" rel="stylesheet">
   <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../M2.1.html">
+    <a class="reference internal" href="../../M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../M2.3.html">
+    <a class="reference internal" href="../../M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -304,10 +306,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   a normal distribution, parametrized by
-   <span class="math notranslate nohighlight">
-    \(\mu=a\)
-   </span>
+   a normal distribution, parametrized by $\mu=a$
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -322,11 +321,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fix-a-and-comparing-eq-1-and-eq-2">
-   fix
-   <span class="math notranslate nohighlight">
-    \(a\)
-   </span>
-   and comparing eq (1) and eq (2)
+   fix $a$ and comparing eq (1) and eq (2)
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -338,10 +333,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#let-s-do-a-small-gradient-ascent-to-get-the-best-a">
-   let’s do a small gradient ascent to get the best
-   <span class="math notranslate nohighlight">
-    \(a\)
-   </span>
+   let’s do a small gradient ascent to get the best $a$
   </a>
  </li>
 </ul>
@@ -354,7 +346,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>a normal distribution, parametrized by \mu=a</h1>
+                <h1>a normal distribution, parametrized by $\mu=a$</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -366,10 +358,7 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   a normal distribution, parametrized by
-   <span class="math notranslate nohighlight">
-    \(\mu=a\)
-   </span>
+   a normal distribution, parametrized by $\mu=a$
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -384,11 +373,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fix-a-and-comparing-eq-1-and-eq-2">
-   fix
-   <span class="math notranslate nohighlight">
-    \(a\)
-   </span>
-   and comparing eq (1) and eq (2)
+   fix $a$ and comparing eq (1) and eq (2)
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -400,10 +385,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#let-s-do-a-small-gradient-ascent-to-get-the-best-a">
-   let’s do a small gradient ascent to get the best
-   <span class="math notranslate nohighlight">
-    \(a\)
-   </span>
+   let’s do a small gradient ascent to get the best $a$
   </a>
  </li>
 </ul>
@@ -432,43 +414,40 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>from</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://stats.stackexchange.com/questions/199605/how-does-the-reparameterization-trick-for-vaes-work-and-why-is-it-important">https://stats.stackexchange.com/questions/199605/how-does-the-reparameterization-trick-for-vaes-work-and-why-is-it-important</a></p></li>
-<li><p><a class="reference external" href="https://ermongroup.github.io/cs228-notes/">https://ermongroup.github.io/cs228-notes/</a></p></li>
+<li><p>https://stats.stackexchange.com/questions/199605/how-does-the-reparameterization-trick-for-vaes-work-and-why-is-it-important</p></li>
+<li><p>https://ermongroup.github.io/cs228-notes/</p></li>
 </ul>
 <p>observe that we can rewrite the gradient of a function in the following manner:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<p>$$
 \begin{align}
-\nabla_\theta q(x) &amp;= \frac{q(x)}{q(x)}\nabla_\theta q(x)\\
+\nabla_\theta q(x) &amp;= \frac{q(x)}{q(x)}\nabla_\theta q(x)\
 &amp;=q(x)\nabla_\theta \log q(x)
 \end{align}
-\end{split}\]</div>
-<p>This is nice, because if <strong><span class="math notranslate nohighlight">\(q(x)\)</span> is a probability distribution</strong> and we need to integrate <span class="math notranslate nohighlight">\(\int \nabla_\theta q(x)\)</span>, we can:</p>
+$$</p>
+<p>This is nice, because if <strong>$q(x)$ is a probability distribution</strong> and we need to integrate $\int \nabla_\theta q(x)$, we can:</p>
 <ul class="simple">
-<li><p>rewrite it as <span class="math notranslate nohighlight">\(\int q(x) \nabla_\theta \log q(x)\)</span></p></li>
-<li><p>use a MC estimate <span class="math notranslate nohighlight">\(\frac{1}{N}\sum_{x_i \sim q} \nabla_\theta \log q(x_i)\)</span></p></li>
+<li><p>rewrite it as $\int q(x) \nabla_\theta \log q(x)$</p></li>
+<li><p>use a MC estimate $\frac{1}{N}\sum_{x_i \sim q} \nabla_\theta \log q(x_i)$</p></li>
 </ul>
-<p><strong>In particular</strong>, if we are computing the <strong>gradient of an expectation</strong> of a function <span class="math notranslate nohighlight">\(f(x)\)</span> with respect to distribution <span class="math notranslate nohighlight">\(q(x)\)</span></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<p><strong>In particular</strong>, if we are computing the <strong>gradient of an expectation</strong> of a function $f(x)$ with respect to distribution $q(x)$</p>
+<p>$$
 \begin{align}
-\nabla_\theta \mathbb{E}_q[f(x)] &amp;= \nabla_\theta \int q(x) f(x) dx &amp;\;\;\;\;(1)\\
-&amp;= \int \nabla_\theta \big[q(x) f(x) \big] dx \\
-&amp;= \int  \big[ f(x)\nabla_\theta q(x) + q(x)\nabla_\theta f(x) \big] dx \\
-&amp;= \int  \big[ f(x)q(x)\nabla_\theta \log q(x) + q(x)\nabla_\theta f(x) \big] dx \\
-&amp;= \int  q(x) \big[ f(x)\nabla_\theta \log q(x) + \nabla_\theta f(x) \big] dx \\
-&amp;= \mathbb{E}_q  \big[ f(x)\nabla_\theta \log q(x) + \nabla_\theta f(x) \big] \\
-&amp;\approx \frac{1}{N}\sum_{x_i \sim q}  \big[ f(x_i)\nabla_\theta \log q(x_i) + \nabla_\theta f(x_i) \big]  &amp;\;\;\;\;(2)\\
+\nabla_\theta \mathbb{E}<em>q[f(x)] &amp;= \nabla</em>\theta \int q(x) f(x) dx &amp;;;;;(1)\
+&amp;= \int \nabla_\theta \big[q(x) f(x) \big] dx \
+&amp;= \int  \big[ f(x)\nabla_\theta q(x) + q(x)\nabla_\theta f(x) \big] dx \
+&amp;= \int  \big[ f(x)q(x)\nabla_\theta \log q(x) + q(x)\nabla_\theta f(x) \big] dx \
+&amp;= \int  q(x) \big[ f(x)\nabla_\theta \log q(x) + \nabla_\theta f(x) \big] dx \
+&amp;= \mathbb{E}<em>q  \big[ f(x)\nabla</em>\theta \log q(x) + \nabla_\theta f(x) \big] \
+&amp;\approx \frac{1}{N}\sum_{x_i \sim q}  \big[ f(x_i)\nabla_\theta \log q(x_i) + \nabla_\theta f(x_i) \big]  &amp;;;;;(2)\
 \end{align}
-\end{split}\]</div>
+$$</p>
 <p>eq (1) is the analytical expression for the expectation and eq (2) is its Montecarlo estimation</p>
 <div class="section" id="a-normal-distribution-parametrized-by-mu-a">
-<h1>a normal distribution, parametrized by <span class="math notranslate nohighlight">\(\mu=a\)</span><a class="headerlink" href="#a-normal-distribution-parametrized-by-mu-a" title="Permalink to this headline">¶</a></h1>
+<h1>a normal distribution, parametrized by $\mu=a$<a class="headerlink" href="#a-normal-distribution-parametrized-by-mu-a" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(a \in [-5, 5]\)</span></p></li>
+<li><p>$a \in [-5, 5]$</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[x \sim \mathcal{N}(a, 1)\]</div>
+<p>$$x \sim \mathcal{N}(a, 1)$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">px</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;x a p_x&quot;</span><span class="p">)</span>
@@ -554,7 +533,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="fix-a-and-comparing-eq-1-and-eq-2">
-<h1>fix <span class="math notranslate nohighlight">\(a\)</span> and comparing eq (1) and eq (2)<a class="headerlink" href="#fix-a-and-comparing-eq-1-and-eq-2" title="Permalink to this headline">¶</a></h1>
+<h1>fix $a$ and comparing eq (1) and eq (2)<a class="headerlink" href="#fix-a-and-comparing-eq-1-and-eq-2" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_gradient_analytical</span><span class="p">(</span><span class="n">a_val</span><span class="p">):</span>
@@ -665,12 +644,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="section" id="let-s-do-a-small-gradient-ascent-to-get-the-best-a">
-<h1>let’s do a small gradient ascent to get the best <span class="math notranslate nohighlight">\(a\)</span><a class="headerlink" href="#let-s-do-a-small-gradient-ascent-to-get-the-best-a" title="Permalink to this headline">¶</a></h1>
-<div class="math notranslate nohighlight">
-\[\text{arg min}_a \; \mathbb{E}_q[f(x)]\]</div>
+<h1>let’s do a small gradient ascent to get the best $a$<a class="headerlink" href="#let-s-do-a-small-gradient-ascent-to-get-the-best-a" title="Permalink to this headline">¶</a></h1>
+<p>$$\text{arg min}_a ; \mathbb{E}_q[f(x)]$$</p>
 <ul class="simple">
 <li><p>we only use MC estimates for the gradient</p></li>
-<li><p>observe that when we use the reparametrization trick everything is more stable <strong>specially with small <span class="math notranslate nohighlight">\(N\)</span></strong> (&lt;3)</p></li>
+<li><p>observe that when we use the reparametrization trick everything is more stable <strong>specially with small $N$</strong> (&lt;3)</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

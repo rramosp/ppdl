@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -53,8 +57,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="TF Prob" href="M2.3.html" />
-    <link rel="prev" title="2.2 Intuitions on probability" href="M2.1.html" />
+    <link rel="next" title="2.3 Tensorflow probability basics" href="M2.3-videolist.html" />
+    <link rel="prev" title="2.1 Tensorflow core refresher" href="M2.1-videolist.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -109,7 +113,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +144,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -301,22 +305,158 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="intuitions-on-probability">
 <h1>2.2 Intuitions on probability<a class="headerlink" href="#intuitions-on-probability" title="Permalink to this headline">¶</a></h1>
+<style>.timeline .timeline-item {margin-bottom: 0rem;}</style>
 <div class="timeline">
-    <h2>Probability basics</h2>
-a long 
- description<div class="timeline-item">
+    <h2>Probability distributions</h2>
+<div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> What is probability? / ¿Qué es probabilidad?<span class="chip float-right"> Video &nbsp; 
-                <a href="#modal-1_ES" class="modal-overlay">ES</a>&nbsp; | &nbsp;<a href="#modal-1_EN" class="modal-overlay">EN</a> &nbsp; &nbsp;&nbsp; 
-                <font color="red">9min</font>
+        <div class="timeline-content"> 1. What is probability?<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-1_ES" class="modal-overlay">ES</a>&nbsp; | &nbsp;<a href="#modal-1_EN" class="modal-overlay">EN</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">9 mins&nbsp;&nbsp;</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 2. Probability distributions<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-2_ES" class="modal-overlay">ES</a>&nbsp; | &nbsp;<a href="#modal-2_EN" class="modal-overlay">EN</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">8 mins&nbsp;&nbsp;</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 3. Marginal, conditionals and joints for discrete distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 4. The relation between marginal, conditionals and joint distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 5. Working with discrete distributions<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-5_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">11min&nbsp;&nbsp;&nbsp;</font>
+                </span><span class="chip float-right">
+                <a href="02.02%20-%20NOTES%2001%20-%20Discrete%20distiributions.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> Marginalizing and conditioning on discrete distributions<span class="chip float-right"> Video &nbsp; 
-                <a href="#modal-2_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
-                <font color="red">11min</font>
-            </span><span class="chip float-right">
-                <a href="02.02%20-%20NOTES%2001%20-%20Discrete%20distiributions.html"> Notebook</a>
+        <div class="timeline-content"> 6. Marginal, conditionals and joints for continuous distributions<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-6_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">7 mins&nbsp;&nbsp;</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 7. Working with continuous distributions<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-7_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">16min&nbsp;&nbsp;&nbsp;</font>
+                </span><span class="chip float-right">
+                <a href="02.02 - NOTES 02 - Continuous distributions.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> <b><font color="red">LAB 1</font> Marginal, conditionals and joints</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="02.02 - LAB 01 - Marginals, conditionals and joints.html"> Notebook</a>
+            </span></div>        
+    </div><h2><br/>Bayes theorem</h2>
+<div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 8. Intuition. Updating knowledge with new information<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-9_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">11 mins</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 9. Intepretating the Bayes theorem<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-10_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">7 mins&nbsp;&nbsp;</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 10. Example case. A medical test under Bayes theorem<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-11_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">8 mins&nbsp;&nbsp;</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 11. Example case. Visual interpretation<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-12_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">9 mins&nbsp;&nbsp;</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 12. Example case. Impact of changing initial conditions<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-13_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">6 mins&nbsp;&nbsp;</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 13. Bayes theorem with discrete distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="02.02 - NOTES 03 - Bayes theorem discrete.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 14. Terminology on Bayes theorem<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-15_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">8 mins&nbsp;&nbsp;</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 15. Priors and posteriors on consecutive observations<span class="chip float-right"> Video &nbsp; 
+                    <a href="#modal-16_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
+                    <font color="SeaGreen">11 mins</font>
+                </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 16. Bayes theorem on continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 17. Updating knowledge on continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 18. Bayes theorem with continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="02.02 - NOTES 04 - Bayes theorem continuous.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 19. Conjugate distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="02.02 - NOTES 05 - Conjugate distributions.html"> Notebook</a>
+            </span></div>        
+    </div><h2><br/>The road to machine learning</h2>
+<div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 20. Conditioning on parameters<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 21. Probability and likelihood<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 22. Working with likelihood<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="02.02 - NOTES 06 - Probability and likelihood.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 23. Similarity of distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 24. Measuring similarity<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="02.02 - NOTES 07 - Similarity of distributions.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 25. Montecarlo and expectations<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 26. Integration with Montecarlo<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="2.02 - NOTES 08 - Integration with Montecarlo.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 27. Markov chain Montecarlo<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 28. Bayes with MCMC<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="2.02 - NOTES 08 - Bayes with MCMC.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> <b><font color='red'>LAB 2</font>. Likelihood</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="02.02 - LAB 02 - Likelihood.html"> Notebook</a>
             </span></div>        
     </div>
 </div>
@@ -324,7 +464,7 @@ a long
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">What is probability? / ¿Qué es probabilidad?</div>
+      <div class="modal-title h5">1. What is probability?</div>
     </div>
     <div class="modal-body">
       <div class="content">
@@ -340,7 +480,7 @@ a long
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">What is probability? / ¿Qué es probabilidad?</div>
+      <div class="modal-title h5">1. What is probability?</div>
     </div>
     <div class="modal-body">
       <div class="content">
@@ -356,11 +496,187 @@ a long
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">Marginalizing and conditioning on discrete distributions</div>
+      <div class="modal-title h5">2. Probability distributions</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/yZ8HWICHRrw"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-2_EN">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">2. Probability distributions</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/0_OdGL2Aiok"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-5_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">5. Working with discrete distributions</div>
     </div>
     <div class="modal-body">
       <div class="content">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/ica5rtg-GXc"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-6_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">6. Marginal, conditionals and joints for continuous distributions</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/tQ9YvVx5WMQ"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-7_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">7. Working with continuous distributions</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/feBSsW1Zd7w"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-9_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">8. Intuition. Updating knowledge with new information</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/C-JFIgVGofg"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-10_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">9. Intepretating the Bayes theorem</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/fW6ZPiTZYvg"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-11_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">10. Example case. A medical test under Bayes theorem</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/JqqpU3LyWVQ"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-12_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">11. Example case. Visual interpretation</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/5S_2sFGG08M"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-13_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">12. Example case. Impact of changing initial conditions</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/2hMWWjg6H8c"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-15_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">14. Terminology on Bayes theorem</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/WZRP98YXD4c"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="modal-footer">
+          <a href="#close" class="btn btn-link">Close</a>
+    </div>
+  </div>
+</div>
+<div class="modal" id="modal-16_ES">
+  <div class="modal-container">
+    <div class="modal-header">
+      <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+      <div class="modal-title h5">15. Priors and posteriors on consecutive observations</div>
+    </div>
+    <div class="modal-body">
+      <div class="content">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/chxyTapHCmo"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
     <div class="modal-footer">
@@ -394,17 +710,17 @@ a long
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="M2.1.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="M2.1-videolist.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2.2 Intuitions on probability</p>
+            <p class="prev-next-title">2.1 Tensorflow core refresher</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="M2.3.html" title="next page">
+    <a class='right-next' id="next-link" href="M2.3-videolist.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">TF Prob</p>
+        <p class="prev-next-title">2.3 Tensorflow probability basics</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

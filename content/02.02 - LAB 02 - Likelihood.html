@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -330,28 +332,24 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="simple">
 <li><p><strong>task 1</strong>: create a function that return the likelihood of a beta distribution wrt some data. this function must have two parameters (a,b for the beta distribution)</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\mathcal{L}(a,b) = P(d|a,b)\]</div>
+<p>$$\mathcal{L}(a,b) = P(d|a,b)$$</p>
 <ul class="simple">
 <li><p><strong>task 2</strong>: create a function that returns the double integral over a,b with a fixed data set –&gt; the likelihood is not a probability</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[Z = \int_a \int_b P(d|a,b)\text{d}a\text{d}b\]</div>
+<p>$$Z = \int_a \int_b P(d|a,b)\text{d}a\text{d}b$$</p>
 <ul class="simple">
 <li><p><strong>task 3</strong>: create a function that optimizes the likelihood</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\underset{a,b}{\text{argmax}}\;\;\mathcal{L}(a,b)\]</div>
+<p>$$\underset{a,b}{\text{argmax}};;\mathcal{L}(a,b)$$</p>
 <ul class="simple">
-<li><p><strong>task 4</strong>: create a function that given priors on the parameters <span class="math notranslate nohighlight">\(P(a)\)</span> and <span class="math notranslate nohighlight">\(P(b)\)</span> it computes</p></li>
+<li><p><strong>task 4</strong>: create a function that given priors on the parameters $P(a)$ and $P(b)$ it computes</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[P(d) = \int_a \int_b P(d|a,b)P(a)P(b)\text{d}a\text{d}b\]</div>
-<p>making emphasis on that this is <span class="math notranslate nohighlight">\(P(d)\)</span> … we are obtaining the marginal probability of our specific dataset by using the conditional and the marginals of the parameters (which as have seen in bayes videos, are also callsed “the priors”).</p>
+<p>$$P(d) = \int_a \int_b P(d|a,b)P(a)P(b)\text{d}a\text{d}b$$</p>
+<p>making emphasis on that this is $P(d)$ … we are obtaining the marginal probability of our specific dataset by using the conditional and the marginals of the parameters (which as have seen in bayes videos, are also callsed “the priors”).</p>
 <ul class="simple">
-<li><p><strong>task 1</strong>: implement the likelihood function for a gaussian with params <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> in tensorflow</p></li>
-<li><p><strong>task 2</strong>: create a function that inputs data, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> and returns the gradients</p></li>
-<li><p><strong>task 3</strong>: create a function that given the data and the likelihood function, uses Adam to optimize <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span></p></li>
+<li><p><strong>task 1</strong>: implement the likelihood function for a gaussian with params $\mu$ and $\sigma$ in tensorflow</p></li>
+<li><p><strong>task 2</strong>: create a function that inputs data, $\mu$ and $\sigma$ and returns the gradients</p></li>
+<li><p><strong>task 3</strong>: create a function that given the data and the likelihood function, uses Adam to optimize $\mu$ and $\sigma$</p></li>
 </ul>
 </div>
 

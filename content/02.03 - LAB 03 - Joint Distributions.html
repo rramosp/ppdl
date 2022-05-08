@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -51,8 +55,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -140,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.1.html">
+    <a class="reference internal" href="M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -150,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="M2.3.html">
+    <a class="reference internal" href="M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -448,13 +450,12 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="task-1-implement-a-logistic-regression-model">
 <h2>Task 1: Implement a Logistic Regression Model<a class="headerlink" href="#task-1-implement-a-logistic-regression-model" title="Permalink to this headline">¶</a></h2>
 <p>In this task, you must define a logistic regression model using the <code class="docutils literal notranslate"><span class="pre">JointDistributionNamed</span></code> API, you must implement the following model:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-w \sim \mathcal{N}([0, 0], [1, 1])\\
-b \sim \mathcal{N}(0, 1)\\
-\text{logits} = \mathbf{w}\cdot\mathbf{x} + b\\
+<p>$$
+w \sim \mathcal{N}([0, 0], [1, 1])\
+b \sim \mathcal{N}(0, 1)\
+\text{logits} = \mathbf{w}\cdot\mathbf{x} + b\
 y \sim \text{categorical}(\text{logits})
-\end{split}\]</div>
+$$</p>
 <p>The model must have the following distributions: <code class="docutils literal notranslate"><span class="pre">w</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -674,12 +675,11 @@ y \sim \text{categorical}(\text{logits})
 <div class="section" id="task-3-map-predictions">
 <h2>Task 3: MAP Predictions<a class="headerlink" href="#task-3-map-predictions" title="Permalink to this headline">¶</a></h2>
 <p>Compute the Maximum Aposteriori predictions of the parameters as follows:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-w_{map} = \text{argmax}(\text{kde}(w_{samples}))\\
-b_{map} = \text{argmax}(\text{kde}(w_{samples}))\\
+<p>$$
+w_{map} = \text{argmax}(\text{kde}(w_{samples}))\
+b_{map} = \text{argmax}(\text{kde}(w_{samples}))\
 \hat{y} = \text{argmax}(\text{softmax}(X, w_{map}, b_{map}))
-\end{split}\]</div>
+$$</p>
 <p>You must use <code class="docutils literal notranslate"><span class="pre">KernelDensity</span></code> for the estimation of the MAP parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

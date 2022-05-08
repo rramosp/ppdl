@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -107,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -138,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../M2.1.html">
+    <a class="reference internal" href="../M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -148,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../M2.3.html">
+    <a class="reference internal" href="../M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -385,42 +389,42 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="section" id="variational-inference">
 <h1>variational inference<a class="headerlink" href="#variational-inference" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://towardsdatascience.com/bayesian-inference-problem-mcmc-and-variational-inference-25a8aa9bce29">https://towardsdatascience.com/bayesian-inference-problem-mcmc-and-variational-inference-25a8aa9bce29</a></p>
-<p><a class="reference external" href="https://www.mit.edu/~9.520/spring11/slides/class19_approxinf.pdf">https://www.mit.edu/~9.520/spring11/slides/class19_approxinf.pdf</a></p>
-<p><a class="reference external" href="https://www.ritchievink.com/blog/2019/09/16/variational-inference-from-scratch/">https://www.ritchievink.com/blog/2019/09/16/variational-inference-from-scratch/</a></p>
-<p><a class="reference external" href="https://fabiandablander.com/r/Variational-Inference.html">https://fabiandablander.com/r/Variational-Inference.html</a></p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Statistical_inference">https://en.wikipedia.org/wiki/Statistical_inference</a></p>
-<p><a class="reference external" href="https://towardsdatascience.com/modeling-uncertainty-in-neural-networks-with-tensorflow-probability-part-1-an-introduction-2bb564c67d6">https://towardsdatascience.com/modeling-uncertainty-in-neural-networks-with-tensorflow-probability-part-1-an-introduction-2bb564c67d6</a></p>
-<p><a class="reference external" href="https://indico.cern.ch/event/917074/contributions/3855332/attachments/2035180/3407136/bayesian_ML_May2020.pdf">https://indico.cern.ch/event/917074/contributions/3855332/attachments/2035180/3407136/bayesian_ML_May2020.pdf</a> (custom made dense variational layer)</p>
-<p><a class="reference external" href="https://arxiv.org/pdf/1606.05908.pdf">https://arxiv.org/pdf/1606.05908.pdf</a> (Tutorial on variational autoencoders)</p>
-<p><a class="reference external" href="https://www.cs.toronto.edu/~duvenaud/papers/blackbox.pdf">https://www.cs.toronto.edu/~duvenaud/papers/blackbox.pdf</a></p>
-<p><a class="reference external" href="https://github.com/cangermueller/varinf">https://github.com/cangermueller/varinf</a></p>
-<p><a class="reference external" href="https://towardsdatascience.com/variational-bayesian-inference-with-normalizing-flows-a-simple-example-1db109d91062">https://towardsdatascience.com/variational-bayesian-inference-with-normalizing-flows-a-simple-example-1db109d91062</a></p>
-<p><a class="reference external" href="https://towardsdatascience.com/variational-inference-c896668707aa">https://towardsdatascience.com/variational-inference-c896668707aa</a></p>
-<p><a class="reference external" href="https://arxiv.org/pdf/2008.05825.pdf">https://arxiv.org/pdf/2008.05825.pdf</a> Unifying supervised learning and VAEs - automating statistical inference in
+<p>https://towardsdatascience.com/bayesian-inference-problem-mcmc-and-variational-inference-25a8aa9bce29</p>
+<p>https://www.mit.edu/~9.520/spring11/slides/class19_approxinf.pdf</p>
+<p>https://www.ritchievink.com/blog/2019/09/16/variational-inference-from-scratch/</p>
+<p>https://fabiandablander.com/r/Variational-Inference.html</p>
+<p>https://en.wikipedia.org/wiki/Statistical_inference</p>
+<p>https://towardsdatascience.com/modeling-uncertainty-in-neural-networks-with-tensorflow-probability-part-1-an-introduction-2bb564c67d6</p>
+<p>https://indico.cern.ch/event/917074/contributions/3855332/attachments/2035180/3407136/bayesian_ML_May2020.pdf (custom made dense variational layer)</p>
+<p>https://arxiv.org/pdf/1606.05908.pdf (Tutorial on variational autoencoders)</p>
+<p>https://www.cs.toronto.edu/~duvenaud/papers/blackbox.pdf</p>
+<p>https://github.com/cangermueller/varinf</p>
+<p>https://towardsdatascience.com/variational-bayesian-inference-with-normalizing-flows-a-simple-example-1db109d91062</p>
+<p>https://towardsdatascience.com/variational-inference-c896668707aa</p>
+<p>https://arxiv.org/pdf/2008.05825.pdf Unifying supervised learning and VAEs - automating statistical inference in
 high-energy physics</p>
-<p><a class="reference external" href="https://arxiv.org/pdf/1601.00670.pdf">https://arxiv.org/pdf/1601.00670.pdf</a> Variational Inference: A Review for Statisticians</p>
-<p><a class="reference external" href="https://medium.com/retina-ai-health-inc/variational-inference-derivation-of-the-variational-autoencoder-vae-loss-function-a-true-story-3543a3dc67ee">https://medium.com/retina-ai-health-inc/variational-inference-derivation-of-the-variational-autoencoder-vae-loss-function-a-true-story-3543a3dc67ee</a></p>
+<p>https://arxiv.org/pdf/1601.00670.pdf Variational Inference: A Review for Statisticians</p>
+<p>https://medium.com/retina-ai-health-inc/variational-inference-derivation-of-the-variational-autoencoder-vae-loss-function-a-true-story-3543a3dc67ee</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="variational-autoencoders">
 <h1>variational autoencoders<a class="headerlink" href="#variational-autoencoders" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73#:~:text=variational%20autoencoders%20(VAEs)%20are%20autoencoders,order%20to%20ensure%20a%20better">https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73#:~:text=variational autoencoders (VAEs) are autoencoders,order to ensure a better</a></p>
-<p>VI, ELBO and relation to VAEs: <a class="reference external" href="https://gregorygundersen.com/blog/2021/04/16/variational-inference/">https://gregorygundersen.com/blog/2021/04/16/variational-inference/</a></p>
+<p>https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73#:~:text=variational%20autoencoders%20(VAEs)%20are%20autoencoders,order%20to%20ensure%20a%20better</p>
+<p>VI, ELBO and relation to VAEs: https://gregorygundersen.com/blog/2021/04/16/variational-inference/</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="bayesian-deep-learning">
 <h1>bayesian deep learning<a class="headerlink" href="#bayesian-deep-learning" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="http://bayesiandeeplearning.org/">http://bayesiandeeplearning.org/</a></p>
+<p>http://bayesiandeeplearning.org/</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="bayesian-linear-regression">
 <h1>bayesian linear regression<a class="headerlink" href="#bayesian-linear-regression" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7">https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7</a></p>
-<p><a class="reference external" href="https://towardsdatascience.com/bayesian-statistics-overview-and-your-first-bayesian-linear-regression-model-ba566676c5a7">https://towardsdatascience.com/bayesian-statistics-overview-and-your-first-bayesian-linear-regression-model-ba566676c5a7</a></p>
-<p><a class="reference external" href="https://towardsdatascience.com/linear-regression-assumptions-why-is-it-important-af28438a44a1">https://towardsdatascience.com/linear-regression-assumptions-why-is-it-important-af28438a44a1</a></p>
-<p><a class="reference external" href="http://www.ke.tu-darmstadt.de/events/ICML-04/tutorial-notes/m2-ghahramani.pdf">http://www.ke.tu-darmstadt.de/events/ICML-04/tutorial-notes/m2-ghahramani.pdf</a></p>
-<p><a class="reference external" href="https://towardsdatascience.com/bayesian-linear-regression-in-python-using-machine-learning-to-predict-student-grades-part-2-b72059a8ac7e">https://towardsdatascience.com/bayesian-linear-regression-in-python-using-machine-learning-to-predict-student-grades-part-2-b72059a8ac7e</a></p>
+<p>https://towardsdatascience.com/introduction-to-bayesian-linear-regression-e66e60791ea7</p>
+<p>https://towardsdatascience.com/bayesian-statistics-overview-and-your-first-bayesian-linear-regression-model-ba566676c5a7</p>
+<p>https://towardsdatascience.com/linear-regression-assumptions-why-is-it-important-af28438a44a1</p>
+<p>http://www.ke.tu-darmstadt.de/events/ICML-04/tutorial-notes/m2-ghahramani.pdf</p>
+<p>https://towardsdatascience.com/bayesian-linear-regression-in-python-using-machine-learning-to-predict-student-grades-part-2-b72059a8ac7e</p>
 <div class="section" id="modelling-data-uncertainty-aleatoric">
 <h2>modelling data uncertainty (aleatoric)<a class="headerlink" href="#modelling-data-uncertainty-aleatoric" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://towardsdatascience.com/modeling-uncertainty-in-neural-networks-with-tensorflow-probability-a706c2274d12">https://towardsdatascience.com/modeling-uncertainty-in-neural-networks-with-tensorflow-probability-a706c2274d12</a></p>
+<p>https://towardsdatascience.com/modeling-uncertainty-in-neural-networks-with-tensorflow-probability-a706c2274d12</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>

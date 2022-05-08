@@ -28,6 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -107,7 +111,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../content/M1.html">
-   Introduction
+   1. Introduction
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -138,7 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../content/M2.1.html">
+    <a class="reference internal" href="../content/M2.1-videolist.html">
      2.1 Tensorflow core
     </a>
    </li>
@@ -148,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../content/M2.3.html">
+    <a class="reference internal" href="../content/M2.3-videolist.html">
      2.3 Tensorflow probability basics
     </a>
    </li>
@@ -377,7 +381,7 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Probabilistic Programming for Deep Learning<a class="headerlink" href="#probabilistic-programming-for-deep-learning" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="running">
 <h2>running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
-<p>we will use primarly <code class="docutils literal notranslate"><span class="pre">manim</span></code> community: <a class="reference external" href="https://github.com/ManimCommunity/manim/">https://github.com/ManimCommunity/manim/</a></p>
+<p>we will use primarly <code class="docutils literal notranslate"><span class="pre">manim</span></code> community: https://github.com/ManimCommunity/manim/</p>
 <p>build the docker image</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  cd bin
    ./build-docker-image
@@ -422,17 +426,17 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="intro-music">
 <h2>Intro music<a class="headerlink" href="#intro-music" title="Permalink to this headline">¶</a></h2>
 <p>seek for music which is royalty free, with no copyright.</p>
-<p><a class="reference external" href="https://www.youtube.com/watch?v=5_ps9cvmiTs&amp;ab_channel=OblivionEpiphany">https://www.youtube.com/watch?v=5_ps9cvmiTs&amp;ab_channel=OblivionEpiphany</a></p>
+<p>https://www.youtube.com/watch?v=5_ps9cvmiTs&amp;ab_channel=OblivionEpiphany</p>
 <p>salsa intro from:</p>
-<p><a class="reference external" href="https://www.youtube.com/watch?v=0h7PMkiiqoA&amp;ab_channel=LiborioConti">https://www.youtube.com/watch?v=0h7PMkiiqoA&amp;ab_channel=LiborioConti</a></p>
+<p>https://www.youtube.com/watch?v=0h7PMkiiqoA&amp;ab_channel=LiborioConti</p>
 </div>
 <div class="section" id="manimgl">
 <h2>manimgl<a class="headerlink" href="#manimgl" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">manimgl</span></code> (the original package by 3b1b) contains examples, objects, etc. that could be useful.</p>
 <ul class="simple">
-<li><p>github repo: <a class="reference external" href="https://github.com/3b1b/manim">https://github.com/3b1b/manim</a></p></li>
-<li><p>github videos of the youtube channel: <a class="reference external" href="https://github.com/3b1b/videos">https://github.com/3b1b/videos</a></p></li>
-<li><p>a mirror github: <a class="reference external" href="https://gitcode.net/mirrors/3b1b/manim">https://gitcode.net/mirrors/3b1b/manim</a></p></li>
+<li><p>github repo: https://github.com/3b1b/manim</p></li>
+<li><p>github videos of the youtube channel: https://github.com/3b1b/videos</p></li>
+<li><p>a mirror github: https://gitcode.net/mirrors/3b1b/manim</p></li>
 </ul>
 <p>Experiments using <code class="docutils literal notranslate"><span class="pre">manimgl</span></code> can be found under <code class="docutils literal notranslate"><span class="pre">refs/manimgl</span></code>. Use the <code class="docutils literal notranslate"><span class="pre">docker/Dockerfile</span></code> that you can find there to create a docker image with manimgl. Use <code class="docutils literal notranslate"><span class="pre">docker/run.sh</span></code> to render scenes.</p>
 <p>If you have an nvidia card, change the <code class="docutils literal notranslate"><span class="pre">FROM</span></code> line in <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> and the <code class="docutils literal notranslate"><span class="pre">run.sh</span></code> script.</p>
