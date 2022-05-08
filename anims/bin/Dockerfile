@@ -9,6 +9,9 @@ RUN apt install -y wget
 RUN apt install -y less
 RUN apt install -y vim
 RUN yes NO  | apt install -y sudo
-RUN pip install pandas matplotlib seaborn
+RUN pip install pandas
+RUN pip install matplotlib
+RUN pip install seaborn
+RUN pip install sympy
 
 USER manimuser
