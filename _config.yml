@@ -2,7 +2,7 @@
 title: Probabilistic Programming for Deep Learning
 author: Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
 logo: content/local/imgs/logo-tf-udea-unal.png
-only_build_toc_files: true
+only_build_toc_files: false
 
 repository:
    url: https://github.com/rramosp/ppdl
@@ -18,3 +18,8 @@ html:
 execute:
   execute_notebooks         : off
 
+parse:
+  myst_enable_extensions:
+    # don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default!
+    - html_image

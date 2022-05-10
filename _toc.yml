@@ -1,92 +1,43 @@
 format: jb-book
 root: intro
-parts:
-  - caption: 1. Introduction
-    chapters:
+chapters:
+  - file: content/M1.md
+    title: 1. Introduction
+    sections: 
     - file: content/M1.1
       title: 1.1 Probabilistic programming
     - file: content/M1.2
       title: 1.2 Course mechanics
-  - caption: 2. Fundamentals
-    chapters: 
-    - file: "content/02.01 - intro.md"
+  - file: content/M2
+    title: 2. Fundamentals
+    sections: 
+    - file: content/M2.1-videolist
       title: 2.1 Tensorflow core
-      sections:
-        - file: "content/02.01 - NOTES 01 - Simbolic computing for ML.ipynb"
-          title: 1 Symbolic computing for ML
-        - file: "content/02.01 - NOTES 02 - TF for symbolic computing.ipynb"
-          title: 2 TF for symbolic computing
-        - file: "content/02.01 - NOTES 03 - Using tf.function.ipynb"
-          title: 3 Using `tf.function`
-        - file: "content/02.01 - LAB 01 - Tensorflow model subclassing.ipynb"
-          title: LAB 1. Model subclassing
-        - file: "content/02.01 - LAB 02 - Low level Tensorflow.ipynb"
-          title: LAB 2. Low level Tensorflow
-    - file: "content/02.02 - intro.md"
+    - file: content/M2.2-videolist
       title: 2.2 Intuitions on probability
-      sections:
-        - file: "content/02.02 - NOTES 01 - Discrete distiributions.ipynb"
-          title: 1 Discrete distributions
-        - file: "content/02.02 - NOTES 02 - Continuous distributions.ipynb"
-          title: 2 Continuous distribuions
-        - file: "content/02.02 - NOTES 03 - Distributions of data and model parameters.ipynb"
-          title: 3 Distributions of data and model paramters
-        - file: "content/02.02 - NOTES 04 - Probability and likelihood.ipynb"
-          title: 4 Probability and likelihood
-        - file: "content/02.02 - NOTES 05 - Similarity of distributions.ipynb"
-          title: 5 Similarity of distributions
-        - file: "content/02.02 - LAB 01 - Marginals, conditionals and joints"
-          title: LAB 1. Marginals, conditionals and joints
-        - file: "content/02.02 - LAB 02 - Likelihood.ipynb"
-          title: LAB 2. Likelihood
-    - file: "content/02.03 - intro.md"
+    - file: content/M2.3-videolist
       title: 2.3 Tensorflow probability basics
-      sections: 
-        - file: "content/02.03 - NOTES 01 - Distribution Objects.ipynb"
-          title: 1 Distribution objects
-        - file: "content/02.03 - NOTES 02 - Distribution Layers.ipynb"
-          title: 2 Distribution layers
-        - file: "content/02.03 - NOTES 03 - Learning Distribution Parameters.ipynb"
-          title: 3 Learnable parameters
-        - file: "content/02.03 - NOTES 04 - TFP DistributionLambda.ipynb"
-          title: 4 Distribution Lambda
-        - file: "content/02.03 - NOTES 05 - Understanding shapes.ipynb"
-          title: 5 Understanding shapes
-        - file: "content/02.03 - NOTES 06 - More distribution objects.ipynb"
-          title: 6 More distribution objects
-        - file: "content/02.03 - NOTES 07 - Bijectors.ipynb"
-          title: 7 Bijectors
-        - file: "content/02.03 - LAB 01 - TFP distributions.ipynb"
-          title: LAB 1. TFP Distributions
-        - file: "content/02.03 - LAB 02 - Distribution layers.ipynb"
-          title: LAB 2. Distribution layers
-  - caption: 3. Bayesian inference
-    chapters: 
-    - file: "content/03.01 - intro.md"
+  - file: content/M3
+    title: 3. Bayesian Inference
+    sections: 
+    - file: content/M3.1.md
       title: 3.1 Model based reasoning
-    - file: "content/03.02 - intro.md"
+    - file: content/M3.2.md
       title: 3.2 Bayesian inference
-    - file: "content/03.03 - intro.md"
+    - file: content/M3.3.md
       title: 3.3 Bayesian hard classifier
-    - file: "content/03.04 - intro.md"
+    - file: content/M3.4.md
       title: 3.4 Probabilisitc linear regression
-
-  - caption: 4. Variational inference
-    chapters: 
-    - file: "content/04.01 - intro.md"
+  - file: content/M4
+    title: 4. Variational Inference
+    sections: 
+    - file: content/M4.1.md
       title: 4.1 Revisiting uncertainty
-    - file: "content/04.02 - intro.md"
+    - file: content/M4.2.md
       title: 4.2 Variational inference
-    - file: "content/04.03 - intro.md"
+    - file: content/M4.3.md
       title: 4.3 VI on latent variables
-      sections:
-        - file: "content/04.03 - NOTES 01 - Dirichlet Distribution"
-          title: 1 Dirichlet distributions
-        - file: "content/04.03 - NOTES 02 - Variational Inference for Text Modeling"
-          title: 2 VI for text modeling
-        - file: "content/04.03 - LAB 01 - Variational Topic Modeling"
-          title: LAB 1. Variational topic modeling
-    - file: "content/04.04 - intro.md"
+    - file: content/M4.4.md
       title: 4.4 VI on latent parameters
 
 
