@@ -13,6 +13,7 @@ import manim
 from scipy import stats
 import pandas as pd
 import matplotlib.pyplot as plt
+import math
 
 config.background_color = WHITE
 
@@ -546,10 +547,28 @@ def add_brackets(mobj):
     r_bracket.next_to(mobj, RIGHT, .2)
     return VGroup(l_bracket, mobj, r_bracket)
 
-def updating_animation(mobject,scene,color=BLUE_E, time_width=3):
-    scene.play(Circumscribe(mobject,color=color,time_width=time_width,fade_out=True))
-    scene.play(Circumscribe(mobject,color=color,time_width=time_width,fade_out=True))
-    scene.play(Circumscribe(mobject,color=color,time_width=time_width))
+def updating_animation(mobject:list[Mobject], scene:Scene,color=BLUE_E, time_width=3):
+
+    if isinstance(mobject,list):
+        scene.play(
+            *[Circumscribe(
+                mob,color=color,time_width=time_width,fade_out=True) for mob in mobject
+            ]
+        )
+        scene.play(
+            *[Circumscribe(
+                mob,color=color,time_width=time_width,fade_out=True) for mob in mobject
+            ]
+        )
+        scene.play(
+            *[Circumscribe(
+                mob,color=color,time_width=time_width) for mob in mobject
+            ]
+        )
+    else:
+        scene.play(Circumscribe(mobject,color=color,time_width=time_width,fade_out=True))
+        scene.play(Circumscribe(mobject,color=color,time_width=time_width,fade_out=True))
+        scene.play(Circumscribe(mobject,color=color,time_width=time_width))
 
 
 def fill_graph(scene, axes, graph, from_value, to_value, run_time=2):
@@ -655,7 +674,7 @@ def generate_stickman(size = 1.0,fill_opacity=0.0 ,general_color = BLACK, color_
 
     return stickman_vdict
 
-def get_cancel_line(mobject, color=BLACK):
+def get_cancel_line(mobject:Mobject, color=BLACK):
     """
     Returns a Line Mobject that goes from the left corner of a Mobject up to
     the right corner of that same mobject.
@@ -667,3 +686,161 @@ def get_cancel_line(mobject, color=BLACK):
     """
 
     return Line(start=mobject.get_corner(DL), end=mobject.get_corner(UR), color=color  )
+
+
+def pdf_curve_normal(x, mu, sigma):
+    
+    """
+    A simple implementation of a probability density function
+    """
+
+    return math.exp(-((x-mu)**2)/(2*sigma**2))/(sigma*math.sqrt(2*math.pi))
+
+def generate_probability_density_function_graph(
+    median: float = 4, x_median_symbol:(Any) = "Z",
+    area_pdf_curve_color: color = RED_E
+    )-> tuple[VDict, dict]:
+
+    """
+
+    A Function to make a 2D graph of a Probability density function 
+    The scale on the number line goes from -10 to 10 on X axis and from 0 to 1 on Y axis (does not support medians above this)
+
+    Params:
+    - median: The center of the probability function, default is 4
+    - x_median_symbol: Any object that implements __str__ , this will be the label for the center of the function.
+    - area_pdf_curve_color: Any color from manim color.py or a HEX REPR
+
+    Returns:
+
+    A Tuple with:
+
+    - A VDict with all ~VMobject elements used (all scalable objects)
+        Structure:
+        pairs = [
+            ("axes", ax), ("tick_median", tick_z),
+            ("zero_label", zero_number_label), ("median_label", z_number_label),
+            ("pdf_curve", pdf_curve), ("area_under_curve", area_pdf_curve)
+        ]
+
+    - A Dict with all other objects (all non scalable objects like ~ValueTracker)
+        Structure:
+
+        trackers_dict = {
+            "sigma": sigma,
+            "shifter_x_axis_pdf": shifter_x_axis_pdf
+        }
+
+    """
+
+
+    ax = Axes(
+            x_range = [-10, 10, 1],
+            y_range = [0, 1, 0.2],
+            axis_config = {    
+                "stroke_color": BLACK,
+                "include_tip": False    
+            },
+            x_axis_config={
+                'numbers_to_include': [0],
+                "include_ticks": False,
+                "exclude_origin_tick": False
+            },
+            y_axis_config={
+                'numbers_to_include': [0],
+                "include_ticks": False
+            }
+        )
+
+    tick_z = ax.get_axes()[0].get_tick(median).scale(2)
+
+    zero_number_label = MathTex(
+        "0", color=BLACK
+    ).scale(0.8).move_to(
+                    ax.get_axes()[0].get_number_mobject(0),
+                )
+
+
+    z_number_label = MathTex(
+        str(x_median_symbol), color=BLACK
+    ).scale(0.8).move_to(
+                    ax.get_axes()[0].get_number_mobject(median),
+                )
+
+
+    sigma = ValueTracker(1)
+    shifter_x_axis_pdf = ValueTracker(median)
+
+
+    pdf_curve = always_redraw(
+        lambda: ax.plot(
+            lambda x: pdf_curve_normal(x + shifter_x_axis_pdf.get_value(), 0, sigma.get_value()), color=BLUE_E)
+    )
+
+    area_pdf_curve = always_redraw(lambda: ax.get_area(pdf_curve, color=area_pdf_curve_color, opacity=0.3))
+
+    pairs = [
+        ("axes", ax), ("tick_median", tick_z),
+        ("zero_label", zero_number_label), ("median_label", z_number_label),
+        ("pdf_curve", pdf_curve), ("area_under_curve", area_pdf_curve)
+    ]
+
+    mobjects_vdict = VDict(pairs,show_keys=False)
+
+    trackers_dict = {
+        "sigma": sigma,
+        "shifter_x_axis_pdf": shifter_x_axis_pdf
+    }
+
+    return mobjects_vdict, trackers_dict
+
+def render_probability_density_function_graph(
+    scene:Scene, mobjects_vdict: VDict, trackers_dict: dict , 
+    render_x_axis: bool = True, render_y_axis: bool = False,
+    render_zero_division: bool = False, render_median: bool =  True,
+    render_pdf_area_curve: bool = True
+    )-> None:
+
+    if render_x_axis == True:
+        scene.play(
+            Write(
+                mobjects_vdict["axes"].get_axes()[0]
+            )
+        )
+
+    
+    if render_y_axis == True:
+        scene.play(
+            Write(
+                mobjects_vdict["axes"].get_axes()[1]
+            )
+        )
+
+    
+    if render_zero_division == True:
+        scene.play(
+            Write(
+                mobjects_vdict["zero_label"]
+            )
+        )
+
+
+    if render_median == True:
+        scene.play(
+            Write(
+                mobjects_vdict["median_label"]
+            )
+        )
+
+    scene.play(
+        Write(
+            mobjects_vdict["pdf_curve"]
+        )
+    )
+
+    if render_pdf_area_curve == True:
+        scene.play(
+            Write(
+                mobjects_vdict["area_under_curve"]
+            )
+        )
