@@ -63,7 +63,7 @@ dirs = [os.path.dirname(inspect.getfile(get_imgmobject))+"/../", "/media"]
 
 def find_mediafile(file, media):
     assert media in ['imgs', 'audio']
-    fnames = [file] + [f"{file}.{ext}" for ext in ['png', 'jpg', 'gif', 'jpeg', 'wav', 'mp3']]
+    fnames = [file] + [f"{file}.{ext}" for ext in ['svg', 'png', 'jpg', 'gif', 'jpeg', 'wav', 'mp3']]
     tried = []
     for d,f in itertools.product(dirs, fnames):
         fullname = f"{d}/{media}/{f}"
@@ -301,6 +301,8 @@ def get_axes(
         y_length = 3,
         xlabel = "", 
         xlabel_kwargs = {},
+        ylabel = "", 
+        ylabel_kwargs = {},
         additional_x_axis_config={},
         additional_y_axis_config={},
         x_splits = 4,
@@ -359,7 +361,8 @@ def get_axes(
         )
 
     xlabel_mobject = Tex(xlabel, **xlabel_kwargs).next_to(axes, DOWN)
-    g = VGroup(axes, xlabel_mobject)
+    ylabel_mobject = Tex(ylabel, **ylabel_kwargs).rotate(np.pi/2).next_to(axes, LEFT*0.7)
+    g = VGroup(axes, xlabel_mobject, ylabel_mobject)
 
     return g
 

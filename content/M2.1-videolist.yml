@@ -5,6 +5,8 @@ videos:
   order: 1
   videos:
   - name: 1. The ML algorithm design workflow
+    video_duration: 19 mins
+    video_youtubeid_ES: EmJZBsWAZhY  
   - name: 2. Linear regression with black box optimization  
     notebook: 02.01 - NOTES 01 - Linear regression black box optimization.html
   - name: 3. Introduction to symbolic computing
