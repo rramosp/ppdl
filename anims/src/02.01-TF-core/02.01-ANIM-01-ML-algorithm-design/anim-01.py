@@ -155,7 +155,7 @@ class Main(Scene):
 
         timer.wait_until("4min 05sec")
         overfit = MathTex(r"\text{overfitting").next_to(ax, UP)
-        underfit = MathTex(r"\text{underitting").next_to(overfit, RIGHT)
+        underfit = MathTex(r"\text{underfitting").next_to(overfit, RIGHT)
         self.play(Write(overfit))
         self.play(Write(underfit))
 
@@ -174,23 +174,25 @@ class Main(Scene):
         
         timer.wait_until("5min 13sec")
         t0, t1, line = get_random_line(plane)
-        t_text = MathTex(r"\theta_0="+f"{t0:.2f}"+r", \theta_0="+f"{t1:.2f}", font_size=20).next_to(plane, UP)
+        t_text = MathTex(r"\theta_0="+f"{t0:.2f}"+r" \hspace{0.5cm}  \theta_1="+f"{t1:.2f}", font_size=20).next_to(plane, UP)
         self.play(Create(line), Write(t_text))
 
         for _ in range(10):
             t0, t1, newline = get_random_line(plane)
-            new_t_text = MathTex(r"\theta_0="+f"{t0:.2f}"+r", \theta_0="+f"{t1:.2f}", font_size=20).next_to(plane, UP)
-            self.play(Transform(line, newline), Transform(t_text, new_t_text), run_time=1)
+            new_t_text = MathTex(r"\theta_0="+f"{t0:.2f}"+r" \hspace{0.5cm}  \theta_1="+f"{t1:.2f}", font_size=20).next_to(plane, UP)
+            self.play(FadeOut(t_text), FadeIn(new_t_text), Transform(line, newline))
+            t_text = new_t_text
             self.wait(0.5)
 
         timer.wait_until("5min 54sec")
+        return
         t0, t1, new_line = get_bad_line(plane)
-        new_t_text = MathTex(r"\theta_0="+f"{t0:.2f}"+r", \theta_0="+f"{t1:.2f}", font_size=20).next_to(plane, UP)
+        new_t_text = MathTex(r"\theta_0="+f"{t0:.2f}"+r" \hspace{0.5cm}  \theta_0="+f"{t1:.2f}", font_size=20).next_to(plane, UP)
         self.play(Transform(line, new_line), Transform(t_text, new_t_text))
 
         timer.wait_until("6min 00sec")
         t0, t1, new_line = get_good_line(plane)
-        new_t_text = MathTex(r"\theta_0="+f"{t0:.2f}"+r", \theta_0="+f"{t1:.2f}", font_size=20).next_to(plane, UP)
+        new_t_text = MathTex(r"\theta_0="+f"{t0:.2f}"+r" \hspace{0.5cm}  \theta_1="+f"{t1:.2f}", font_size=20).next_to(plane, UP)
         self.play(Transform(line, new_line), Transform(t_text, new_t_text))
 
         timer.wait_until("6min 40sec")
