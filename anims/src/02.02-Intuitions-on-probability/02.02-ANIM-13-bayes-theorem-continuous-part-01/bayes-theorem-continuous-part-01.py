@@ -35,7 +35,7 @@ class Main(Scene):
         play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
 
-        sfile = find_soundfile("bayes-theorem-03-terminology-part-02-ES")
+        sfile = find_soundfile("bayes-theorem-03-continuous-part-01-ES")
        
         self.add_sound(sfile)
 
