@@ -64,7 +64,7 @@ dirs = [os.path.dirname(inspect.getfile(get_imgmobject))+"/../", "/media"]
 
 def find_mediafile(file, media):
     assert media in ['imgs', 'audio']
-    fnames = [file] + [f"{file}.{ext}" for ext in ['svg', 'png', 'jpg', 'gif', 'jpeg', 'wav', 'mp3']]
+    fnames = [file] + [f"{file}.{ext}" for ext in ['svg', 'png', 'jpg', 'gif', 'jpeg', 'wav', 'mp3','mkv']]
     tried = []
     for d,f in itertools.product(dirs, fnames):
         fullname = f"{d}/{media}/{f}"
@@ -550,7 +550,7 @@ def add_brackets(mobj):
     r_bracket.next_to(mobj, RIGHT, .2)
     return VGroup(l_bracket, mobj, r_bracket)
 
-def updating_animation(mobject:list[Mobject], scene:Scene,color=BLUE_E, time_width=3):
+def updating_animation(mobject:list, scene:Scene,color=BLUE_E, time_width=3):
 
     if isinstance(mobject,list):
         scene.play(
@@ -701,8 +701,9 @@ def pdf_curve_normal(x, mu, sigma):
 
 def generate_probability_density_function_graph(
     median: float = 4, x_median_symbol:(Any) = "Z",
-    area_pdf_curve_color: color = RED_E
-    )-> tuple[VDict, dict]:
+    area_pdf_curve_color: color = RED_E,
+    x_axis_numbers_to_include: list = []
+    )-> tuple:
 
     """
 
@@ -735,7 +736,7 @@ def generate_probability_density_function_graph(
         }
 
     """
-
+    median = -median
 
     ax = Axes(
             x_range = [-10, 10, 1],
@@ -745,7 +746,7 @@ def generate_probability_density_function_graph(
                 "include_tip": False    
             },
             x_axis_config={
-                'numbers_to_include': [0],
+                'numbers_to_include': x_axis_numbers_to_include,
                 "include_ticks": False,
                 "exclude_origin_tick": False
             },
@@ -836,14 +837,14 @@ def render_probability_density_function_graph(
         )
 
     scene.play(
-        Write(
+        Create(
             mobjects_vdict["pdf_curve"]
         )
     )
 
     if render_pdf_area_curve == True:
         scene.play(
-            Write(
+            FadeIn(
                 mobjects_vdict["area_under_curve"]
             )
         )

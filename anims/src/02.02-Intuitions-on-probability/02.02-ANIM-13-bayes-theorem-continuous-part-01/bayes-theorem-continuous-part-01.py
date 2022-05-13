@@ -15,7 +15,8 @@ import math
 
 sys.path.insert(0, ".")
 
-config.max_files_cached = 1000
+
+config.max_files_cached = 10000
 Tex.set_default(color=BLACK)
 Tex.set_default(stroke_color=BLACK)
 Line.set_default(stroke_color=BLACK)
@@ -31,12 +32,12 @@ class Main(Scene):
     def construct(self):
 
         video_name = r"bayes theorem continuous part 01"
-        #play_intro_scene(self, video_name)
+        play_intro_scene(self, video_name)
         timer = SceneTimer(self, debug_wait=False).reset()
 
-        #sfile = find_soundfile("bayes-theorem-03-terminology-part-02-ES")
+        sfile = find_soundfile("bayes-theorem-04-continuous-part-01-ES")
        
-        self.add_sound("C:\\Users\\felip\Documents\\ppdl\\anims\media\\audio\\bayes-theorem-04-continuous-part-01-ES.mkv")
+        self.add_sound(sfile)
 
         bayes_definition_tex = MathTex(
             "P", "(", "A", "|", "B", ")",
@@ -473,7 +474,7 @@ class Main(Scene):
 
 
         z_number_label = MathTex(
-            "Z", color=BLACK
+            "Z: \hspace{0.1cm} real \hspace{0.1cm} (unknown) \hspace{0.1cm} position", color=BLACK
         ).scale(1.4).move_to(
                         ax.get_axes()[0].get_number_mobject(0),
                     )
@@ -494,6 +495,8 @@ class Main(Scene):
 
         vgroup_mini_pdf.scale(0.4).next_to(std_1_m_tex,RIGHT)
         
+        labels_axis = ax.get_axis_labels(y_label="prob. \hspace{0.1cm} of \hspace{0.1cm} measurement").set_color(BLUE_E).scale(0.4).shift(UP*0.7)
+
         self.play(
             Write(ax.get_axes()[0]),
         )
@@ -510,6 +513,7 @@ class Main(Scene):
         timer.wait_until("4min 17sec")
 
         self.play(Write(ax.get_axes()[1]))
+        self.add(labels_axis[1])
 
         timer.wait_until("4min 27sec")
 
@@ -536,7 +540,7 @@ class Main(Scene):
         )
         self.play(Write(horizontal_line_pdf))
 
-        vgroup_mini_pdf.add(std_specification_graph_tex_left,std_specification_graph_tex_right,horizontal_line_pdf)
+        vgroup_mini_pdf.add(std_specification_graph_tex_left,std_specification_graph_tex_right,horizontal_line_pdf, labels_axis)
 
         vgroup_mini_pdf.remove(pdf_curve)
 
@@ -570,24 +574,150 @@ class Main(Scene):
         timer.wait_until("4min 57sec")
 
         ## distribucion continua EN CONSTRUCCION
-
-        under_construction_mobjects = self.mobjects
-
-        self.play(FadeOut(*self.mobjects))
         
-        tex = Tex("UNDER CONSTRUCTION, FAST FORWARD TO 7:21")
+        pre_graph_mobjects = self.mobjects
+        self.play(FadeOut(*pre_graph_mobjects))
+
+        p_z_graph_vdict, p_z_graph_trackers = generate_probability_density_function_graph(median=2,x_axis_numbers_to_include=[-10,10])
+
+
+        negative_hundred_number_label = MathTex(
+        "-100", color=BLACK
+        ).scale(0.8).move_to(
+                    p_z_graph_vdict["axes"][0].get_number_mobject(-10),
+                )
+        
+        hundred_number_label = MathTex(
+        "100", color=BLACK
+        ).scale(0.8).move_to(
+                   p_z_graph_vdict["axes"][0].get_number_mobject(10),
+                )
+
+        tick_twenty = p_z_graph_vdict["axes"][0].get_tick(2).scale(2)
+
+        twenty_number_label = MathTex(
+        "20", color=BLACK
+        ).scale(0.8).move_to(
+                   p_z_graph_vdict["axes"][0].get_number_mobject(2),
+                )
+
+        continuous_graph = always_redraw(lambda: p_z_graph_vdict["axes"].plot(lambda x: 0.5, x_range=[-10,10], color=GREEN_E))
+        label_func_1 = p_z_graph_vdict["axes"].get_graph_label(graph=continuous_graph, label=MathTex("Continuous Function", color=GREEN_E).scale(0.8), x_val=-5,direction=UP )
+
+        p_z_graph_trackers["sigma"].set_value(1)
+
+
         self.play(
-            FadeIn(tex)
+            Create(p_z_graph_vdict["axes"]),
+            Write(label_func_1)
         )
 
-        #
+        timer.wait_until("5min")
+
+        self.play(
+            Create(continuous_graph)
+        )
+
+        timer.wait_until("5min 3sec")
+
+        self.play(
+            Write(negative_hundred_number_label)
+        )
+
+        self.play(
+            Write(hundred_number_label)
+        )
+
+        timer.wait_until("5min 30sec")
+
+        self.play(
+            Write(twenty_number_label),
+            Create(tick_twenty)
+        )
+
+        timer.wait_until("5min 40sec")
+
+        render_probability_density_function_graph(
+            self,
+            p_z_graph_vdict,
+            p_z_graph_trackers,
+            render_median=False,
+            render_x_axis=False,
+            render_y_axis=False,
+            render_zero_division=True,
+            render_pdf_area_curve=True
+        )
+
+        timer.wait_until("5min 41sec")
+
+        
+
+        label_func = p_z_graph_vdict["axes"].get_graph_label(graph=p_z_graph_vdict["pdf_curve"], label=MathTex("patata").scale(0.8), x_val=3,direction=UR )
+
+        normal_tex = MathTex(
+            "N(", "20", ",", "w", ")", color=BLUE_E
+        ).scale(0.8).move_to(label_func.get_center())
+
+        self.play(
+            Write(normal_tex[0:3])
+        )
+        
+        timer.wait_until("5min 43sec")
+
+        self.play(
+            Write(normal_tex[3:])
+        )
+
+        timer.wait_until("5min 55sec")
+
+        self.play(
+            FadeOut(normal_tex[-2])
+        )
+
+        point_five_tex = MathTex(
+            "0.5", color=BLUE_E
+        ).scale(0.7).move_to(normal_tex[-2]).shift(UP*0.02)
+
+        timer.wait_until("6min")
+
+        self.play(
+            FadeIn(point_five_tex)
+        )
+
+        timer.wait_until("6min 25sec")
+
+        self.play(
+            Indicate(normal_tex[1], color=RED_E,scale_factor=1.15),
+            run_time=3
+        )
+
+        timer.wait_until("6min 28sec")
+
+        self.play(
+            Indicate(point_five_tex, color=RED_E, scale_factor=1.15),
+            run_time=3
+        )
 
 
-        #
+        timer.wait_until("6min 50sec")
 
-        timer.wait_until("7min 10sec")
-        self.play(FadeOut(tex))
-        self.play(FadeIn(*under_construction_mobjects))
+
+        self.play(
+            p_z_graph_trackers["sigma"].animate.set_value(2), run_time=3,
+            rate_func=rate_functions.smooth
+        )
+
+        timer.wait_until("7min 6sec")
+
+        self.play(
+            FadeOut(*self.mobjects)
+        )
+
+        timer.wait_until("7min 8sec")
+
+        self.play(
+            FadeIn(*pre_graph_mobjects)
+        )     
 
         timer.wait_until("7min 11sec")
 
@@ -678,11 +808,7 @@ class Main(Scene):
 
         timer.wait_until("8min 2sec")
 
-        self.play(
-            Write(
-                riemann_area,lag_ratio=1
-            )
-        )
+        
 
         ## end mini graph
 
@@ -765,8 +891,7 @@ class Main(Scene):
         timer.wait_until("8min 49sec")
 
         self.play(
-            FadeOut(p_z_graph_vdict),
-            FadeOut(riemann_area)
+            FadeOut(p_z_graph_vdict)
         )
 
         updating_animation(
@@ -959,7 +1084,7 @@ class Main(Scene):
             tips=False,
         )
 
-        labels = ax.get_axis_labels()
+        labels = ax.get_axis_labels().set_color(BLACK)
 
         curve_2 = ax.plot(
             lambda x: 0.8 * x ** 2 - 3 * x + 4,
@@ -1010,10 +1135,10 @@ class Main(Scene):
         ## ENDS MINI GRAPH
 
 
-        """
+        
         ## credits
         self.wait(5)
         play_credits(self)
 
         self.wait(5)
-        """
+        
