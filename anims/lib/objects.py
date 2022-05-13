@@ -550,7 +550,7 @@ def add_brackets(mobj):
     r_bracket.next_to(mobj, RIGHT, .2)
     return VGroup(l_bracket, mobj, r_bracket)
 
-def updating_animation(mobject:list[Mobject], scene:Scene,color=BLUE_E, time_width=3):
+def updating_animation(mobject:list, scene:Scene,color=BLUE_E, time_width=3):
 
     if isinstance(mobject,list):
         scene.play(
@@ -702,8 +702,8 @@ def pdf_curve_normal(x, mu, sigma):
 def generate_probability_density_function_graph(
     median: float = 4, x_median_symbol:(Any) = "Z",
     area_pdf_curve_color: color = RED_E,
-    x_axis_numbers_to_include: list[float] = []
-    )-> tuple[VDict, dict]:
+    x_axis_numbers_to_include: list = []
+    )-> tuple:
 
     """
 
