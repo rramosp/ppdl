@@ -185,7 +185,7 @@ class Main(Scene):
             self.wait(0.5)
 
         timer.wait_until("5min 54sec")
-        return
+        
         t0, t1, new_line = get_bad_line(plane)
         new_t_text = MathTex(r"\theta_0="+f"{t0:.2f}"+r" \hspace{0.5cm}  \theta_0="+f"{t1:.2f}", font_size=20).next_to(plane, UP)
         self.play(Transform(line, new_line), Transform(t_text, new_t_text))
