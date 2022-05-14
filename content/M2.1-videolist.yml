@@ -6,7 +6,7 @@ videos:
   videos:
   - name: 1. The ML algorithm design workflow
     video_duration: 19 mins
-    video_youtubeid_ES: 7VAHFnnwQl0  
+    video_youtubeid_ES: 4WfPxlx7Uog  
   - name: 2. Linear regression with black box optimization  
     notebook: 02.01 - NOTES 01 - Linear regression black box optimization.html
   - name: 3. Introduction to symbolic computing
@@ -24,12 +24,12 @@ videos:
     notebook: 02.01 - NOTES 04 - Using tf.function.html
   - name: <b><font color="red">LAB 1</font> Low level Tensorflow</b>
     notebook: 02.01 - LAB 01 - Low level Tensorflow.html
+  - name: 8. Linear regression with low level Tensorflow
+    notebook: 02.01 - NOTES 05 - Linear regression with low level Tensorflow.html
 
 - name: <br/>Implementing models with Tensorflow and Keras
   order: 3
   videos:
-  - name: 8. Linear regression with low level Tensorflow
-    notebook: 02.01 - NOTES 05 - Linear regression with low level Tensorflow.html
   - name: 9. Neural networks with sequential models
     description: TBD notebook with feed forward netwoork with sequential model.
   - name: 10. Functional models
