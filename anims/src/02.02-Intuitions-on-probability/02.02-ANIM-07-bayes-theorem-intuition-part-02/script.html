@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bayes theorem &#8212; Probabilistic Programming for Deep Learning</title>
+    <title>Bayes theorem &#8212; Probabilistic Programming for Machine Learning</title>
     
   <link href="../../../../_static/css/theme.css" rel="stylesheet">
   <link href="../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -55,6 +55,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -93,7 +95,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../../../../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Deep Learning</h1>
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
@@ -109,113 +111,40 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../../../content/M1.html">
-   1. Introduction
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/outline.html">
+   Course outline
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M1.1.html">
-     1.1 Probabilistic programming
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M1.2.html">
-     1.2 Course mechanics
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../../../content/M2.html">
-   2. Fundamentals
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M1-videolist.html">
+   1 Introduction
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.1-videolist.html">
-     2.1 Tensorflow core
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.2-videolist.html">
-     2.2 Intuitions on probability
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.3-videolist.html">
-     2.3 Tensorflow probability basics
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../../../content/M3.html">
-   3. Bayesian Inference
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M2-videolist.html">
+   2 Machine learning with Tensorflow
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M3.1.html">
-     3.1 Model based reasoning
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M3.2.html">
-     3.2 Bayesian inference
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M3.3.html">
-     3.3 Bayesian hard classifier
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../../../content/M4.html">
-   4. Variational Inference
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M3-videolist.html">
+   3 Intuitions on probability
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M4.1.html">
-     4.1 Revisiting uncertainty
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M4.2.html">
-     4.2 Variational inference
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M4.3.html">
-     4.3 VI on latent variables
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M4.4.html">
-     4.4 VI on latent parameters
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M4-videolist.html">
+   4 Tensorflow probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M5-videolist.html">
+   5 Bayesian Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M6-videolist.html">
+   6 Variational Inference
+  </a>
  </li>
 </ul>
 
@@ -330,16 +259,16 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="bayes-theorem">
 <h1>Bayes theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this headline">¶</a></h1>
 <p>but let’s stop and understand what this means</p>
-<p><font color="red">animation inverse to substitute $rain$ and $sun$ by $A$ and $B$.</font></p>
+<p><font color="red">animation inverse to substitute <span class="math notranslate nohighlight">\(rain\)</span> and <span class="math notranslate nohighlight">\(sun\)</span> by <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>.</font></p>
 <ul class="simple">
-<li><p>$P(sun|rain)P(rain)$: it is obviously the probability of both rain and sun according to the formulas above.</p></li>
-<li><p>Another way to look at it: we are in the world where $rain$ has been confirmed and we are expressing our belief about $sun$ ($P(sun|rain)$) $\rightarrow$ how do we transform this belief into a world where $rain$ has <strong>NOT</strong> been confirmed?</p></li>
-<li><p>This is, If I start with $P(sun|rain)$, What can I say about $sun$ and $rain$ in a world where $rain$ has <strong>NOT</strong> been confirmed? [<font color="red">show diagram with only $rain$ and $sun|rain$</font>] … I cannot state anything about $¬rain$ because I have no information about it. Somewhat, $P(sun\text{ and }rain)$ is the best I can do</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(sun|rain)P(rain)\)</span>: it is obviously the probability of both rain and sun according to the formulas above.</p></li>
+<li><p>Another way to look at it: we are in the world where <span class="math notranslate nohighlight">\(rain\)</span> has been confirmed and we are expressing our belief about <span class="math notranslate nohighlight">\(sun\)</span> (<span class="math notranslate nohighlight">\(P(sun|rain)\)</span>) <span class="math notranslate nohighlight">\(\rightarrow\)</span> how do we transform this belief into a world where <span class="math notranslate nohighlight">\(rain\)</span> has <strong>NOT</strong> been confirmed?</p></li>
+<li><p>This is, If I start with <span class="math notranslate nohighlight">\(P(sun|rain)\)</span>, What can I say about <span class="math notranslate nohighlight">\(sun\)</span> and <span class="math notranslate nohighlight">\(rain\)</span> in a world where <span class="math notranslate nohighlight">\(rain\)</span> has <strong>NOT</strong> been confirmed? [<font color="red">show diagram with only <span class="math notranslate nohighlight">\(rain\)</span> and <span class="math notranslate nohighlight">\(sun|rain\)</span></font>] … I cannot state anything about <span class="math notranslate nohighlight">\(¬rain\)</span> because I have no information about it. Somewhat, <span class="math notranslate nohighlight">\(P(sun\text{ and }rain)\)</span> is the best I can do</p></li>
 </ul>
 <p>observe the game we are playing: What happens if I gain some information (observed that rains)? What happens if I loose information (move to a world where rain has <strong>NOT</strong> been confirmed).</p>
 <ul class="simple">
-<li><p>the equation $P(sun|rain)=P(sun\text{ and }rain) / P(rain)$ represents the case when we <strong>GAIN</strong> information (observed $rain$)</p></li>
-<li><p>the equation $P(sun\text{ and }rain)=P(sun|rain)P(rain)$ represents the case when we want to <strong>INTEGRATE</strong> the information gained into a larger context where $rain$ has not been confirmed.</p></li>
+<li><p>the equation <span class="math notranslate nohighlight">\(P(sun|rain)=P(sun\text{ and }rain) / P(rain)\)</span> represents the case when we <strong>GAIN</strong> information (observed <span class="math notranslate nohighlight">\(rain\)</span>)</p></li>
+<li><p>the equation <span class="math notranslate nohighlight">\(P(sun\text{ and }rain)=P(sun|rain)P(rain)\)</span> represents the case when we want to <strong>INTEGRATE</strong> the information gained into a larger context where <span class="math notranslate nohighlight">\(rain\)</span> has not been confirmed.</p></li>
 <li><p>observe that this is just a very simple algebraic manipulation … but its interpretation is <strong>VERY</strong> profound.</p></li>
 </ul>
 <div class="section" id="this-is-bayesian-thinking">

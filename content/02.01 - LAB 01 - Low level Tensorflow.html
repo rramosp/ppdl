@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LAB 3.2 - Low level tensorflow &#8212; Probabilistic Programming for Deep Learning</title>
+    <title>LAB 3.2 - Low level tensorflow &#8212; Probabilistic Programming for Machine Learning</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -55,6 +55,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -93,7 +95,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Deep Learning</h1>
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -109,113 +111,40 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="M1.html">
-   1. Introduction
+ <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Course outline
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M1.1.html">
-     1.1 Probabilistic programming
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M1.2.html">
-     1.2 Course mechanics
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="M2.html">
-   2. Fundamentals
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1-videolist.html">
+   1 Introduction
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M2.1-videolist.html">
-     2.1 Tensorflow core
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M2.2-videolist.html">
-     2.2 Intuitions on probability
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M2.3-videolist.html">
-     2.3 Tensorflow probability basics
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="M3.html">
-   3. Bayesian Inference
+ <li class="toctree-l1">
+  <a class="reference internal" href="M2-videolist.html">
+   2 Machine learning with Tensorflow
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M3.1.html">
-     3.1 Model based reasoning
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M3.2.html">
-     3.2 Bayesian inference
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M3.3.html">
-     3.3 Bayesian hard classifier
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="M4.html">
-   4. Variational Inference
+ <li class="toctree-l1">
+  <a class="reference internal" href="M3-videolist.html">
+   3 Intuitions on probability
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M4.1.html">
-     4.1 Revisiting uncertainty
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M4.2.html">
-     4.2 Variational inference
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M4.3.html">
-     4.3 VI on latent variables
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="M4.4.html">
-     4.4 VI on latent parameters
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M4-videolist.html">
+   4 Tensorflow probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M5-videolist.html">
+   5 Bayesian Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M6-videolist.html">
+   6 Variational Inference
+  </a>
  </li>
 </ul>
 
@@ -590,9 +519,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p><strong>COMPLETE</strong> the following function <strong>WITHOUT USING TENSORFLOW</strong> such that you get the same output as the model above, given the input and the weights.</p>
 <p>In specific, the Dense layer output must be</p>
-<p>$$A = \text{tanh}(XW+b)$$</p>
+<div class="math notranslate nohighlight">
+\[A = \text{tanh}(XW+b)\]</div>
 <p>And the batch normalization layer after that output is</p>
-<p>$$\frac{A-m_\mu}{\sqrt{m_\sigma+\varepsilon}}\gamma + \beta$$</p>
+<div class="math notranslate nohighlight">
+\[\frac{A-m_\mu}{\sqrt{m_\sigma+\varepsilon}}\gamma + \beta\]</div>
 <p>You <strong>MUST RETURN</strong> a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array, <strong>NOT</strong> a tensor.</p>
 <p><strong>CHALLENGE</strong>: Solve it with one single line of Python code.</p>
 <div class="cell docutils container">
@@ -627,17 +558,17 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The arguments for your code below:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">expression_fn</span></code>: is a Python function that, when executed, will return a Tensor depending on the variables in <code class="docutils literal notranslate"><span class="pre">svars</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">svars</span></code>: a list of $n$ <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>s against which  the derivatives are to be taken.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">svars</span></code>: a list of <span class="math notranslate nohighlight">\(n\)</span> <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code>s against which  the derivatives are to be taken.</p></li>
 </ul>
 <p>The result:</p>
 <ul class="simple">
-<li><p>a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array of dimension $n\times n$, containing in each position the value of the corresponding double derivative evaluated with the value attached to each variable in <code class="docutils literal notranslate"><span class="pre">svars</span></code>.</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array of dimension <span class="math notranslate nohighlight">\(n\times n\)</span>, containing in each position the value of the corresponding double derivative evaluated with the value attached to each variable in <code class="docutils literal notranslate"><span class="pre">svars</span></code>.</p></li>
 </ul>
 <p>See the example call below to understand what you have to produce.</p>
 <p><strong>NOTE</strong>: Observe that <code class="docutils literal notranslate"><span class="pre">expression_fn</span></code> is a function that you <strong>must call</strong> inside some <code class="docutils literal notranslate"><span class="pre">GradientTape</span></code> to obtain the expresion. This needs to be done this way because <code class="docutils literal notranslate"><span class="pre">GradientTape</span></code> needs to <em>watch</em> how expressions are built to be able to access the computational graph and compute the gradient. This is a technique which is very often used in Tensorflow.</p>
 <p><strong>WARN</strong>: You cannot use <code class="docutils literal notranslate"><span class="pre">tf.hessian</span></code> or <code class="docutils literal notranslate"><span class="pre">GradientTape.jacobian</span></code> or <code class="docutils literal notranslate"><span class="pre">sympy</span></code>. Do not use the name <code class="docutils literal notranslate"><span class="pre">hessian</span></code> to name any variable within your code.</p>
 <p><strong>HINT 1</strong>: use a <code class="docutils literal notranslate"><span class="pre">GradientTape</span></code> inside another <code class="docutils literal notranslate"><span class="pre">GradientTape</span></code>.</p>
-<p><strong>HINT 2</strong>: use <code class="docutils literal notranslate"><span class="pre">unconnected_gradients=tf.UnconnectedGradients.ZERO</span></code> as argument to <code class="docutils literal notranslate"><span class="pre">GradientTape.gradient</span></code> to have the variables not participating in an expresion result in gradient zero. For instance with $f=xy$, we have $\frac{\partial f}{\partial y\partial y}=0$, since $\frac{\partial f}{\partial y}=1$. Or if we have $f=x$ we have $\frac{\partial f}{\partial y\partial x}=0$, since $\frac{\partial f}{\partial y}=0$. If you do not include this argument, Tensorflow will return these values as <code class="docutils literal notranslate"><span class="pre">None</span></code> and you would have to fix them later.</p>
+<p><strong>HINT 2</strong>: use <code class="docutils literal notranslate"><span class="pre">unconnected_gradients=tf.UnconnectedGradients.ZERO</span></code> as argument to <code class="docutils literal notranslate"><span class="pre">GradientTape.gradient</span></code> to have the variables not participating in an expresion result in gradient zero. For instance with <span class="math notranslate nohighlight">\(f=xy\)</span>, we have <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial y\partial y}=0\)</span>, since <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial y}=1\)</span>. Or if we have <span class="math notranslate nohighlight">\(f=x\)</span> we have <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial y\partial x}=0\)</span>, since <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial y}=0\)</span>. If you do not include this argument, Tensorflow will return these values as <code class="docutils literal notranslate"><span class="pre">None</span></code> and you would have to fix them later.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_double_derivatives</span><span class="p">(</span><span class="n">expression_fn</span><span class="p">,</span><span class="n">svars</span><span class="p">):</span>
@@ -652,20 +583,21 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <p>check your code. The following expression</p>
-<p>$$f = 2xy^2 + 3x\cos{y}$$</p>
+<div class="math notranslate nohighlight">
+\[f = 2xy^2 + 3x\cos{y}\]</div>
 <p>has as first derivatives:</p>
 <ul class="simple">
-<li><p>$\frac{\partial f }{\partial x} = 2y^2 +3\cos{y}$</p></li>
-<li><p>$\frac{\partial f }{\partial y} = 4xy - 3x\sin{y}$</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial f }{\partial x} = 2y^2 +3\cos{y}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial f }{\partial y} = 4xy - 3x\sin{y}\)</span></p></li>
 </ul>
 <p>and as second derivatives:</p>
 <ul class="simple">
-<li><p>$\frac{\partial f }{\partial x \partial x} = 0$</p></li>
-<li><p>$\frac{\partial f }{\partial x \partial y} = 4y - 3\sin{y}$</p></li>
-<li><p>$\frac{\partial f }{\partial y \partial x} = 4y - 3\sin{y}$</p></li>
-<li><p>$\frac{\partial f }{\partial y \partial y} = 4x - 3x\cos{y}$</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial f }{\partial x \partial x} = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial f }{\partial x \partial y} = 4y - 3\sin{y}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial f }{\partial y \partial x} = 4y - 3\sin{y}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial f }{\partial y \partial y} = 4x - 3x\cos{y}\)</span></p></li>
 </ul>
-<p>which, when evaluated at $x=2$ and $y=-3$ yields</p>
+<p>which, when evaluated at <span class="math notranslate nohighlight">\(x=2\)</span> and <span class="math notranslate nohighlight">\(y=-3\)</span> yields</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[[  0     ,  -11.58],
  [ -11.58 ,   13.94]]
 </pre></div>

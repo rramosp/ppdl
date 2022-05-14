@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bayes theorem example &#8212; Probabilistic Programming for Deep Learning</title>
+    <title>Bayes theorem example &#8212; Probabilistic Programming for Machine Learning</title>
     
   <link href="../../../../_static/css/theme.css" rel="stylesheet">
   <link href="../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -55,6 +55,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -93,7 +95,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../../../../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Deep Learning</h1>
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
@@ -109,113 +111,40 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../../../content/M1.html">
-   1. Introduction
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/outline.html">
+   Course outline
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M1.1.html">
-     1.1 Probabilistic programming
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M1.2.html">
-     1.2 Course mechanics
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../../../content/M2.html">
-   2. Fundamentals
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M1-videolist.html">
+   1 Introduction
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.1-videolist.html">
-     2.1 Tensorflow core
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.2-videolist.html">
-     2.2 Intuitions on probability
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M2.3-videolist.html">
-     2.3 Tensorflow probability basics
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../../../content/M3.html">
-   3. Bayesian Inference
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M2-videolist.html">
+   2 Machine learning with Tensorflow
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M3.1.html">
-     3.1 Model based reasoning
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M3.2.html">
-     3.2 Bayesian inference
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M3.3.html">
-     3.3 Bayesian hard classifier
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../../../content/M4.html">
-   4. Variational Inference
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M3-videolist.html">
+   3 Intuitions on probability
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
-  <label for="toctree-checkbox-4">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M4.1.html">
-     4.1 Revisiting uncertainty
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M4.2.html">
-     4.2 Variational inference
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M4.3.html">
-     4.3 VI on latent variables
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../../../content/M4.4.html">
-     4.4 VI on latent parameters
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M4-videolist.html">
+   4 Tensorflow probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M5-videolist.html">
+   5 Bayesian Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../content/M6-videolist.html">
+   6 Variational Inference
+  </a>
  </li>
 </ul>
 
@@ -353,60 +282,63 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s consider the following scenario: Consider a human population that may or may not have a certain disease and a medical test that returns positive or negative for detecting the disease (Test is Positive or Negative), e.g. like a mammogram for detecting breast cancer, or a PCR for detecting COVID.</p>
 <p>We are told:</p>
 <ul class="simple">
-<li><p>$P(disease)$ = 30% = 0.3 $\rightarrow$ the incidence of the disease in the population $\rightarrow$ my current knowledge about whether I have the disease</p></li>
-<li><p>$P(pos|disease)$ = 0.85 $\rightarrow$ the sensitivity of the test: if you DO have the disease, only 85% of the times the test will confirm so. This should be given by the manufacturer of the test.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(disease)\)</span> = 30% = 0.3 <span class="math notranslate nohighlight">\(\rightarrow\)</span> the incidence of the disease in the population <span class="math notranslate nohighlight">\(\rightarrow\)</span> my current knowledge about whether I have the disease</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(pos|disease)\)</span> = 0.85 <span class="math notranslate nohighlight">\(\rightarrow\)</span> the sensitivity of the test: if you DO have the disease, only 85% of the times the test will confirm so. This should be given by the manufacturer of the test.</p></li>
 </ul>
 <p>We undergo a test and turns out positive (it is an observation)</p>
 <ul class="simple">
-<li><p>we want to know $P(disease|pos)$ $\rightarrow$ the probability (my knowledge) about having the disease, once I have the new information about a positive test result</p></li>
+<li><p>we want to know <span class="math notranslate nohighlight">\(P(disease|pos)\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> the probability (my knowledge) about having the disease, once I have the new information about a positive test result</p></li>
 </ul>
 <p>Let’s first use Bayes theorem algebraically</p>
-<p>$$P(disease|pos) = \frac{P(pos|disease)P(disease)}{P(pos)}$$</p>
-<p>We almost have everything to do the calculation, we are missing $P(pos)$.</p>
-<p>What is $P(pos)$? This is the probability of testing positive, if we would be testing the full population. We <strong>don’t know</strong> this, but if we consider <strong>ALL</strong> possibilities under which we can have a positive test we <strong>COULD</strong> obtain it.</p>
+<div class="math notranslate nohighlight">
+\[P(disease|pos) = \frac{P(pos|disease)P(disease)}{P(pos)}\]</div>
+<p>We almost have everything to do the calculation, we are missing <span class="math notranslate nohighlight">\(P(pos)\)</span>.</p>
+<p>What is <span class="math notranslate nohighlight">\(P(pos)\)</span>? This is the probability of testing positive, if we would be testing the full population. We <strong>don’t know</strong> this, but if we consider <strong>ALL</strong> possibilities under which we can have a positive test we <strong>COULD</strong> obtain it.</p>
 <p>In this scenario, a positive result may only happen in two circumstances: with or without the disease.</p>
-<p>$P(pos) = P(pos|disease)*P(disease) + P(pos|\neg disease)P(\neg disease)$</p>
-<p>and we can say that $P(\neg disease) = 1 - P(disease) = 1 - 0.02 = 0.98$</p>
-<p>we are still missing $P(pos|\neg disease)$, which is the probability of having a positive result if I <strong>DONT</strong> have cancer. A <strong>false positive</strong>. This must be given also by the manufacturer of the test.</p>
+<p><span class="math notranslate nohighlight">\(P(pos) = P(pos|disease)*P(disease) + P(pos|\neg disease)P(\neg disease)\)</span></p>
+<p>and we can say that <span class="math notranslate nohighlight">\(P(\neg disease) = 1 - P(disease) = 1 - 0.02 = 0.98\)</span></p>
+<p>we are still missing <span class="math notranslate nohighlight">\(P(pos|\neg disease)\)</span>, which is the probability of having a positive result if I <strong>DONT</strong> have cancer. A <strong>false positive</strong>. This must be given also by the manufacturer of the test.</p>
 <ul class="simple">
-<li><p>We are told that $P(pos|\neg disease)=0.05$</p></li>
+<li><p>We are told that <span class="math notranslate nohighlight">\(P(pos|\neg disease)=0.05\)</span></p></li>
 </ul>
-<p>Therefore: $P(pos) = 0.85 * 0.3 + 0.05 * 0.7 = 0.29$</p>
-<p>And now $P(disease|pos) = 0.85 * 0.3 / 0.29 = 0.879$</p>
+<p>Therefore: <span class="math notranslate nohighlight">\(P(pos) = 0.85 * 0.3 + 0.05 * 0.7 = 0.29\)</span></p>
+<p>And now <span class="math notranslate nohighlight">\(P(disease|pos) = 0.85 * 0.3 / 0.29 = 0.879\)</span></p>
 <p>We did this algebraically, let’s understand this better</p>
 <p><img alt="" src="../../../../_images/2022-01-18-13-29-11.png" /></p>
-<p>Let’s now explore other situations, supose now that the incidence of the disease is much less, but the quality of the equipment is the same: $P(disease) = 0.01$</p>
-<p>$P(pos) = 0.85 * 0.01 + 0.05 * 0.99 = 0.058$</p>
-<p>And now $P(disease|pos) = 0.85 * 0.01 / 0.058 = 0.147$</p>
+<p>Let’s now explore other situations, supose now that the incidence of the disease is much less, but the quality of the equipment is the same: <span class="math notranslate nohighlight">\(P(disease) = 0.01\)</span></p>
+<p><span class="math notranslate nohighlight">\(P(pos) = 0.85 * 0.01 + 0.05 * 0.99 = 0.058\)</span></p>
+<p>And now <span class="math notranslate nohighlight">\(P(disease|pos) = 0.85 * 0.01 / 0.058 = 0.147\)</span></p>
 <p>why did this happen. Observe that the proportions change</p>
 <p>observe that although the proportion of false positives remain the same, the number of false positives increases, because there is much more people without the disease.</p>
 <p><img alt="" src="../../../../_images/2022-01-18-13-42-30.png" /></p>
 <div class="section" id="naming-parts">
 <h2>naming parts<a class="headerlink" href="#naming-parts" title="Permalink to this headline">¶</a></h2>
 <p>likelihood, prior, posterior, normalizing factor</p>
-<p>observe in the computation above that the numerator is one of the terms of the denominator, and this is why this is named the normalizing factor, as it ensures this is going to be a true probability $0&lt;p&lt;1$</p>
+<p>observe in the computation above that the numerator is one of the terms of the denominator, and this is why this is named the normalizing factor, as it ensures this is going to be a true probability <span class="math notranslate nohighlight">\(0&lt;p&lt;1\)</span></p>
 </div>
 <div class="section" id="another-test">
 <h2>another test<a class="headerlink" href="#another-test" title="Permalink to this headline">¶</a></h2>
 <p>let’s now take a second test.</p>
-<p>this time, our prior is not anymore $0.01$, which was the general incidence of the disease in the population, but $0.147$ which was the posterior after processing the result of the first test.</p>
+<p>this time, our prior is not anymore <span class="math notranslate nohighlight">\(0.01\)</span>, which was the general incidence of the disease in the population, but <span class="math notranslate nohighlight">\(0.147\)</span> which was the posterior after processing the result of the first test.</p>
 <p>so we compute again</p>
-<p>$P(pos) = 0.85 * 0.147 + 0.05 * (1-0.147) = 0.1676$</p>
-<p>And now $P(disease|pos) = 0.85 * 0.147 / 0.1676 = 0.746$</p>
+<p><span class="math notranslate nohighlight">\(P(pos) = 0.85 * 0.147 + 0.05 * (1-0.147) = 0.1676\)</span></p>
+<p>And now <span class="math notranslate nohighlight">\(P(disease|pos) = 0.85 * 0.147 / 0.1676 = 0.746\)</span></p>
 </div>
 <div class="section" id="finally-which-is-the-best-way-to-improve-the-overall-accuracy-of-the-test">
 <h2>finally, which is the best way to improve the overall accuracy of the test?<a class="headerlink" href="#finally-which-is-the-best-way-to-improve-the-overall-accuracy-of-the-test" title="Permalink to this headline">¶</a></h2>
 <p>recall that we have two kinds of errors:</p>
 <ul class="simple">
-<li><p>$P(neg|disease)$: false negative</p></li>
-<li><p>$P(pos|\neg disease)$: false positive</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(neg|disease)\)</span>: false negative</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(pos|\neg disease)\)</span>: false positive</p></li>
 </ul>
 <p>if we had to decide where to invest effort and money to improve our testing device, would we trye to reduce FPR or FNR?</p>
 <p>let’s see what is the effect of each kind of improvement.</p>
 <p>Overall, we would like both of the following to be as high as possible</p>
-<p>$$P(disease|pos) = \frac{P(pos|disease)P(disease)}{P(pos|disease)P(diseas) + P(pos|\neg disease)P(\neg disease)}$$</p>
+<div class="math notranslate nohighlight">
+\[P(disease|pos) = \frac{P(pos|disease)P(disease)}{P(pos|disease)P(diseas) + P(pos|\neg disease)P(\neg disease)}\]</div>
 <p>and</p>
-<p>$$P(\neg disease|neg) = \frac{P(neg|disease)P(disease)}{P(neg|disease)P(disease) + P(neg|\neg disease)P(\neg disease)}$$</p>
+<div class="math notranslate nohighlight">
+\[P(\neg disease|neg) = \frac{P(neg|disease)P(disease)}{P(neg|disease)P(disease) + P(neg|\neg disease)P(\neg disease)}\]</div>
 <p>this is, that we can rely on the test both when predicting the presence or the absence of the disease</p>
 </div>
 </div>
