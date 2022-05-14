@@ -1,0 +1,23 @@
+title: 6 Variational Inference
+description: "<style>.timeline .timeline-item {margin-bottom: 0rem;}</style>"
+videos:
+- name: Revisiting uncertainty
+  order: 1
+  videos:
+  - name: 1. Aleatoric and epistemic uncertainty
+  - name: 2. Exploting uncertainty on data (aleatoric)  
+    notebook: XX
+  - name: 3. Exploting uncertainty on models (epistemic)  
+    notebook: XX
+- name: <br/>Variational Inference
+  order: 2
+  videos:
+  - name: 4. Why and how variational inference
+- name: <br/>VI on latent variables
+  order: 3
+  videos:
+  - name: 5. TF examples
+- name: <br/>VI on latent parameteris
+  order: 4
+  videos:
+  - name: 6. TF implementations

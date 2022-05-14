@@ -1,43 +1,19 @@
 format: jb-book
 root: intro
 chapters:
-  - file: content/M1.md
-    title: 1. Introduction
-    sections: 
-    - file: content/M1.1
-      title: 1.1 Probabilistic programming
-    - file: content/M1.2
-      title: 1.2 Course mechanics
-  - file: content/M2
-    title: 2. Fundamentals
-    sections: 
-    - file: content/M2.1-videolist
-      title: 2.1 Tensorflow core
-    - file: content/M2.2-videolist
-      title: 2.2 Intuitions on probability
-    - file: content/M2.3-videolist
-      title: 2.3 Tensorflow probability basics
-  - file: content/M3
-    title: 3. Bayesian Inference
-    sections: 
-    - file: content/M3.1.md
-      title: 3.1 Model based reasoning
-    - file: content/M3.2.md
-      title: 3.2 Bayesian inference
-    - file: content/M3.3.md
-      title: 3.3 Bayesian hard classifier
-    - file: content/M3.4.md
-      title: 3.4 Probabilisitc linear regression
-  - file: content/M4
-    title: 4. Variational Inference
-    sections: 
-    - file: content/M4.1.md
-      title: 4.1 Revisiting uncertainty
-    - file: content/M4.2.md
-      title: 4.2 Variational inference
-    - file: content/M4.3.md
-      title: 4.3 VI on latent variables
-    - file: content/M4.4.md
-      title: 4.4 VI on latent parameters
+  - file: content/outline
+    title: Course outline
+  - file: content/M1-videolist
+    title: 1 Introduction
+  - file: content/M2-videolist
+    title: 2 Machine learning with Tensorflow
+  - file: content/M3-videolist
+    title: 3 Intuitions on probability
+  - file: content/M4-videolist
+    title: 4 Tensorflow probability
+  - file: content/M5-videolist
+    title: 5 Bayesian Modelling
+  - file: content/M6-videolist
+    title: 6 Variational Inference
 
 

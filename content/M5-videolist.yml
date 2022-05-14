@@ -1,0 +1,69 @@
+title: 5. Bayesian modelling
+description: "<style>.timeline .timeline-item {margin-bottom: 0rem;}</style>"
+videos:
+
+- name: Bayes theorem
+  order: 1
+  videos:
+
+  - name: 8. Intuition. Updating knowledge with new information
+    video_duration: 11 mins
+    video_youtubeid_ES: C-JFIgVGofg
+
+  - name: 9. Intepretating the Bayes theorem 
+    video_duration: 7 mins
+    video_youtubeid_ES: fW6ZPiTZYvg
+
+  - name: 10. Example case. A medical test under Bayes theorem
+    video_duration: 8 mins
+    video_youtubeid_ES: JqqpU3LyWVQ
+
+  - name: 11. Example case. Visual interpretation 
+    video_duration: 9 mins
+    video_youtubeid_ES: 5S_2sFGG08M
+
+  - name: 12. Example case. Impact of changing initial conditions
+    video_duration: 6 mins
+    video_youtubeid_ES: 2hMWWjg6H8c
+
+  - name: 13. Bayes theorem with discrete distributions
+    notebook: 02.02 - NOTES 03 - Bayes theorem discrete.html
+
+  - name: 14. Terminology on Bayes theorem
+    video_duration: 8 mins
+    video_youtubeid_ES: WZRP98YXD4c
+
+  - name: 15. Priors and posteriors on consecutive observations 
+    video_duration: 11 mins
+    video_youtubeid_ES: chxyTapHCmo
+
+  - name: 16. Bayes theorem on continuous distributions
+
+  - name: 17. Updating knowledge on continuous distributions
+
+  - name: 18. Bayes theorem with continuous distributions
+    notebook: 02.02 - NOTES 04 - Bayes theorem continuous.html
+
+
+- name: </br> Bayesian inference
+  order: 2
+  videos:
+  - name: Introduction to Bayesian inference and modelling 
+  - name: Modelling a coin flip with a discrete prior
+    notebook: 03.01 - NOTES 01 - coin flip discrete prior.html
+  - name: Conjugate distributions
+  - name: Modeling noisy measurements
+    notebook: 03.01 - NOTES 02 - noisy measurements.html
+  - name: Markov chain Monte Carlo
+  - name: MCMC in TF Probability
+    notebook: 03.01 - NOTES 03 - MCMC in TF Probability.html
+  - name: Modelling a coin flip with TF Probability
+    notebook: 03.01 - NOTES 04 - coin flip with TF Probability.html
+  - name: Bayesian linear regression
+    notebook: 03.01 - NOTES 05 - Bayesian linear regression.html
+  - name: Bayesian neural networks
+    notebook: 03.01 - NOTES 06 - Bayesian neural networks.html
+  - name: <b><font color="red">LAB 1</font> Bayesian modelling</b>
+    description: Task 1 iterative posterior estimation with conjugate
+    description: Task 2 probabilistic model sampling 
+    description: Task 3 Bayesian neural networks
