@@ -17,6 +17,7 @@
 
 - los materiales del curso (notebooks y talleres) son **en inglés**. _course materials (notebooks and labs) are **in English**_
 - los videos son **ambos** en inglés y en español. _course videos are **both** in Spanish and in English_
+
 ### <font color="red">NEWEST ADDITIONS</font> 
 
 - notebooks and labs on section **2.1 Tensorflow core** [click here](content/02.01%20-%20NOTES%2001%20-%20Simbolic%20computing%20for%20ML)

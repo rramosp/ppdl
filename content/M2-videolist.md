@@ -1,4 +1,5 @@
-# 2.1 Tensorflow core refresher
+# 2 Machine learning with Tensorflow
+
 <style>.timeline .timeline-item {margin-bottom: 0rem;}</style>
 <div class="timeline">
     <h2>Machine learning and symbolic computing</h2>

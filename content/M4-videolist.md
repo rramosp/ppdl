@@ -1,7 +1,8 @@
-# 2.3 Tensorflow probability basics
+# 4 Tensorflow probability basics
+
 <style>.timeline .timeline-item {margin-bottom: 0rem;}</style>
 <div class="timeline">
-    <h2>Machine learning and symbolic computing</h2>
+    <h2>Programming with Tensoflow probability</h2>
 <div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
         <div class="timeline-content"> 1. Disitrbutions objects<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">

@@ -1,7 +1,7 @@
-title: 2.3 Tensorflow probability basics
+title: 4 Tensorflow probability basics
 description: "<style>.timeline .timeline-item {margin-bottom: 0rem;}</style>"
 videos:
-- name: Machine learning and symbolic computing
+- name: Programming with Tensoflow probability 
   order: 1
   videos:
   - name: 1. Disitrbutions objects
