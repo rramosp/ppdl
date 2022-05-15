@@ -1,0 +1,1603 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discrete distributions &#8212; Probabilistic Programming for Machine Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MBFEZ3PF64');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Course outline
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1-videolist.html">
+   1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M2-videolist.html">
+   2 TF for Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M3-videolist.html">
+   3 Intuitions on Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M4-videolist.html">
+   4 Tensorflow Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M5-videolist.html">
+   5 Bayesian Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M6-videolist.html">
+   6 Variational Inference
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/03.01 - NOTES 01 - Discrete distiributions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/03.01 - NOTES 01 - Discrete distiributions.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discrete-or-categorical-distributions">
+   Discrete (or categorical) distributions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joint-distribution">
+     joint distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#marginal-distribution">
+     marginal distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conditional-distribution">
+     conditional distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#independance">
+     independance
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Discrete distributions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discrete-or-categorical-distributions">
+   Discrete (or categorical) distributions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joint-distribution">
+     joint distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#marginal-distribution">
+     marginal distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conditional-distribution">
+     conditional distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#independance">
+     independance
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
+<span class="o">!</span>git clone https://github.com/rramosp/ppdl.git &gt; /dev/null <span class="m">2</span>&gt; /dev/null
+<span class="o">!</span>mv -n ppdl/content/init.py ppdl/content/local . <span class="m">2</span>&gt; /dev/null
+<span class="o">!</span>pip install -r ppdl/content/requirements.txt &gt; /dev/null
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="discrete-distributions">
+<h1>Discrete distributions<a class="headerlink" href="#discrete-distributions" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">init</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="discrete-or-categorical-distributions">
+<h2>Discrete (or categorical) distributions<a class="headerlink" href="#discrete-or-categorical-distributions" title="Permalink to this headline">¶</a></h2>
+<p>we will have a <strong>joint</strong> distribute distritbution of <strong>two</strong> variables, in the example below these are <span class="math notranslate nohighlight">\(edad\)</span> and <span class="math notranslate nohighlight">\(barrio\)</span>.</p>
+<ul class="simple">
+<li><p>each variable make take any value from a <strong>FINITE</strong> set. Observe that <span class="math notranslate nohighlight">\(edad\)</span> is discrete because its value comes binned into age groups.</p></li>
+<li><p>the possible values for each variable might be sortable in a meaningful way or not. <span class="math notranslate nohighlight">\(edad\)</span> is sortable, <span class="math notranslate nohighlight">\(barrio\)</span> is not, because an alphabetical sorting does not imply any relation.</p></li>
+<li><p>for instance, that <span class="math notranslate nohighlight">\(edad\)</span> <code class="docutils literal notranslate"><span class="pre">10-14</span></code> &lt; <code class="docutils literal notranslate"><span class="pre">25-29</span></code> represents a true relation of data (younger/older people)</p></li>
+<li><p>but <span class="math notranslate nohighlight">\(barrio\)</span> <code class="docutils literal notranslate"><span class="pre">Aranjuez</span></code> &lt; <code class="docutils literal notranslate"><span class="pre">Belen</span></code> does <strong>NOT</strong> represent any true relation between the two neighborhoods. It is somewhat arbitrary.</p></li>
+</ul>
+<p>recall that:</p>
+<ul class="simple">
+<li><p>the <strong>joint probability</strong> is the probability of a value of <span class="math notranslate nohighlight">\(edad\)</span> and a value of <span class="math notranslate nohighlight">\(barrio\)</span> for occurring simultaneously. Answers the question: <em>What is the observed proportion of people with age <code class="docutils literal notranslate"><span class="pre">10-14</span></code> <strong>and</strong> living in <code class="docutils literal notranslate"><span class="pre">Belen</span></code></em>.</p></li>
+<li><p>the <strong>marginal probability</strong> is the probability of a value of one variable irrespective of the outcome of the another variable. Answers the question: <em>What is the observed proportion of people living in <span class="math notranslate nohighlight">\(belen\)</span>?</em>.</p></li>
+<li><p>the <strong>conditional probability</strong> is the probability of one event occurring in the presence of a second event. Answers the question: <em>If we only consider people living in <span class="math notranslate nohighlight">\(belen\)</span>, what is the observed proportion of people with ages <code class="docutils literal notranslate"><span class="pre">10-14</span></code>?</em></p></li>
+</ul>
+<p>This is the data of <strong>people ages</strong> and <strong>district</strong> in Medellin where they live, taken from <a class="reference external" href="http://medata.gov.co/dataset/proyecci%C3%B3n-de-poblaci%C3%B3n-medell%C3%ADn-2017">medata.gov.co</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;local/data/proyecciones_de_poblacion_medellin_2017.csv.gz&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="s1">&#39;grupo_edad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">grupo_edad</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&quot;codigo&quot;</span><span class="p">:</span> <span class="s2">&quot;barrio&quot;</span><span class="p">,</span> <span class="s2">&quot;grupo_edad&quot;</span><span class="p">:</span> <span class="s2">&quot;edad&quot;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;0-4&quot;</span><span class="p">,</span> <span class="s1">&#39;00-04&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;5-9&#39;</span><span class="p">,</span> <span class="s1">&#39;05-09&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;80 y más&#39;</span><span class="p">,</span> <span class="s1">&#39;80-&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">edad</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">!=</span><span class="s2">&quot;total&quot;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[[(</span><span class="s2">&quot;Suma&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="s2">&quot;Total&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">barrio</span><span class="p">]]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;edad&quot;</span><span class="p">,</span> <span class="s2">&quot;barrio&quot;</span> <span class="p">])[[</span><span class="s1">&#39;total_2017&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;total_2017&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>edad</th>
+      <th>00-04</th>
+      <th>05-09</th>
+      <th>10-14</th>
+      <th>15-19</th>
+      <th>20-24</th>
+      <th>25-29</th>
+      <th>30-34</th>
+      <th>35-39</th>
+      <th>40-44</th>
+      <th>45-49</th>
+      <th>50-54</th>
+      <th>55-59</th>
+      <th>60-64</th>
+      <th>65-69</th>
+      <th>70-74</th>
+      <th>75-79</th>
+      <th>80-</th>
+    </tr>
+    <tr>
+      <th>barrio</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Altavista</th>
+      <td>3281</td>
+      <td>3183</td>
+      <td>3538</td>
+      <td>3467</td>
+      <td>3888</td>
+      <td>3861</td>
+      <td>3270</td>
+      <td>2990</td>
+      <td>3270</td>
+      <td>2689</td>
+      <td>1896</td>
+      <td>1107</td>
+      <td>717</td>
+      <td>520</td>
+      <td>421</td>
+      <td>367</td>
+      <td>109</td>
+    </tr>
+    <tr>
+      <th>Aranjuez</th>
+      <td>10047</td>
+      <td>10206</td>
+      <td>10357</td>
+      <td>10976</td>
+      <td>11936</td>
+      <td>13804</td>
+      <td>13695</td>
+      <td>11557</td>
+      <td>9851</td>
+      <td>11339</td>
+      <td>12631</td>
+      <td>11616</td>
+      <td>8990</td>
+      <td>6352</td>
+      <td>4103</td>
+      <td>2551</td>
+      <td>2904</td>
+    </tr>
+    <tr>
+      <th>Belén</th>
+      <td>8406</td>
+      <td>9304</td>
+      <td>9695</td>
+      <td>12281</td>
+      <td>14230</td>
+      <td>15365</td>
+      <td>15848</td>
+      <td>14129</td>
+      <td>11069</td>
+      <td>13116</td>
+      <td>16739</td>
+      <td>16754</td>
+      <td>13710</td>
+      <td>10397</td>
+      <td>6893</td>
+      <td>4369</td>
+      <td>5094</td>
+    </tr>
+    <tr>
+      <th>Buenos Aires</th>
+      <td>6968</td>
+      <td>7288</td>
+      <td>7212</td>
+      <td>8611</td>
+      <td>10025</td>
+      <td>11343</td>
+      <td>11011</td>
+      <td>9835</td>
+      <td>8276</td>
+      <td>9630</td>
+      <td>11503</td>
+      <td>11146</td>
+      <td>8586</td>
+      <td>6071</td>
+      <td>3991</td>
+      <td>2713</td>
+      <td>3046</td>
+    </tr>
+    <tr>
+      <th>Castilla</th>
+      <td>7844</td>
+      <td>7986</td>
+      <td>8228</td>
+      <td>8743</td>
+      <td>10642</td>
+      <td>12446</td>
+      <td>11560</td>
+      <td>10021</td>
+      <td>9083</td>
+      <td>12129</td>
+      <td>14627</td>
+      <td>12250</td>
+      <td>9130</td>
+      <td>6665</td>
+      <td>4253</td>
+      <td>2652</td>
+      <td>2622</td>
+    </tr>
+    <tr>
+      <th>Doce de Octubre</th>
+      <td>12714</td>
+      <td>12562</td>
+      <td>12473</td>
+      <td>13301</td>
+      <td>14749</td>
+      <td>15935</td>
+      <td>14512</td>
+      <td>12670</td>
+      <td>11435</td>
+      <td>14508</td>
+      <td>16409</td>
+      <td>14151</td>
+      <td>10555</td>
+      <td>7568</td>
+      <td>4926</td>
+      <td>3150</td>
+      <td>3169</td>
+    </tr>
+    <tr>
+      <th>El Poblado</th>
+      <td>3666</td>
+      <td>4212</td>
+      <td>4527</td>
+      <td>5353</td>
+      <td>6363</td>
+      <td>8189</td>
+      <td>9540</td>
+      <td>9600</td>
+      <td>8681</td>
+      <td>10461</td>
+      <td>13356</td>
+      <td>13622</td>
+      <td>11246</td>
+      <td>8634</td>
+      <td>5739</td>
+      <td>4086</td>
+      <td>4211</td>
+    </tr>
+    <tr>
+      <th>Guayabal</th>
+      <td>4175</td>
+      <td>4428</td>
+      <td>4523</td>
+      <td>5268</td>
+      <td>6217</td>
+      <td>7460</td>
+      <td>7620</td>
+      <td>6692</td>
+      <td>5463</td>
+      <td>6768</td>
+      <td>8231</td>
+      <td>7821</td>
+      <td>6743</td>
+      <td>5364</td>
+      <td>3552</td>
+      <td>2546</td>
+      <td>2526</td>
+    </tr>
+    <tr>
+      <th>La América</th>
+      <td>2439</td>
+      <td>2883</td>
+      <td>3034</td>
+      <td>4091</td>
+      <td>4923</td>
+      <td>6154</td>
+      <td>6775</td>
+      <td>6377</td>
+      <td>5143</td>
+      <td>6418</td>
+      <td>9502</td>
+      <td>10146</td>
+      <td>8779</td>
+      <td>7678</td>
+      <td>5315</td>
+      <td>3393</td>
+      <td>3868</td>
+    </tr>
+    <tr>
+      <th>La Candelaria</th>
+      <td>3111</td>
+      <td>3453</td>
+      <td>3715</td>
+      <td>4038</td>
+      <td>4557</td>
+      <td>6305</td>
+      <td>7479</td>
+      <td>6949</td>
+      <td>5157</td>
+      <td>5944</td>
+      <td>7206</td>
+      <td>7179</td>
+      <td>6452</td>
+      <td>5097</td>
+      <td>3330</td>
+      <td>2382</td>
+      <td>3304</td>
+    </tr>
+    <tr>
+      <th>Laureles - Estadio</th>
+      <td>2906</td>
+      <td>3533</td>
+      <td>3910</td>
+      <td>4850</td>
+      <td>5523</td>
+      <td>7946</td>
+      <td>9810</td>
+      <td>9010</td>
+      <td>6861</td>
+      <td>7589</td>
+      <td>10124</td>
+      <td>11632</td>
+      <td>11062</td>
+      <td>9895</td>
+      <td>6966</td>
+      <td>5262</td>
+      <td>5865</td>
+    </tr>
+    <tr>
+      <th>Manrique</th>
+      <td>11440</td>
+      <td>11314</td>
+      <td>11312</td>
+      <td>11756</td>
+      <td>12422</td>
+      <td>13701</td>
+      <td>12536</td>
+      <td>10458</td>
+      <td>9325</td>
+      <td>11208</td>
+      <td>12622</td>
+      <td>11293</td>
+      <td>8057</td>
+      <td>5460</td>
+      <td>3568</td>
+      <td>2238</td>
+      <td>2360</td>
+    </tr>
+    <tr>
+      <th>Palmitas</th>
+      <td>474</td>
+      <td>417</td>
+      <td>543</td>
+      <td>609</td>
+      <td>666</td>
+      <td>646</td>
+      <td>505</td>
+      <td>430</td>
+      <td>634</td>
+      <td>611</td>
+      <td>507</td>
+      <td>361</td>
+      <td>233</td>
+      <td>198</td>
+      <td>109</td>
+      <td>87</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>Popular</th>
+      <td>11799</td>
+      <td>11707</td>
+      <td>11113</td>
+      <td>11056</td>
+      <td>10779</td>
+      <td>10956</td>
+      <td>10037</td>
+      <td>8971</td>
+      <td>7859</td>
+      <td>8280</td>
+      <td>8382</td>
+      <td>6789</td>
+      <td>4860</td>
+      <td>3426</td>
+      <td>2228</td>
+      <td>1589</td>
+      <td>1614</td>
+    </tr>
+    <tr>
+      <th>Robledo</th>
+      <td>10897</td>
+      <td>11153</td>
+      <td>11142</td>
+      <td>12065</td>
+      <td>13989</td>
+      <td>14847</td>
+      <td>13997</td>
+      <td>12195</td>
+      <td>10244</td>
+      <td>11809</td>
+      <td>13580</td>
+      <td>12245</td>
+      <td>9498</td>
+      <td>6923</td>
+      <td>4467</td>
+      <td>2596</td>
+      <td>2759</td>
+    </tr>
+    <tr>
+      <th>San Antonio</th>
+      <td>8610</td>
+      <td>8208</td>
+      <td>9796</td>
+      <td>9925</td>
+      <td>11907</td>
+      <td>11737</td>
+      <td>10736</td>
+      <td>9990</td>
+      <td>11105</td>
+      <td>8874</td>
+      <td>6166</td>
+      <td>4119</td>
+      <td>2517</td>
+      <td>1601</td>
+      <td>1102</td>
+      <td>875</td>
+      <td>326</td>
+    </tr>
+    <tr>
+      <th>San Cristóbal</th>
+      <td>6985</td>
+      <td>6898</td>
+      <td>8400</td>
+      <td>8337</td>
+      <td>9241</td>
+      <td>9375</td>
+      <td>8014</td>
+      <td>7614</td>
+      <td>8303</td>
+      <td>6913</td>
+      <td>4641</td>
+      <td>3257</td>
+      <td>1901</td>
+      <td>1243</td>
+      <td>887</td>
+      <td>780</td>
+      <td>283</td>
+    </tr>
+    <tr>
+      <th>San Javier</th>
+      <td>9775</td>
+      <td>10642</td>
+      <td>10930</td>
+      <td>11672</td>
+      <td>11885</td>
+      <td>12005</td>
+      <td>11317</td>
+      <td>10307</td>
+      <td>8614</td>
+      <td>8838</td>
+      <td>9205</td>
+      <td>7705</td>
+      <td>5679</td>
+      <td>4049</td>
+      <td>2620</td>
+      <td>1693</td>
+      <td>2239</td>
+    </tr>
+    <tr>
+      <th>Santa Cruz</th>
+      <td>8789</td>
+      <td>8720</td>
+      <td>8546</td>
+      <td>8891</td>
+      <td>9289</td>
+      <td>9814</td>
+      <td>9039</td>
+      <td>7867</td>
+      <td>6491</td>
+      <td>7037</td>
+      <td>7978</td>
+      <td>6554</td>
+      <td>4581</td>
+      <td>3424</td>
+      <td>2257</td>
+      <td>1471</td>
+      <td>1766</td>
+    </tr>
+    <tr>
+      <th>Santa Elena</th>
+      <td>1559</td>
+      <td>1491</td>
+      <td>1725</td>
+      <td>1670</td>
+      <td>1785</td>
+      <td>1997</td>
+      <td>1757</td>
+      <td>1495</td>
+      <td>1514</td>
+      <td>1488</td>
+      <td>1077</td>
+      <td>678</td>
+      <td>511</td>
+      <td>353</td>
+      <td>250</td>
+      <td>159</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>Villa Hermosa</th>
+      <td>9971</td>
+      <td>10346</td>
+      <td>10228</td>
+      <td>11280</td>
+      <td>11901</td>
+      <td>12581</td>
+      <td>11909</td>
+      <td>10075</td>
+      <td>7885</td>
+      <td>7939</td>
+      <td>8694</td>
+      <td>7737</td>
+      <td>6052</td>
+      <td>4552</td>
+      <td>2970</td>
+      <td>1952</td>
+      <td>2470</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="section" id="joint-distribution">
+<h3>joint distribution<a class="headerlink" href="#joint-distribution" title="Permalink to this headline">¶</a></h3>
+<p>we turn it into a <strong>joint distribution</strong>. This is an <strong>empirical</strong> distribution, because the data was obtained by counting using some method  on the real world and not derived or assumed by some analytical procedure or calculation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xd</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">xd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>edad</th>
+      <th>00-04</th>
+      <th>05-09</th>
+      <th>10-14</th>
+      <th>15-19</th>
+      <th>20-24</th>
+      <th>25-29</th>
+      <th>30-34</th>
+      <th>35-39</th>
+      <th>40-44</th>
+      <th>45-49</th>
+      <th>50-54</th>
+      <th>55-59</th>
+      <th>60-64</th>
+      <th>65-69</th>
+      <th>70-74</th>
+      <th>75-79</th>
+      <th>80-</th>
+    </tr>
+    <tr>
+      <th>barrio</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Altavista</th>
+      <td>0.001308</td>
+      <td>0.001269</td>
+      <td>0.001410</td>
+      <td>0.001382</td>
+      <td>0.001550</td>
+      <td>0.001539</td>
+      <td>0.001304</td>
+      <td>0.001192</td>
+      <td>0.001304</td>
+      <td>0.001072</td>
+      <td>0.000756</td>
+      <td>0.000441</td>
+      <td>0.000286</td>
+      <td>0.000207</td>
+      <td>0.000168</td>
+      <td>0.000146</td>
+      <td>0.000043</td>
+    </tr>
+    <tr>
+      <th>Aranjuez</th>
+      <td>0.004005</td>
+      <td>0.004069</td>
+      <td>0.004129</td>
+      <td>0.004376</td>
+      <td>0.004758</td>
+      <td>0.005503</td>
+      <td>0.005460</td>
+      <td>0.004607</td>
+      <td>0.003927</td>
+      <td>0.004520</td>
+      <td>0.005035</td>
+      <td>0.004631</td>
+      <td>0.003584</td>
+      <td>0.002532</td>
+      <td>0.001636</td>
+      <td>0.001017</td>
+      <td>0.001158</td>
+    </tr>
+    <tr>
+      <th>Belén</th>
+      <td>0.003351</td>
+      <td>0.003709</td>
+      <td>0.003865</td>
+      <td>0.004896</td>
+      <td>0.005673</td>
+      <td>0.006125</td>
+      <td>0.006318</td>
+      <td>0.005633</td>
+      <td>0.004413</td>
+      <td>0.005229</td>
+      <td>0.006673</td>
+      <td>0.006679</td>
+      <td>0.005466</td>
+      <td>0.004145</td>
+      <td>0.002748</td>
+      <td>0.001742</td>
+      <td>0.002031</td>
+    </tr>
+    <tr>
+      <th>Buenos Aires</th>
+      <td>0.002778</td>
+      <td>0.002905</td>
+      <td>0.002875</td>
+      <td>0.003433</td>
+      <td>0.003996</td>
+      <td>0.004522</td>
+      <td>0.004390</td>
+      <td>0.003921</td>
+      <td>0.003299</td>
+      <td>0.003839</td>
+      <td>0.004586</td>
+      <td>0.004443</td>
+      <td>0.003423</td>
+      <td>0.002420</td>
+      <td>0.001591</td>
+      <td>0.001082</td>
+      <td>0.001214</td>
+    </tr>
+    <tr>
+      <th>Castilla</th>
+      <td>0.003127</td>
+      <td>0.003184</td>
+      <td>0.003280</td>
+      <td>0.003485</td>
+      <td>0.004242</td>
+      <td>0.004962</td>
+      <td>0.004608</td>
+      <td>0.003995</td>
+      <td>0.003621</td>
+      <td>0.004835</td>
+      <td>0.005831</td>
+      <td>0.004883</td>
+      <td>0.003640</td>
+      <td>0.002657</td>
+      <td>0.001695</td>
+      <td>0.001057</td>
+      <td>0.001045</td>
+    </tr>
+    <tr>
+      <th>Doce de Octubre</th>
+      <td>0.005068</td>
+      <td>0.005008</td>
+      <td>0.004972</td>
+      <td>0.005302</td>
+      <td>0.005880</td>
+      <td>0.006353</td>
+      <td>0.005785</td>
+      <td>0.005051</td>
+      <td>0.004559</td>
+      <td>0.005784</td>
+      <td>0.006541</td>
+      <td>0.005641</td>
+      <td>0.004208</td>
+      <td>0.003017</td>
+      <td>0.001964</td>
+      <td>0.001256</td>
+      <td>0.001263</td>
+    </tr>
+    <tr>
+      <th>El Poblado</th>
+      <td>0.001461</td>
+      <td>0.001679</td>
+      <td>0.001805</td>
+      <td>0.002134</td>
+      <td>0.002537</td>
+      <td>0.003265</td>
+      <td>0.003803</td>
+      <td>0.003827</td>
+      <td>0.003461</td>
+      <td>0.004170</td>
+      <td>0.005324</td>
+      <td>0.005430</td>
+      <td>0.004483</td>
+      <td>0.003442</td>
+      <td>0.002288</td>
+      <td>0.001629</td>
+      <td>0.001679</td>
+    </tr>
+    <tr>
+      <th>Guayabal</th>
+      <td>0.001664</td>
+      <td>0.001765</td>
+      <td>0.001803</td>
+      <td>0.002100</td>
+      <td>0.002478</td>
+      <td>0.002974</td>
+      <td>0.003038</td>
+      <td>0.002668</td>
+      <td>0.002178</td>
+      <td>0.002698</td>
+      <td>0.003281</td>
+      <td>0.003118</td>
+      <td>0.002688</td>
+      <td>0.002138</td>
+      <td>0.001416</td>
+      <td>0.001015</td>
+      <td>0.001007</td>
+    </tr>
+    <tr>
+      <th>La América</th>
+      <td>0.000972</td>
+      <td>0.001149</td>
+      <td>0.001210</td>
+      <td>0.001631</td>
+      <td>0.001963</td>
+      <td>0.002453</td>
+      <td>0.002701</td>
+      <td>0.002542</td>
+      <td>0.002050</td>
+      <td>0.002559</td>
+      <td>0.003788</td>
+      <td>0.004045</td>
+      <td>0.003500</td>
+      <td>0.003061</td>
+      <td>0.002119</td>
+      <td>0.001353</td>
+      <td>0.001542</td>
+    </tr>
+    <tr>
+      <th>La Candelaria</th>
+      <td>0.001240</td>
+      <td>0.001377</td>
+      <td>0.001481</td>
+      <td>0.001610</td>
+      <td>0.001817</td>
+      <td>0.002514</td>
+      <td>0.002982</td>
+      <td>0.002770</td>
+      <td>0.002056</td>
+      <td>0.002370</td>
+      <td>0.002873</td>
+      <td>0.002862</td>
+      <td>0.002572</td>
+      <td>0.002032</td>
+      <td>0.001328</td>
+      <td>0.000950</td>
+      <td>0.001317</td>
+    </tr>
+    <tr>
+      <th>Laureles - Estadio</th>
+      <td>0.001158</td>
+      <td>0.001408</td>
+      <td>0.001559</td>
+      <td>0.001933</td>
+      <td>0.002202</td>
+      <td>0.003168</td>
+      <td>0.003911</td>
+      <td>0.003592</td>
+      <td>0.002735</td>
+      <td>0.003025</td>
+      <td>0.004036</td>
+      <td>0.004637</td>
+      <td>0.004410</td>
+      <td>0.003945</td>
+      <td>0.002777</td>
+      <td>0.002098</td>
+      <td>0.002338</td>
+    </tr>
+    <tr>
+      <th>Manrique</th>
+      <td>0.004561</td>
+      <td>0.004510</td>
+      <td>0.004510</td>
+      <td>0.004687</td>
+      <td>0.004952</td>
+      <td>0.005462</td>
+      <td>0.004998</td>
+      <td>0.004169</td>
+      <td>0.003717</td>
+      <td>0.004468</td>
+      <td>0.005032</td>
+      <td>0.004502</td>
+      <td>0.003212</td>
+      <td>0.002177</td>
+      <td>0.001422</td>
+      <td>0.000892</td>
+      <td>0.000941</td>
+    </tr>
+    <tr>
+      <th>Palmitas</th>
+      <td>0.000189</td>
+      <td>0.000166</td>
+      <td>0.000216</td>
+      <td>0.000243</td>
+      <td>0.000266</td>
+      <td>0.000258</td>
+      <td>0.000201</td>
+      <td>0.000171</td>
+      <td>0.000253</td>
+      <td>0.000244</td>
+      <td>0.000202</td>
+      <td>0.000144</td>
+      <td>0.000093</td>
+      <td>0.000079</td>
+      <td>0.000043</td>
+      <td>0.000035</td>
+      <td>0.000012</td>
+    </tr>
+    <tr>
+      <th>Popular</th>
+      <td>0.004704</td>
+      <td>0.004667</td>
+      <td>0.004430</td>
+      <td>0.004407</td>
+      <td>0.004297</td>
+      <td>0.004368</td>
+      <td>0.004001</td>
+      <td>0.003576</td>
+      <td>0.003133</td>
+      <td>0.003301</td>
+      <td>0.003342</td>
+      <td>0.002706</td>
+      <td>0.001937</td>
+      <td>0.001366</td>
+      <td>0.000888</td>
+      <td>0.000633</td>
+      <td>0.000643</td>
+    </tr>
+    <tr>
+      <th>Robledo</th>
+      <td>0.004344</td>
+      <td>0.004446</td>
+      <td>0.004442</td>
+      <td>0.004810</td>
+      <td>0.005577</td>
+      <td>0.005919</td>
+      <td>0.005580</td>
+      <td>0.004862</td>
+      <td>0.004084</td>
+      <td>0.004708</td>
+      <td>0.005414</td>
+      <td>0.004881</td>
+      <td>0.003786</td>
+      <td>0.002760</td>
+      <td>0.001781</td>
+      <td>0.001035</td>
+      <td>0.001100</td>
+    </tr>
+    <tr>
+      <th>San Antonio</th>
+      <td>0.003432</td>
+      <td>0.003272</td>
+      <td>0.003905</td>
+      <td>0.003957</td>
+      <td>0.004747</td>
+      <td>0.004679</td>
+      <td>0.004280</td>
+      <td>0.003983</td>
+      <td>0.004427</td>
+      <td>0.003538</td>
+      <td>0.002458</td>
+      <td>0.001642</td>
+      <td>0.001003</td>
+      <td>0.000638</td>
+      <td>0.000439</td>
+      <td>0.000349</td>
+      <td>0.000130</td>
+    </tr>
+    <tr>
+      <th>San Cristóbal</th>
+      <td>0.002785</td>
+      <td>0.002750</td>
+      <td>0.003349</td>
+      <td>0.003324</td>
+      <td>0.003684</td>
+      <td>0.003737</td>
+      <td>0.003195</td>
+      <td>0.003035</td>
+      <td>0.003310</td>
+      <td>0.002756</td>
+      <td>0.001850</td>
+      <td>0.001298</td>
+      <td>0.000758</td>
+      <td>0.000496</td>
+      <td>0.000354</td>
+      <td>0.000311</td>
+      <td>0.000113</td>
+    </tr>
+    <tr>
+      <th>San Javier</th>
+      <td>0.003897</td>
+      <td>0.004242</td>
+      <td>0.004357</td>
+      <td>0.004653</td>
+      <td>0.004738</td>
+      <td>0.004786</td>
+      <td>0.004512</td>
+      <td>0.004109</td>
+      <td>0.003434</td>
+      <td>0.003523</td>
+      <td>0.003670</td>
+      <td>0.003072</td>
+      <td>0.002264</td>
+      <td>0.001614</td>
+      <td>0.001044</td>
+      <td>0.000675</td>
+      <td>0.000893</td>
+    </tr>
+    <tr>
+      <th>Santa Cruz</th>
+      <td>0.003504</td>
+      <td>0.003476</td>
+      <td>0.003407</td>
+      <td>0.003544</td>
+      <td>0.003703</td>
+      <td>0.003912</td>
+      <td>0.003603</td>
+      <td>0.003136</td>
+      <td>0.002588</td>
+      <td>0.002805</td>
+      <td>0.003180</td>
+      <td>0.002613</td>
+      <td>0.001826</td>
+      <td>0.001365</td>
+      <td>0.000900</td>
+      <td>0.000586</td>
+      <td>0.000704</td>
+    </tr>
+    <tr>
+      <th>Santa Elena</th>
+      <td>0.000621</td>
+      <td>0.000594</td>
+      <td>0.000688</td>
+      <td>0.000666</td>
+      <td>0.000712</td>
+      <td>0.000796</td>
+      <td>0.000700</td>
+      <td>0.000596</td>
+      <td>0.000604</td>
+      <td>0.000593</td>
+      <td>0.000429</td>
+      <td>0.000270</td>
+      <td>0.000204</td>
+      <td>0.000141</td>
+      <td>0.000100</td>
+      <td>0.000063</td>
+      <td>0.000020</td>
+    </tr>
+    <tr>
+      <th>Villa Hermosa</th>
+      <td>0.003975</td>
+      <td>0.004124</td>
+      <td>0.004077</td>
+      <td>0.004497</td>
+      <td>0.004744</td>
+      <td>0.005015</td>
+      <td>0.004748</td>
+      <td>0.004016</td>
+      <td>0.003143</td>
+      <td>0.003165</td>
+      <td>0.003466</td>
+      <td>0.003084</td>
+      <td>0.002413</td>
+      <td>0.001815</td>
+      <td>0.001184</td>
+      <td>0.000778</td>
+      <td>0.000985</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># it must add up to 1</span>
+<span class="n">xd</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="marginal-distribution">
+<h3>marginal distribution<a class="headerlink" href="#marginal-distribution" title="Permalink to this headline">¶</a></h3>
+<p>This are the <strong>TWO</strong> marginal distributions, for each one of the variables</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbarrio</span> <span class="o">=</span> <span class="n">xd</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dedad</span>   <span class="o">=</span> <span class="n">xd</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbarrio</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">dedad</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.0, 1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mf">3.5</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">dbarrio</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">dedad</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03.01 - NOTES 01 - Discrete distiributions_15_0.png" src="../_images/03.01 - NOTES 01 - Discrete distiributions_15_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="conditional-distribution">
+<h3>conditional distribution<a class="headerlink" href="#conditional-distribution" title="Permalink to this headline">¶</a></h3>
+<p>we compute it for one variable <strong>with respect</strong> to a specific value of the other one.</p>
+<p>This is</p>
+<div class="math notranslate nohighlight">
+\[P(\text{edad}|\text{barrio}=\text{belen})\]</div>
+<p>observe that we obtain it from the join distribution but <strong>WE MUST NORMALIZE</strong> so we have a true distribution adding up to 1.</p>
+<p>This normalization will become very important later on in the course.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># unnormalized conditional</span>
+
+<span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Belén&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>edad
+00-04    0.003351
+05-09    0.003709
+10-14    0.003865
+15-19    0.004896
+20-24    0.005673
+25-29    0.006125
+30-34    0.006318
+35-39    0.005633
+40-44    0.004413
+45-49    0.005229
+50-54    0.006673
+55-59    0.006679
+60-64    0.005466
+65-69    0.004145
+70-74    0.002748
+75-79    0.001742
+80-      0.002031
+Name: Belén, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># it does not add up to one</span>
+<span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Belén&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07869355283657012
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we normalized it</span>
+
+<span class="n">dbelen</span> <span class="o">=</span> <span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Belén&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Belén&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;check sum =&quot;</span><span class="p">,</span> <span class="n">dbelen</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">dbelen</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>check sum = 1.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>edad
+00-04    0.042584
+05-09    0.047133
+10-14    0.049114
+15-19    0.062214
+20-24    0.072087
+25-29    0.077837
+30-34    0.080284
+35-39    0.071576
+40-44    0.056074
+45-49    0.066444
+50-54    0.084798
+55-59    0.084874
+60-64    0.069453
+65-69    0.052670
+70-74    0.034919
+75-79    0.022133
+80-      0.025806
+Name: Belén, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbelen</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03.01 - NOTES 01 - Discrete distiributions_20_0.png" src="../_images/03.01 - NOTES 01 - Discrete distiributions_20_0.png" />
+</div>
+</div>
+<p>Sometimes we write</p>
+<div class="math notranslate nohighlight">
+\[P(\text{edad}|\text{barrio})\]</div>
+<p>without specifying the value of the conditioning variable, but <strong>assuming</strong> someone has decided upon a certain value. You must pay attention to the context in which this is being used to understand well how to compute or use this conditional distribution.</p>
+<p>In fact, for each value of <span class="math notranslate nohighlight">\(barrio\)</span> we have a different distritbuion.</p>
+</div>
+<div class="section" id="independance">
+<h3>independance<a class="headerlink" href="#independance" title="Permalink to this headline">¶</a></h3>
+<p>Observe <strong>carefully</strong>. If all conditional distributions look the same this suggests that both variables <strong>are independant</strong>, <span class="math notranslate nohighlight">\(\rightarrow\)</span> knowing something about one does not tell us anything about the other one.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">barrio</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="n">xd</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">dmarginal</span> <span class="o">=</span> <span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">barrio</span><span class="p">]</span> <span class="o">/</span> <span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">barrio</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">dmarginal</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">barrio</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">.11</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03.01 - NOTES 01 - Discrete distiributions_22_0.png" src="../_images/03.01 - NOTES 01 - Discrete distiributions_22_0.png" />
+</div>
+</div>
+<p>or for each value of <span class="math notranslate nohighlight">\(edad\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">edad</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="n">xd</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">dmarginal</span> <span class="o">=</span> <span class="n">xd</span><span class="p">[</span><span class="n">edad</span><span class="p">]</span> <span class="o">/</span> <span class="n">xd</span><span class="p">[</span><span class="n">edad</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">dmarginal</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">edad</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">.11</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03.01 - NOTES 01 - Discrete distiributions_24_0.png" src="../_images/03.01 - NOTES 01 - Discrete distiributions_24_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "p39"
+        },
+        kernelOptions: {
+            kernelName: "p39",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'p39'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

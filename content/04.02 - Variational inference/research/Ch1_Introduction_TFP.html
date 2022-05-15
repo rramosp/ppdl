@@ -123,17 +123,17 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../../M2-videolist.html">
-   2 Machine learning with Tensorflow
+   2 TF for Machine Learning
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../../M3-videolist.html">
-   3 Intuitions on probability
+   3 Intuitions on Probability
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../../M4-videolist.html">
-   4 Tensorflow probability
+   4 Tensorflow Probability
   </a>
  </li>
  <li class="toctree-l1">
@@ -1057,8 +1057,8 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 <p>If, in reality, no sudden change occurred and indeed <span class="math notranslate nohighlight">\(\lambda_1 = \lambda_2\)</span>, then the <span class="math notranslate nohighlight">\(\lambda\)</span>s posterior distributions should look about equal.</p>
 <p>We are interested in inferring the unknown <span class="math notranslate nohighlight">\(\lambda\)</span>s. To use Bayesian inference, we need to assign prior probabilities to the different possible values of <span class="math notranslate nohighlight">\(\lambda\)</span>. What would be good prior probability distributions for <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>? Recall that <span class="math notranslate nohighlight">\(\lambda\)</span> can be any positive number. As we saw earlier, the <em>exponential</em> distribution provides a continuous density function for positive numbers, so it might be a good choice for modeling <span class="math notranslate nohighlight">\(\lambda_i\)</span>. But recall that the exponential distribution takes a parameter of its own, so we’ll need to include that parameter in our model. Let’s call that parameter <span class="math notranslate nohighlight">\(\alpha\)</span>.
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f65d9139-bc37-4c96-bd62-caa8f90f9af5">
-<span class="eqno">()<a class="headerlink" href="#equation-f65d9139-bc37-4c96-bd62-caa8f90f9af5" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-02156904-ee43-4598-ad18-a03b6eb2a2bd">
+<span class="eqno">()<a class="headerlink" href="#equation-02156904-ee43-4598-ad18-a03b6eb2a2bd" title="Permalink to this equation">¶</a></span>\[\begin{align}
 &amp;\lambda_1 \sim \text{Exp}( \alpha ) \\
 &amp;\lambda_2 \sim \text{Exp}( \alpha )
 \end{align}\]</div>
@@ -1068,8 +1068,8 @@ $\alpha$ is called a *hyper-parameter* or *parent variable*. In literal terms, i
 <p>An alternative, and something I encourage the reader to try, would be to have two priors: one for each <span class="math notranslate nohighlight">\(\lambda_i\)</span>. Creating two exponential distributions with different <span class="math notranslate nohighlight">\(\alpha\)</span> values reflects our prior belief that the rate changed at some point during the observations.</p>
 <p>What about <span class="math notranslate nohighlight">\(\tau\)</span>? Because of the noisiness of the data, it’s difficult to pick out a priori when <span class="math notranslate nohighlight">\(\tau\)</span> might have occurred. Instead, we can assign a <em>uniform prior belief</em> to every possible day. This is equivalent to saying
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5e96bf2a-3ecf-4237-b9d5-c5b3a59f6034">
-<span class="eqno">()<a class="headerlink" href="#equation-5e96bf2a-3ecf-4237-b9d5-c5b3a59f6034" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ee96301d-9adc-47fb-bef9-396e9c5a9510">
+<span class="eqno">()<a class="headerlink" href="#equation-ee96301d-9adc-47fb-bef9-396e9c5a9510" title="Permalink to this equation">¶</a></span>\[\begin{align}
 &amp; \tau \sim \text{DiscreteUniform(1,70) }\\
 &amp; \Rightarrow P( \tau = k ) = \frac{1}{70}
 \end{align}\]</div>
