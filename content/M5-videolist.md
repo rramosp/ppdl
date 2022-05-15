@@ -2,108 +2,110 @@
 
 <style>.timeline .timeline-item {margin-bottom: 0rem;}</style>
 <div class="timeline">
-    <h2>Bayes theorem</h2>
+    <h2>5.1 Bayes theorem</h2>
 <div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 8. Intuition. Updating knowledge with new information<span class="chip float-right"> Video &nbsp; 
+        <div class="timeline-content"> 1. Intuition. Updating knowledge with new information<span class="chip float-right"> Video &nbsp; 
                     <a href="#modal-1_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
                     <font color="SeaGreen">11 mins</font>
                 </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 9. Intepretating the Bayes theorem<span class="chip float-right"> Video &nbsp; 
+        <div class="timeline-content"> 2. Intepretating the Bayes theorem<span class="chip float-right"> Video &nbsp; 
                     <a href="#modal-2_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
                     <font color="SeaGreen">7 mins&nbsp;&nbsp;</font>
                 </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 10. Example case. A medical test under Bayes theorem<span class="chip float-right"> Video &nbsp; 
+        <div class="timeline-content"> 3. Example case. A medical test under Bayes theorem<span class="chip float-right"> Video &nbsp; 
                     <a href="#modal-3_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
                     <font color="SeaGreen">8 mins&nbsp;&nbsp;</font>
                 </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 11. Example case. Visual interpretation<span class="chip float-right"> Video &nbsp; 
+        <div class="timeline-content"> 4. Example case. Visual interpretation<span class="chip float-right"> Video &nbsp; 
                     <a href="#modal-4_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
                     <font color="SeaGreen">9 mins&nbsp;&nbsp;</font>
                 </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 12. Example case. Impact of changing initial conditions<span class="chip float-right"> Video &nbsp; 
+        <div class="timeline-content"> 5. Example case. Impact of changing initial conditions<span class="chip float-right"> Video &nbsp; 
                     <a href="#modal-5_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
                     <font color="SeaGreen">6 mins&nbsp;&nbsp;</font>
                 </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 13. Bayes theorem with discrete distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="02.02 - NOTES 03 - Bayes theorem discrete.html"> Notebook</a>
+        <div class="timeline-content"> 6. Bayes theorem with discrete distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.01 - NOTES 01 - Bayes theorem discrete.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 14. Terminology on Bayes theorem<span class="chip float-right"> Video &nbsp; 
+        <div class="timeline-content"> 7. Terminology on Bayes theorem<span class="chip float-right"> Video &nbsp; 
                     <a href="#modal-7_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
                     <font color="SeaGreen">8 mins&nbsp;&nbsp;</font>
                 </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 15. Priors and posteriors on consecutive observations<span class="chip float-right"> Video &nbsp; 
+        <div class="timeline-content"> 8. Priors and posteriors on consecutive observations<span class="chip float-right"> Video &nbsp; 
                     <a href="#modal-8_ES" class="modal-overlay">ES</a> &nbsp; &nbsp;&nbsp; 
                     <font color="SeaGreen">11 mins</font>
                 </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 16. Bayes theorem on continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+        <div class="timeline-content"> 9. Bayes theorem on continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 17. Updating knowledge on continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+        <div class="timeline-content"> 10. Updating knowledge on continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 18. Bayes theorem with continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="02.02 - NOTES 04 - Bayes theorem continuous.html"> Notebook</a>
+        <div class="timeline-content"> 11. Bayes theorem with continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.01 - NOTES 02 - Bayes theorem continuous.html"> Notebook</a>
             </span></div>        
-    </div><h2></br> Bayesian inference</h2>
+    </div><h2></br> 5.2 Bayesian inference</h2>
 <div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> Introduction to Bayesian inference and modelling<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+        <div class="timeline-content"> 1. Introduction to Bayesian inference and modelling<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> Modelling a coin flip with a discrete prior<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="03.01 - NOTES 01 - coin flip discrete prior.html"> Notebook</a>
+        <div class="timeline-content"> 2. Modelling a coin flip with a discrete prior<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.02 - NOTES 01 - Modelling a coin flip with discrete distributions.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> Conjugate distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+        <div class="timeline-content"> 3- Conjugate distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> Modeling noisy measurements<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="03.01 - NOTES 02 - noisy measurements.html"> Notebook</a>
+        <div class="timeline-content"> 4. Conjugate distributions for noisy measurements<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.02 - NOTES 02 - Conjugate distributions for noisy measurements.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> Markov chain Monte Carlo<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+        <div class="timeline-content"> 5. Markov chain Monte Carlo<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> MCMC in TF Probability<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="03.01 - NOTES 03 - MCMC in TF Probability.html"> Notebook</a>
+        <div class="timeline-content"> 6. MCMC in TF Probability (not needed?)<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.02 - NOTES 03 - MCMC in TF Probability.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> Modelling a coin flip with TF Probability<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="03.01 - NOTES 04 - coin flip with TF Probability.html"> Notebook</a>
+        <div class="timeline-content"> 7. Modelling a coin flip with TF Probability<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.02 - NOTES 04 - coin flip with TF Probability.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> Bayesian linear regression<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="03.01 - NOTES 05 - Bayesian linear regression.html"> Notebook</a>
+        <div class="timeline-content"> 8. Bayesian linear regression<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.02 - NOTES 05 - Bayesian linear regression.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> Bayesian neural networks<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="03.01 - NOTES 06 - Bayesian neural networks.html"> Notebook</a>
+        <div class="timeline-content"> 9. Bayesian neural networks<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.02 - NOTES 06 - Bayesian neural networks.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> <b><font color="red">LAB 1</font> Bayesian modelling</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+        <div class="timeline-content"> <b><font color="red">LAB 1</font> Bayesian modelling</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.02 - LAB 1 - Bayesian modelling.html"> Notebook</a>
+            </span></div>        
     </div>
 </div>
     
@@ -111,7 +113,7 @@
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">8. Intuition. Updating knowledge with new information</div>
+      <div class="modal-title h5">1. Intuition. Updating knowledge with new information</div>
     </div>
     <div class="modal-body">
       <div class="content">
@@ -128,7 +130,7 @@
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">9. Intepretating the Bayes theorem</div>
+      <div class="modal-title h5">2. Intepretating the Bayes theorem</div>
     </div>
     <div class="modal-body">
       <div class="content">
@@ -145,7 +147,7 @@
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">10. Example case. A medical test under Bayes theorem</div>
+      <div class="modal-title h5">3. Example case. A medical test under Bayes theorem</div>
     </div>
     <div class="modal-body">
       <div class="content">
@@ -162,7 +164,7 @@
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">11. Example case. Visual interpretation</div>
+      <div class="modal-title h5">4. Example case. Visual interpretation</div>
     </div>
     <div class="modal-body">
       <div class="content">
@@ -179,7 +181,7 @@
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">12. Example case. Impact of changing initial conditions</div>
+      <div class="modal-title h5">5. Example case. Impact of changing initial conditions</div>
     </div>
     <div class="modal-body">
       <div class="content">
@@ -196,7 +198,7 @@
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">14. Terminology on Bayes theorem</div>
+      <div class="modal-title h5">7. Terminology on Bayes theorem</div>
     </div>
     <div class="modal-body">
       <div class="content">
@@ -213,7 +215,7 @@
   <div class="modal-container">
     <div class="modal-header">
       <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
-      <div class="modal-title h5">15. Priors and posteriors on consecutive observations</div>
+      <div class="modal-title h5">8. Priors and posteriors on consecutive observations</div>
     </div>
     <div class="modal-body">
       <div class="content">

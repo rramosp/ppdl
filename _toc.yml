@@ -6,11 +6,11 @@ chapters:
   - file: content/M1-videolist
     title: 1 Introduction
   - file: content/M2-videolist
-    title: 2 Machine learning with Tensorflow
+    title: 2 TF for Machine Learning
   - file: content/M3-videolist
-    title: 3 Intuitions on probability
+    title: 3 Intuitions on Probability
   - file: content/M4-videolist
-    title: 4 Tensorflow probability
+    title: 4 Tensorflow Probability
   - file: content/M5-videolist
     title: 5 Bayesian Modelling
   - file: content/M6-videolist
