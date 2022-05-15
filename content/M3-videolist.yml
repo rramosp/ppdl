@@ -1,7 +1,7 @@
 title: 3 Intuitions on probability
 description: "<style>.timeline .timeline-item {margin-bottom: 0rem;}</style>"
 videos:
-- name: Probability distributions
+- name: 3.1 Probability and distributions
   order: 1
   videos:
   - name: 1. What is probability?
@@ -21,7 +21,7 @@ videos:
   - name: 5. Working with discrete distributions
     video_duration: 11min
     video_youtubeid_ES: ica5rtg-GXc
-    notebook: 02.02%20-%20NOTES%2001%20-%20Discrete%20distiributions.html
+    notebook: 03.01 - NOTES 01 - Discrete distiributions.html
 
   - name: 6. Marginal, conditionals and joints for continuous distributions
     video_duration: 7 mins
@@ -30,26 +30,26 @@ videos:
   - name: 7. Working with continuous distributions
     video_duration: 16min
     video_youtubeid_ES: feBSsW1Zd7w
-    notebook: 02.02 - NOTES 02 - Continuous distributions.html
+    notebook: 03.01 - NOTES 02 - Continuous distributions.html
 
   - name: <b><font color="red">LAB 1</font> Marginal, conditionals and joints</b>
-    notebook: 02.02 - LAB 01 - Marginals, conditionals and joints.html
+    notebook: 03.01 - LAB 01 - Marginals, conditionals and joints.html
 
-- name: <br/>The road to machine learning
+- name: <br/>3.2 Probability in machine learning
   order: 2
   videos:
 
-  - name: 20. Conditioning on parameters
+  - name: 1. Conditioning on parameters
 
-  - name: 21. Probability and likelihood
+  - name: 2. Probability and likelihood
 
-  - name: 22. Working with likelihood
-    notebook: 02.02 - NOTES 06 - Probability and likelihood.html
+  - name: 3. Working with likelihood
+    notebook: 03.02 - NOTES 01 - Probability and likelihood.html
 
-  - name: 23. Similarity of distributions
+  - name: 4. Similarity of distributions
 
-  - name: 24. Measuring similarity
-    notebook: 02.02 - NOTES 07 - Similarity of distributions.html
+  - name: 5. Measuring similarity
+    notebook: 03.02 - NOTES 02 - Similarity of distributions.html
 
   - name: <b><font color='red'>LAB 2</font>. Likelihood</b>
-    notebook: 02.02 - LAB 02 - Likelihood.html
+    notebook: 03.02 - LAB 01 - Likelihood.html

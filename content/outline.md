@@ -23,7 +23,7 @@
             <img src="../_static/tfcore.png" class="img-responsive">
         </div>
         <div class="card-header">
-            <div class="card-title"><b>3 Machine learning with Tensorflow</b></div>
+            <div class="card-title"><b>2 Tensorflow for Machine Learning</b></div>
         </div>
         <div class="card-body" style="font-size:0.7rem;">
             Tensorflow, as a matrix based symbolic computing engine for machine learning.
@@ -38,7 +38,7 @@
             <img src="../_static/bayesian-regression.png" class="img-responsive">
         </div>
         <div class="card-header">
-            <div class="card-title"><b>3 Intuitions on probability</b></div>
+            <div class="card-title"><b>3 Intuitions on Probability</b></div>
         </div>
         <div class="card-body" style="font-size:0.7rem;">
             Probability and distributions, marginals, conditionals, likelihood
@@ -69,10 +69,10 @@
     <div class="column col-4 col-xs-12">
         <div class="card">
         <div class="card-image">
-            <img src="../_static/bayes-theorem.png" class="img-responsive">
+            <img src="../_static/bayes_theorem_draw.png" class="img-responsive">
         </div>
         <div class="card-header">
-            <div class="card-title"><b>5 Bayesian modelling</b></div>
+            <div class="card-title"><b>5 Bayesian Modelling</b></div>
         </div>
         <div class="card-body" style="font-size:0.7rem;">
             Bayes theorem, uncertainty and knowledge update, priors, likelihood, evidence, posteriors.
@@ -87,7 +87,7 @@
             <img src="../_static/vi_hand.jpg" class="img-responsive">
         </div>
         <div class="card-header">
-            <div class="card-title"><b>6 Variational inference</b></div>
+            <div class="card-title"><b>6 Variational Inference</b></div>
         </div>
         <div class="card-body" style="font-size:0.7rem;">
             Optimization for Bayes modelling, VI on model parameters, VI on data.
