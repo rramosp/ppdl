@@ -1,0 +1,32 @@
+title: 4 Tensorflow probability basics
+description: "<style>.timeline .timeline-item {margin-bottom: 0rem;}</style>"
+videos:
+- name: 4.1 Programming with Tensoflow probability 
+  order: 1
+  videos:
+  - name: 1. Disitrbutions objects
+    notebook: 04.01 - NOTES 01 - Distribution Objects.html
+  - name: 2. Distribution layers  
+    notebook: 04.01 - NOTES 02 - Distribution Layers.html
+  - name: 3. Learning distirbution parameters
+    notebook: 04.01 - NOTES 03 - Learning Distribution Parameters.html
+  - name: 4. TFP <tt>DistributionLambda</tt>
+    notebook: 04.01 - NOTES 04 - TFP DistributionLambda.html
+  - name: 5. Understanding shapes
+    notebook: 04.01 - NOTES 05 - Understanding shapes.html
+  - name: 6. More distribution objects
+    notebook: 04.01 - NOTES 06 - More distribution objects.html
+  - name: 7. Bijectors
+    notebook: 04.01 - NOTES 07 - Bijectors.html
+  - name: 8. TFP <tt>JointDistributionNames</tt>
+    notebook: 04.01 - NOTES 08 - JointDistributionNamed.html
+
+- name: <br/><font color="red">LAB Assignments</font>
+  order: 2
+  videos:
+  - name: LAB 1. TFP Distributions
+    notebook: 04.01 - LAB 01 - TFP distributions.html
+  - name: LAB 2. Distribution layers
+    notebook: 04.01 - LAB 02 - Distribution layers.html
+  - name: LAB 3. Joint distributions
+    notebook: 01.01 - LAB 03 - Joint Distributions.html

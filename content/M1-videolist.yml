@@ -1,0 +1,18 @@
+title: 1 Introduction
+img: 1.1 course-mechanics.png
+description: "<style>.timeline .timeline-item {margin-bottom: 0rem;}</style>"
+videos:
+- name: 1.1 What and why probabilistic programming
+  order: 1
+  videos:
+  - name: 1. What is probabilistic programming
+  - name: 2. A simple example
+    notebook: 01.01 - NOTES 01 - Probabilistic programming, a simple example.html
+
+
+- name: <br/>1.2 Course mechanics
+  order: 2
+  videos:
+  - name: 1. Course mechanics
+  - name: <b><font color="red">LAB 1.2</font> Warm up</b>
+    notebook: 01.02 - LAB 01 - Warmup.html
