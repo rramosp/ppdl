@@ -807,8 +807,7 @@ class Main(Scene):
         timer.wait_until("8min 49sec")
 
         self.play(
-            FadeOut(p_z_graph_vdict),
-            FadeOut(riemann_area)
+            FadeOut(p_z_graph_vdict)
         )
 
         updating_animation(
