@@ -700,7 +700,7 @@ def pdf_curve_normal(x, mu, sigma):
     return math.exp(-((x-mu)**2)/(2*sigma**2))/(sigma*math.sqrt(2*math.pi))
 
 def generate_probability_density_function_graph(
-    median: float = 4, x_median_symbol:(Any) = "Z",
+    median: float = 4, x_median_symbol:(Any) = "z",
     area_pdf_curve_color: color = RED_E,
     x_axis_numbers_to_include: list = []
     )-> tuple:
