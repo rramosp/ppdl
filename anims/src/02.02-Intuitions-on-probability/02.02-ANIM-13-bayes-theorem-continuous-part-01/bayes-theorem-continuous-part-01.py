@@ -53,7 +53,7 @@ class Main(Scene):
             "{P(", "s_{0} = 22.3m", "|", "z", ") \cdot ", "P(z)",
             "\\over",
             "P(", "s_{0} = 22.3m", ")}", color= BLACK
-        )
+        ).scale(0.8).to_edge(UP)
 
         
         timer.wait_until(1)
@@ -205,10 +205,7 @@ class Main(Scene):
 
         area_pdf_curve = always_redraw(lambda: ax.get_area(pdf_curve, color=RED_E, opacity=0.5))
 
-        self.play(
-            Write(area_pdf_curve)
-        )
-
+        
         timer.wait_until("1min 31sec")
 
         self.play(
@@ -234,11 +231,6 @@ class Main(Scene):
 
         timer.wait_until("1min 33sec")
 
-        self.play(
-            Uncreate(pdf_curve),
-            FadeOut(area_pdf_curve),
-            run_time=2    
-        )
 
  
         timer.wait_until("1min 36sec")
@@ -274,7 +266,7 @@ class Main(Scene):
             )
         )
 
-
+        
 
         timer.wait_until("1min 49sec")
 
@@ -304,7 +296,7 @@ class Main(Scene):
         )
 
         timer.wait_until("2min 1sec")
-
+        
         s_sub_1_tex =  MathTex(
             "S_{1}", "=", "22.8m", color=BLACK
         ).next_to(s_sub_0_tex,DOWN)
@@ -327,7 +319,11 @@ class Main(Scene):
             )
         )
 
-        
+        s_i_vgroup = VGroup(s_sub_i_tex,s_sub_0_tex, s_sub_1_tex, z_tex )
+
+        timer.wait_until("2min 15sec")
+
+        self.play(s_i_vgroup.animate.scale(0.8).to_corner(UL,buff=MED_SMALL_BUFF))
 
         timer.wait_until("2min 23sec")
         
@@ -337,7 +333,7 @@ class Main(Scene):
 
         self.play(
             Write(
-                p_z_to_s0[0:7].to_edge(UP).scale(0.8)
+                p_z_to_s0[0:7]
             )
         )
 
@@ -355,7 +351,7 @@ class Main(Scene):
 
         self.play(
             FadeIn(
-                p_z_to_s0[7:].to_edge(UP).scale(0.8)
+                p_z_to_s0[7:]
             )
         )
 
@@ -378,14 +374,16 @@ class Main(Scene):
         )
 
         self.play(
-            p_z_copy.animate.move_to(ORIGIN).scale(1.2)
+            p_z_copy.animate.next_to(s_sub_i_tex,RIGHT).scale(1).shift(RIGHT*7)
         )
+
+        
 
         timer.wait_until("3min 34sec")
 
         p_s0_to_z = MathTex(
             "P(", "S_{0}", "|", "z", ")", color=BLACK
-        ).next_to(p_z_copy, DOWN)
+        ).scale(0.8).next_to(p_z_copy, DOWN)
 
 
         self.play(
@@ -444,7 +442,8 @@ class Main(Scene):
 
         std_1_m_tex = MathTex(
             "\\rightarrow", "std: ", "1","m"
-        ).next_to(p_s0_to_z,buff=SMALL_BUFF)
+        ).scale(0.8).next_to(p_s0_to_z,buff=SMALL_BUFF)
+
 
         self.play(
             Write(
@@ -455,15 +454,23 @@ class Main(Scene):
 
         std_specification_graph_tex_left = MathTex(
             "1m"
-        ).scale(0.5).next_to(z_number_label,UP).shift(LEFT*0.2)
+        ).scale(0.6).next_to(z_number_label,UP).shift(LEFT*0.4).shift(UP)
 
 
         std_specification_graph_tex_right = MathTex(
             "1m"
-        ).scale(0.5).next_to(z_number_label,UP).shift(RIGHT*0.2)
+        ).scale(0.6).next_to(z_number_label,UP).shift(RIGHT*0.4).shift(UP)
 
+        t_label = ax.get_T_label(x_val=4, graph=pdf_curve, label=None, triangle_size=0, line_color=BLACK)
 
-        horizontal_line_pdf = ax.get_horizontal_line(ax.input_to_graph_point(1,pdf_curve),color=BLACK)
+        self.play(
+            Create(t_label)
+        )
+
+        horizontal_line_pdf = ax.get_horizontal_line(ax.input_to_graph_point(0.2,pdf_curve),color=BLACK)
+
+        timer.wait_until("4min 9sec")
+
 
         self.play(
             Write(
@@ -484,11 +491,10 @@ class Main(Scene):
         timer.wait_until("4min 53sec")
 
         p_z_value = MathTex(
-            "\\rightarrow" ,"\\textbf{?}"
+            "\\rightarrow" ,"prior"
         ).scale(0.8).next_to(p_z_copy,RIGHT)
 
-
-
+        
 
         self.play(
             FadeIn(p_z_value)
@@ -507,20 +513,12 @@ class Main(Scene):
         "100", color=BLACK
         ).scale(0.8).move_to(
                    ax[0].get_number_mobject(10),
-                )
+                )        
 
-        tick_twenty = ax[0].get_tick(2).scale(2)
-
-        twenty_number_label = MathTex(
-        "20", color=BLACK
-        ).scale(0.8).move_to(
-                   ax[0].get_number_mobject(2),
-                )
-
-        continuous_graph = always_redraw(lambda: ax.plot(lambda x: 0.5, x_range=[-10,10], color=GREEN_E))
+        continuous_graph = always_redraw(lambda: ax.plot(lambda x: 0.4, x_range=[-10,10], color=GREEN_E))
         label_func_1 = ax.get_graph_label(graph=continuous_graph, label=MathTex("Continuous Function", color=GREEN_E).scale(0.8), x_val=-5,direction=UP )
 
-        p_z_graph_trackers["sigma"].set_value(1)
+        sigma.set_value(1)
 
 
         self.play(
@@ -546,33 +544,32 @@ class Main(Scene):
 
         timer.wait_until("5min 30sec")
 
+        self.play(FadeOut(z_number_label))
+
+        z_number_label = MathTex(
+            "20", color=BLACK
+        ).scale(0.8).move_to(
+                        ax.get_axes()[0].get_number_mobject(4),
+                    )
+
         self.play(
-            Write(twenty_number_label),
-            Create(tick_twenty)
+            FadeIn(z_number_label)
+            
         )
 
         timer.wait_until("5min 40sec")
 
-        render_probability_density_function_graph(
-            self,
-            p_z_graph_vdict,
-            p_z_graph_trackers,
-            render_median=False,
-            render_x_axis=False,
-            render_y_axis=False,
-            render_zero_division=True,
-            render_pdf_area_curve=True
-        )
-
-        timer.wait_until("5min 41sec")
+        probabilities_vgroup = VGroup(p_z_copy,std_1_m_tex, p_z_value,p_s0_to_z)
 
         
 
-        label_func = ax.get_graph_label(graph=p_z_graph_vdict["pdf_curve"], label=MathTex("patata").scale(0.8), x_val=3,direction=UR )
+        timer.wait_until("5min 41sec")
+
+        label_func = ax.get_graph_label(graph=pdf_curve, label=MathTex("patata").scale(0.8), x_val=3,direction=UR )
 
         normal_tex = MathTex(
-            "N(", "20", ",", "w", ")", color=BLUE_E
-        ).scale(0.8).move_to(label_func.get_center())
+            "N(", "20", ",", "W", ")}", color=BLUE_E
+        ).scale(0.8).move_to(label_func.get_center()).shift(RIGHT)
 
         self.play(
             Write(normal_tex[0:3])
@@ -591,11 +588,14 @@ class Main(Scene):
         )
 
         point_five_tex = MathTex(
-            "0.5", color=BLUE_E
-        ).scale(0.7).move_to(normal_tex[-2]).shift(UP*0.02)
+            "0.5)", color=BLUE_E
+        ).scale(0.8).move_to(normal_tex[-2]).shift(DOWN*0.02)
 
         timer.wait_until("6min")
 
+        self.play(
+            FadeOut(normal_tex[-1])
+        )
         self.play(
             FadeIn(point_five_tex)
         )
@@ -614,27 +614,38 @@ class Main(Scene):
             run_time=3
         )
 
+        timer.wait_until("6min 48sec")
+
+        self.play(
+            Uncreate(t_label),
+            FadeOut(std_specification_graph_tex_left, std_specification_graph_tex_right)
+        )
+
+        
 
         timer.wait_until("6min 50sec")
 
 
         self.play(
-            p_z_graph_trackers["sigma"].animate.set_value(2), run_time=3,
+            sigma.animate.set_value(2), run_time=3,
             rate_func=rate_functions.smooth
+        )
+
+        timer.wait_until("6min 55sec")
+
+        t_label = ax.get_T_label(x_val=4, graph=pdf_curve, label=None, triangle_size=0, line_color=BLACK)
+
+        self.play(
+            Create(t_label)
         )
 
         timer.wait_until("7min 6sec")
 
-        self.play(
-            FadeOut(*self.mobjects)
-        )
+        self.play(probabilities_vgroup.animate.scale(0.8).next_to(z_tex,DOWN))
 
         timer.wait_until("7min 8sec")
 
-        self.play(
-            FadeIn(*pre_graph_mobjects)
-        )     
-
+        
         timer.wait_until("7min 11sec")
 
         denominator_underline = Underline(p_z_to_s0[-3:], color=RED_E)
@@ -651,8 +662,13 @@ class Main(Scene):
             "normalization \hspace{0.2cm} factor"
         ).scale(0.5).next_to(denominator_underline,DOWN,buff=SMALL_BUFF)
 
+        normalization_factor_evidence_tex = MathTex(
+            "(evidence)"
+        ).scale(0.5).next_to(normalization_factor_tex,DOWN,buff=0.01)
+
         self.play(
-            Write(normalization_factor_tex)
+            Write(normalization_factor_tex),
+            Write(normalization_factor_evidence_tex)
         )
     
         denominator_copy = p_z_to_s0[-3:].copy()
@@ -663,7 +679,7 @@ class Main(Scene):
 
         number_tex = MathTex(
             "\\rightarrow", "number"
-        ).scale(0.8).next_to(denominator_copy,RIGHT)
+        ).scale(0.8).scale(0.8).next_to(denominator_copy,RIGHT)
 
         self.play(
             Write(number_tex[-1])
@@ -686,7 +702,7 @@ class Main(Scene):
 
         prob_distribution_p_z_tex = MathTex(
             "N(", "20", "," ,"3", ")", "(z)"
-        ).scale(0.8).next_to(p_z_value,RIGHT,buff=0).shift(LEFT*0.15)
+        ).scale(0.8).scale(0.8).move_to(p_z_value[-1]).shift(RIGHT*0.35)
 
         self.play(
             Write(prob_distribution_p_z_tex[0])
@@ -697,36 +713,6 @@ class Main(Scene):
         self.play(
             Write(prob_distribution_p_z_tex[1:5])
         )
-
-
-        timer.wait_until("7min 53sec")
-
-        ## start mini graph
-
-        p_z_graph_vdict, p_z_graph_trackers = generate_probability_density_function_graph(median=0)
-
-        p_z_graph_vdict.scale(0.3).next_to(prob_distribution_p_z_tex,RIGHT).shift(UP*0.8).shift(RIGHT*0.5)
-
-        render_probability_density_function_graph(
-            self,
-            p_z_graph_vdict, p_z_graph_trackers,
-            render_pdf_area_curve=False
-        )
-
-        
-        #Axes().get_riemann_rectangles()
-
-        p_z_graph_vdict["median_label"].scale(2)
-
-        riemann_area = ax.get_riemann_rectangles(
-            graph= p_z_graph_vdict["pdf_curve"], x_range=[-9,9],dx=0.35 ,color=RED_E
-            )
-
-        timer.wait_until("8min 2sec")
-
-        
-
-        ## end mini graph
 
         timer.wait_until("8min 6sec")
 
@@ -742,11 +728,11 @@ class Main(Scene):
 
         buffer_arrow = MathTex(
             "\\rightarrow"
-        ).scale(0.8).next_to(p_s0_to_z, RIGHT)
+        ).scale(0.8).scale(0.8).next_to(p_s0_to_z, RIGHT)
 
         prob_distribution_p_s0_z_tex = MathTex(
             "N(", "z", "," ,"1", ")", "(22.3)"
-        ).scale(0.8).next_to(buffer_arrow,RIGHT,buff=0.1)
+        ).scale(0.8).scale(0.8).next_to(buffer_arrow,RIGHT,buff=0.1)
 
         self.play(
             FadeOut(
@@ -806,9 +792,7 @@ class Main(Scene):
 
         timer.wait_until("8min 49sec")
 
-        self.play(
-            FadeOut(p_z_graph_vdict)
-        )
+        
 
         updating_animation(
             VGroup(p_z_copy,prob_distribution_p_z_tex),
@@ -850,7 +834,7 @@ class Main(Scene):
             color=RED_E)
         )
 
-        f_z_first = MathTex("\\rightarrow", "f(z)").scale(0.8).next_to(prob_distribution_p_z_tex,RIGHT,buff=0.1)
+        f_z_first = MathTex("\\rightarrow", "f(z)").scale(0.8).scale(0.8).next_to(prob_distribution_p_z_tex,RIGHT,buff=0.1)
 
         self.play(
             Write(
@@ -865,7 +849,7 @@ class Main(Scene):
             color=BLUE_E)
         )
 
-        f_z_second = MathTex("\\rightarrow", "f(z)").scale(0.8).next_to(prob_distribution_p_s0_z_tex,RIGHT,buff=0.1)
+        f_z_second = MathTex("\\rightarrow", "f(z)").scale(0.8).scale(0.8).next_to(prob_distribution_p_s0_z_tex,RIGHT,buff=0.1)
 
         self.play(
             Write(
@@ -888,7 +872,7 @@ class Main(Scene):
             "P(s_{0}=22.3m)", "=",
             "\int_{- \infty }^{ \infty }",
             "P(", "s_{0} = 22.3m", "|", "z)", "\cdot", "P(z)", " \,dz "
-        ).scale(0.8).next_to(denominator_copy,DOWN)
+        ).scale(0.8).next_to(ORIGIN,UP).shift(RIGHT*3.3)
 
         self.play(
             FadeIn(
@@ -992,7 +976,7 @@ class Main(Scene):
 
         ## STARTS MINI GRAPH
 
-        ax = Axes(
+        ax2 = Axes(
             x_range=[0, 5],
             y_range=[0, 6],
             axis_config={"stroke_color": BLACK},
@@ -1000,37 +984,41 @@ class Main(Scene):
             tips=False,
         )
 
-        labels = ax.get_axis_labels().set_color(BLACK)
+        labels_2 = ax2.get_axis_labels().set_color(BLACK)
 
-        curve_2 = ax.plot(
+        curve_3 = ax2.plot(
             lambda x: 0.8 * x ** 2 - 3 * x + 4,
             x_range=[0, 4],
             color=GREEN_B,
         )
 
-        line_1 = ax.get_vertical_line(ax.input_to_graph_point(2, curve_2), color=PURPLE_A)
-        line_2 = ax.get_vertical_line(ax.i2gp(3, curve_2), color=PURPLE_A)
+        line_1 = ax2.get_vertical_line(ax2.input_to_graph_point(2, curve_3), color=PURPLE_A)
+        line_2 = ax2.get_vertical_line(ax2.i2gp(3, curve_3), color=PURPLE_A)
 
         
-        area = ax.get_area(curve_2, [2, 3], color=GREEN_E, opacity=0.4)
+        area = ax2.get_area(curve_3, [2, 3], color=GREEN_E, opacity=0.4)
 
         any_function_vgroup = VGroup(
-            ax, labels, curve_2, line_1, line_2, area
-        ).scale(0.3).shift(UP*0.8).shift(RIGHT*0.5).next_to(sum_denominator_tex, RIGHT)
+            ax2, labels_2, curve_3, line_1, line_2, area
+        ).scale(0.3).shift(UP*0.8).shift(RIGHT*0.5).to_edge(UR,buff=SMALL_BUFF)
 
+        surrounder_mini_graph = SurroundingRectangle(any_function_vgroup,color=RED_E)
 
         self.play(
             Write(
-                ax
+                ax2
             ),
             Write(
-                labels
+                labels_2
+            ),
+            Write(
+                surrounder_mini_graph
             )
         )
 
         self.play(
             Create(
-                curve_2
+                curve_3
             )
         )
 
