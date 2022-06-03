@@ -25,8 +25,8 @@ blank: does not apply
 13- [video ntbk][          x  x] 02.02 - NOTES 03 - bayes theorem discrete
 14- [video anim][ *  *  r      ] 02.02 - ANIM 11 - bayes-theorem-terminology-part-01
 15- [video anim][ *  *  w      ] 02.02 - ANIM 12 - bayes-theorem-terminology-part-02
-16- [video anim][ *  *  -      ] 02.02 - ANIM 13 - bayes-theorem-continuous-01
-17- [video anim][ *  *  -      ] 02.02 - ANIM 14 - bayes-theorem-continuous-02
+16- [video anim][ *  *  r      ] 02.02 - ANIM 13 - bayes-theorem-continuous-01
+17- [video anim][ *  *  r      ] 02.02 - ANIM 14 - bayes-theorem-continuous-02
 18- [video ntbk][          w  w] 02.02 - NOTES 04 - Bayes theorem continuous
 19- [video ntbk][          -  -] 02.02 - NOTES 05 - Conjugate distributions
 20- [video anim][ d  -  -      ] 02.02 - ANIM 15 - Conditioning-on-parameters
