@@ -702,7 +702,9 @@ def pdf_curve_normal(x, mu, sigma):
 def generate_probability_density_function_graph(
     median: float = 4, x_median_symbol:(Any) = "z",
     area_pdf_curve_color: color = RED_E,
-    x_axis_numbers_to_include: list = []
+    x_axis_numbers_to_include: list = [],
+    x_range: list = [-10,10,1],
+    initial_sigma: float = 1
     )-> tuple:
 
     """
@@ -739,7 +741,7 @@ def generate_probability_density_function_graph(
     median = -median
 
     ax = Axes(
-            x_range = [-10, 10, 1],
+            x_range = x_range,
             y_range = [0, 1, 0.2],
             axis_config = {    
                 "stroke_color": BLACK,
@@ -772,7 +774,7 @@ def generate_probability_density_function_graph(
                 )
 
 
-    sigma = ValueTracker(1)
+    sigma = ValueTracker(initial_sigma)
     shifter_x_axis_pdf = ValueTracker(median)
 
 
