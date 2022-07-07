@@ -12,7 +12,7 @@ blank: does not apply
                  sc vd vf nb vn
 1-  [video anim][ *  *  *      ] 02.02 - ANIM 01 - what-is-probability
 2-  [video anim][ *  *  *      ] 02.02 - ANIM 02 - probability-and-distributions
-3-  [video anim][ *  p  p      ] 02.02 - ANIM 03 - marginals-conditionals-joints
+3-  [video anim][ *  r  r      ] 02.02 - ANIM 03 - marginals-conditionals-joints
 4-  [video anim][ *  -  -      ] 02.02 - ANIM 04 - relations-between-cond-margs
 5-  [video ntbk][          *  *] 02.02 - NOTES 01 - marginalizing and conditioning on discrete distributions
 6-  [video anim][ *  p  -      ] 02.02 - ANIM 05 - cond-margs-joints-continuous
