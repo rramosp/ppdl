@@ -4,27 +4,32 @@ videos:
 - name: 6.1 Revisiting uncertainty
   order: 1
   videos:
-  - name: 1. Aleatoric and epistemic uncertainty
+  - name: 1. Parameters, data and random variables
   - name: 2. Exploring uncertainty on data (aleatoric)  
     notebook: 06.01 - NOTES 01 - Exploring aleatoric uncertainty.html
   - name: 3. Exploring uncertainty on models (epistemic)  
     notebook: 06.01 - NOTES 02 - Exploring epistemic uncertainty.html
+
 - name: <br/>6.2 Variational Inference
   order: 2
   videos:
-  - name: 1. Why and how variational inference
-- name: <br/>6.3 VI on latent variables
+  - name: 1. Why variational inference
+  - name: 2. The ELBO
+  - name: 3. Expectations and the reparametrization trick
+    notebook: 06.02 - NOTES 03 - Expectations and reparametrization.html
+  - name: <b><font color="red">LAB 1</font> Expectations and gradients</b>
+    notebook: 06.02 - LAB 01 - Expectations and gradients.html
+
+- name: <br/>6.3 Variational Inference in practice
   order: 3
   videos:
-  - name: 1. TF examples
-- name: <br/>6.4 VI on latent parameteris
-  order: 4
-  videos:
-  - name: 1. Dirichlet distributions
-    notebook: 06.04 - NOTES 01 - Dirichlet Distribution.html
-
-  - name: 2. VI for Text modelling
-    notebook: 06.04 - NOTES 02 - Variational Inference for Text Modeling.html
-
-  - name: <b><font color="red">LAB 1</font> Topic modelling</b>
-    notebook: 06.04 - LAB 01 - Variational Topic Modeling.html
+  - name: 1. Single observation example
+    notebook: 06.03 - NOTES 01 - Single observation posterior.ipynb
+  - name: 2. Variational Autoencoders
+  - name: 3. Dirichlet distributions
+    notebook: 06.03 - NOTES 03 - Dirichlet Distribution.html
+  - name: 4. Text modelling
+    notebook: 06.03 - NOTES 04 - Variational Inference for Text Modeling.html
+  - name: <b><font color="red">LAB 2</font> Variational autoencoder</b>
+  - name: <b><font color="red">LAB 3</font> Topic modelling</b>
+    notebook: 06.03 - LAB 02 - Variational Topic Modeling.html
