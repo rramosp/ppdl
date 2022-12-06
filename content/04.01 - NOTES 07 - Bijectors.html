@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -330,10 +330,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
-<span class="o">!</span>git clone https://github.com/rramosp/ppdl.git &gt; /dev/null <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>mv -n ppdl/content/init.py ppdl/content/local . <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
+!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
+!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
+!pip install -r ppdl/content/requirements.txt &gt; /dev/null
 </pre></div>
 </div>
 </div>
@@ -342,19 +342,19 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Bijectors<a class="headerlink" href="#bijectors" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
-<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">ppdl</span> 
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+from rlxutils import subplots, copy_func
+import tensorflow_probability as tfp
+import tensorflow as tf
+import ppdl 
+import pandas as pd
 
-<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
-<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
+tfd = tfp.distributions
+tfb = tfp.bijectors
 
-<span class="o">%</span><span class="k">matplotlib</span> inline
+%matplotlib inline
 </pre></div>
 </div>
 </div>
@@ -367,25 +367,25 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Observe how we scale and shift a distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bscale</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
-<span class="n">bshift</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Shift</span><span class="p">(</span><span class="mf">.3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bscale = tfb.Scale(.5)
+bshift = tfb.Shift(.3)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_orig</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="mf">1.8</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
-<span class="n">d_scaled</span> <span class="o">=</span> <span class="n">bscale</span><span class="p">(</span><span class="n">d_orig</span><span class="p">)</span>
-<span class="n">d_scaled_and_shifted</span> <span class="o">=</span> <span class="n">bshift</span><span class="p">(</span><span class="n">d_scaled</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d_orig = tfd.Beta(1.8,1.5)
+d_scaled = bscale(d_orig)
+d_scaled_and_shifted = bshift(d_scaled)
 
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_orig</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;original&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_scaled</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;scaled&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_scaled_and_shifted</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;scaled and shifted&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+for ax,i in subplots(range(3), usizex=5):
+    if i==0: ppdl.plot_pdf(d_orig); plt.title(&quot;original&quot;)
+    if i==1: ppdl.plot_pdf(d_scaled); plt.title(&quot;scaled&quot;)
+    if i==2: ppdl.plot_pdf(d_scaled_and_shifted); plt.title(&quot;scaled and shifted&quot;)
+    plt.xlim(-.1,1.1)
+    plt.grid();
+plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -396,7 +396,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>the resulting distribution are fully valid TFP distribution objects</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_scaled</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d_scaled
 </pre></div>
 </div>
 </div>
@@ -408,8 +408,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">d_scaled</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">s</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = d_scaled.sample(10)
+s
 </pre></div>
 </div>
 </div>
@@ -424,7 +424,7 @@ array([0.11156841, 0.39035392, 0.07765947, 0.19926141, 0.3500817 ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_scaled</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d_scaled.log_prob(s)
 </pre></div>
 </div>
 </div>
@@ -444,18 +444,18 @@ array([0.5458902 , 0.91539323, 0.29789424, 0.8819361 , 0.9846997 ,
 <p>you can also create an <strong>inverse bijector</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bc</span>     <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">([</span><span class="n">bshift</span><span class="p">,</span><span class="n">bscale</span><span class="p">])</span>
-<span class="n">bci</span>    <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Invert</span><span class="p">(</span><span class="n">bc</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bc     = tfb.Chain([bshift,bscale])
+bci    = tfb.Invert(bc)
 
-<span class="n">dt</span>     <span class="o">=</span> <span class="n">bc</span><span class="p">(</span><span class="n">d_orig</span><span class="p">)</span>
-<span class="n">d_back</span> <span class="o">=</span> <span class="n">bci</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+dt     = bc(d_orig)
+d_back = bci(dt)
 
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_orig</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;original distribution&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;chain transformed&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_back</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;transformed back&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+for ax,i in subplots(3, usizex=5):
+    if i==0: ppdl.plot_pdf(d_orig); plt.title(&quot;original distribution&quot;)
+    if i==1: ppdl.plot_pdf(dt); plt.title(&quot;chain transformed&quot;)
+    if i==2: ppdl.plot_pdf(d_back); plt.title(&quot;transformed back&quot;)
+    plt.xlim(-.1,1.1)
+    plt.grid();
 </pre></div>
 </div>
 </div>
@@ -468,9 +468,9 @@ array([0.5458902 , 0.91539323, 0.29789424, 0.8819361 , 0.9846997 ,
 <h2>Bijector are general transformations on TF objects<a class="headerlink" href="#bijector-are-general-transformations-on-tf-objects" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
-<span class="n">tx</span> <span class="o">=</span> <span class="n">bc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">tx</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = tf.Variable(2.)
+tx = bc(x)
+tx
 </pre></div>
 </div>
 </div>
@@ -482,7 +482,7 @@ array([0.5458902 , 0.91539323, 0.29789424, 0.8819361 , 0.9846997 ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bc</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bc.inverse(tx)
 </pre></div>
 </div>
 </div>
@@ -498,15 +498,15 @@ array([0.5458902 , 0.91539323, 0.29789424, 0.8819361 , 0.9846997 ,
 <p>bijectors make it easier to model stuff with non standard distributions, for instance</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">([</span><span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Shift</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mf">1.5</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Shift</span><span class="p">(</span><span class="o">+</span><span class="mf">.5</span><span class="p">)])</span>
-<span class="n">d1</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.8</span><span class="p">)</span>
-<span class="n">d2</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t = tfb.Chain([tfb.Scale(3), tfb.Shift(2), tfb.Tanh(), tfb.Scale(1.5), tfb.Shift(+.5)])
+d1 = tfd.Beta(1.2,1.8)
+d2 = t(d1)
 
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d1</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;original&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d2</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;transformed&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+for ax,i in subplots(2, usizex=5):
+    if i==0: ppdl.plot_pdf(d1); plt.title(&quot;original&quot;)
+    if i==1: ppdl.plot_pdf(d2); plt.title(&quot;transformed&quot;)
+    plt.grid();
+plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -521,11 +521,11 @@ array([0.5458902 , 0.91539323, 0.29789424, 0.8819361 , 0.9846997 ,
 <p>This is only checked in <code class="docutils literal notranslate"><span class="pre">validate_args</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, otherwise, <code class="docutils literal notranslate"><span class="pre">nan</span></code> are generated and the code downstream will fail somewhere</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">()</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">s</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t = tfb.Square()
+d = tfd.Normal(loc=0, scale=1)
+dt = t(d)
+s = dt.sample(10)
+s
 </pre></div>
 </div>
 </div>
@@ -540,7 +540,7 @@ array([0.05243969, 0.00711866, 0.3022964 , 0.08465093, 1.0127188 ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dt.prob(s)
 </pre></div>
 </div>
 </div>
@@ -556,13 +556,13 @@ array([0.84852153, 2.3557818 ,        nan, 0.6571772 , 0.1194611 ,
 <p>with <code class="docutils literal notranslate"><span class="pre">validate_args</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> an exception is rised and can be dealt with</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">(</span><span class="n">validate_args</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t = tfb.Square(validate_args=True)
+d = tfd.Normal(loc=0, scale=1)
+dt = t(d)
+try:
+    s = dt.sample(10)
+except Exception as e:
+    print (e)
 </pre></div>
 </div>
 </div>
@@ -579,11 +579,11 @@ x (shape=(10,) dtype=float32) =
 We test both cases with positive samples which we know are valid</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">([</span><span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">validate_args</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">(</span><span class="n">validate_args</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="o">%</span><span class="k">timeit</span> s = dt.sample(1000)
-<span class="o">%</span><span class="k">timeit</span> dt.log_prob(s)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t = tfb.Chain([tfb.Scale(2, validate_args=True), tfb.Square(validate_args=True)])
+d = tfd.Normal(loc=100, scale=1)
+dt = t(d)
+%timeit s = dt.sample(1000)
+%timeit dt.log_prob(s)
 </pre></div>
 </div>
 </div>
@@ -596,12 +596,12 @@ We test both cases with positive samples which we know are valid</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">()</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">([</span><span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">()])</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="o">%</span><span class="k">timeit</span> s = dt.sample(1000)
-<span class="o">%</span><span class="k">timeit</span> dt.log_prob(s)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t = tfb.Square()
+t = tfb.Chain([tfb.Scale(2), tfb.Square()])
+d = tfd.Normal(loc=100, scale=1)
+dt = t(d)
+%timeit s = dt.sample(1000)
+%timeit dt.log_prob(s)
 </pre></div>
 </div>
 </div>
@@ -618,15 +618,16 @@ We test both cases with positive samples which we know are valid</p>
 <p>observe how we can learn altogether bijector and distribution parameters</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scale</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span>
-<span class="n">dbeta</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
-<span class="n">d_orig</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">dbeta</span><span class="p">)</span>  
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+scale = tfb.Scale(3)
+a,b = 2, 1.5
+dbeta = tfd.Beta(a,b)
+d_orig = scale(dbeta)  
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">d_orig</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
-<span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_orig</span><span class="p">,</span> <span class="n">hist_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;bins&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">.5</span><span class="p">})</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample mean&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+x = d_orig.sample(100000)
+ppdl.plot_pdf(d_orig, hist_args={&#39;color&#39;: &#39;red&#39;, &#39;bins&#39;: 100, &#39;alpha&#39;: .5})
+plt.axvline(np.mean(x), ls=&quot;--&quot;, color=&quot;black&quot;, alpha=.5, label=&quot;sample mean&quot;)
+plt.grid(); plt.legend();
 </pre></div>
 </div>
 </div>
@@ -637,52 +638,52 @@ We test both cases with positive samples which we know are valid</p>
 <p>Although trivial, we will just learn the bijector parameter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="n">init_sc</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">validate_args</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def optimize(init_sc=10., validate_args=False):
     
-    <span class="n">sc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">init_sc</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    sc = tf.Variable(init_sc, dtype=tf.float32)
 
-    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>    
+    optimizer = tf.keras.optimizers.Adam(learning_rate=0.1)    
 
-    <span class="n">hloss</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">hgrads</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">hparams</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">)):</span>
+    hloss = []
+    hgrads = []
+    hparams = []
+    for epoch in pbar(range(200)):
 
-        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
-            <span class="n">c</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span> <span class="n">validate_args</span><span class="o">=</span><span class="n">validate_args</span><span class="p">))</span>
-            <span class="n">negloglik</span>    <span class="o">=</span> <span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-            <span class="n">hloss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">negloglik</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+        with tf.GradientTape() as tape:
+            c = tfb.Scale(sc)
+            d = c(tfd.Beta(a,b, validate_args=validate_args))
+            negloglik    = -tf.reduce_mean(d.log_prob(x))
+            hloss.append(negloglik.numpy())
 
-        <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">negloglik</span><span class="p">,</span> <span class="p">[</span><span class="n">sc</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gradients</span><span class="p">]):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;nan gradients&quot;</span><span class="p">)</span>
-            <span class="k">break</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,[</span><span class="n">sc</span><span class="p">]))</span>
-        <span class="n">hgrads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gradients</span><span class="p">)</span>
-        <span class="n">hparams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+        gradients = tape.gradient(negloglik, [sc])
+        if np.any([np.isnan(i) for i in gradients]):
+            print(&quot;nan gradients&quot;)
+            break
+        optimizer.apply_gradients(zip(gradients,[sc]))
+        hgrads.append(gradients)
+        hparams.append(sc.numpy())
 
-    <span class="n">hgrads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">hgrads</span><span class="p">]</span>
-    <span class="n">hloss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">hloss</span><span class="p">]</span>
-    <span class="n">hparams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">hparams</span><span class="p">]</span>
+    hgrads = np.r_[hgrads]
+    hloss = np.r_[hloss]
+    hparams = np.r_[hparams]
     
-    <span class="k">return</span> <span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">,</span> <span class="n">sc</span>
+    return hloss, hparams, hgrads, sc
     
-<span class="k">def</span> <span class="nf">plot_optim</span><span class="p">(</span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hloss</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hparams</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;parameter value&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hgrads</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;paramter gradient&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+def plot_optim(hloss, hparams, hgrads):
+    for ax,i in subplots(3, usizex=5):
+        if i==0: plt.plot(hloss); plt.title(&quot;loss&quot;)
+        if i==1: plt.plot(hparams); plt.title(&quot;parameter value&quot;)
+        if i==2: plt.plot(hgrads[:,0]); plt.title(&quot;paramter gradient&quot;)
+        plt.xlabel(&quot;epoch&quot;)
+        plt.grid();
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">,</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">()</span>
-<span class="n">sc</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>hloss, hparams, hgrads, sc = optimize()
+sc
 </pre></div>
 </div>
 </div>
@@ -697,7 +698,7 @@ We test both cases with positive samples which we know are valid</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_optim</span><span class="p">(</span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_optim(hloss, hparams, hgrads)
 </pre></div>
 </div>
 </div>
@@ -707,9 +708,9 @@ We test both cases with positive samples which we know are valid</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">hist_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;fitted distribution&#39;</span><span class="p">,</span> <span class="s1">&#39;bins&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">.5</span><span class="p">})</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;original distribution&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ppdl.plot_pdf(d, hist_args={&#39;label&#39;: &#39;fitted distribution&#39;, &#39;bins&#39;: 100, &#39;alpha&#39;: .5})
+plt.hist(x.numpy(), bins=100, density=True, alpha=.5, color=&quot;red&quot;, label=&quot;original distribution&quot;)
+plt.grid(); plt.legend();
 </pre></div>
 </div>
 </div>
@@ -720,7 +721,7 @@ We test both cases with positive samples which we know are valid</p>
 <p>observe that we might hit invalid values during optimization. The Beta distribution returns <code class="docutils literal notranslate"><span class="pre">nan</span></code> if trying to compute densities for values outside its domain.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">,</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">init_sc</span><span class="o">=-</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>hloss, hparams, hgrads, sc = optimize(init_sc=-5)
 </pre></div>
 </div>
 </div>
@@ -735,7 +736,7 @@ We test both cases with positive samples which we know are valid</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_optim</span><span class="p">(</span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_optim(hloss, hparams, hgrads)
 </pre></div>
 </div>
 </div>
@@ -746,7 +747,7 @@ We test both cases with positive samples which we know are valid</p>
 <p>with <code class="docutils literal notranslate"><span class="pre">validate_args</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> TFP checks stuff and will hint these situations</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">,</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">init_sc</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">validate_args</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>hloss, hparams, hgrads, sc = optimize(init_sc=-5, validate_args=True)
 </pre></div>
 </div>
 </div>

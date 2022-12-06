@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -316,29 +316,29 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
-<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+from scipy.integrate import quad
+from rlxutils import subplots, copy_func
+from progressbar import progressbar as pbar
+%matplotlib inline
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_posterior</span><span class="p">(</span><span class="n">likelihood_fn</span><span class="p">,</span> <span class="n">prior_fn</span><span class="p">,</span> <span class="n">support</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">integration_intervals</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">support</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def get_posterior(likelihood_fn, prior_fn, support, atol=1e-5, integration_intervals=1000):
+    assert len(support)==2
 
-    <span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">support</span><span class="p">,</span> <span class="n">integration_intervals</span><span class="p">)</span>
+    xr = np.linspace(*support, integration_intervals)
 
-    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">likelihood_fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">prior_fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xr</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    Z = np.sum([likelihood_fn(x)*prior_fn(x) for x in xr]) * (xr[1]-xr[0])
     
-    <span class="n">posterior_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">copy_func</span><span class="p">(</span><span class="n">likelihood_fn</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">copy_func</span><span class="p">(</span><span class="n">prior_fn</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span>  <span class="n">Z</span>
+    posterior_fn = lambda x: copy_func(likelihood_fn)(x) * copy_func(prior_fn)(x) /  Z
     
-    <span class="k">return</span> <span class="n">posterior_fn</span>
+    return posterior_fn
 </pre></div>
 </div>
 </div>
@@ -347,24 +347,24 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>the posterior of one measurement<a class="headerlink" href="#the-posterior-of-one-measurement" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">support</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>support = [-20,20]
 
-<span class="n">likelihood</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">prior</span>      <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">posterior</span>  <span class="o">=</span> <span class="n">get_posterior</span><span class="p">(</span><span class="n">likelihood</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">support</span><span class="p">)</span>
+likelihood = lambda x: stats.norm(loc=2,scale=.5).pdf(x)
+prior      = lambda x: stats.norm(loc=4,scale=1).pdf(x)
+posterior  = get_posterior(likelihood, prior, support)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">support</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">(</span><span class="n">xr</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;likelihood&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">prior</span><span class="p">(</span><span class="n">xr</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;prior&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">posterior</span><span class="p">(</span><span class="n">xr</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;posterior&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr = np.linspace(*support,1000)
+plt.plot(xr, likelihood(xr), label=&quot;likelihood&quot;)
+plt.plot(xr, prior(xr), label=&quot;prior&quot;, color=&quot;black&quot;, lw=1)
+plt.plot(xr, posterior(xr), label=&quot;posterior&quot;, color=&quot;black&quot;, lw=4)
+plt.grid();
+plt.legend();
+plt.xlim(0,5);
 </pre></div>
 </div>
 </div>
@@ -378,47 +378,47 @@ const thebe_selector_output = ".output, .cell_output"
 <p>we repeat the steps above, using the posterior obtained at each step as the prior for next measurement</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_position</span><span class="p">(</span>
-    <span class="n">z_real</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span>
-    <span class="n">prior_mean</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="n">prior_std</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="n">sensor_sigma</span> <span class="o">=</span> <span class="mf">.7</span><span class="p">,</span>
-    <span class="n">support</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
-<span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def estimate_position(
+    z_real = 23,
+    prior_mean = 20,
+    prior_std = 10,
+    sensor_sigma = .7,
+    support = [-10, 50]
+):
     
-    <span class="n">initial_prior</span>      <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lambda x: stats.norm(loc=</span><span class="si">{</span><span class="n">prior_mean</span><span class="si">}</span><span class="s2">,scale=</span><span class="si">{</span><span class="n">prior_std</span><span class="si">}</span><span class="s2">).pdf(x)&quot;</span><span class="p">)</span>
-    <span class="n">measurements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">z_real</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sensor_sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">posteriors</span> <span class="o">=</span> <span class="p">[]</span>
+    initial_prior      = eval(f&quot;lambda x: stats.norm(loc={prior_mean},scale={prior_std}).pdf(x)&quot;)
+    measurements = np.random.normal(loc=z_real, scale=sensor_sigma, size=10)
+    posteriors = []
     
-    <span class="n">prior</span> <span class="o">=</span> <span class="n">initial_prior</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">measurements</span><span class="p">))):</span>
-        <span class="c1"># compute the likelihood</span>
-        <span class="n">likelihood</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lambda x: stats.norm(loc=</span><span class="si">{</span><span class="n">measurements</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">,scale=</span><span class="si">{</span><span class="n">sensor_sigma</span><span class="si">}</span><span class="s2">).pdf(x)&quot;</span><span class="p">)</span>
+    prior = initial_prior
+    for i in pbar(range(len(measurements))):
+        # compute the likelihood
+        likelihood = eval(f&quot;lambda x: stats.norm(loc={measurements[i]},scale={sensor_sigma}).pdf(x)&quot;)
         
-        <span class="c1"># compute the posterior, stop if integration errors</span>
-        <span class="n">posterior</span> <span class="o">=</span> <span class="n">get_posterior</span><span class="p">(</span><span class="n">likelihood</span><span class="p">,</span> <span class="n">prior</span><span class="p">,</span> <span class="n">support</span><span class="p">)</span>
-        <span class="n">posteriors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">posterior</span><span class="p">)</span>
+        # compute the posterior, stop if integration errors
+        posterior = get_posterior(likelihood, prior, support)
+        posteriors.append(posterior)
 
-        <span class="c1"># the posterior becomes the next prior </span>
-        <span class="n">prior</span> <span class="o">=</span> <span class="n">posteriors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        # the posterior becomes the next prior 
+        prior = posteriors[-1]
         
-    <span class="c1"># plot stuff</span>
-    <span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">support</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">posteriors</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">initial_prior</span><span class="p">(</span><span class="n">xr</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;prior&quot;</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">z_real</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">z_real</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">posteriors</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">](</span><span class="n">xr</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;measurement </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">measurements</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">z_real</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">z_real</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+    # plot stuff
+    xr = np.linspace(*support, 10000)
+    for ax,i in subplots(len(posteriors)+1, n_cols=6):
+        if i==0:
+            plt.plot(xr, initial_prior(xr), color=&quot;steelblue&quot;)
+            plt.title(&quot;prior&quot;)
+            plt.ylim(0,0.5)
+            plt.xlim(z_real-5, z_real+5)
+        else:
+            plt.plot(xr, posteriors[i-1](xr), color=&quot;steelblue&quot;)
+            plt.title(f&quot;measurement {i}&quot;)
+            plt.axvline(measurements[i-1], color=&quot;black&quot;, ls=&quot;--&quot;)
+            plt.xlim(z_real-2, z_real+2)
 
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">z_real</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        plt.grid();
+        plt.axvline(z_real, color=&quot;black&quot;)
+    plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -428,12 +428,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>observe how, as measurements are processed, the posterior becomes narrower (less uncertainty) and approaches the real value</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_position</span><span class="p">(</span>
-    <span class="n">z_real</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span>
-    <span class="n">prior_mean</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="n">prior_std</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="n">sensor_sigma</span> <span class="o">=</span> <span class="mf">.7</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>estimate_position(
+    z_real = 23,
+    prior_mean = 5,
+    prior_std = 20,
+    sensor_sigma = .7
+)
 </pre></div>
 </div>
 </div>
@@ -450,12 +450,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>however observe that numerical integration might stop us from processing further measurements</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_position</span><span class="p">(</span>
-    <span class="n">z_real</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span>
-    <span class="n">prior_mean</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="n">prior_std</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="n">sensor_sigma</span> <span class="o">=</span> <span class="mf">.2</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>estimate_position(
+    z_real = 23,
+    prior_mean = 20,
+    prior_std = 10,
+    sensor_sigma = .2
+)
 </pre></div>
 </div>
 </div>
@@ -473,12 +473,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Recall, narrow stdevs anywhere always represent small uncertainty</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimate_position</span><span class="p">(</span>
-    <span class="n">z_real</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span>
-    <span class="n">prior_mean</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="n">prior_std</span> <span class="o">=</span> <span class="mf">.2</span><span class="p">,</span>
-    <span class="n">sensor_sigma</span> <span class="o">=</span> <span class="mf">.2</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>estimate_position(
+    z_real = 23,
+    prior_mean = 20,
+    prior_std = .2,
+    sensor_sigma = .2
+)
 </pre></div>
 </div>
 </div>

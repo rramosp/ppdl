@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -338,10 +338,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
-<span class="o">!</span>git clone https://github.com/rramosp/ppdl.git &gt; /dev/null <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>mv -n ppdl/content/init.py ppdl/content/local . <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
+!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
+!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
+!pip install -r ppdl/content/requirements.txt &gt; /dev/null
 </pre></div>
 </div>
 </div>
@@ -350,20 +350,20 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Understanding shapes<a class="headerlink" href="#understanding-shapes" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
-<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
-<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
-<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+from scipy.integrate import quad
+from progressbar import progressbar as pbar
+from rlxutils import subplots, copy_func
+import pandas as pd
+import seaborn as sns
+import tensorflow as tf
+import tensorflow_probability as tfp
+tfd = tfp.distributions
+tfb = tfp.bijectors
 
-<span class="o">%</span><span class="k">matplotlib</span> inline
+%matplotlib inline
 </pre></div>
 </div>
 </div>
@@ -377,8 +377,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>observe that, besides <code class="docutils literal notranslate"><span class="pre">batch_shape</span></code> distributions have an associated <code class="docutils literal notranslate"><span class="pre">event_shape</span></code>, which in this case in empty, signalling that each distribution in the batch is a distribution of scalars.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">d</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d = tfd.Normal(loc=[-1,0], scale=1)
+d
 </pre></div>
 </div>
 </div>
@@ -394,22 +394,22 @@ const thebe_selector_output = ".output, .cell_output"
 <p>They have <code class="docutils literal notranslate"><span class="pre">event_shape</span></code>. For instance, for a multivariate normal distribution we must specify a covariance matrix. Observe that <strong>this cannot be done</strong> using uniquely the <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, since in general variables of a multivariate normal <strong>are not independant</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize a single 3-variate Gaussian.</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">cov</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.36</span><span class="p">,</span>  <span class="mf">0.12</span><span class="p">],</span>
-       <span class="p">[</span> <span class="mf">0.12</span><span class="p">,</span>  <span class="mf">0.29</span><span class="p">]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Initialize a single 3-variate Gaussian.
+mu = [1., 2]
+cov = [[ 0.36,  0.12],
+       [ 0.12,  0.29]]
 
-<span class="n">mvn</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">MultivariateNormalTriL</span><span class="p">(</span>
-    <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span>
-    <span class="n">scale_tril</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">cov</span><span class="p">))</span>
+mvn = tfd.MultivariateNormalTriL(
+    loc=mu,
+    scale_tril=tf.linalg.cholesky(cov))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">mvn</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = mvn.sample(10000)
+s.shape
 </pre></div>
 </div>
 </div>
@@ -422,8 +422,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>observe that dependance shows as a slanted plot</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.displot( x = s[:,0], y = s[:,1], kind=&quot;kde&quot;, rug=False)
+plt.axis(&quot;equal&quot;); plt.grid();
 </pre></div>
 </div>
 </div>
@@ -434,7 +434,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>observe that this implies an <code class="docutils literal notranslate"><span class="pre">event_shape</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mvn</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mvn
 </pre></div>
 </div>
 </div>
@@ -450,23 +450,23 @@ const thebe_selector_output = ".output, .cell_output"
 <p>altogether both determine the sample sizes. Observe how we use broadcasting of the covariance matrix to have a batch of three multivariate distributions of two variables each. The three distributions have the same covariance matrix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize a single 3-variate Gaussian.</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Initialize a single 3-variate Gaussian.
+mu = [[1., 2],[3,4], [5,6]]
 
-<span class="n">cov</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.36</span><span class="p">,</span>  <span class="mf">0.12</span><span class="p">],</span>
-       <span class="p">[</span> <span class="mf">0.12</span><span class="p">,</span>  <span class="mf">0.29</span><span class="p">]]</span>
+cov = [[ 0.36,  0.12],
+       [ 0.12,  0.29]]
 
-<span class="n">mvn</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">MultivariateNormalTriL</span><span class="p">(</span>
-    <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span>
-    <span class="n">scale_tril</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
-<span class="p">)</span>
+mvn = tfd.MultivariateNormalTriL(
+    loc=mu,
+    scale_tril=tf.linalg.cholesky(cov)
+)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mvn</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mvn
 </pre></div>
 </div>
 </div>
@@ -478,8 +478,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">mvn</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = mvn.sample(10000)
+s.shape
 </pre></div>
 </div>
 </div>
@@ -491,7 +491,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.min(mu)
 </pre></div>
 </div>
 </div>
@@ -503,12 +503,12 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>    
-    <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax,i in subplots(s.shape[1], usizex=4):    
+    sns.kdeplot( x = s[:, i, 0], y = s[:, i, 1], ax=ax)
+    plt.axis(&quot;equal&quot;); plt.grid();
+    plt.xlim(np.min(mu)-2, np.max(mu)+2)
+    plt.ylim(np.min(mu)-4, np.max(mu)+4)
+plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -549,11 +549,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p>observe how we deal with each case in the code below</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># batch_shape=[], event_shape=[]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># batch_shape=[], event_shape=[]
 
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+d = tfd.Normal(loc=0, scale=1)
+print (d)
+print (d.sample(2).numpy())
 </pre></div>
 </div>
 </div>
@@ -566,11 +566,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># batch_shape=[3], event_shape=[]     implicitly with vector parameters</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># batch_shape=[3], event_shape=[]     implicitly with vector parameters
 
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># broadcasting on batch same for scale</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+d = tfd.Normal(loc=[0,1,2], scale=1) # broadcasting on batch same for scale
+print (d)
+print (d.sample(2).numpy())
 </pre></div>
 </div>
 </div>
@@ -584,16 +584,16 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># batch_shape=[], event_shape=[4]        explicitly with a multivariate distribution</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># batch_shape=[], event_shape=[4]        explicitly with a multivariate distribution
 
-<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="o">-</span><span class="mi">5</span>
-<span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="o">+</span><span class="mf">.1</span>    <span class="c1"># will broadcast covariance matrix</span>
-<span class="n">cov</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">T</span><span class="p">))</span> <span class="c1"># ensures positive definite matrix</span>
+mu = np.random.random(4)*10-5
+cov = np.random.random(size=(4,4))+.1    # will broadcast covariance matrix
+cov = tf.linalg.cholesky(cov.dot(cov.T)) # ensures positive definite matrix
 
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">MultivariateNormalTriL</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="n">cov</span><span class="p">)</span>
+d = tfd.MultivariateNormalTriL(mu,cov)
 
-<span class="nb">print</span> <span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+print (d)
+print (d.sample(2).numpy())
 </pre></div>
 </div>
 </div>
@@ -607,17 +607,17 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># batch_shape=[3], event_shape=[4]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># batch_shape=[3], event_shape=[4]
 
-<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="o">*</span><span class="mi">10</span><span class="o">-</span><span class="mi">5</span>
+mu = np.random.random((3,4))*10-5
 
-<span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="o">+</span><span class="mf">.1</span>    <span class="c1"># will broadcast covariance matrix</span>
-<span class="n">cov</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cov</span><span class="o">.</span><span class="n">T</span><span class="p">))</span> <span class="c1"># ensures positive definite matrix</span>
+cov = np.random.random(size=(4,4))+.1    # will broadcast covariance matrix
+cov = tf.linalg.cholesky(cov.dot(cov.T)) # ensures positive definite matrix
 
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">MultivariateNormalTriL</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="n">cov</span><span class="p">)</span>
+d = tfd.MultivariateNormalTriL(mu,cov)
 
-<span class="nb">print</span> <span class="p">(</span><span class="n">d</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+print (d)
+print (d.sample(2).numpy())
 </pre></div>
 </div>
 </div>
@@ -641,18 +641,18 @@ const thebe_selector_output = ".output, .cell_output"
 <p>This might be useful when designing specific final distributions. Recall that batches are sets of distributions of the same family but with different parameters, so they are <strong>independant</strong>, whereas events belong to the same multivariate and maybe dependant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize a single 3-variate Gaussian.</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Initialize a single 3-variate Gaussian.
+mu = np.random.random(size=(3,4,2)).astype(np.float32)
 
-<span class="n">cov</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">0.36</span><span class="p">,</span>  <span class="mf">0.12</span><span class="p">],</span>
-       <span class="p">[</span> <span class="mf">0.12</span><span class="p">,</span>  <span class="mf">0.29</span><span class="p">]]</span>
+cov = [[ 0.36,  0.12],
+       [ 0.12,  0.29]]
 
-<span class="n">mvn</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">MultivariateNormalTriL</span><span class="p">(</span>
-    <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span>
-    <span class="n">scale_tril</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">cov</span><span class="p">)</span>
-<span class="p">)</span>
+mvn = tfd.MultivariateNormalTriL(
+    loc=mu,
+    scale_tril=tf.linalg.cholesky(cov)
+)
 
-<span class="n">mvn</span>
+mvn
 </pre></div>
 </div>
 </div>
@@ -664,8 +664,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">mvn</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = mvn.sample(100000)
+s.shape
 </pre></div>
 </div>
 </div>
@@ -677,7 +677,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.imshow(np.mean(s, axis=0).reshape(2,-1))
 </pre></div>
 </div>
 </div>
@@ -690,7 +690,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.imshow(np.std(s, axis=0).reshape(2,-1))
 </pre></div>
 </div>
 </div>
@@ -704,8 +704,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p><strong>redistribute dimensions</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mi</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span><span class="n">mvn</span><span class="p">,</span> <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">mi</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mi = tfd.Independent(mvn, reinterpreted_batch_ndims=1)
+mi
 </pre></div>
 </div>
 </div>
@@ -718,8 +718,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>observe that samples have the same shape and individual distributions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">mi</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = mi.sample(100000)
+s.shape
 </pre></div>
 </div>
 </div>
@@ -731,7 +731,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.imshow(np.mean(s, axis=0).reshape(2,-1))
 </pre></div>
 </div>
 </div>
@@ -744,7 +744,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.imshow(np.std(s, axis=0).reshape(2,-1))
 </pre></div>
 </div>
 </div>

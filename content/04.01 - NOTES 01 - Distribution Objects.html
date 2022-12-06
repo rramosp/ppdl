@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -354,10 +354,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
-<span class="o">!</span>git clone https://github.com/rramosp/ppdl.git &gt; /dev/null <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>mv -n ppdl/content/init.py ppdl/content/local . <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
+!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
+!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
+!pip install -r ppdl/content/requirements.txt &gt; /dev/null
 </pre></div>
 </div>
 </div>
@@ -366,19 +366,19 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Distribution objects<a class="headerlink" href="#distribution-objects" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
-<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+from scipy.integrate import quad
+from progressbar import progressbar as pbar
+from rlxutils import subplots, copy_func
 
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
-<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
-<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
+import tensorflow as tf
+import tensorflow_probability as tfp
+tfd = tfp.distributions
+tfb = tfp.bijectors
 
-<span class="o">%</span><span class="k">matplotlib</span> inline
+%matplotlib inline
 </pre></div>
 </div>
 </div>
@@ -391,8 +391,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-1&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] = &quot;-1&quot;
 </pre></div>
 </div>
 </div>
@@ -404,8 +404,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">d</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d = tfd.Normal(loc=2, scale=3)
+d
 </pre></div>
 </div>
 </div>
@@ -424,8 +424,8 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = d.sample(20)
+s.shape
 </pre></div>
 </div>
 </div>
@@ -437,7 +437,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s
 </pre></div>
 </div>
 </div>
@@ -454,7 +454,7 @@ array([ 0.84202063, -3.4651394 ,  0.24238634,  4.7199984 , -1.849772  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d.log_prob(s)
 </pre></div>
 </div>
 </div>
@@ -472,14 +472,14 @@ array([-2.0920463, -3.6768703, -2.1891735, -2.4285727, -2.8409257,
 <p>for a larger sample</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">xr_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">xr</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = d.sample(10000).numpy()
+xr = np.linspace(np.min(s), np.max(s), 100)
+xr_probs = np.exp(d.log_prob(xr))
 
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">xr_probs</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;probs&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+plt.hist(s, bins=100, alpha=.5, density=True, label=&quot;samples&quot;);
+plt.plot(xr, xr_probs, color=&quot;black&quot;, lw=2, label=&quot;probs&quot;)
+plt.grid();
+plt.legend();
 </pre></div>
 </div>
 </div>
@@ -494,9 +494,9 @@ array([-2.0920463, -3.6768703, -2.1891735, -2.4285727, -2.8409257,
 <p>All distributions in a batch are of the <strong>same type</strong> but may have <strong>different parameter values</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d = tfd.Normal(loc=[2,8], scale=[4,10])
+s = d.sample(10000).numpy()
+s.shape
 </pre></div>
 </div>
 </div>
@@ -508,9 +508,9 @@ array([-2.0920463, -3.6768703, -2.1891735, -2.4285727, -2.8409257,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for i in range(s.shape[1]):
+    plt.hist(s[:,i], alpha=.5, bins=100, density=True)
+plt.grid();
 </pre></div>
 </div>
 </div>
@@ -525,7 +525,7 @@ array([-2.0920463, -3.6768703, -2.1891735, -2.4285727, -2.8409257,
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">batch_shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d.batch_shape
 </pre></div>
 </div>
 </div>
@@ -537,7 +537,7 @@ array([-2.0920463, -3.6768703, -2.1891735, -2.4285727, -2.8409257,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">parameters</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d.parameters
 </pre></div>
 </div>
 </div>
@@ -555,18 +555,18 @@ array([-2.0920463, -3.6768703, -2.1891735, -2.4285727, -2.8409257,
 <h3>as complex as you want<a class="headerlink" href="#as-complex-as-you-want" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span><span class="o">*</span><span class="mf">1.</span> <span class="o">+</span> <span class="mi">5</span>
-<span class="n">stds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">means</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">*</span><span class="mf">1.</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>means = np.random.randint(10, size=(2,3,4))*1. + 5
+stds = np.random.randint(5, size=means.shape)*1. + 1
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;means</span><span class="se">\n</span><span class="si">{</span><span class="n">means</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stds</span><span class="se">\n</span><span class="si">{</span><span class="n">stds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+print(f&quot;means\n{means}&quot;)
+print(f&quot;stds\n{stds}&quot;)
 
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">means</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stds</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+d = tfd.Normal(loc=means, scale=stds)
+s = d.sample(10000).numpy()
 
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">sample shape&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+print (&quot;\nsample shape&quot;, s.shape)
 
-<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">there are </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="si">}</span><span class="s2"> batch distributions&quot;</span><span class="p">)</span>
+print (f&quot;\nthere are {np.product(s.shape[1:])} batch distributions&quot;)
 </pre></div>
 </div>
 </div>
@@ -597,7 +597,7 @@ there are 24 batch distributions
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">batch_shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d.batch_shape
 </pre></div>
 </div>
 </div>
@@ -610,20 +610,20 @@ there are 24 batch distributions
 <p>observe the samples on each batch distribution</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
-<span class="n">dims</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">batch_shape</span><span class="p">]))</span>
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="n">dims</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">sdim</span> <span class="o">=</span> <span class="n">s</span><span class="p">[(</span><span class="o">...</span><span class="p">,</span> <span class="o">*</span><span class="n">dim</span><span class="p">)]</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sdim</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="n">dim</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\mu$&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">stds</span><span class="p">[</span><span class="n">dim</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\mu \pm\sigma$&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">means</span><span class="p">[</span><span class="n">dim</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">stds</span><span class="p">[</span><span class="n">dim</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;batch distrib </span><span class="si">{</span><span class="n">dim</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">dim</span><span class="o">==</span><span class="n">dims</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import itertools
+dims = list(itertools.product(*[range(i) for i in d.batch_shape]))
+for ax, dim in subplots(dims, n_cols=5, usizey=2):
+    sdim = s[(..., *dim)]
+    plt.hist(sdim, bins=100, density=True, alpha=.5)
+    plt.axvline(means[dim], color=&quot;black&quot;, label=&quot;$\mu$&quot;)
+    plt.axvline(means[dim] + 2*stds[dim], color=&quot;black&quot;, label=&quot;$\mu \pm\sigma$&quot;, ls=&quot;--&quot;)
+    plt.axvline(means[dim] - 2*stds[dim], color=&quot;black&quot;, ls=&quot;--&quot;)
+    plt.title(f&quot;batch distrib {dim}&quot;)
+    plt.grid();
+    if dim==dims[-1]:
+        plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -638,10 +638,10 @@ there are 24 batch distributions
 <p>broadcasting works between different parameters of the distributions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># a batch of two normals with the same std</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># a batch of two normals with the same std
+d = tfd.Normal(loc=[2,5], scale=2)
+s = d.sample(10000).numpy()
+s.shape
 </pre></div>
 </div>
 </div>
@@ -653,7 +653,7 @@ there are 24 batch distributions
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">batch_shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d.batch_shape
 </pre></div>
 </div>
 </div>
@@ -665,7 +665,7 @@ there are 24 batch distributions
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">parameters</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d.parameters
 </pre></div>
 </div>
 </div>
@@ -681,8 +681,8 @@ there are 24 batch distributions
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for i in range(s.shape[1]):
+    plt.hist(s[:,i], bins=100, alpha=.5)
 </pre></div>
 </div>
 </div>
@@ -692,16 +692,16 @@ there are 24 batch distributions
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># a batch of two normals with the same std</span>
-<span class="n">means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">5.</span><span class="p">],</span> <span class="p">[</span><span class="mf">8.</span><span class="p">,</span><span class="mf">10.</span><span class="p">]]]</span>
-<span class="n">stds</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">]]]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># a batch of two normals with the same std
+means = np.r_[[[2.,5.], [8.,10.]]]
+stds  = np.r_[[[1.,2.]]]
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;means</span><span class="se">\n</span><span class="si">{</span><span class="n">means</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stds</span><span class="se">\n</span><span class="si">{</span><span class="n">stds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+print(f&quot;means\n{means}&quot;)
+print(f&quot;stds\n{stds}&quot;)
 
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">means</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stds</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+d = tfd.Normal(loc=means, scale=stds)
+s = d.sample(10000).numpy()
+s.shape
 </pre></div>
 </div>
 </div>
@@ -720,7 +720,7 @@ stds
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">batch_shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d.batch_shape
 </pre></div>
 </div>
 </div>
@@ -732,10 +732,10 @@ stds
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dims</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]))</span>
-<span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">[(</span><span class="o">...</span><span class="p">,</span><span class="o">*</span><span class="n">dim</span><span class="p">)],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dims = list(itertools.product(*[range(i) for i in s.shape[1:]]))
+for dim in dims:
+    plt.hist(s[(...,*dim)], density=True, alpha=.5, bins=100)
+plt.grid();
 </pre></div>
 </div>
 </div>
@@ -746,13 +746,13 @@ stds
 <p>observe <strong>carefully</strong> that broadcasting is done across the dimension that matches</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># a batch of two normals with the same std</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;means</span><span class="se">\n</span><span class="si">{</span><span class="n">means</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stds</span><span class="se">\n</span><span class="si">{</span><span class="n">stds</span><span class="o">.</span><span class="n">T</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># a batch of two normals with the same std
+print(f&quot;means\n{means}&quot;)
+print(f&quot;stds\n{stds.T}&quot;)
 
-<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">means</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">stds</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
+d = tfd.Normal(loc=means, scale=stds.T)
+s = d.sample(10000).numpy()
+s.shape
 </pre></div>
 </div>
 </div>
@@ -772,7 +772,7 @@ stds
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">batch_shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d.batch_shape
 </pre></div>
 </div>
 </div>
@@ -784,10 +784,10 @@ stds
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dims</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]))</span>
-<span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dims</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">[(</span><span class="o">...</span><span class="p">,</span><span class="o">*</span><span class="n">dim</span><span class="p">)],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dims = list(itertools.product(*[range(i) for i in s.shape[1:]]))
+for dim in dims:
+    plt.hist(s[(...,*dim)], density=True, alpha=.5, bins=100)
+plt.grid();
 </pre></div>
 </div>
 </div>
@@ -808,12 +808,12 @@ stds
 \[\underset{z_\mu, z_\sigma}{\text{arg max}} \;\; \frac{1}{N} \sum_i \log P_{\mathcal{N}(z_\mu, z_\sigma)}(x_i) \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we have some data (which actually is not generated by a Normal distribution)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># we have some data (which actually is not generated by a Normal distribution)
 
-<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="mf">2.</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample mean&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+x = 5*tfd.Beta(2.,5).sample(10000)+2
+plt.hist(x.numpy(), bins=50, density=True, alpha=.5);
+plt.axvline(np.mean(x), ls=&quot;--&quot;, color=&quot;black&quot;, alpha=.5, label=&quot;sample mean&quot;)
+plt.grid(); plt.legend();
 </pre></div>
 </div>
 </div>
@@ -835,27 +835,27 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>recall that the <code class="docutils literal notranslate"><span class="pre">GradientTape</span></code> must <strong>watch</strong> how the expresion you want to optimize is built, and therefore we <strong>must</strong> create the distribution object within the <code class="docutils literal notranslate"><span class="pre">GradientTape</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">zm</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">zs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>zm = tf.Variable(0, dtype=tf.float32)
+zs = tf.Variable(1, dtype=tf.float32)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>optimizer = tf.keras.optimizers.Adam(learning_rate=0.1)
 
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+for epoch in range(100):
     
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
-        <span class="n">distribution</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">zm</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">zs</span><span class="p">))</span>        
-        <span class="n">negloglik</span>    <span class="o">=</span> <span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    with tf.GradientTape() as tape:
+        distribution = tfd.Normal(loc=zm, scale=tf.math.softplus(zs))        
+        negloglik    = -tf.reduce_mean(distribution.log_prob(x))
         
-    <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">negloglik</span><span class="p">,</span> <span class="p">[</span><span class="n">zm</span><span class="p">,</span> <span class="n">zs</span><span class="p">])</span>
+    gradients = tape.gradient(negloglik, [zm, zs])
     
-    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,[</span><span class="n">zm</span><span class="p">,</span> <span class="n">zs</span><span class="p">]))</span>
+    optimizer.apply_gradients(zip(gradients,[zm, zs]))
     
-<span class="p">[</span><span class="n">zm</span><span class="p">,</span> <span class="n">zs</span><span class="p">]</span>
+[zm, zs]
 </pre></div>
 </div>
 </div>
@@ -868,11 +868,11 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">xr</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;fitted normal&quot;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample mean&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr = np.linspace(np.min(x), np.max(x), 100)
+plt.hist(x.numpy(), bins=50, density=True, alpha=.5);
+plt.plot(xr, np.exp(distribution.log_prob(xr).numpy()), color=&quot;black&quot;, label=&quot;fitted normal&quot;);
+plt.axvline(np.mean(x), ls=&quot;--&quot;, color=&quot;black&quot;, alpha=.5, label=&quot;sample mean&quot;)
+plt.grid(); plt.legend();
 </pre></div>
 </div>
 </div>
@@ -883,19 +883,19 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 <p>observe what would happen if we create the distribution object <strong>outside</strong> the gradient tape</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">zm</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">zs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>zm = tf.Variable(0, dtype=tf.float32)
+zs = tf.Variable(1, dtype=tf.float32)
 
-<span class="n">distribution</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">zm</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">zs</span><span class="p">))</span>        
+distribution = tfd.Normal(loc=zm, scale=tf.math.softplus(zs))        
 
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+optimizer = tf.keras.optimizers.Adam(learning_rate=0.1)
 
-<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
-    <span class="n">loglik</span> <span class="o">=</span> <span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">distribution</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+with tf.GradientTape() as tape:
+    loglik = -tf.reduce_mean(distribution.log_prob(x))
 
-<span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loglik</span><span class="p">,</span> <span class="p">[</span><span class="n">zm</span><span class="p">,</span> <span class="n">zs</span><span class="p">])</span>
+gradients = tape.gradient(loglik, [zm, zs])
 
-<span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,[</span><span class="n">zm</span><span class="p">,</span> <span class="n">zs</span><span class="p">]))</span>
+optimizer.apply_gradients(zip(gradients,[zm, zs]))
 </pre></div>
 </div>
 </div>

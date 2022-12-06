@@ -1,0 +1,1146 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scenarios with Bayes &#8212; Probabilistic Programming for Machine Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MBFEZ3PF64');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Course outline
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1-videolist.html">
+   1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M2-videolist.html">
+   2 TF for Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M3-videolist.html">
+   3 Intuitions on Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M4-videolist.html">
+   4 Tensorflow Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M5-videolist.html">
+   5 Bayesian Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M6-videolist.html">
+   6 Variational Inference
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/06.03 - NOTES 01 - Single observation posterior.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/06.03 - NOTES 01 - Single observation posterior.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Scenarios with Bayes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#models-and-goals">
+   Models and goals
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-vs-designing">
+   Computing vs designing
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-observation-posterior-with-model">
+   Single observation posterior with model
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analytical-or-numerical-solutions-for-all-distributions">
+     analytical or numerical solutions for all distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chain-sampling">
+   Chain sampling
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimate-p-z-x-i">
+   Estimate
+   <span class="math notranslate nohighlight">
+    \(p(z|x_i)\)
+   </span>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-mcmc">
+     Estimate
+     <span class="math notranslate nohighlight">
+      \(p(z|x_i)\)
+     </span>
+     with MCMC
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions">
+     Estimate
+     <span class="math notranslate nohighlight">
+      \(p(z|x_i)\)
+     </span>
+     with variational inference and a Gaussian class of distributions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions">
+     Estimate
+     <span class="math notranslate nohighlight">
+      \(p(z|x_i)\)
+     </span>
+     with variational inference and a mixture of
+     <span class="math notranslate nohighlight">
+      \(n\)
+     </span>
+     Gaussians class of distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Scenarios with Bayes</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Scenarios with Bayes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#models-and-goals">
+   Models and goals
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-vs-designing">
+   Computing vs designing
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#single-observation-posterior-with-model">
+   Single observation posterior with model
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#analytical-or-numerical-solutions-for-all-distributions">
+     analytical or numerical solutions for all distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chain-sampling">
+   Chain sampling
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimate-p-z-x-i">
+   Estimate
+   <span class="math notranslate nohighlight">
+    \(p(z|x_i)\)
+   </span>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-mcmc">
+     Estimate
+     <span class="math notranslate nohighlight">
+      \(p(z|x_i)\)
+     </span>
+     with MCMC
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions">
+     Estimate
+     <span class="math notranslate nohighlight">
+      \(p(z|x_i)\)
+     </span>
+     with variational inference and a Gaussian class of distributions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions">
+     Estimate
+     <span class="math notranslate nohighlight">
+      \(p(z|x_i)\)
+     </span>
+     with variational inference and a mixture of
+     <span class="math notranslate nohighlight">
+      \(n\)
+     </span>
+     Gaussians class of distributions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># init repo notebook
+!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
+!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
+!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install rlxutils &gt; /dev/null
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span><span class="p">,</span> <span class="n">dblquad</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span>
+<span class="kn">import</span> <span class="nn">daft</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">tfd</span> <span class="o">=</span>  <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="scenarios-with-bayes">
+<h1>Scenarios with Bayes<a class="headerlink" href="#scenarios-with-bayes" title="Permalink to this headline">¶</a></h1>
+<p>Remember Bayes theorem:</p>
+<div class="math notranslate nohighlight">
+\[ p(z|x) = \frac{p(x|z)p(z)}{p(x)} = \frac{p(x,z)}{p(x)}\]</div>
+<p>and recall that this is a relation between marginal, conditional and joint probability distributions.</p>
+<p>Bayes’ theorem does not make any assumption on how the different probabilities come into existance and, thus, it can be used and interpreted in many different scenarios:</p>
+<ul class="simple">
+<li><p>independence of measurements: we are given two clinical variables of patients (cholesterol and age), which may, or may not be correlated, but there is no temporality or causality initally associated between then, both can be measured at any time regardless the other.</p></li>
+<li><p>time dependance: we consider <span class="math notranslate nohighlight">\(z\)</span> happens (or is measured) <strong>before</strong> <span class="math notranslate nohighlight">\(x\)</span>, such as when modelling causality (I aim a gun and then I shoot).</p></li>
+<li><p>latent variables: we consider <span class="math notranslate nohighlight">\(z\)</span> a latent variable that explains or generates <span class="math notranslate nohighlight">\(x\)</span> an observed variable.</p></li>
+</ul>
+<p>of course, each scenario comes with its limitations. Normally <span class="math notranslate nohighlight">\(p(x)\)</span> is intractable or very difficult to compute, etc.</p>
+<p>We will call the different terms of Bayes theorem this way (with analogies on the time dependance example above):</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p(z)\)</span>: the <strong>prior</strong>, our initial knowledge or assumption of how <span class="math notranslate nohighlight">\(z\)</span> is distributed. This would be our estimation on how do I aim a gun (like a distribution of directions in which I generally aim with respect to a target).</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(x)\)</span>: the <strong>evidence</strong>, what we observe. The positions in the target where my shots hit.</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(x|z)\)</span>: the <strong>model</strong>, the probability of seeing <span class="math notranslate nohighlight">\(x\)</span> is we assume a certain value of <span class="math notranslate nohighlight">\(z\)</span>. A model which, giving an aiming direction <span class="math notranslate nohighlight">\(z\)</span>, produces a probability distribution of possible positions of where would my shot hit the target. This would take into account the gravity, distance, direction, etc. <span class="math notranslate nohighlight">\(p(x|z)\)</span> is a result of applying Newton’s laws to <span class="math notranslate nohighlight">\(z\)</span> and the shooting conditions.</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(z|x)\)</span>: the <strong>posterior</strong>. Given an observation <span class="math notranslate nohighlight">\(x\)</span>, what possible aiming directions could have produced it.</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="models-and-goals">
+<h1>Models and goals<a class="headerlink" href="#models-and-goals" title="Permalink to this headline">¶</a></h1>
+<p>In general we are given data (observations of <span class="math notranslate nohighlight">\(x\)</span>, and possibly of <span class="math notranslate nohighlight">\(z\)</span>) and we will be asked for the <strong>posterior</strong>. But the posterior might have different meanings in different settings. It is key to <strong>understand what question you are answering we you are asked to get the posterior</strong>:</p>
+<ul class="simple">
+<li><p>independance of measurements: <span class="math notranslate nohighlight">\(x\)</span> is cholesterol, <span class="math notranslate nohighlight">\(x\)</span> is age. If I make an observations of <span class="math notranslate nohighlight">\(x\)</span>, the posterior <span class="math notranslate nohighlight">\(p(z|x)\)</span> is answering the question <em>In what ages is more typical this observation cholesterol?</em></p></li>
+<li><p>causality: <span class="math notranslate nohighlight">\(z\)</span> is my aiming direction, <span class="math notranslate nohighlight">\(x\)</span> is the position in the target where my shot hit. If I make an observation <span class="math notranslate nohighlight">\(x\)</span>, the posterior <span class="math notranslate nohighlight">\(p(z|x)\)</span> is answering the question <em>What possible aiming conditions could have produced this shot mark in the target?</em></p></li>
+</ul>
+<p>In different problem settings we might be given different things, and need to obtain others.
+For instance</p>
+<ul class="simple">
+<li><p>given <strong>one observation</strong> <span class="math notranslate nohighlight">\(x_i\)</span>, <span class="math notranslate nohighlight">\(p(z)\)</span> and <span class="math notranslate nohighlight">\(p(x|z)\)</span> obtain <span class="math notranslate nohighlight">\(p(z|x_i)\)</span>, this is, the posterior for that specific observation. And there will be choices in  what tools, methods or data to use, but not on the shape or properties on the different distributions.</p></li>
+<li><p>given <strong>many observations</strong>, <span class="math notranslate nohighlight">\(p(z)\)</span> and <span class="math notranslate nohighlight">\(p(x|z)\)</span> obtain a function that computes <span class="math notranslate nohighlight">\(p(z|x)\)</span> for any observation.</p></li>
+<li><p>give one or many observations and <strong>only</strong> <span class="math notranslate nohighlight">\(p(z)\)</span> <strong>design</strong> a parametrized version of <span class="math notranslate nohighlight">\(p(x)\)</span>, <span class="math notranslate nohighlight">\(p(x|z)\)</span> and <span class="math notranslate nohighlight">\(p(z|x)\)</span>, and try to obtain the parameters that best fit the data. This will be the case of the variational autoencoder.</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="computing-vs-designing">
+<h1>Computing vs designing<a class="headerlink" href="#computing-vs-designing" title="Permalink to this headline">¶</a></h1>
+<p>Observe the subtlety between the statements above.</p>
+<ul class="simple">
+<li><p>When asked to <strong>obtain</strong> something we have <strong>no design choices</strong>. Obtaining typically refers to <em>computing</em> some result with a higher or lower degree of generality. This might be challenging for many reasons: intractability, numerical instabilities, hard to implement, lack of tools, etc.</p></li>
+<li><p>When asked to <strong>design</strong> something <strong>we make choices</strong> that imply different <strong>trade-offs</strong>. For instance, a variational autoencoder <strong>designs</strong> a setting in which <span class="math notranslate nohighlight">\(p(x|z)\)</span>, <span class="math notranslate nohighlight">\(p(z|x)\)</span>, <span class="math notranslate nohighlight">\(p(z)\)</span> and <span class="math notranslate nohighlight">\(p(x)\)</span> have certain desirable properties.</p></li>
+</ul>
+<p>See the chain sampling process below to follow up the discussion on this.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="single-observation-posterior-with-model">
+<h1>Single observation posterior with model<a class="headerlink" href="#single-observation-posterior-with-model" title="Permalink to this headline">¶</a></h1>
+<p>we have an scenario where we are given:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p(z)\)</span>, the prior</p></li>
+<li><p><span class="math notranslate nohighlight">\(p(x|z)\)</span>, a model</p></li>
+</ul>
+<p>We <strong>observe one <span class="math notranslate nohighlight">\(x\)</span></strong> and we are asked to obtain <span class="math notranslate nohighlight">\(p(z|x)\)</span>, the posterior. Our answer must be a distribution (not a number). This is a scenario in which we are <strong>asked to obtain something</strong>, there are no design choices about the distributions here. <strong>However</strong>, this is in general a dificult question, and we might restrict the possible solutions that we produce to make it easier.</p>
+<p>This may correspond to an scenario where <strong>we are given a model on how <span class="math notranslate nohighlight">\(x\)</span> is generated from <span class="math notranslate nohighlight">\(z\)</span></strong>.</p>
+<p>For instance, given a level of acidity of a liquid (<span class="math notranslate nohighlight">\(z\)</span>), we have a stochastical model that gives us the distribution of energies that we would get in a chemical reaction (<span class="math notranslate nohighlight">\(x\)</span>). This model is <span class="math notranslate nohighlight">\(p(x|z)\)</span>. This model has been tested and is given to us.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">JointDistributionSequential</span></code> to model <span class="math notranslate nohighlight">\(p(z)\)</span> <strong>and</strong> <span class="math notranslate nohighlight">\(p(x|z)\)</span></p>
+<div class="section" id="analytical-or-numerical-solutions-for-all-distributions">
+<h2>analytical or numerical solutions for all distributions<a class="headerlink" href="#analytical-or-numerical-solutions-for-all-distributions" title="Permalink to this headline">¶</a></h2>
+<p>in theory with <span class="math notranslate nohighlight">\(p(z)\)</span> and <span class="math notranslate nohighlight">\(p(x|z)\)</span> we could obtain the rest of distributions:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-39db1a2d-0c4c-4cb0-8eb9-2882c2a5cf1c">
+<span class="eqno">()<a class="headerlink" href="#equation-39db1a2d-0c4c-4cb0-8eb9-2882c2a5cf1c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\text{joint} &amp; \;\;\;\;p(z,x) = p(x|z)p(z)\\
+\text{marginal for }x &amp;\;\;\;\;p(x) = \int p(x|z)p(z) dz\\
+\text{posterior for }z &amp;\;\;\;\;p(z|x) = \frac{p(x|z)p(z)}{p(x)}
+\end{align}\]</div>
+<p>but this is normally not possible and thus, we need to resort to MCMC, Variational Inference, etc.</p>
+<p>In this case, since it is a simple scenarion with known 1D variables, we can solve or compute the distributions above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Scenario</span><span class="p">:</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">zx_joint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_joint</span><span class="p">()</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">z_samples</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">zx_joint</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+
+      <span class="bp">self</span><span class="o">.</span><span class="n">zmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z_samples</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z_samples</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">xmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_samples</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x_samples</span><span class="p">)</span>
+
+      <span class="bp">self</span><span class="o">.</span><span class="n">zr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">dz</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>    
+
+      <span class="bp">self</span><span class="o">.</span><span class="n">pzx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">zx_joint</span><span class="o">.</span><span class="n">prob</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">pz</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">zx_joint</span><span class="o">.</span><span class="n">submodules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>                  <span class="c1"># from the joint sequential distribution</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">px</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pzx</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dz</span> <span class="c1"># numerical integration using the rectangle rule</span>
+
+      <span class="bp">self</span><span class="o">.</span><span class="n">pz_given_x</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pzx</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">px</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># joint sequential plus numerical integratin</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">px_given_z</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">z</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pzx</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">pz</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="c1"># joint sequential only</span>
+
+  <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z_samples</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x_samples</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">zmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zmax</span><span class="p">],</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">xmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xmax</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;samples&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+          <span class="n">zxgrid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">))]</span>
+          <span class="n">pzxgrid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pzx</span><span class="p">(</span><span class="n">zxgrid</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">zxgrid</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xr</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">))</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">xr</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pzxgrid</span><span class="o">+</span><span class="mf">1e-5</span><span class="p">))</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;log prob&quot;</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> 
+      
+  <span class="k">def</span> <span class="nf">plot_pz_given_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xis</span><span class="p">):</span>
+      <span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xis</span><span class="p">)):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pz_given_x</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span><span class="n">xis</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p(z|x) for x=</span><span class="si">{</span><span class="n">xis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;p(z|x)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>    
+
+  <span class="k">def</span> <span class="nf">plot_pz_given_xi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observed_xi</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    for a given observation:</span>
+<span class="sd">      - take one sample zi from p(z|xi)</span>
+<span class="sd">      - take one sample xhati from p(x|zi)</span>
+<span class="sd">      - do many times</span>
+<span class="sd">    </span>
+<span class="sd">    plot histogram of xhati</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pz_given_xi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pz_given_x</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span><span class="n">observed_xi</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="c1"># sample from p(z|xi)</span>
+    <span class="n">pz_given_xi_sample</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">pz_given_xi</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dz</span><span class="o">&gt;</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
+
+    <span class="c1"># sample from p(x|zi)</span>
+    <span class="n">xh_sample</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">)):</span>
+        <span class="n">_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">pz_given_xi_sample</span><span class="p">)</span>
+        <span class="n">pxh_given_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">px_given_z</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xr</span><span class="p">,</span> <span class="n">_z</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">cumsum</span> <span class="o">=</span> <span class="n">pxh_given_z</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span>
+        <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="n">cumsum</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">cumsum</span><span class="o">&gt;</span><span class="n">rnd</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">xh_sample</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_x</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span> <span class="n">pz_given_xi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pz_given_xi_sample</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$p(z|x_i)$ for $x_i=$</span><span class="si">{</span><span class="n">observed_xi</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xh_sample</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">observed_xi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;observed $x_i$&quot;</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;distribution of $\hat</span><span class="si">{x}</span><span class="s2">$</span><span class="se">\n</span><span class="s2">obtained by sampling $z_i \sim p(z|x_i)$ and then $\hat</span><span class="si">{x}</span><span class="s2">_i \sim p(x|z_i)$&quot;</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span>
+
+
+<span class="k">class</span> <span class="nc">ScenarioMultiModal</span><span class="p">(</span><span class="n">Scenario</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionSequential</span><span class="p">([</span>
+            <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+            <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">z</span><span class="p">))</span><span class="o">*</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">],</span> <span class="n">batch_ndims</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
+
+<span class="k">class</span> <span class="nc">ScenarioDependantGaussian</span><span class="p">(</span><span class="n">Scenario</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionSequential</span><span class="p">([</span>
+            <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+            <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">4.</span><span class="p">)</span>
+        <span class="p">],</span> <span class="n">batch_ndims</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> 
+
+
+<span class="k">class</span> <span class="nc">ScenarioIndependantGaussian</span><span class="p">(</span><span class="n">Scenario</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionSequential</span><span class="p">([</span>
+            <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+            <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span><span class="o">+</span><span class="mf">0.00001</span><span class="o">*</span><span class="n">z</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">4.</span><span class="p">)</span>
+        <span class="p">],</span> <span class="n">batch_ndims</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario</span> <span class="o">=</span> <span class="n">ScenarioDependantGaussian</span><span class="p">()</span>
+<span class="n">scenario</span> <span class="o">=</span> <span class="n">ScenarioMultiModal</span><span class="p">()</span>
+<span class="n">scenario</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">scenario</span><span class="o">.</span><span class="n">plot_pz_given_x</span><span class="p">(</span><span class="n">xis</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_7_0.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_7_0.png" />
+<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_7_1.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_7_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="chain-sampling">
+<h1>Chain sampling<a class="headerlink" href="#chain-sampling" title="Permalink to this headline">¶</a></h1>
+<p>We do the following process</p>
+<ol class="simple">
+<li><p>Make one observation <span class="math notranslate nohighlight">\(x_i\)</span></p></li>
+<li><p>Take one sample <span class="math notranslate nohighlight">\(z_i\)</span> from <span class="math notranslate nohighlight">\(p(z|x_i)\)</span></p></li>
+<li><p>Take one sample <span class="math notranslate nohighlight">\(\hat{x}_i\)</span> from <span class="math notranslate nohighlight">\(p(x|z_i)\)</span></p></li>
+<li><p>Go to 2 many times</p></li>
+</ol>
+<p>We will endup with a bunch of samples <span class="math notranslate nohighlight">\(\hat{x}\)</span>. In general, in this scenario (there are no design choices), there is no particular relation between <span class="math notranslate nohighlight">\(x_i\)</span> and the distribution of <span class="math notranslate nohighlight">\(\hat{x}\)</span>. You can see that in the experiment below.</p>
+<p>When we will see the variational autoencoders, we will see that <span class="math notranslate nohighlight">\(p(x|z)\)</span> and <span class="math notranslate nohighlight">\(p(z|x)\)</span> <strong>are designed</strong> so that <span class="math notranslate nohighlight">\(x_i\)</span> is the MLE of <span class="math notranslate nohighlight">\(\hat{x}\)</span> and we can reconstruct input data from the distributions of latent variables.</p>
+<p>In the experiment below we use <a class="reference external" href="https://en.wikipedia.org/wiki/Inverse_transform_sampling">Inverse Transform Sampling</a> by using the numerical CDF of each distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed_xi</span><span class="o">=-</span><span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario</span><span class="o">.</span><span class="n">plot_pz_given_xi</span><span class="p">(</span><span class="n">observed_xi</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 10% (530 of 5000) |##                   | Elapsed Time: 0:00:09 ETA:   0:01:32
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">29</span><span class="o">-</span><span class="mf">1e135</span><span class="n">e60a696</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">scenario</span><span class="o">.</span><span class="n">plot_pz_given_xi</span><span class="p">(</span><span class="n">observed_xi</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nn">&lt;ipython-input-3-872f987b159a&gt;</span> in <span class="ni">plot_pz_given_xi</span><span class="nt">(self, observed_xi, n_samples)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">)):</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>         <span class="n">_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">pz_given_xi_sample</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">66</span>         <span class="n">pxh_given_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">px_given_z</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xr</span><span class="p">,</span> <span class="n">_z</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>         <span class="n">cumsum</span> <span class="o">=</span> <span class="n">pxh_given_z</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>         <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="n">cumsum</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nn">&lt;ipython-input-3-872f987b159a&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(x, z)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> 
+<span class="g g-Whitespace">     </span><span class="mi">19</span>       <span class="bp">self</span><span class="o">.</span><span class="n">pz_given_x</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pzx</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">px</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># joint sequential plus numerical integratin</span>
+<span class="ne">---&gt; </span><span class="mi">20</span>       <span class="bp">self</span><span class="o">.</span><span class="n">px_given_z</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">z</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pzx</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">pz</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="c1"># joint sequential only</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> 
+<span class="g g-Whitespace">     </span><span class="mi">22</span>   <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/joint_distribution.py</span> in <span class="ni">prob</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">917</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">918</span><span class="sd">     name = kwargs.pop(&#39;name&#39;, &#39;prob&#39;)</span>
+<span class="ne">--&gt; </span><span class="mi">919</span><span class="sd">     return self._call_prob(self._resolve_value(*args, **kwargs), name=name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">920</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">921</span><span class="sd">   # Override the base method to capture *args and **kwargs, so we can</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/distribution.py</span> in <span class="ni">_call_prob</span><span class="nt">(self, value, name, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1326</span><span class="sd">         return self._prob(value, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1327</span><span class="sd">       if hasattr(self, &#39;_log_prob&#39;):</span>
+<span class="ne">-&gt; </span><span class="mi">1328</span><span class="sd">         return tf.exp(self._log_prob(value, **kwargs))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1329</span><span class="sd">       raise NotImplementedError(&#39;prob is not implemented: {}&#39;.format(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1330</span><span class="sd">           type(self).__name__))</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/joint_distribution.py</span> in <span class="ni">_log_prob</span><span class="nt">(self, value)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span><span class="sd">   def _log_prob(self, value):</span>
+<span class="g g-Whitespace">    </span><span class="mi">679</span><span class="sd">     return self._reduce_log_probs_over_dists(</span>
+<span class="ne">--&gt; </span><span class="mi">680</span><span class="sd">         self._map_measure_over_dists(&#39;log_prob&#39;, value))</span>
+<span class="g g-Whitespace">    </span><span class="mi">681</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">682</span><span class="sd">   def _unnormalized_log_prob(self, value):</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/joint_distribution.py</span> in <span class="ni">_map_measure_over_dists</span><span class="nt">(self, attr, value)</span>
+<span class="g g-Whitespace">    </span><span class="mi">748</span><span class="sd">         seed=samplers.zeros_seed(),</span>
+<span class="g g-Whitespace">    </span><span class="mi">749</span><span class="sd">         sample_and_trace_fn=(</span>
+<span class="ne">--&gt; </span><span class="mi">750</span><span class="sd">             lambda dist, value, **_: ValueWithTrace(value=value,  # pylint: disable=g-long-lambda</span>
+<span class="g g-Whitespace">    </span><span class="mi">751</span><span class="sd">                                                     traced=attr(dist, value))))</span>
+<span class="g g-Whitespace">    </span><span class="mi">752</span><span class="sd"> </span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/joint_distribution.py</span> in <span class="ni">_call_execute_model</span><span class="nt">(self, sample_shape, seed, value, sample_and_trace_fn)</span>
+<span class="g g-Whitespace">    </span><span class="mi">853</span><span class="sd">       return self._execute_model(</span>
+<span class="g g-Whitespace">    </span><span class="mi">854</span><span class="sd">           sample_shape=sample_shape, seed=seed, value=flat_value,</span>
+<span class="ne">--&gt; </span><span class="mi">855</span><span class="sd">           sample_and_trace_fn=sample_and_trace_fn)</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span><span class="sd">     # Set up for autovectorized sampling. To support the `value` arg, we need to</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/joint_distribution.py</span> in <span class="ni">_execute_model</span><span class="nt">(self, sample_shape, seed, value, stop_index, sample_and_trace_fn)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1054</span><span class="sd">         if stop_index is not None and index == stop_index:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1055</span><span class="sd">           break</span>
+<span class="ne">-&gt; </span><span class="mi">1056</span><span class="sd">         d = gen.send(next_value)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1057</span><span class="sd">     except StopIteration:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1058</span><span class="sd">       pass</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/joint_distribution_sequential.py</span> in <span class="ni">_model_coroutine</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span><span class="sd">     xs = []</span>
+<span class="g g-Whitespace">    </span><span class="mi">391</span><span class="sd">     for dist_fn, args in zip(self._dist_fn_wrapped, self._dist_fn_args):</span>
+<span class="ne">--&gt; </span><span class="mi">392</span><span class="sd">       dist = dist_fn(*xs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">393</span><span class="sd">       if not args:</span>
+<span class="g g-Whitespace">    </span><span class="mi">394</span><span class="sd">         dist = self.Root(dist)</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/joint_distribution_sequential.py</span> in <span class="ni">dist_fn_wrapped</span><span class="nt">(*xs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">601</span><span class="sd">           &#39;(dist_fn: {}, expected: {}, saw: {}).&#39;.format(</span>
+<span class="g g-Whitespace">    </span><span class="mi">602</span><span class="sd">               i, dist_fn, len(args), len(xs)))</span>
+<span class="ne">--&gt; </span><span class="mi">603</span><span class="sd">     return dist_fn(*reversed(xs[-len(args):]))</span>
+<span class="g g-Whitespace">    </span><span class="mi">604</span><span class="sd">   return dist_fn_wrapped, args</span>
+<span class="g g-Whitespace">    </span><span class="mi">605</span><span class="sd"> </span>
+
+<span class="nn">&lt;ipython-input-3-872f987b159a&gt;</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(z)</span>
+<span class="g g-Whitespace">     </span><span class="mi">90</span><span class="sd">         return tfd.JointDistributionSequential([</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span><span class="sd">             tfd.Normal(loc=2, scale=4),</span>
+<span class="ne">---&gt; </span><span class="mi">92</span><span class="sd">             lambda z: tfd.Normal(loc=z, scale=tf.math.abs((z))*1+1)</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span><span class="sd">         ], batch_ndims=0) </span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span><span class="sd"> </span>
+
+<span class="nn">&lt;decorator-gen-329&gt;</span> in <span class="ni">__init__</span><span class="nt">(self, loc, scale, validate_args, allow_nan_stats, name)</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/distribution.py</span> in <span class="ni">wrapped_init</span><span class="nt">(***failed resolving arguments***)</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span><span class="sd">       # called, here is the place to do it.</span>
+<span class="g g-Whitespace">    </span><span class="mi">341</span><span class="sd">       self_._parameters = None</span>
+<span class="ne">--&gt; </span><span class="mi">342</span><span class="sd">       default_init(self_, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span><span class="sd">       # Note: if we ever want to override things set in `self` by subclass</span>
+<span class="g g-Whitespace">    </span><span class="mi">344</span><span class="sd">       # `__init__`, here is the place to do it.</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/normal.py</span> in <span class="ni">__init__</span><span class="nt">(self, loc, scale, validate_args, allow_nan_stats, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span><span class="sd">           allow_nan_stats=allow_nan_stats,</span>
+<span class="g g-Whitespace">    </span><span class="mi">145</span><span class="sd">           parameters=parameters,</span>
+<span class="ne">--&gt; </span><span class="mi">146</span><span class="sd">           name=name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span><span class="sd">   @classmethod</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/distribution.py</span> in <span class="ni">__init__</span><span class="nt">(self, dtype, reparameterization_type, validate_args, allow_nan_stats, parameters, graph_parents, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">634</span><span class="sd">     if not self._defer_all_assertions:</span>
+<span class="g g-Whitespace">    </span><span class="mi">635</span><span class="sd">       self._initial_parameter_control_dependencies = tuple(</span>
+<span class="nn">--&gt; 636           d for d</span> in <span class="ni">self._parameter_control_dependencies</span><span class="nt">(is_init=True)</span>
+<span class="g g-Whitespace">    </span><span class="mi">637</span><span class="sd">           if d is not None)</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span><span class="sd">     else:</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/normal.py</span> in <span class="ni">_parameter_control_dependencies</span><span class="nt">(self, is_init)</span>
+<span class="g g-Whitespace">    </span><span class="mi">236</span><span class="sd">     if is_init:</span>
+<span class="g g-Whitespace">    </span><span class="mi">237</span><span class="sd">       try:</span>
+<span class="ne">--&gt; </span><span class="mi">238</span><span class="sd">         self._batch_shape()</span>
+<span class="g g-Whitespace">    </span><span class="mi">239</span><span class="sd">       except ValueError:</span>
+<span class="g g-Whitespace">    </span><span class="mi">240</span><span class="sd">         raise ValueError(</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/distribution.py</span> in <span class="ni">_batch_shape</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1084</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1085</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1086</span>       <span class="k">return</span> <span class="n">batch_shape_lib</span><span class="o">.</span><span class="n">inferred_batch_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1087</span>     <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1088</span>       <span class="c1"># If a distribution doesn&#39;t implement `_parameter_properties` or its own</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/internal/batch_shape_lib.py</span> in <span class="ni">inferred_batch_shape</span><span class="nt">(batch_object, bijector_x_event_ndims)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>       <span class="n">get_batch_shape_part</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>       <span class="n">require_static</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="ne">---&gt; </span><span class="mi">72</span>       <span class="n">bijector_x_event_ndims</span><span class="o">=</span><span class="n">bijector_x_event_ndims</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>   <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">broadcast_static_shape</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>                           <span class="n">tf</span><span class="o">.</span><span class="n">nest</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">batch_shapes</span><span class="p">),</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/internal/batch_shape_lib.py</span> in <span class="ni">map_fn_over_parameters_with_event_ndims</span><span class="nt">(batch_object, fn, bijector_x_event_ndims, require_static, **parameter_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">325</span>           <span class="n">parameter_properties</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">326</span> 
+<span class="ne">--&gt; </span><span class="mi">327</span>   <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">batch_object</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">328</span>                                 <span class="o">**</span><span class="n">parameter_kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">329</span>     <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/distribution.py</span> in <span class="ni">parameters</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span>     <span class="c1"># Remove &#39;self&#39;, &#39;__class__&#39;, or other special variables. These can appear</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span>     <span class="c1"># if the subclass used: `parameters = dict(locals())`.</span>
+<span class="ne">--&gt; </span><span class="mi">819</span>     <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_parameters_sanitized&#39;</span><span class="p">)</span> <span class="ow">or</span>
+<span class="g g-Whitespace">    </span><span class="mi">820</span>         <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters_sanitized</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">821</span>       <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">()</span> <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="estimate-p-z-x-i">
+<h1>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span><a class="headerlink" href="#estimate-p-z-x-i" title="Permalink to this headline">¶</a></h1>
+<p>Above we used analytic/numerical methods to compute the different distributions. In almost all practical cases this is not possible and we need to resort to other methods.</p>
+<p>We now estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with:</p>
+<ul class="simple">
+<li><p>MCMC</p></li>
+<li><p>Variational Inference using a 1D Gaussian class of distributions.</p></li>
+<li><p>Variational Inference using a 1D mixture of <span class="math notranslate nohighlight">\(n\)</span> Gaussians class of distributions.</p></li>
+</ul>
+<p>note that for</p>
+<ul class="simple">
+<li><p>for <span class="math notranslate nohighlight">\(observed_x=-10\)</span> all three methods have difficulty</p></li>
+<li><p>for <span class="math notranslate nohighlight">\(observed_x=-5\)</span> only VI on a mixture of gaussians produces a decent approximation</p></li>
+</ul>
+<div class="section" id="estimate-p-z-x-i-with-mcmc">
+<h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with MCMC<a class="headerlink" href="#estimate-p-z-x-i-with-mcmc" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_results</span> <span class="o">=</span> <span class="mi">50000</span>
+<span class="n">num_burnin_steps</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">observed_x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">observed_x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Improve performance by tracing the sampler using `tf.function`</span>
+<span class="c1"># and compiling it using XLA.</span>
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">autograph</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">jit_compile</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">do_sampling</span><span class="p">():</span>
+  <span class="k">return</span> <span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">sample_chain</span><span class="p">(</span>
+                      <span class="n">num_results</span><span class="o">=</span><span class="n">num_results</span><span class="p">,</span>
+                      <span class="n">num_burnin_steps</span><span class="o">=</span><span class="n">num_burnin_steps</span><span class="p">,</span>
+                      <span class="n">current_state</span><span class="o">=</span><span class="p">[</span>
+                          <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="o">-</span><span class="mf">5.</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>  <span class="n">name</span><span class="o">=</span><span class="s1">&#39;init_avg_effect&#39;</span><span class="p">),</span>
+                      <span class="p">],</span>
+                      <span class="n">kernel</span><span class="o">=</span><span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">HamiltonianMonteCarlo</span><span class="p">(</span>
+                          <span class="n">target_log_prob_fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">scenario</span><span class="o">.</span><span class="n">zx_joint</span><span class="o">.</span><span class="n">log_prob</span><span class="p">((</span><span class="n">z</span><span class="p">,</span> <span class="n">observed_x</span><span class="p">)),</span>
+                          <span class="n">step_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                          <span class="n">num_leapfrog_steps</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+  <span class="p">)</span>
+
+<span class="n">states</span><span class="p">,</span> <span class="n">kernel_results</span> <span class="o">=</span> <span class="n">do_sampling</span><span class="p">()</span>
+<span class="n">num_accepted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">kernel_results</span><span class="o">.</span><span class="n">is_accepted</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Acceptance rate: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num_accepted</span> <span class="o">/</span> <span class="n">num_results</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/mcmc/sample.py:339: UserWarning: Tracing all kernel results by default is deprecated. Set the `trace_fn` argument to None (the future default value) or an explicit callback that traces the values you are interested in.
+  warnings.warn(&#39;Tracing all kernel results by default is deprecated. Set &#39;
+WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f971b9a7cb0&gt; triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Acceptance rate: 0.13998
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span> <span class="n">scenario</span><span class="o">.</span><span class="n">pz_given_x</span><span class="p">(</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span><span class="n">observed_x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>  <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;actual p(z|x=</span><span class="si">{</span><span class="n">observed_x</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MCMC samples&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;a&#39;)
+</pre></div>
+</div>
+<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_14_1.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_14_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions">
+<h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a Gaussian class of distributions<a class="headerlink" href="#estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions" title="Permalink to this headline">¶</a></h2>
+<p>We want to find <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> given a certain observation <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p>We do this by:</p>
+<ol class="simple">
+<li><p>define a class of distributions <span class="math notranslate nohighlight">\(Q(z|x_i) = \{q_\theta(z|x_i)\}\)</span> parametrized by <span class="math notranslate nohighlight">\(\theta\)</span> hoping some distribution of this class is able to approximate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span></p></li>
+<li><p>find the parameters <span class="math notranslate nohighlight">\(w\)</span> corresponding to the distribution <span class="math notranslate nohighlight">\(q_w\)</span> which is closer to <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> in KLdiv. This is</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\text{arg min}_\theta \;\; KL\big[q_\theta(z|x_i)||p(z|x_i)\big] 
+\]</div>
+<p>This initially seems hard because we <strong>don’t know</strong> <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> (which is precisely what we want to obtain), so how can be tell how any <span class="math notranslate nohighlight">\(q_\theta(z|x_i)\)</span> may be to it?</p>
+<p>It turns our that the following expression is a lower bound to <span class="math notranslate nohighlight">\(\text{arg min}_\theta\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\text{arg max}_\theta \;\;\mathbb{E}_{q_\theta(z|x_i)} \log p(x_i|z) - KL\big[q_\theta(z|x_i)||p(z)\big] 
+\]</div>
+<p>which is equivalent to</p>
+<div class="math notranslate nohighlight">
+\[
+\text{arg max}_\theta \;\;\mathbb{E}_{q_\theta(z|x_i)} \big[\log p(x_i|z) - \log q_\theta(z|x_i) + \log p(z) \big]
+\]</div>
+<p>we choose a family of functions assuming a normal distribution for <span class="math notranslate nohighlight">\(p(z|x)\)</span>, which may be more or less appropriate to each case.</p>
+<div class="math notranslate nohighlight">
+\[q_{\theta=\{\mu, \sigma\}}(z|x_i) = \mathcal{N}(\mu, \text{softplus}(\sigma))\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApproximatePosteriorDistribution</span><span class="p">:</span>
+
+  <span class="k">def</span> <span class="nf">get_qx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_batch</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">get_trainable_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">set_observed_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observed_x</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">observed_x</span> <span class="o">=</span> <span class="n">observed_x</span>
+    <span class="k">return</span> <span class="bp">self</span>
+
+  <span class="k">def</span> <span class="nf">set_scenario</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scenario</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">scenario</span> <span class="o">=</span> <span class="n">scenario</span>
+    <span class="k">return</span> <span class="bp">self</span>
+
+  <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+
+    <span class="n">lossh</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">)):</span>
+
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
+            <span class="n">qx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_qx</span><span class="p">()</span>
+            <span class="n">elbo_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scenario</span><span class="o">.</span><span class="n">px_given_z</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">observed_x</span><span class="p">,</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="mf">1e-10</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span> <span class="n">qx</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scenario</span><span class="o">.</span><span class="n">pz</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="mf">1e-10</span><span class="p">))</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">qx</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">elbo_fn</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+            
+        <span class="n">gradients</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_trainable_variables</span><span class="p">())</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_trainable_variables</span><span class="p">()))</span>
+
+        <span class="n">lossh</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">lossh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">lossh</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">plot_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+      <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lossh</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+          <span class="n">qx</span> <span class="o">=</span> <span class="n">approximate_distrib</span><span class="o">.</span><span class="n">get_qx</span><span class="p">()</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scenario</span><span class="o">.</span><span class="n">pz_given_x</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">observed_x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>  <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;actual p(z|x=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">observed_x</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span> <span class="n">qx</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VI estimate&quot;</span><span class="p">)</span>
+          <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>    
+
+      <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApproximatePosteriorNormal</span><span class="p">(</span><span class="n">ApproximatePosteriorDistribution</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">+</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">get_qx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_batch</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+      <span class="n">scale</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span><span class="o">+</span><span class="mf">1e-5</span>
+      <span class="k">return</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">get_trainable_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span> <span class="o">=</span> <span class="n">ApproximatePosteriorNormal</span><span class="p">()</span><span class="o">.</span><span class="n">set_scenario</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span><span class="o">.</span><span class="n">set_observed_x</span><span class="p">(</span><span class="n">observed_x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100% (200 of 200) |######################| Elapsed Time: 0:00:05 Time:  0:00:05
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">plot_loss</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_20_0.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_20_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions">
+<h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a mixture of <span class="math notranslate nohighlight">\(n\)</span> Gaussians class of distributions<a class="headerlink" href="#estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions" title="Permalink to this headline">¶</a></h2>
+<p>We define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+n &amp; \text{ the number of gaussians in the mixture}\\
+\bar{\alpha} = [\alpha_i] &amp;\text{ the weights with which each gaussian participates in the mix}\\
+&amp;\text{ with }\sum\alpha_i = 1\text{ and }i \in \{1...n\} \\
+\bar{\mu} = [\mu_i] &amp;\text{ the mean of each gaussian}\\
+\bar{\sigma} = [\sigma_i] &amp;\text{ the stdev of each gaussian}\\
+\end{align}
+\end{split}\]</div>
+<p>then our family of distributions is</p>
+<div class="math notranslate nohighlight">
+\[q_{\theta=\{\bar{\mu}, \bar{\sigma},\bar{\alpha}\}}(z|x_i) = \sum \alpha_i \mathcal{N}(\mu_i, \sigma_i)\]</div>
+<p>Observe that <span class="math notranslate nohighlight">\(\theta=\{\bar{\mu}, \bar{\sigma}, \bar{\alpha}\}\)</span> are the parameters that will be learnt through VI.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApproximatePosteriorMixOfNormals</span><span class="p">(</span><span class="n">ApproximatePosteriorDistribution</span><span class="p">):</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_gaussians</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">n_gaussians</span> <span class="o">=</span> <span class="n">n_gaussians</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">n_gaussians</span><span class="p">,</span><span class="mi">3</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">get_qx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_batch</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Mixture</span><span class="p">(</span>
+        <span class="n">cat</span><span class="o">=</span><span class="n">tfd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">logits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]),</span>
+        <span class="n">components</span><span class="o">=</span><span class="p">[</span><span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">ti</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scale</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">softplus</span><span class="p">(</span><span class="n">ti</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="k">for</span> <span class="n">ti</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">]</span>
+      <span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">get_trainable_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span> <span class="o">=</span> <span class="n">ApproximatePosteriorMixOfNormals</span><span class="p">(</span><span class="n">n_gaussians</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">set_scenario</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span><span class="o">.</span><span class="n">set_observed_x</span><span class="p">(</span><span class="n">observed_x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100% (150 of 150) |######################| Elapsed Time: 0:00:11 Time:  0:00:11
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">plot_loss</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_26_0.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_26_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -262,11 +262,11 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">from</span> <span class="nn">manim</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+import numpy as np
+from skimage.io import imread
+from PIL import Image
+from manim import *
 </pre></div>
 </div>
 </div>
@@ -278,21 +278,21 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span>
-<span class="n">imgs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span><span class="n">imread</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imgs/</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;imgs&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.png&quot;</span><span class="p">)}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+from skimage.io import imread
+imgs = {&quot;.&quot;.join(i.split(&quot;.&quot;)[:-1]):imread(f&quot;imgs/{i}&quot;) for i in os.listdir(&quot;imgs&quot;) if i.endswith(&quot;.png&quot;)}
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rlxutils</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import rlxutils
 
-<span class="k">for</span> <span class="n">ax</span><span class="p">,(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">rlxutils</span><span class="o">.</span><span class="n">subplots</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">imgs</span><span class="o">.</span><span class="n">items</span><span class="p">()]):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+for ax,(k,v) in rlxutils.subplots([(k,v) for k,v in imgs.items()]):
+    ax.imshow(v)
+    plt.title(k)
+    plt.axis(&quot;off&quot;)
 </pre></div>
 </div>
 </div>
@@ -302,11 +302,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imgs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span><span class="n">imread</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imgs/</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;imgs&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.png&quot;</span><span class="p">)}</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">imgs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">v</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">imgs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImageMobject</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imgs = {&quot;.&quot;.join(i.split(&quot;.&quot;)[:-1]):imread(f&quot;imgs/{i}&quot;) for i in os.listdir(&quot;imgs&quot;) if i.endswith(&quot;.png&quot;)}
+for k,v in imgs.items():
+    for i in range(3):
+        v[:,:,i] = v[:,:,3]
+    imgs[k] = ImageMobject(Image.fromarray(v))
 </pre></div>
 </div>
 </div>
@@ -337,15 +337,15 @@ XX change 2 rgba 2 140233349602272 (1000, 1000, 4) 43080856
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="n">imgs</span><span class="p">[</span><span class="s1">&#39;wheel&#39;</span><span class="p">],</span> <span class="n">imgs</span><span class="p">[</span><span class="s1">&#39;smile&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>g = Group(imgs[&#39;wheel&#39;], imgs[&#39;smile&#39;])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for i in g:
+    print (i)
 </pre></div>
 </div>
 </div>
@@ -358,13 +358,13 @@ ImageMobject
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pimg</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;imgs/smile.png&quot;</span><span class="p">)</span>
-<span class="n">ximg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pimg</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">ximg</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ximg</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">]</span>
-<span class="n">pimg</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">ximg</span><span class="p">)</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">ImageMobject</span><span class="p">(</span><span class="n">pimg</span><span class="p">)</span>
-<span class="n">img</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pimg = Image.open(&quot;imgs/smile.png&quot;)
+ximg = np.array(pimg)
+for i in range(3):
+    ximg[:,:,i] = ximg[:,:,3]
+pimg = Image.fromarray(ximg)
+img = ImageMobject(pimg)
+img.get_image()
 </pre></div>
 </div>
 </div>
@@ -388,11 +388,11 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pimg</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;imgs/smile.png&quot;</span><span class="p">)</span>
-<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pimg</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">x2</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x2</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pimg = Image.open(&quot;imgs/smile.png&quot;)
+x2 = np.array(pimg)
+for i in range(3):
+    x2[:,:,i] = x2[:,:,3]
+plt.imshow(x2)
 </pre></div>
 </div>
 </div>
@@ -405,35 +405,35 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imsave</span>
-<span class="n">imsave</span><span class="p">(</span><span class="s2">&quot;/tmp/ss.png&quot;</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from skimage.io import imsave
+imsave(&quot;/tmp/ss.png&quot;, x2)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manim.mobject.svg.text_mobject</span> <span class="kn">import</span> <span class="n">Text</span>
-<span class="n">Text</span><span class="o">.</span><span class="n">CONFIG</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;arg_separator&quot;</span><span class="p">:</span> <span class="s2">&quot; &quot;</span><span class="p">,</span>
-        <span class="s2">&quot;substrings_to_isolate&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;tex_to_color_map&quot;</span><span class="p">:</span> <span class="p">{},</span>
-        <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">RED_E</span><span class="p">,</span>
-    <span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from manim.mobject.svg.text_mobject import Text
+Text.CONFIG = {
+        &quot;arg_separator&quot;: &quot; &quot;,
+        &quot;substrings_to_isolate&quot;: [],
+        &quot;tex_to_color_map&quot;: {},
+        &quot;color&quot;: RED_E,
+    }
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span> <span class="o">=</span> <span class="n">Square</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sq = Square()
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sq</span><span class="o">.</span><span class="n">get_bottom</span><span class="p">(),</span> <span class="n">sq</span><span class="o">.</span><span class="n">get_left</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sq.get_bottom(), sq.get_left()
 </pre></div>
 </div>
 </div>
@@ -445,7 +445,7 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">drawings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import drawings
 </pre></div>
 </div>
 </div>
@@ -469,15 +469,15 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manim</span> <span class="kn">import</span> <span class="n">animation</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from manim import animation
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">manim</span>
-<span class="n">manim</span><span class="o">.</span><span class="n">RIGHT</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import manim
+manim.RIGHT
 </pre></div>
 </div>
 </div>
@@ -489,24 +489,24 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imgs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span><span class="n">ImageMobject</span><span class="p">(</span><span class="n">imread</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imgs/</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span> <span class="n">image_mode</span><span class="o">=</span><span class="s2">&quot;RGBa&quot;</span><span class="p">)</span>\
-           <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;imgs&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.png&quot;</span><span class="p">)}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imgs = {&quot;.&quot;.join(i.split(&quot;.&quot;)[:-1]):ImageMobject(imread(f&quot;imgs/{i}&quot;), image_mode=&quot;RGBa&quot;)\
+           for i in os.listdir(&quot;imgs&quot;) if i.endswith(&quot;.png&quot;)}
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imgs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span><span class="n">ImageMobject</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;imgs/</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span> <span class="n">image_mode</span><span class="o">=</span><span class="s2">&quot;RGBA&quot;</span><span class="p">)</span>\
-           <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;imgs&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.png&quot;</span><span class="p">)}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>imgs = {&quot;.&quot;.join(i.split(&quot;.&quot;)[:-1]):ImageMobject(Image.open(f&quot;imgs/{i}&quot;), image_mode=&quot;RGBA&quot;)\
+           for i in os.listdir(&quot;imgs&quot;) if i.endswith(&quot;.png&quot;)}
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="n">imgs</span><span class="p">[</span><span class="s2">&quot;smile&quot;</span><span class="p">]</span>
-<span class="n">k</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>k = imgs[&quot;smile&quot;]
+k
 </pre></div>
 </div>
 </div>
@@ -518,8 +518,8 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ki</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">ki</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ki = k.get_image()
+type(ki)
 </pre></div>
 </div>
 </div>
@@ -531,7 +531,7 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ki</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.array(ki).shape
 </pre></div>
 </div>
 </div>
@@ -543,7 +543,7 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ki</span><span class="p">)[:,:,</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ki</span><span class="p">)[:,:,</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.array(ki)[:,:,3].min(), np.array(ki)[:,:,3].max()
 </pre></div>
 </div>
 </div>
@@ -555,8 +555,8 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s2">&quot;imgs/smile.png&quot;</span><span class="p">)</span>
-<span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">im</span><span class="p">[:,:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">im</span><span class="p">[:,:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>im = imread(&quot;imgs/smile.png&quot;)
+im.shape, im[:,:,-1].min(), im[:,:,-1].max()
 </pre></div>
 </div>
 </div>
@@ -568,10 +568,10 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;imgs/smile.png&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGBA&quot;</span><span class="p">)</span>
-<span class="n">pi</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;/tmp/ss.png&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGBA&quot;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pi</span><span class="p">)[:,:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pi</span><span class="p">)[:,:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">pi</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pi = Image.open(&quot;imgs/smile.png&quot;).convert(&quot;RGBA&quot;)
+pi = Image.open(&quot;/tmp/ss.png&quot;).convert(&quot;RGBA&quot;)
+print (np.min(np.array(pi)[:,:,-1]), np.max(np.array(pi)[:,:,-1]))
+pi
 </pre></div>
 </div>
 </div>
@@ -584,21 +584,21 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 559516425
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;imgs/smile.png&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGBA&quot;</span><span class="p">)</span>
-<span class="n">mi</span> <span class="o">=</span> <span class="n">ImageMobject</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span><span class="c1">#, image_mode=&quot;RGBA&quot;)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pi = Image.open(&quot;imgs/smile.png&quot;).convert(&quot;RGBA&quot;)
+mi = ImageMobject(pi)#, image_mode=&quot;RGBA&quot;)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">manim</span> <span class="kn">import</span> <span class="o">*</span> 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">mi</span> <span class="o">=</span> <span class="n">ImageMobject</span><span class="p">(</span><span class="s2">&quot;/tmp/ss.png&quot;</span><span class="p">,</span> <span class="n">image_mode</span><span class="o">=</span><span class="s2">&quot;RGBA&quot;</span><span class="p">)</span>
-<span class="n">xxm</span> <span class="o">=</span> <span class="n">mi</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
-<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xxm</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">xxm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from manim import * 
+import matplotlib.pyplot as plt
+from PIL import Image
+mi = ImageMobject(&quot;/tmp/ss.png&quot;, image_mode=&quot;RGBA&quot;)
+xxm = mi.get_image()
+np.array(xxm).sum()
+xxm
 </pre></div>
 </div>
 </div>
@@ -629,10 +629,10 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 528768000
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/tmp/x1.npy&quot;</span><span class="p">)</span>
-<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;/tmp/x2.npy&quot;</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;minmax&quot;</span><span class="p">,</span> <span class="n">x2</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x2</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-<span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x1</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span><span class="n">x2</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">x2</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x1 = np.load(&quot;/tmp/x1.npy&quot;)
+x2 = np.load(&quot;/tmp/x2.npy&quot;)
+print (&quot;minmax&quot;, x2[:,:,0].min(), x2[:,:,0].max())
+x1.shape, x1.sum(),x2.shape, x2.sum()
 </pre></div>
 </div>
 </div>
@@ -647,19 +647,19 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 528768000
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="n">x2</span><span class="p">[:,:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x2</span><span class="p">[:,:,</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for i in range(3):
+    x2[:,:,i] = x2[:,:,3]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ix1</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
-<span class="n">ix2</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
-<span class="n">ixc</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">alpha_composite</span><span class="p">(</span><span class="n">ix1</span><span class="p">,</span> <span class="n">ix2</span><span class="p">)</span>
-<span class="n">xc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ixc</span><span class="p">)</span>
-<span class="n">xc</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">xc</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ix1 = Image.fromarray(x1)
+ix2 = Image.fromarray(x2)
+ixc = Image.alpha_composite(ix1, ix2)
+xc = np.array(ixc)
+xc.sum(), xc.shape
 </pre></div>
 </div>
 </div>
@@ -671,7 +671,7 @@ XX min 0 max 255 RGBA SHAPE (1080, 1920, 4) 528768000
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ixc</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ixc
 </pre></div>
 </div>
 </div>

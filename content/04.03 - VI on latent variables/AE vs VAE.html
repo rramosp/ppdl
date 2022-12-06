@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -339,17 +339,17 @@ const thebe_selector_output = ".output, .cell_output"
   <p>from https://keras.io/examples/generative/vae/</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
-<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span>
-<span class="kn">from</span> <span class="nn">ppdl.models</span> <span class="kn">import</span> <span class="n">transfer_weights</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
-<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+from progressbar import progressbar as pbar
+import matplotlib.pyplot as plt
+from rlxutils import subplots
+from ppdl.models import transfer_weights
+%matplotlib inline
+from IPython.core.display import display, HTML
+display(HTML(&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;))
 </pre></div>
 </div>
 </div>
@@ -362,20 +362,20 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-1&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] = &quot;-1&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">physical_devices</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
-<span class="k">try</span><span class="p">:</span>
-  <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">set_memory_growth</span><span class="p">(</span><span class="n">physical_devices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">True</span><span class="p">)</span>
-<span class="k">except</span><span class="p">:</span>
-  <span class="c1"># Invalid device or cannot modify virtual devices once initialized.</span>
-  <span class="k">pass</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>physical_devices = tf.config.list_physical_devices(&#39;GPU&#39;)
+try:
+  tf.config.experimental.set_memory_growth(physical_devices[0], True)
+except:
+  # Invalid device or cannot modify virtual devices once initialized.
+  pass
 </pre></div>
 </div>
 </div>
@@ -389,9 +389,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
-<span class="n">mnist_digits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">mnist_digits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">255</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>(x_train, _), (x_test, _) = keras.datasets.mnist.load_data()
+mnist_digits = np.concatenate([x_train, x_test], axis=0)
+mnist_digits = np.expand_dims(mnist_digits, -1).astype(&quot;float32&quot;) / 255
 </pre></div>
 </div>
 </div>
@@ -401,7 +401,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>VAE has an extra layer to predict latent distribution std</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">random_normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tf.keras.backend.random_normal(shape=(3, 2))
 </pre></div>
 </div>
 </div>
@@ -420,144 +420,144 @@ array([[-0.50825334,  0.04180132],
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Encoder</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>class Encoder(keras.Model):
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv1_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;enc_conv1&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">conv2_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;enc_conv2&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dense_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;enc_dense1&quot;</span><span class="p">)</span>
+    def __init__(self, latent_dim=2):
+        super().__init__()
+        self.conv1_layer = layers.Conv2D(32, 3, activation=&quot;relu&quot;, strides=2, padding=&quot;same&quot;, name=&quot;enc_conv1&quot;)
+        self.conv2_layer = layers.Conv2D(64, 3, activation=&quot;relu&quot;, strides=2, padding=&quot;same&quot;, name=&quot;enc_conv2&quot;)
+        self.dense_layer = layers.Dense(16, activation=&quot;relu&quot;, name=&quot;enc_dense1&quot;)
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">output_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;enc_output&quot;</span><span class="p">)</span>
+        self.output_layer = layers.Dense(latent_dim, name=&quot;enc_output&quot;)
 
-    <span class="k">def</span> <span class="nf">call_stage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">x</span>
+    def call_stage(self, x):
+        x = self.conv1_layer(x)
+        x = self.conv2_layer(x)
+        x = layers.Flatten()(x)
+        x = self.dense_layer(x)
+        return x
     
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_stage</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">x</span>
+    def call(self, x):
+        x = self.call_stage(x)
+        x = self.output_layer(x)
+        return x
 
-<span class="k">class</span> <span class="nc">Sampling</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Uses (z_mean, z_log_var) to sample z, the vector encoding a digit.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">no_sampling</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">no_sampling</span> <span class="o">=</span> <span class="n">no_sampling</span>
+class Sampling(layers.Layer):
+    &quot;&quot;&quot;Uses (z_mean, z_log_var) to sample z, the vector encoding a digit.&quot;&quot;&quot;
+    def __init__(self, no_sampling=False, **kwargs):
+        super().__init__(**kwargs)
+        self.no_sampling = no_sampling
 
-    <span class="k">def</span> <span class="nf">disable_sampling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">no_sampling</span> <span class="o">=</span> <span class="kc">True</span>
+    def disable_sampling(self):
+        self.no_sampling = True
 
-    <span class="k">def</span> <span class="nf">enable_sampling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">no_sampling</span> <span class="o">=</span> <span class="kc">False</span>
+    def enable_sampling(self):
+        self.no_sampling = False
 
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
-        <span class="n">z_mean</span><span class="p">,</span> <span class="n">z_log_var</span> <span class="o">=</span> <span class="n">inputs</span>
-        <span class="n">batch</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">z_mean</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">dim</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">z_mean</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_sampling</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">z_mean</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">epsilon</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">random_normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">z_mean</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">z_log_var</span><span class="p">)</span> <span class="o">*</span> <span class="n">epsilon</span>
+    def call(self, inputs):
+        z_mean, z_log_var = inputs
+        batch = tf.shape(z_mean)[0]
+        dim = tf.shape(z_mean)[1]
+        if self.no_sampling:
+            return z_mean
+        else:
+            epsilon = tf.keras.backend.random_normal(shape=(batch, dim))
+            return z_mean + tf.exp(0.5 * z_log_var) * epsilon
     
-<span class="k">class</span> <span class="nc">VAE_Encoder</span><span class="p">(</span><span class="n">Encoder</span><span class="p">):</span>
+class VAE_Encoder(Encoder):
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">latent_dim</span><span class="o">=</span><span class="n">latent_dim</span><span class="p">)</span>
+    def __init__(self, latent_dim=2):
+        super().__init__(latent_dim=latent_dim)
         
-        <span class="bp">self</span><span class="o">.</span><span class="n">z_mean_layer</span>    <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_layer</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">z_log_var_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;enc_z_log_var&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">z_sampling_layer</span> <span class="o">=</span> <span class="n">Sampling</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;enc_sampling&quot;</span><span class="p">)</span>
+        self.z_mean_layer    = self.output_layer
+        self.z_log_var_layer = layers.Dense(latent_dim, name=&quot;enc_z_log_var&quot;)
+        self.z_sampling_layer = Sampling(name=&quot;enc_sampling&quot;)
 
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_stage</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">z_mean</span>    <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_mean_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">z_log_var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_log_var_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">z_sample</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">z_sampling_layer</span><span class="p">([</span><span class="n">z_mean</span><span class="p">,</span> <span class="n">z_log_var</span><span class="p">])</span>
+    def call(self, x):
+        x = self.call_stage(x)
+        z_mean    = self.z_mean_layer(x)
+        z_log_var = self.z_log_var_layer(x)
+        z_sample  = self.z_sampling_layer([z_mean, z_log_var])
         
-        <span class="k">return</span> <span class="p">[</span><span class="n">z_mean</span><span class="p">,</span> <span class="n">z_log_var</span><span class="p">,</span> <span class="n">z_sample</span><span class="p">]</span>
+        return [z_mean, z_log_var, z_sample]
     
-<span class="k">class</span> <span class="nc">Decoder</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+class Decoder(keras.Model):
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dense_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">7</span> <span class="o">*</span> <span class="mi">7</span> <span class="o">*</span> <span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dec_dense&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convt1_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv2DTranspose</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dec_convt1&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convt2_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv2DTranspose</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dec_convt2&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">convt_output_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv2DTranspose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dec_convt_output&quot;</span><span class="p">)</span>
+    def __init__(self, latent_dim=2):
+        super().__init__()
+        self.dense_layer = layers.Dense(7 * 7 * 64, activation=&quot;relu&quot;, name=&quot;dec_dense&quot;)
+        self.convt1_layer = layers.Conv2DTranspose(64, 3, activation=&quot;relu&quot;, strides=2, padding=&quot;same&quot;, name=&quot;dec_convt1&quot;)
+        self.convt2_layer = layers.Conv2DTranspose(32, 3, activation=&quot;relu&quot;, strides=2, padding=&quot;same&quot;, name=&quot;dec_convt2&quot;)
+        self.convt_output_layer = layers.Conv2DTranspose(1, 3, activation=&quot;sigmoid&quot;, padding=&quot;same&quot;, name=&quot;dec_convt_output&quot;)
         
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Reshape</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">64</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convt1_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convt2_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convt_output_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">x</span>
+    def call(self, x):
+        x = self.dense_layer(x)
+        x = layers.Reshape((7, 7, 64))(x)
+        x = self.convt1_layer(x)
+        x = self.convt2_layer(x)
+        x = self.convt_output_layer(x)
+        return x
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VAE</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">VAE_Encoder</span><span class="p">(</span><span class="n">latent_dim</span><span class="o">=</span><span class="n">latent_dim</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">total_loss_tracker</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;total_loss&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_tracker</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;reconstruction_loss&quot;</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">kl_loss_tracker</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;kl_loss&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>class VAE(keras.Model):
+    def __init__(self, latent_dim=2, **kwargs):
+        super().__init__(**kwargs)
+        self.encoder = VAE_Encoder(latent_dim=latent_dim)
+        self.decoder = Decoder()
+        self.total_loss_tracker = keras.metrics.Mean(name=&quot;total_loss&quot;)
+        self.reconstruction_loss_tracker = keras.metrics.Mean(
+            name=&quot;reconstruction_loss&quot;
+        )
+        self.kl_loss_tracker = keras.metrics.Mean(name=&quot;kl_loss&quot;)
 
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="n">z_mean</span><span class="p">,</span> <span class="n">z_log_var</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    def call(self, x):
+        z_mean, z_log_var, z = self.encoder(x)
+        return self.decoder(z)
         
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">total_loss_tracker</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_tracker</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">kl_loss_tracker</span><span class="p">,</span>
-        <span class="p">]</span>
+    @property
+    def metrics(self):
+        return [
+            self.total_loss_tracker,
+            self.reconstruction_loss_tracker,
+            self.kl_loss_tracker,
+        ]
 
-    <span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
-            <span class="n">z_mean</span><span class="p">,</span> <span class="n">z_log_var</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="n">reconstruction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-            <span class="n">reconstruction_loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span>
-                <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span>
-                    <span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">binary_crossentropy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reconstruction</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
-            <span class="n">kl_loss</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z_log_var</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">z_mean</span><span class="p">)</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z_log_var</span><span class="p">))</span>
-            <span class="n">kl_loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">kl_loss</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-            <span class="n">total_loss</span> <span class="o">=</span> <span class="n">reconstruction_loss</span> <span class="o">+</span> <span class="n">kl_loss</span>
-        <span class="n">grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">total_loss</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainable_weights</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainable_weights</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">total_loss_tracker</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span><span class="n">total_loss</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_tracker</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span><span class="n">reconstruction_loss</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">kl_loss_tracker</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span><span class="n">kl_loss</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_loss_tracker</span><span class="o">.</span><span class="n">result</span><span class="p">(),</span>
-            <span class="s2">&quot;reconstruction_loss&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_tracker</span><span class="o">.</span><span class="n">result</span><span class="p">(),</span>
-            <span class="s2">&quot;kl_loss&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">kl_loss_tracker</span><span class="o">.</span><span class="n">result</span><span class="p">(),</span>
-        <span class="p">}</span>
+    def train_step(self, data):
+        with tf.GradientTape() as tape:
+            z_mean, z_log_var, z = self.encoder(data)
+            reconstruction = self.decoder(z)
+            reconstruction_loss = tf.reduce_mean(
+                tf.reduce_sum(
+                    keras.losses.binary_crossentropy(data, reconstruction), axis=(1, 2)
+                )
+            )
+            kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
+            kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
+            total_loss = reconstruction_loss + kl_loss
+        grads = tape.gradient(total_loss, self.trainable_weights)
+        self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
+        self.total_loss_tracker.update_state(total_loss)
+        self.reconstruction_loss_tracker.update_state(reconstruction_loss)
+        self.kl_loss_tracker.update_state(kl_loss)
+        return {
+            &quot;loss&quot;: self.total_loss_tracker.result(),
+            &quot;reconstruction_loss&quot;: self.reconstruction_loss_tracker.result(),
+            &quot;kl_loss&quot;: self.kl_loss_tracker.result(),
+        }
 
-<span class="k">class</span> <span class="nc">VAE_no_sampling</span><span class="p">(</span><span class="n">VAE</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    this does no sampling during training, it simply uses the mean obtain from the encoder</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">z_sampling_layer</span><span class="o">.</span><span class="n">disable_sampling</span><span class="p">()</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">train_step</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">z_sampling_layer</span><span class="o">.</span><span class="n">enable_sampling</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">r</span>
+class VAE_no_sampling(VAE):
+    &quot;&quot;&quot;
+    this does no sampling during training, it simply uses the mean obtain from the encoder
+    &quot;&quot;&quot;
+    def train_step(self, data):
+        self.encoder.z_sampling_layer.disable_sampling()
+        r = super().train_step(data)
+        self.encoder.z_sampling_layer.enable_sampling()
+        return r
 </pre></div>
 </div>
 </div>
@@ -568,38 +568,38 @@ array([[-0.50825334,  0.04180132],
 <p>and in our VAE <span class="math notranslate nohighlight">\(d_2 = \mathcal{N}(0,1)\)</span> and <span class="math notranslate nohighlight">\(d_1=\mathcal{N}(z_m, z_s)\)</span> (the latent space)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AE</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">latent_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span><span class="n">latent_dim</span><span class="o">=</span><span class="n">latent_dim</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_tracker</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Mean</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;reconstruction_loss&quot;</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_history</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>class AE(keras.Model):
+    def __init__(self, latent_dim=2, **kwargs):
+        super().__init__(**kwargs)
+        self.encoder = Encoder(latent_dim=latent_dim)
+        self.decoder = Decoder()
+        self.reconstruction_loss_tracker = keras.metrics.Mean(
+            name=&quot;reconstruction_loss&quot;
+        )
+        self.reconstruction_loss_history = []
 
-    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    def call(self, x):
+        return self.decoder(self.encoder(x))
         
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_tracker</span><span class="p">]</span>
+    @property
+    def metrics(self):
+        return [self.reconstruction_loss_tracker]
 
-    <span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
-            <span class="n">reconstruction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-            <span class="n">reconstruction_loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span>
-                <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span>
-                    <span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">binary_crossentropy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">reconstruction</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
-        <span class="n">grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">reconstruction_loss</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainable_weights</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trainable_weights</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_tracker</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span><span class="n">reconstruction_loss</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_tracker</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
-        <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">reconstruction_loss_tracker</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-        <span class="p">}</span>
+    def train_step(self, data):
+        with tf.GradientTape() as tape:
+            reconstruction = self(data)
+            reconstruction_loss = tf.reduce_mean(
+                tf.reduce_sum(
+                    keras.losses.binary_crossentropy(data, reconstruction), axis=(1, 2)
+                )
+            )
+        grads = tape.gradient(reconstruction_loss, self.trainable_weights)
+        self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
+        self.reconstruction_loss_tracker.update_state(reconstruction_loss)
+        self.reconstruction_loss_history.append(self.reconstruction_loss_tracker.result())
+        return {
+            &quot;loss&quot;: self.reconstruction_loss_tracker.result()
+        }
 </pre></div>
 </div>
 </div>
@@ -608,37 +608,37 @@ array([[-0.50825334,  0.04180132],
 <h2>train both VAE and AE<a class="headerlink" href="#train-both-vae-and-ae" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from collections import defaultdict
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LogHistoryCallback</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">Callback</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">[])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>class LogHistoryCallback(keras.callbacks.Callback):
+    def __init__(self):
+        self.history = defaultdict(lambda: [])
         
-    <span class="k">def</span> <span class="nf">on_train_batch_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">logs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">logs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>        
+    def on_train_batch_end(self, batch, logs=None):
+        for k,v in logs.items():
+            self.history[k].append(v)        
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">latent_dim</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>latent_dim = 2
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ae</span> <span class="o">=</span> <span class="n">AE</span><span class="p">(</span><span class="n">latent_dim</span><span class="o">=</span><span class="n">latent_dim</span><span class="p">)</span>
-<span class="n">ae_history</span> <span class="o">=</span> <span class="n">LogHistoryCallback</span><span class="p">()</span>
-<span class="n">ae</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">())</span>
-<span class="n">ae</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">ae_history</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ae = AE(latent_dim=latent_dim)
+ae_history = LogHistoryCallback()
+ae.compile(optimizer=keras.optimizers.Adam())
+ae.fit(mnist_digits, epochs=10, batch_size=128, callbacks=[ae_history])
 </pre></div>
 </div>
 </div>
@@ -672,10 +672,10 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vae</span> <span class="o">=</span> <span class="n">VAE</span><span class="p">(</span><span class="n">latent_dim</span> <span class="o">=</span> <span class="n">latent_dim</span><span class="p">)</span>
-<span class="n">vae_history</span> <span class="o">=</span> <span class="n">LogHistoryCallback</span><span class="p">()</span>
-<span class="n">vae</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">())</span>
-<span class="n">vae</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">vae_history</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vae = VAE(latent_dim = latent_dim)
+vae_history = LogHistoryCallback()
+vae.compile(optimizer=keras.optimizers.Adam())
+vae.fit(mnist_digits, epochs=10, batch_size=128, callbacks=[vae_history])
 </pre></div>
 </div>
 </div>
@@ -709,11 +709,11 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># VAE with no sampling during training --- seems to minimize faster both reconstruction and KL loss (overfits!!!)</span>
-<span class="n">nvae</span> <span class="o">=</span> <span class="n">VAE_no_sampling</span><span class="p">(</span><span class="n">latent_dim</span> <span class="o">=</span> <span class="n">latent_dim</span><span class="p">)</span>
-<span class="n">nvae_history</span> <span class="o">=</span> <span class="n">LogHistoryCallback</span><span class="p">()</span>
-<span class="n">nvae</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">())</span>
-<span class="n">nvae</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">nvae_history</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># VAE with no sampling during training --- seems to minimize faster both reconstruction and KL loss (overfits!!!)
+nvae = VAE_no_sampling(latent_dim = latent_dim)
+nvae_history = LogHistoryCallback()
+nvae.compile(optimizer=keras.optimizers.Adam())
+nvae.fit(mnist_digits, epochs=10, batch_size=128, callbacks=[nvae_history])
 </pre></div>
 </div>
 </div>
@@ -747,17 +747,17 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">vae_history</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;VAE </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for k,v in vae_history.history.items():
+    plt.plot(v, label=f&quot;VAE {k}&quot;)
 
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">nvae_history</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;nVAE </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+for k,v in nvae_history.history.items():
+    plt.plot(v, label=f&quot;nVAE {k}&quot;, ls=&quot;--&quot;)
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ae_history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AE reconstruction_loss&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+plt.plot(ae_history.history[&#39;loss&#39;], label=&quot;AE reconstruction_loss&quot;, color=&quot;red&quot;, lw=4, alpha=.5)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
+plt.grid();
 </pre></div>
 </div>
 </div>
@@ -772,9 +772,9 @@ Epoch 10/10
 <p>observe how AE <strong>tends</strong> to VAE</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vaezm</span><span class="p">,</span><span class="n">vaezs</span><span class="p">,</span><span class="n">vaez</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vae</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">)]</span>
-<span class="n">nvaezm</span><span class="p">,</span><span class="n">nvaezs</span><span class="p">,</span><span class="n">nvaez</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nvae</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">)]</span>
-<span class="n">aez</span> <span class="o">=</span> <span class="n">ae</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vaezm,vaezs,vaez = [i.numpy() for i in vae.encoder(mnist_digits)]
+nvaezm,nvaezs,nvaez = [i.numpy() for i in nvae.encoder(mnist_digits)]
+aez = ae.encoder(mnist_digits).numpy()
 </pre></div>
 </div>
 </div>
@@ -790,46 +790,46 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">aez</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AE encoder &quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">vaez</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;VAE encoder (sampling latent))&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">vaezm</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;VAE encoder mean&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">.5</span><span class="o">*</span><span class="n">vaezs</span><span class="p">[:,</span><span class="n">i</span><span class="p">]),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;VAE encoder std&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">nvaez</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;nVAE encoder (sampling latent)&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">nvaezm</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;nVAE encoder mean&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">k</span><span class="o">==</span><span class="mi">7</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">latent_dim</span><span class="p">):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">.5</span><span class="o">*</span><span class="n">nvaezs</span><span class="p">[:,</span><span class="n">i</span><span class="p">]),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;nVAE encoder std&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax,k in subplots(8, usizex=5, n_cols=4):
+    if k==0:
+        for i in range(latent_dim):
+            plt.hist(aez[:,i], density=True, bins=100, alpha=.5);
+        plt.title(&quot;AE encoder &quot;)
+        plt.grid();
+    if k==1:
+        for i in range(latent_dim):
+            plt.hist(vaez[:,i], density=True, bins=100, alpha=.5);
+        plt.title(&quot;VAE encoder (sampling latent))&quot;)
+        plt.grid();
+    if k==2:
+        for i in range(latent_dim):
+            plt.hist(vaezm[:,i], density=True, bins=100, alpha=.5);
+        plt.title(&quot;VAE encoder mean&quot;)
+        plt.grid();
+    if k==3:
+        for i in range(latent_dim):
+            plt.hist(np.exp(.5*vaezs[:,i]), density=True, bins=100, alpha=.5);
+        plt.title(&quot;VAE encoder std&quot;)
+        plt.grid();
+    if k==4:
+        plt.axis(&quot;off&quot;)
+    if k==5:
+        for i in range(latent_dim):
+            plt.hist(nvaez[:,i], density=True, bins=100, alpha=.5);
+        plt.title(&quot;nVAE encoder (sampling latent)&quot;)
+        plt.grid();
+    if k==6:
+        for i in range(latent_dim):
+            plt.hist(nvaezm[:,i], density=True, bins=100, alpha=.5);
+        plt.title(&quot;nVAE encoder mean&quot;)
+        plt.grid();
+    if k==7:
+        for i in range(latent_dim):
+            plt.hist(np.exp(.5*nvaezs[:,i]), density=True, bins=100, alpha=.5);
+        plt.title(&quot;nVAE encoder std&quot;)
+        plt.grid();
 
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -847,17 +847,17 @@ Epoch 10/10
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># select one random input</span>
-<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># select one random input
+idx = np.random.randint(len(mnist_digits))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># AE is deterministic, so we do inference just once and obtain one value for each output pixel</span>
-<span class="n">output_ae</span> <span class="o">=</span> <span class="n">ae</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">output_ae</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># AE is deterministic, so we do inference just once and obtain one value for each output pixel
+output_ae = ae(mnist_digits[idx:idx+1]).numpy()
+output_ae.shape
 </pre></div>
 </div>
 </div>
@@ -869,9 +869,9 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># VAE is stochastic, so we do inference many times to understand the output distribution of each pixel</span>
-<span class="n">output_vae</span> <span class="o">=</span> <span class="n">vae</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="mi">10000</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">output_vae</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># VAE is stochastic, so we do inference many times to understand the output distribution of each pixel
+output_vae = vae(np.repeat(mnist_digits[idx:idx+1],10000, axis=0)).numpy()
+output_vae.shape
 </pre></div>
 </div>
 </div>
@@ -883,9 +883,9 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nVAE is stochastic, so we do inference many times to understand the output distribution of each pixel</span>
-<span class="n">output_nvae</span> <span class="o">=</span> <span class="n">nvae</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="mi">10000</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">output_nvae</span><span class="o">.</span><span class="n">shape</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># nVAE is stochastic, so we do inference many times to understand the output distribution of each pixel
+output_nvae = nvae(np.repeat(mnist_digits[idx:idx+1],10000, axis=0)).numpy()
+output_nvae.shape
 </pre></div>
 </div>
 </div>
@@ -897,32 +897,32 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">[</span><span class="n">idx</span><span class="p">][:,:,</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;input img idx=</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">output_ae</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:,</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AE output&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>        
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;VAE output pixel mean&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>        
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;VAE output pixel std&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">output_nvae</span><span class="p">[:,:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;nVAE output pixel mean&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>        
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">5</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">output_nvae</span><span class="p">[:,:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;nVAE output pixel std&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax, i in subplots(6):
+    if i==0:
+        plt.imshow(mnist_digits[idx][:,:,0])
+        plt.title(f&quot;input img idx={idx}&quot;)
+        plt.colorbar();
+    if i==1:
+        plt.imshow(output_ae[0,:,:,0])
+        plt.title(&quot;AE output&quot;)
+        plt.colorbar();        
+    if i==2:
+        plt.imshow(output_vae[:,:,:,0].mean(axis=0))
+        plt.title(&quot;VAE output pixel mean&quot;)
+        plt.colorbar();        
+    if i==3:
+        plt.imshow(output_vae[:,:,:,0].std(axis=0))
+        plt.title(&quot;VAE output pixel std&quot;)
+        plt.colorbar();
+    if i==4:
+        plt.imshow(output_nvae[:,:,:,0].mean(axis=0))
+        plt.title(&quot;nVAE output pixel mean&quot;)
+        plt.colorbar();        
+    if i==5:
+        plt.imshow(output_nvae[:,:,:,0].std(axis=0))
+        plt.title(&quot;nVAE output pixel std&quot;)
+        plt.colorbar();
+plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -932,24 +932,24 @@ Epoch 10/10
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">output_ae</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AE&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(40,10))
+plt.plot(output_ae.reshape(-1), color=&quot;blue&quot;, alpha=.5, lw=2, ls=&quot;--&quot;, label=&quot;AE&quot;)
 
-<span class="n">om</span> <span class="o">=</span> <span class="n">output_vae</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">os</span> <span class="o">=</span> <span class="n">output_vae</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">nom</span> <span class="o">=</span> <span class="n">output_nvae</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">nos</span> <span class="o">=</span> <span class="n">output_nvae</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+om = output_vae.mean(axis=0).reshape(-1)
+os = output_vae.std(axis=0).reshape(-1)
+nom = output_nvae.mean(axis=0).reshape(-1)
+nos = output_nvae.std(axis=0).reshape(-1)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE mean&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">om</span><span class="p">)),</span> <span class="n">om</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">os</span><span class="p">,</span> <span class="n">om</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">os</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE std&quot;</span><span class="p">)</span>
+plt.plot(om, color=&quot;red&quot;, alpha=.5, lw=1, label=&quot;VAE mean&quot;)
+plt.fill_between(range(len(om)), om-3*os, om+3*os, color=&quot;orange&quot;, alpha=.5, label=&quot;VAE std&quot;)
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nom</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;nVAE mean&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nom</span><span class="p">)),</span> <span class="n">nom</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">nos</span><span class="p">,</span> <span class="n">nom</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">nos</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;nVAE std&quot;</span><span class="p">)</span>
+plt.plot(nom, color=&quot;green&quot;, alpha=1, lw=1, label=&quot;nVAE mean&quot;)
+plt.fill_between(range(len(nom)), nom-3*nos, nom+3*nos, color=&quot;green&quot;, alpha=.2, label=&quot;nVAE std&quot;)
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;pixel number&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+plt.xlabel(&quot;pixel number&quot;)
+plt.legend();
+plt.grid();
 </pre></div>
 </div>
 </div>
@@ -960,44 +960,44 @@ Epoch 10/10
 <p>show VAE distribution of pixel with largest mean and largest std</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my</span><span class="p">,</span><span class="n">mx</span> <span class="o">=</span> <span class="n">output_vae</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span><span class="o">//</span><span class="mi">28</span><span class="p">,</span> <span class="n">output_vae</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span><span class="o">%</span><span class="k">28</span>
-<span class="n">sy</span><span class="p">,</span><span class="n">sx</span> <span class="o">=</span> <span class="n">output_vae</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span><span class="o">//</span><span class="mi">28</span><span class="p">,</span> <span class="n">output_vae</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span><span class="o">%</span><span class="k">28</span>
-<span class="n">ry1</span><span class="p">,</span><span class="n">rx1</span><span class="p">,</span><span class="n">ry2</span><span class="p">,</span><span class="n">rx2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>my,mx = output_vae.mean(axis=0).argmax()//28, output_vae.mean(axis=0).argmax()%28
+sy,sx = output_vae.std(axis=0).argmax()//28, output_vae.std(axis=0).argmax()%28
+ry1,rx1,ry2,rx2 = np.random.randint(28, size=4)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="n">output_vae</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">output_ae</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="mf">.1</span>
-<span class="n">vmin</span> <span class="o">-=</span> <span class="mf">.1</span>
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,</span><span class="n">my</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE value&quot;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,</span><span class="n">my</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean VAE value&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">output_ae</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">my</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AE value&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VAE distribution for pixel with largest mean</span><span class="se">\n</span><span class="s2"> y=</span><span class="si">{</span><span class="n">my</span><span class="si">}</span><span class="s2">, x=</span><span class="si">{</span><span class="n">mx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="c1">#plt.xlim(vmin, vmax)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,</span><span class="n">sy</span><span class="p">,</span><span class="n">sx</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE value&quot;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,</span><span class="n">sy</span><span class="p">,</span><span class="n">sx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean VAE value&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">output_ae</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">sy</span><span class="p">,</span><span class="n">sx</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AE value&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VAE distribution for pixel with largest std</span><span class="se">\n</span><span class="s2"> y=</span><span class="si">{</span><span class="n">my</span><span class="si">}</span><span class="s2">, x=</span><span class="si">{</span><span class="n">mx</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="c1">#plt.xlim(vmin, vmax)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,</span><span class="n">ry1</span><span class="p">,</span><span class="n">rx1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE value&quot;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,</span><span class="n">ry1</span><span class="p">,</span><span class="n">rx1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean VAE value&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VAE distribution for a ranodm pixel</span><span class="se">\n</span><span class="s2"> y=</span><span class="si">{</span><span class="n">ry1</span><span class="si">}</span><span class="s2">, x=</span><span class="si">{</span><span class="n">rx1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,</span><span class="n">ry2</span><span class="p">,</span><span class="n">rx2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE value&quot;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">output_vae</span><span class="p">[:,</span><span class="n">ry2</span><span class="p">,</span><span class="n">rx2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;mean VAE value&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VAE distribution for a ranodm pixel</span><span class="se">\n</span><span class="s2"> y=</span><span class="si">{</span><span class="n">ry2</span><span class="si">}</span><span class="s2">, x=</span><span class="si">{</span><span class="n">rx2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">output_ae</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">ry2</span><span class="p">,</span><span class="n">rx2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AE value&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vmin, vmax = output_vae.min(), np.max([output_ae.max(),1])+.1
+vmin -= .1
+for ax,i in subplots(4, usizex=5, usizey=4):
+    if i==0:
+        plt.hist(output_vae[:,my,mx,0], density=True, color=&quot;red&quot;, bins=100, alpha=.2, label=&quot;VAE value&quot;);
+        plt.axvline(output_vae[:,my,mx,0].mean(), color=&quot;red&quot;, label=&quot;mean VAE value&quot;)
+        plt.axvline(output_ae[0,my,mx,0], color=&quot;blue&quot;, label=&quot;AE value&quot;)
+        plt.grid(); plt.legend();
+        plt.title(f&quot;VAE distribution for pixel with largest mean\n y={my}, x={mx}&quot;)
+        #plt.xlim(vmin, vmax)
+    if i==1:
+        plt.hist(output_vae[:,sy,sx,0], density=True, color=&quot;red&quot;, bins=100, alpha=.2, label=&quot;VAE value&quot;);
+        plt.axvline(output_vae[:,sy,sx,0].mean(), color=&quot;red&quot;, label=&quot;mean VAE value&quot;)
+        plt.axvline(output_ae[0,sy,sx,0], color=&quot;blue&quot;, label=&quot;AE value&quot;)
+        plt.grid(); plt.legend();
+        plt.title(f&quot;VAE distribution for pixel with largest std\n y={my}, x={mx}&quot;)
+        #plt.xlim(vmin, vmax)
+    if i==2:
+        plt.hist(output_vae[:,ry1,rx1,0], density=True, color=&quot;red&quot;, bins=100, alpha=.2, label=&quot;VAE value&quot;);
+        plt.axvline(output_vae[:,ry1,rx1,0].mean(), color=&quot;red&quot;, label=&quot;mean VAE value&quot;)
+        plt.grid(); plt.legend();
+        plt.title(f&quot;VAE distribution for a ranodm pixel\n y={ry1}, x={rx1}&quot;)
+    if i==3:
+        plt.hist(output_vae[:,ry2,rx2,0], density=True, color=&quot;red&quot;, bins=100, alpha=.2, label=&quot;VAE value&quot;);
+        plt.axvline(output_vae[:,ry2,rx2,0].mean(), color=&quot;red&quot;, label=&quot;mean VAE value&quot;)
+        plt.title(f&quot;VAE distribution for a ranodm pixel\n y={ry2}, x={rx2}&quot;)
+        plt.axvline(output_ae[0,ry2,rx2,0], color=&quot;blue&quot;, label=&quot;AE value&quot;)
+        plt.grid(); plt.legend();
+plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -1012,7 +1012,7 @@ Epoch 10/10
 <p>AE output is <strong>equivalent</strong> to VAE-mean output on the same input image</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_weights</span><span class="p">(</span><span class="n">from_model</span> <span class="o">=</span> <span class="n">vae</span><span class="o">.</span><span class="n">encoder</span><span class="p">,</span> <span class="n">to_model</span> <span class="o">=</span> <span class="n">ae</span><span class="o">.</span><span class="n">encoder</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>transfer_weights(from_model = vae.encoder, to_model = ae.encoder)
 </pre></div>
 </div>
 </div>
@@ -1025,7 +1025,7 @@ layers not transferred [&#39;enc_z_log_var&#39;, &#39;enc_sampling&#39;]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transfer_weights</span><span class="p">(</span><span class="n">from_model</span> <span class="o">=</span> <span class="n">vae</span><span class="o">.</span><span class="n">decoder</span><span class="p">,</span> <span class="n">to_model</span> <span class="o">=</span> <span class="n">ae</span><span class="o">.</span><span class="n">decoder</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>transfer_weights(from_model = vae.decoder, to_model = ae.decoder)
 </pre></div>
 </div>
 </div>
@@ -1038,19 +1038,19 @@ layers not transferred []
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_ae</span> <span class="o">=</span> <span class="n">ae</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">output_vae</span> <span class="o">=</span> <span class="n">vae</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">mnist_digits</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="mi">10000</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>output_ae = ae(mnist_digits[idx:idx+1]).numpy()
+output_vae = vae(np.repeat(mnist_digits[idx:idx+1],10000, axis=0)).numpy()
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">output_ae</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AE&quot;</span><span class="p">)</span>
+plt.figure(figsize=(20,3))
+plt.plot(output_ae.reshape(-1), color=&quot;blue&quot;, alpha=.5, lw=2, ls=&quot;--&quot;, label=&quot;AE&quot;)
 
-<span class="n">om</span> <span class="o">=</span> <span class="n">output_vae</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">os</span> <span class="o">=</span> <span class="n">output_vae</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE mean&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">om</span><span class="p">)),</span> <span class="n">om</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">os</span><span class="p">,</span> <span class="n">om</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">os</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE std&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;pixel number&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+om = output_vae.mean(axis=0).reshape(-1)
+os = output_vae.std(axis=0).reshape(-1)
+plt.plot(om, color=&quot;red&quot;, alpha=.5, lw=1, label=&quot;VAE mean&quot;)
+plt.fill_between(range(len(om)), om-3*os, om+3*os, color=&quot;orange&quot;, alpha=.5, label=&quot;VAE std&quot;)
+plt.xlabel(&quot;pixel number&quot;)
+plt.legend();
+plt.grid();
 </pre></div>
 </div>
 </div>
@@ -1070,16 +1070,16 @@ layers not transferred []
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_input</span> <span class="o">=</span> <span class="n">mnist_digits</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">img_output</span> <span class="o">=</span> <span class="n">vae</span><span class="p">(</span><span class="n">img_input</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>img_input = mnist_digits[idx:idx+1]
+img_output = vae(img_input)
 
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_input</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">vae</span><span class="p">(</span><span class="n">img_input</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;output sample </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+for ax,i in subplots(10):
+    if i == 0:
+        plt.imshow(img_input[0])
+        plt.title(&quot;input&quot;)
+    if i &gt; 0:
+        plt.imshow(vae(img_input)[0])
+        plt.title(f&quot;output sample {i}&quot;)
 </pre></div>
 </div>
 </div>
@@ -1089,41 +1089,41 @@ layers not transferred []
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_wname</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>get_wname = lambda x: &quot;/&quot;.join(x.name.split(&quot;/&quot;)[-2:])
 
-<span class="k">def</span> <span class="nf">compute_reconstruction_gradient</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">img_input</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+def compute_reconstruction_gradient(model, img_input, weights=None):
 
-    <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">trainable_weights</span>
+    if weights is None:
+        weights = model.trainable_weights
     
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
-        <span class="n">img_output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">img_input</span><span class="p">)</span>
-        <span class="n">reconstruction_loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span>
-            <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span>
-                <span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">binary_crossentropy</span><span class="p">(</span><span class="n">img_input</span><span class="p">,</span> <span class="n">img_output</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-    <span class="n">grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">reconstruction_loss</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="p">{</span><span class="n">get_wname</span><span class="p">(</span><span class="n">w</span><span class="p">):</span> <span class="n">g</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">g</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">weights</span><span class="p">)}</span>
-    <span class="n">r</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reconstruction_loss</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">r</span>
+    with tf.GradientTape() as tape:
+        img_output = model(img_input)
+        reconstruction_loss = tf.reduce_mean(
+            tf.reduce_sum(
+                keras.losses.binary_crossentropy(img_input, img_output), axis=(1, 2)
+            )
+        )
+    grads = tape.gradient(reconstruction_loss, weights)
+    r = {get_wname(w): g.numpy() for g,w in zip(grads, weights)}
+    r[&#39;loss&#39;] = reconstruction_loss.numpy()
+    return r
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w_ae</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_wname</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ae</span><span class="o">.</span><span class="n">trainable_weights</span><span class="p">]</span>
-<span class="n">w_vae</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_wname</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vae</span><span class="o">.</span><span class="n">trainable_weights</span><span class="p">]</span>
-<span class="n">w_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">w_ae</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">w_vae</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>w_ae = [get_wname(i) for i in ae.trainable_weights]
+w_vae = [get_wname(i) for i in vae.trainable_weights]
+w_names = list(set(w_ae).intersection(w_vae))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vae_grads</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_reconstruction_gradient</span><span class="p">(</span><span class="n">vae</span><span class="p">,</span> <span class="n">img_input</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">))]</span>
-<span class="n">ae_grads</span>  <span class="o">=</span>  <span class="n">compute_reconstruction_gradient</span><span class="p">(</span><span class="n">ae</span><span class="p">,</span> <span class="n">img_input</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vae_grads = [compute_reconstruction_gradient(vae, img_input) for _ in pbar(range(10000))]
+ae_grads  =  compute_reconstruction_gradient(ae, img_input)
 </pre></div>
 </div>
 </div>
@@ -1135,20 +1135,20 @@ layers not transferred []
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plotw</span><span class="p">(</span><span class="n">w_name</span><span class="p">):</span>
-    <span class="n">vgm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[</span><span class="n">i</span><span class="p">[</span><span class="n">w_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vae_grads</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">vgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[</span><span class="n">i</span><span class="p">[</span><span class="n">w_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vae_grads</span><span class="p">]]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def plotw(w_name):
+    vgm = np.r_[[i[w_name] for i in vae_grads]].mean(axis=0).reshape(-1)
+    vgs = np.r_[[i[w_name] for i in vae_grads]].std(axis=0).reshape(-1) 
+    plt.figure(figsize=(20,3))
     
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vgm</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE mean&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vgm</span><span class="p">)),</span> <span class="n">vgm</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">vgs</span><span class="p">,</span> <span class="n">vgm</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">vgs</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE std&quot;</span><span class="p">)</span>
+    plt.plot(vgm, color=&quot;red&quot;, alpha=.5, label=&quot;VAE mean&quot;)
+    plt.fill_between(range(len(vgm)), vgm-3*vgs, vgm+3*vgs, color=&quot;orange&quot;, alpha=.5, label=&quot;VAE std&quot;)
     
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ae_grads</span><span class="p">[</span><span class="n">w_name</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AE&quot;</span><span class="p">)</span>
+    plt.plot(ae_grads[w_name].reshape(-1), color=&quot;blue&quot;, alpha=.5, label=&quot;AE&quot;)
     
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;parameter </span><span class="si">{</span><span class="n">w_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;parameter component number&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+    plt.title(f&quot;parameter {w_name}&quot;)
+    plt.xlabel(&quot;parameter component number&quot;)
+    plt.grid();
+    plt.legend();
 </pre></div>
 </div>
 </div>
@@ -1157,8 +1157,8 @@ layers not transferred []
 <h3>the mean gradient of VAE converges to the gradient of AE<a class="headerlink" href="#the-mean-gradient-of-vae-converges-to-the-gradient-of-ae" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">w_name</span> <span class="ow">in</span> <span class="n">w_names</span><span class="p">:</span>
-    <span class="n">plotw</span><span class="p">(</span><span class="n">w_name</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for w_name in w_names:
+    plotw(w_name)
 </pre></div>
 </div>
 </div>
@@ -1192,12 +1192,12 @@ layers not transferred []
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vloss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vae_grads</span><span class="p">]]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">vloss</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE loss&quot;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">vloss</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAE mean loss&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">ae_grads</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AE loss&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;loss values&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vloss = np.r_[[i[&#39;loss&#39;] for i in vae_grads]]
+plt.hist(vloss, bins=100, alpha=.5, label=&quot;VAE loss&quot;);
+plt.axvline(vloss.mean(), color=&quot;red&quot;, label=&quot;VAE mean loss&quot;)
+plt.axvline(ae_grads[&#39;loss&#39;], color=&quot;blue&quot;, label=&quot;AE loss&quot;)
+plt.grid(); plt.legend();
+plt.xlabel(&quot;loss values&quot;)
 </pre></div>
 </div>
 </div>

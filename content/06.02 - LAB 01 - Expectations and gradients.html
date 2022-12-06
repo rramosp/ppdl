@@ -1,0 +1,887 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab 06.01.01: Expectations, Gradients and Reparameterization Trick &#8212; Probabilistic Programming for Machine Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MBFEZ3PF64');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Course outline
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1-videolist.html">
+   1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M2-videolist.html">
+   2 TF for Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M3-videolist.html">
+   3 Intuitions on Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M4-videolist.html">
+   4 Tensorflow Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M5-videolist.html">
+   5 Bayesian Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M6-videolist.html">
+   6 Variational Inference
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/06.02 - LAB 01 - Expectations and gradients.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-1">
+   Task 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-2">
+   Task 2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-3">
+   Task 3
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-4">
+   Task 4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-5">
+   Task 5
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Lab 06.01.01: Expectations, Gradients and Reparameterization Trick</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-1">
+   Task 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-2">
+   Task 2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-3">
+   Task 3
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-4">
+   Task 4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#task-5">
+   Task 5
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># init repo notebook
+!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
+!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
+!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="lab-06-01-01-expectations-gradients-and-reparameterization-trick">
+<h1>Lab 06.01.01: Expectations, Gradients and Reparameterization Trick<a class="headerlink" href="#lab-06-01-01-expectations-gradients-and-reparameterization-trick" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<p>In this laboratory you’ll compute gradients using different approaches, including numerical methods, Monte Carlo sampling and the reparameterization trick.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>## Ignore this cell
+!pip install ppdl==0.1.5 rlxmoocapi==0.1.0 --quiet
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">rlxmoocapi</span> <span class="kn">import</span> <span class="n">submit</span><span class="p">,</span> <span class="n">session</span>
+<span class="kn">from</span> <span class="nn">tensorflow_probability.python.math</span> <span class="kn">import</span> <span class="n">integration</span>
+<span class="n">course_id</span> <span class="o">=</span> <span class="s2">&quot;ppdl.v1&quot;</span>
+<span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;https://m5knaekxo6.execute-api.us-west-2.amazonaws.com/dev-v0001/rlxmooc&quot;</span>
+<span class="n">lab</span> <span class="o">=</span> <span class="s2">&quot;L06.01.01&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Log-in with your username and password:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">session</span><span class="o">.</span><span class="n">LoginSequence</span><span class="p">(</span>
+    <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
+    <span class="n">course_id</span><span class="o">=</span><span class="n">course_id</span><span class="p">,</span>
+    <span class="n">lab_id</span><span class="o">=</span><span class="n">lab</span><span class="p">,</span>
+    <span class="n">varname</span><span class="o">=</span><span class="s2">&quot;student&quot;</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, let us import the required libraries:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;ggplot&quot;</span><span class="p">)</span>
+<span class="n">COLOR1</span> <span class="o">=</span> <span class="s2">&quot;#598EDC&quot;</span>
+<span class="n">COLOR2</span> <span class="o">=</span> <span class="s2">&quot;#57956C&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="task-1">
+<h2>Task 1<a class="headerlink" href="#task-1" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
+<p>In this task you have to compute a numerical approximation of the expectation of any function <span class="math notranslate nohighlight">\(f(x)\)</span> given any probability distribution <span class="math notranslate nohighlight">\(p(x)\)</span>, as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{p(x)}{\mathbb{E}}[f(x)] = \int p(x) f(x) dx
+\]</div>
+<p>You must implement the <code class="docutils literal notranslate"><span class="pre">expected_value_trapz</span></code> function, which has the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f</span></code>: a <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> representing <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist</span></code>: a <code class="docutils literal notranslate"><span class="pre">tfd.Distribution</span></code> representing <span class="math notranslate nohighlight">\(p(x)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integration_range</span></code>: a tuple with the range that must be used for the numerical approximation of the integral.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_points</span></code>: number of points for the numerical approximation.</p></li>
+</ul>
+<p>You must use the trapezoidal rule to approximate the integral, please use the <code class="docutils literal notranslate"><span class="pre">tensorflow_probability</span></code>’s implementation <code class="docutils literal notranslate"><span class="pre">tfp.math.trapz</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">expected_value_trapz</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">integration_range</span><span class="p">,</span> <span class="n">n_points</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lets test the function with the following values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.01</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">integration_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+        <span class="n">low</span><span class="o">=</span><span class="n">integration_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">high</span><span class="o">=</span><span class="n">integration_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+
+<span class="n">n_points</span> <span class="o">=</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following figure shows how must be the expectation for the given function and probability distribution.</p>
+<p>You must obtain the same value that is shown in this image:</p>
+<p><img alt="expectation_value" src="../_images/expectation_value.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">x_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">integration_range</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">x_range</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR1</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$P(x)$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR2</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">e_val</span> <span class="o">=</span> <span class="n">expected_value_trapz</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">integration_range</span><span class="p">,</span> <span class="n">n_points</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\mathbb</span><span class="si">{E}</span><span class="s2">[f(x)]=&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s change the probability distribution to see differences in the expectation.</p>
+<p>You must obtain the following result if your implementation of <code class="docutils literal notranslate"><span class="pre">expected_value_trapz</span></code> is correct:</p>
+<p><img alt="expectation_value_dists" src="../_images/expectation_value_dists.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dists</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">mean</span> <span class="ow">in</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+        <span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">dists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">x_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">integration_range</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+            <span class="s2">&quot;float32&quot;</span>
+            <span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">x_range</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR1</span><span class="p">)</span>
+
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR2</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$P(x)$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR2</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">e_val</span> <span class="o">=</span> <span class="n">expected_value_trapz</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">integration_range</span><span class="p">,</span> <span class="n">n_points</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s2">&quot;$\mathbb</span><span class="si">{E}</span><span class="s2">[f(x)]=&quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, P(x)=N(</span><span class="se">\\</span><span class="s2">mu=</span><span class="si">{</span><span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="se">\\</span><span class="s2">sigma=5)$&quot;</span>
+            <span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-2">
+<h2>Task 2<a class="headerlink" href="#task-2" title="Permalink to this headline">¶</a></h2>
+<p>In this task, you must implement an expectation using the Monte Carlo approach, i.e.:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\underset{P(x)}{\mathbb{E}}[f(x)] \approx \frac{1}{N}\sum_{i=1} ^ N f(x_i)\\
+x_i \sim P(x)\\
+N \rightarrow \infty\\
+\end{split}\]</div>
+<p>You have to implement the <code class="docutils literal notranslate"><span class="pre">expected_value_mc</span></code> function that has the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f</span></code>: a <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> representing <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist</span></code>: a <code class="docutils literal notranslate"><span class="pre">tfd.Distribution</span></code> representing <span class="math notranslate nohighlight">\(p(x)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_samples</span></code>: number of samples to use for the Monte Carlo approximation.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note</strong>: the <code class="docutils literal notranslate"><span class="pre">expected_value_mc</span></code> function must be implemented using <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> operations only. You can’t use <code class="docutils literal notranslate"><span class="pre">numpy</span></code> neither <em>Python</em>’s native functions like <code class="docutils literal notranslate"><span class="pre">sum</span></code> or <code class="docutils literal notranslate"><span class="pre">for</span></code> loops.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">expected_value_mc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compute the expected value for the following values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    
+<span class="n">dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">n_points</span> <span class="o">=</span> <span class="mi">10_000</span>
+<span class="n">integration_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell must return values similar to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>❱ print(f&quot;Monte Carlo: {e_mc}&quot;)
+Monte Carlo: 0.9449480175971985
+❱ print(f&quot;Trapz integration: {e_trapz}&quot;)
+Trapz integration: 0.9440837502479553
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e_mc</span> <span class="o">=</span> <span class="n">expected_value_mc</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">n_points</span><span class="p">)</span>
+<span class="n">e_trapz</span> <span class="o">=</span> <span class="n">expected_value_trapz</span><span class="p">(</span>
+        <span class="n">function</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">integration_range</span><span class="p">,</span> <span class="n">n_points</span>
+        <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Monte Carlo: </span><span class="si">{</span><span class="n">e_mc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Trapz integration: </span><span class="si">{</span><span class="n">e_trapz</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can see a comparison between <code class="docutils literal notranslate"><span class="pre">expected_value_mc</span></code> and <code class="docutils literal notranslate"><span class="pre">expected_value_trapz</span></code> functions using different distributions.</p>
+<p>If your implementation is correct, the following cell must output the following image:</p>
+<p><img alt="companrison_expected_values" src="../_images/comparison_expected.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dists</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">mean</span> <span class="ow">in</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+        <span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">dists</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">x_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">x_range</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$f(x)$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR1</span><span class="p">)</span>
+
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">dist</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR2</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$P(x)$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR2</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">e_mc</span> <span class="o">=</span> <span class="n">expected_value_mc</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+    <span class="n">e_trapz</span> <span class="o">=</span> <span class="n">expected_value_trapz</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">10000</span><span class="p">)</span>
+
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MC=</span><span class="si">{</span><span class="n">e_mc</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, TRAPZ=</span><span class="si">{</span><span class="n">e_trapz</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T2&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-3">
+<h2>Task 3<a class="headerlink" href="#task-3" title="Permalink to this headline">¶</a></h2>
+<p>In this task you must compute the gradients with respect to a function’s parameter <span class="math notranslate nohighlight">\(\theta\)</span> given it’s expectation.</p>
+<p>Remember that the gradient of an expectation is equal to the expectation of the gradients:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\underset{\theta}{\nabla} \underset{p(x)}{\mathbb{E}}[f(x, \theta)] = \underset{\theta}{\nabla} \int p(x) f(x, \theta) dx\\
+\underset{\theta}{\nabla} \underset{p(x)}{\mathbb{E}}[f(x, \theta)] =  \int p(x) \underset{\theta}{\nabla} f(x, \theta) dx\\
+\underset{\theta}{\nabla} \underset{p(x)}{\mathbb{E}}[f(x, \theta)] =   \underset{p(x)}{\mathbb{E}}[\underset{\theta}{\nabla}f(x, \theta)]
+\end{split}\]</div>
+<p>To achieve this, compute <span class="math notranslate nohighlight">\(\underset{p(x)}{\mathbb{E}}[\underset{\theta}{\nabla}f(x, \theta)]\)</span> using the Monte Carlo method. You must implement the <code class="docutils literal notranslate"><span class="pre">expectation_gradients</span></code> function which has the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f</span></code>: a <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> representing <span class="math notranslate nohighlight">\(f(x, \theta)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">theta</span></code>: <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> to compute the gradients.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist</span></code>: a <code class="docutils literal notranslate"><span class="pre">tfd.Distribution</span></code> representing <span class="math notranslate nohighlight">\(p(x)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_samples</span></code>: number of samples to use for the Monte Carlo approximation.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note</strong>: you must compute the gradients using <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code>:</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">expectation_gradients</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compute the gradients using the following values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">theta</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">theta_0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell must return values similar to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>❱ print(expectation_gradients(function, theta_0, dist, n_samples))
+tf.Tensor(0.7384695, shape=(), dtype=float32)
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">expectation_gradients</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s see a comparison between the gradient’s estimation using a large number of samples vs an expectation using batches.</p>
+<p>The following cell must output values similar to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>❱ print(large_expectation)
+tf.Tensor(1.0713083, shape=(), dtype=float32)
+❱ print(batches_expectation)
+tf.Tensor(1.0762898, shape=(), dtype=float32)
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># large sample</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">large_expectation</span> <span class="o">=</span> <span class="n">expectation_gradients</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">16e3</span><span class="p">))</span>
+<span class="c1"># batches</span>
+<span class="n">batches_expectation</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">expectation_gradients</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">large_expectation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">batches_expectation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T3&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-4">
+<h2>Task 4<a class="headerlink" href="#task-4" title="Permalink to this headline">¶</a></h2>
+<p>In this task you must compute the gradients with respect of a function’s parameter <span class="math notranslate nohighlight">\(\theta\)</span> given its expectation using a probability distribution which also has <span class="math notranslate nohighlight">\(\theta\)</span> as a parameter.</p>
+<p>Remember that this can’t be directly computed using the Monte Carlo approach since the distribution’s pdf also depends on <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\underset{\theta}{\nabla} \underset{p(x|\theta)}{\mathbb{E}}[f(x, \theta)] = \underset{\theta}{\nabla} \int p(x|\theta) f(x, \theta) dx\\
+\underset{\theta}{\nabla} \underset{p(x|\theta)}{\mathbb{E}}[f(x, \theta)] = \int \underset{\theta}{\nabla}( p(x|\theta) f(x, \theta)) dx\\
+\underset{\theta}{\nabla} \underset{p(x|\theta)}{\mathbb{E}}[f(x, \theta)] = \int \underset{\theta}{\nabla} p(x|\theta) f(x, \theta) + p(x|\theta)\underset{\theta}{\nabla} f(x, \theta) dx\\
+\end{split}\]</div>
+<p>From the last equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\theta}{\nabla} \underset{p(x|\theta)}{\mathbb{E}}[f(x, \theta)] = \underbrace{\int \underset{\theta}{\nabla} p(x|\theta) f(x, \theta) dx}_\text{Numerically compute this} + \underbrace{\underset{P(x|\theta)}{\mathbb{E}}[\underset{\theta}{\nabla}f(x, \theta)]}_\text{Monte Carlo approach for this}
+\]</div>
+<p>You must implement the <code class="docutils literal notranslate"><span class="pre">gradients_dependence</span></code> function which has the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f</span></code>: a <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> representing <span class="math notranslate nohighlight">\(f(x, \theta)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">theta</span></code>: <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> to compute the gradients.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist_f</span></code>: a function that generates a <code class="docutils literal notranslate"><span class="pre">tfd.Distribution</span></code> given a <code class="docutils literal notranslate"><span class="pre">theta</span></code> value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_samples</span></code>: number of samples to use for the Monte Carlo approximation and the trapezoidal rule.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">integration_range</span></code>: integration range to use in the trapezoidal rule.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note</strong>: you must numerically approximate the left part of the equation using <code class="docutils literal notranslate"><span class="pre">tfp.math.trapz</span></code> and the right part using the Monte Carlo method. You must compute the gradients using <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> using pure <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> code. Use <code class="docutils literal notranslate"><span class="pre">n_samples</span></code> for both the trapezoidal and Monte Carlo approaches.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gradients_dependence</span><span class="p">(</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dist_f</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span>
+        <span class="n">integration_range</span>
+        <span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compute the gradients using the following values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">theta</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">dist_function</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">theta_0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">integration_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">10_000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell must output values similar to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>❱ print(grads_dep)
+tf.Tensor(0.4767751, shape=(), dtype=float32)
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grads_dep</span> <span class="o">=</span> <span class="n">gradients_dependence</span><span class="p">(</span>
+        <span class="n">function</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">dist_function</span><span class="p">,</span>
+        <span class="n">n_samples</span><span class="p">,</span> <span class="n">integration_range</span>
+        <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grads_dep</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T4&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="task-5">
+<h2>Task 5<a class="headerlink" href="#task-5" title="Permalink to this headline">¶</a></h2>
+<p>As you noted in the previous task, computing the gradients when there’s a dependence between the distribution’s pdf and the function’s parameters is not an easy task, specially, it involves a numerical integration step that does not scale when We have parameters in higher dimensions.</p>
+<p>For this reason, We need the reparameterization trick, in this task you must compute the gradients for this distribution:</p>
+<div class="math notranslate nohighlight">
+\[
+x \sim N(\mu=\theta, \sigma=1)
+\]</div>
+<p>And this reparameterization:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x' \sim N(\mu=0, \sigma=0)\\
+g(x', \theta) = x' + \theta
+\end{split}\]</div>
+<p>Remember that after reparameterization, the gradients are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\underset{\theta}{\nabla} \underset{P(x')}{\mathbb{E}}[f(g(x', \theta), \theta)] = \underset{\theta}{\nabla} \int p(x') f(g(x', \theta), \theta) dx\\
+\underset{\theta}{\nabla} \underset{P(x')}{\mathbb{E}}[f(g(x', \theta), \theta)] = \int p(x') \underset{\theta}{\nabla} f(g(x', \theta), \theta) dx
+\end{split}\]</div>
+<p>This means, you can compute the gradients using the Monte Carlo method:</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\theta}{\nabla} \underset{P(x')}{\mathbb{E}}[f(g(x', \theta), \theta)] = \underset{P(x')}{\mathbb{E}}\left[\underset{\theta}{\nabla} f(g(x', \theta), \theta)\right]
+\]</div>
+<p>In this task, you must implement the <code class="docutils literal notranslate"><span class="pre">gradients_reparameterization</span></code> function which has the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f</span></code>: a <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> representing <span class="math notranslate nohighlight">\(f(x, \theta)\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">theta</span></code>: <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> to compute the gradients.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist</span></code>: a <code class="docutils literal notranslate"><span class="pre">tfd.Distribution</span></code> representing <span class="math notranslate nohighlight">\(p(x')\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_samples</span></code>: number of samples to use for the Monte Carlo approximation and the trapezoidal rule.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rep_f</span></code>: a <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> representing <span class="math notranslate nohighlight">\(g(x', \theta)\)</span>.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note</strong>: your implementation must use <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> and you must use pure <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> code.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gradients_reparameterization</span><span class="p">(</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">rep_f</span>
+        <span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s compute the gradients using the following values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">theta</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">rep_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">theta</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">theta_0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="n">integration_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cell must return values similar to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>❱ print(gradients_rep)
+tf.Tensor(0.16392285, shape=(), dtype=float32)
+❱ print(gradients_dep)
+tf.Tensor(0.16380094, shape=(), dtype=float32)
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gradients_rep</span> <span class="o">=</span> <span class="n">gradients_reparameterization</span><span class="p">(</span>
+        <span class="n">function</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">rep_f</span>
+        <span class="p">)</span>
+<span class="n">gradients_dep</span> <span class="o">=</span> <span class="n">gradients_dependence</span><span class="p">(</span>
+        <span class="n">function</span><span class="p">,</span> <span class="n">theta_0</span><span class="p">,</span> <span class="n">dist_function</span><span class="p">,</span>
+        <span class="n">n_samples</span><span class="p">,</span> <span class="n">integration_range</span>
+        <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gradients_rep</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gradients_dep</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the reparameterization trick allows a simpler approximation of the gradients that only depends on the Monte Carlo method and doesn’t require the trapezoidal rule. This allows probabilistic distributions inside of neural networks while allowing backpropagation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T5&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

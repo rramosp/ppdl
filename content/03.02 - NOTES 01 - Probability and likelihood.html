@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -314,10 +314,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
-<span class="o">!</span>git clone https://github.com/rramosp/ppdl.git &gt; /dev/null <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>mv -n ppdl/content/init.py ppdl/content/local . <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
+!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
+!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
+!pip install -r ppdl/content/requirements.txt &gt; /dev/null
 </pre></div>
 </div>
 </div>
@@ -326,13 +326,13 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Probability and likelihood<a class="headerlink" href="#probability-and-likelihood" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span>
-<span class="kn">import</span> <span class="nn">itertools</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+import pandas as pd
+from rlxutils import subplots
+import itertools
+%matplotlib inline
 </pre></div>
 </div>
 </div>
@@ -353,8 +353,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>In all practical settings having an exhaustive list of all datasets is simply impossible. Think, for instance, of all possible datasets of 1000 customers described by age, profession, income, credit history,…. This would mean <strong>all</strong> combinations of <strong>all</strong> possible values for each feature.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_datasets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span><span class="o">*</span><span class="mi">4</span><span class="p">))]</span>
-<span class="n">all_datasets</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>all_datasets = np.r_[list(itertools.product(*[[0,1]]*4))]
+all_datasets
 </pre></div>
 </div>
 </div>
@@ -382,7 +382,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>the conditional probability function</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_x_given_p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">p</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_x_given_p = lambda x,p: np.prod(stats.bernoulli(p).pmf(x))
 </pre></div>
 </div>
 </div>
@@ -390,8 +390,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>we fix p, so we have a function of x</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fixed_p</span><span class="o">=</span><span class="mf">.3</span>
-<span class="n">P_x_fixed_p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">P_x_given_p</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fixed_p</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fixed_p=.3
+P_x_fixed_p = lambda x: P_x_given_p(x, fixed_p)
 </pre></div>
 </div>
 </div>
@@ -400,9 +400,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The expression <span class="math notranslate nohighlight">\(P(x|p)\)</span> with a fixed <span class="math notranslate nohighlight">\(p\)</span> and varying <span class="math notranslate nohighlight">\(x\)</span> <strong>is a discrete probability distribution</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[</span><span class="n">P_x_fixed_p</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="k">for</span> <span class="n">dataset</span> <span class="ow">in</span> <span class="n">all_datasets</span><span class="p">]]</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;all probabilities&quot;</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">check sum of probabilities&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">probs</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>probs = np.r_[[P_x_fixed_p(dataset) for dataset in all_datasets]]
+print (&quot;all probabilities&quot;, probs)
+print (&quot;\ncheck sum of probabilities&quot;, np.sum(probs))
 </pre></div>
 </div>
 </div>
@@ -417,8 +417,8 @@ check sum of probabilities 0.9999999999999998
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">all_datasets</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;probability distribution P(x|p) with p fixed&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pd.Series(probs, index=[tuple(i) for i in all_datasets]).plot(figsize=(5,2), kind=&#39;bar&#39;)
+plt.grid();plt.title(&quot;probability distribution P(x|p) with p fixed&quot;)
 </pre></div>
 </div>
 </div>
@@ -436,8 +436,8 @@ check sum of probabilities 0.9999999999999998
 <p>We fix <span class="math notranslate nohighlight">\(x\)</span>, so we have a function of <span class="math notranslate nohighlight">\(p\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fixed_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">likelihood</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">P_x_given_p</span><span class="p">(</span><span class="n">fixed_x</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fixed_x = np.r_[1,0,1,1]
+likelihood = lambda p: P_x_given_p(fixed_x, p)
 </pre></div>
 </div>
 </div>
@@ -448,10 +448,10 @@ check sum of probabilities 0.9999999999999998
 <p>in this case the integration is between 0 and 1 since, by definition, <span class="math notranslate nohighlight">\(p \in [0,1]\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">.0</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span> <span class="p">[</span><span class="n">likelihood</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span> <span class="k">for</span> <span class="n">pi</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;likelihood&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pr = np.linspace(.0,1., 100)
+plt.plot(pr, [likelihood(pi) for pi in pr])
+plt.title(&quot;likelihood&quot;); plt.grid();
+plt.xlabel(&quot;p&quot;);
 </pre></div>
 </div>
 </div>
@@ -461,9 +461,9 @@ check sum of probabilities 0.9999999999999998
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the integral</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="n">quad</span><span class="p">(</span><span class="n">likelihood</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># the integral
+from scipy.integrate import quad
+quad(likelihood, 0,1)[0]
 </pre></div>
 </div>
 </div>
@@ -481,16 +481,16 @@ check sum of probabilities 0.9999999999999998
 \[l(p) =  \prod_i P(x_i|p) \;\;\;\;\text{with }x\text{ fixed}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.optimize import minimize
 
-<span class="c1"># negative function for maximization</span>
-<span class="c1"># constrained to possible values</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="o">-</span><span class="n">likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span>
-             <span class="n">constraints</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="p">},</span>
-                            <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">}</span> <span class="p">)</span>
+# negative function for maximization
+# constrained to possible values
+r = minimize(lambda p: -likelihood(p), np.random.random(),
+             constraints = ({&#39;type&#39;:&#39;ineq&#39;, &#39;fun&#39;: lambda p: p},
+                            {&#39;type&#39;:&#39;ineq&#39;, &#39;fun&#39;: lambda p: 1-p} )
             
-            <span class="p">)</span> 
-<span class="n">r</span>
+            ) 
+r
 </pre></div>
 </div>
 </div>
@@ -510,12 +510,12 @@ check sum of probabilities 0.9999999999999998
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">.0</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span> <span class="p">[</span><span class="n">likelihood</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span> <span class="k">for</span> <span class="n">pi</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;likelihood&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MLE for p&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pr = np.linspace(.0,1., 100)
+plt.plot(pr, [likelihood(pi) for pi in pr])
+plt.title(&quot;likelihood&quot;); plt.grid();
+plt.xlabel(&quot;p&quot;);
+plt.axvline(r.x[0], color=&quot;black&quot;, label=&quot;MLE for p&quot;)
+plt.legend()
 </pre></div>
 </div>
 </div>
@@ -532,18 +532,18 @@ check sum of probabilities 0.9999999999999998
 \[\mathcal{L}(p) = \log l(p) =  \log \prod_i P(x_i|p) = \sum_i \log P(x_i|p)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># original conditional distribution function</span>
-<span class="n">P_x_given_p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">p</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># original conditional distribution function
+P_x_given_p = lambda x,p: np.prod(stats.bernoulli(p).pmf(x))
 
-<span class="c1"># log likelihood function</span>
-<span class="n">log_likelihood</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">bernoulli</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">fixed_x</span><span class="p">)</span><span class="o">+</span><span class="mf">1e-7</span><span class="p">))</span>
+# log likelihood function
+log_likelihood = lambda p: np.sum(np.log(stats.bernoulli(p).pmf(fixed_x)+1e-7))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_likelihood</span><span class="p">(</span><span class="mf">.2</span><span class="p">)),</span> <span class="n">likelihood</span><span class="p">(</span><span class="mf">.2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.exp(log_likelihood(.2)), likelihood(.2)
 </pre></div>
 </div>
 </div>
@@ -555,11 +555,11 @@ check sum of probabilities 0.9999999999999998
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="o">-</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> 
-             <span class="n">constraints</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">},</span>
-                            <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span><span class="s1">&#39;ineq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">}</span> <span class="p">)</span>
-            <span class="p">)</span>
-<span class="n">r</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>r = minimize(lambda p: -log_likelihood(p), np.random.random(), 
+             constraints = ({&#39;type&#39;:&#39;ineq&#39;, &#39;fun&#39;: lambda x: x},
+                            {&#39;type&#39;:&#39;ineq&#39;, &#39;fun&#39;: lambda x: 1-x} )
+            )
+r
 </pre></div>
 </div>
 </div>
@@ -579,9 +579,9 @@ check sum of probabilities 0.9999999999999998
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span> <span class="p">[</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span> <span class="k">for</span> <span class="n">pi</span> <span class="ow">in</span> <span class="n">pr</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MLE for p&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.plot(pr, [log_likelihood(pi) for pi in pr])
+plt.ylim(-10,0); plt.grid();
+plt.axvline(r.x[0], color=&quot;black&quot;, label=&quot;MLE for p&quot;)
 </pre></div>
 </div>
 </div>
@@ -599,17 +599,17 @@ check sum of probabilities 0.9999999999999998
 <p>we will focus only on the marginal distribution of the variable <strong>length</strong>, and we will scale it so that it has values between 0 and 1</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;local/data/abalone.data.gz&quot;</span><span class="p">,</span> 
-                <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="s2">&quot;diameter&quot;</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="s2">&quot;whole weight&quot;</span><span class="p">,</span> <span class="s2">&quot;shucked weight&quot;</span><span class="p">,</span>
-                         <span class="s2">&quot;viscera weigth&quot;</span><span class="p">,</span> <span class="s2">&quot;shell weight&quot;</span><span class="p">,</span> <span class="s2">&quot;rings&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dataset = pd.read_csv(&quot;local/data/abalone.data.gz&quot;, 
+                names=[&quot;sex&quot;, &quot;length&quot;, &quot;diameter&quot;, &quot;height&quot;, &quot;whole weight&quot;, &quot;shucked weight&quot;,
+                         &quot;viscera weigth&quot;, &quot;shell weight&quot;, &quot;rings&quot;])
 
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+from sklearn.preprocessing import MinMaxScaler
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;diameter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">(</span><span class="n">feature_range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">.99</span><span class="p">))</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1">#x = x[np.random.permutation(len(x))[:1000]]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+x = dataset[&#39;diameter&#39;].values
+x = MinMaxScaler(feature_range=(0.01,.99)).fit_transform(x.reshape(-1,1)).reshape(-1)
+#x = x[np.random.permutation(len(x))[:1000]]
+plt.hist(x, bins=20, density=True, alpha=.5);
+plt.grid();
 </pre></div>
 </div>
 </div>
@@ -625,20 +625,20 @@ check sum of probabilities 0.9999999999999998
 \[\mathcal{L}(a,b) = \log \prod P(x|a,b)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loglik</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">1e-7</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>loglik = lambda a,b: np.sum(np.log(stats.beta(a,b).pdf(x)+1e-7))
 
-<span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">.99</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">plist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">ar</span><span class="p">,</span><span class="n">br</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">_</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
-    <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mf">.01</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span>
-    <span class="n">beta</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xr</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a=</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">loglik=</span><span class="si">{</span><span class="n">loglik</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">3.5</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+xr = np.linspace(0.01,.99,100)
+plist = list(itertools.product(ar,br))
+for ax,_ in subplots(18, n_cols=6):
+    a,b = (np.random.random(2)+.01)*5
+    beta = stats.beta(a=a, b=b)
+    plt.plot(xr, beta.pdf(xr))
+    plt.title(f&quot;a={a:.2f}, b={b:.2f}\nloglik={loglik(a,b):.2f}&quot;)
+    plt.hist(x, bins=30, alpha=.5, density=True)
+    plt.ylim(0,3.5)
+    plt.grid();
     
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -654,12 +654,12 @@ check sum of probabilities 0.9999999999999998
 <p>We now find the MLE by brute force.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
-<span class="n">ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">.5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">br</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">.5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">dr</span> <span class="o">=</span> <span class="p">(</span><span class="n">ar</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">ar</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">br</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">br</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[</span><span class="n">loglik</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">ar</span><span class="p">,</span> <span class="n">br</span><span class="p">),</span> <span class="n">max_value</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ar</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">br</span><span class="p">))]]</span>
-<span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ar</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">br</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from progressbar import progressbar as pbar
+ar = np.linspace(.5,10,200)
+br = np.linspace(.5,10,200)
+dr = (ar[1]-ar[0])*(br[1]-br[0])
+r = np.r_[[loglik(a,b) for a,b in pbar(itertools.product(ar, br), max_value=len(ar)*len(br))]]
+r=r.reshape(len(ar), len(br))
 </pre></div>
 </div>
 </div>
@@ -671,8 +671,8 @@ check sum of probabilities 0.9999999999999998
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ai</span><span class="p">,</span> <span class="n">bi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">argmax</span><span class="p">(),</span> <span class="n">r</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">ar</span><span class="p">[</span><span class="n">ai</span><span class="p">],</span> <span class="n">br</span><span class="p">[</span><span class="n">bi</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ai, bi = np.unravel_index(r.argmax(), r.shape)
+ar[ai], br[bi]
 </pre></div>
 </div>
 </div>
@@ -685,15 +685,15 @@ check sum of probabilities 0.9999999999999998
 <p>this is the <strong>search space</strong> and the values for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> yielding the best likelihood.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ar</span><span class="p">))[::</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">[::</span><span class="mi">10</span><span class="p">]],</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;vertical&quot;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">br</span><span class="p">))[::</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">br</span><span class="p">[::</span><span class="mi">10</span><span class="p">]]);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;likelihood&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">bi</span><span class="p">,</span> <span class="n">ai</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MLE&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.imshow(r, origin=&quot;lower&quot;)
+plt.colorbar();
+plt.xticks(range(len(ar))[::10], [f&quot;{i:.2f}&quot; for i in ar[::10]], rotation=&quot;vertical&quot;);
+plt.yticks(range(len(br))[::10], [f&quot;{i:.2f}&quot; for i in br[::10]]);
+plt.xlabel(&quot;a&quot;)
+plt.ylabel(&quot;b&quot;)
+plt.title(&quot;likelihood&quot;)
+plt.scatter(bi, ai, marker=&quot;x&quot;, color=&quot;black&quot;, s=50, label=&quot;MLE&quot;)
+plt.legend();
 </pre></div>
 </div>
 </div>
@@ -704,11 +704,11 @@ check sum of probabilities 0.9999999999999998
 <p>observe how this makes intuitive sense, <strong>fitting</strong> reasonably well the distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">ar</span><span class="p">[</span><span class="n">ai</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="n">br</span><span class="p">[</span><span class="n">bi</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">beta</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xr</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a=</span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">loglik=</span><span class="si">{</span><span class="n">loglik</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>beta = stats.beta(a=ar[ai], b=br[bi])
+plt.plot(xr, beta.pdf(xr))
+plt.title(f&quot;a={a:.2f}, b={b:.2f}\nloglik={loglik(a,b):.2f}&quot;)
+plt.hist(x, bins=30, alpha=.5, density=True)
+plt.grid();
 </pre></div>
 </div>
 </div>

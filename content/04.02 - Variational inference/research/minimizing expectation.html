@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -348,15 +348,15 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sy</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
-<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import sympy as sy
+import numpy as np
+from scipy import stats
+import matplotlib.pyplot as plt
+from scipy.integrate import quad
+from progressbar import progressbar as pbar
+from rlxutils import subplots
+import pandas as pd
+%matplotlib inline
 </pre></div>
 </div>
 </div>
@@ -402,34 +402,34 @@ const thebe_selector_output = ".output, .cell_output"
 \[x \sim \mathcal{N}(a, 1)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">px</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;x a p_x&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x, a, px = sy.symbols(r&quot;x a p_x&quot;)
 
-<span class="n">amin</span><span class="p">,</span> <span class="n">amax</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span>
+amin, amax = -5,5
 
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1"># the PDF</span>
-<span class="c1">#pdf  = sy.exp(-0.5*((x-a)/sigma_val)**2)/(sigma_val*sy.sqrt(2*sy.pi))</span>
-<span class="n">pdfx</span>  <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span><span class="o">*</span><span class="n">sy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sy</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+sigma = sy.N(1)
+# the PDF
+#pdf  = sy.exp(-0.5*((x-a)/sigma_val)**2)/(sigma_val*sy.sqrt(2*sy.pi))
+pdfx  = sy.exp(-0.5*((x-a)/sigma)**2)/(sigma*sy.sqrt(2*sy.pi))
 
-<span class="n">_pdfx</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">],</span> <span class="n">pdfx</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+_pdfx = sy.lambdify([x, a], pdfx, &quot;numpy&quot;)
 
-<span class="c1"># a random value for parameter a</span>
-<span class="n">random_a</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">amax</span><span class="o">-</span><span class="n">amin</span><span class="p">)</span> <span class="o">+</span> <span class="n">amin</span>
+# a random value for parameter a
+random_a = lambda N=1: np.random.random(N)*(amax-amin) + amin
 
-<span class="c1"># sampling from the distribution</span>
-<span class="n">samplex</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">a_val</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">a</span><span class="p">:</span> <span class="n">a_val</span><span class="p">})))</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+# sampling from the distribution
+samplex = lambda a_val, N: stats.norm(loc=a_val, scale=float(sigma.subs({a: a_val}))).rvs(N)
 
-<span class="n">samplee</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">N</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+samplee = lambda N: stats.norm(loc=0, scale=1).rvs(N)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_xmin_xmax</span><span class="p">(</span><span class="n">a_val</span><span class="p">):</span>
-    <span class="n">_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000000</span><span class="p">)</span>
-    <span class="n">_x</span> <span class="o">=</span> <span class="n">_x</span><span class="p">[</span><span class="n">_pdfx</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">a_val</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-10</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">_x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">_x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def get_xmin_xmax(a_val):
+    _x = np.linspace(-1000,1000,1000000)
+    _x = _x[_pdfx(_x, a=a_val)&gt;1e-10]
+    return _x.min(), _x.max()
 </pre></div>
 </div>
 </div>
@@ -439,28 +439,28 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>check and inspect the probability distribution<a class="headerlink" href="#check-and-inspect-the-probability-distribution" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">a_val</span> <span class="o">=</span> <span class="n">random_a</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">get_xmin_xmax</span><span class="p">(</span><span class="n">a_val</span><span class="p">)</span>
-        <span class="n">x_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">_pdfx</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">a_val</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
-        <span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
-        <span class="n">xs</span> <span class="o">=</span> <span class="n">samplex</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$q_a(x)$&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a=</span><span class="si">{</span><span class="n">a_val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">    checking PDF</span><span class="se">\n</span><span class="s2">  </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2"> samples (using CDF and inv CDF)&quot;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">a_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-        <span class="n">int01</span> <span class="o">=</span> <span class="p">[</span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">_pdfx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_val</span><span class="p">),</span> <span class="o">*</span><span class="n">get_xmin_xmax</span><span class="p">(</span><span class="n">a_val</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">a_val</span> <span class="ow">in</span> <span class="n">a_range</span><span class="p">]</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_range</span><span class="p">,</span> <span class="n">int01</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;value of $\int_0^1 q_a(x) dx$&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">.9</span><span class="p">,</span><span class="mf">1.1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax, i in subplots(2, usizex=6, usizey=4):
+    if i==0:
+        a_val = random_a()[0]
+        xmin, xmax = get_xmin_xmax(a_val)
+        x_range = np.linspace(xmin,xmax,100)
+        plt.plot(x_range, _pdfx(x_range, a_val), color=&quot;black&quot;, label=&quot;PDF&quot;)
+        N = 100000
+        xs = samplex(a_val, N)
+        plt.hist(xs, bins=100, density=True, alpha=.5, color=&quot;orange&quot;, label=&quot;samples&quot;);
+        plt.grid();
+        plt.xlabel(&quot;x&quot;)
+        plt.ylabel(&quot;$q_a(x)$&quot;)
+        plt.title(f&quot;a={a_val:.3f}    checking PDF\n  {N} samples (using CDF and inv CDF)&quot;);
+        plt.legend();
+    if i==1:
+        a_range = np.linspace(amin, amax, 100)
+        int01 = [quad(lambda x: _pdfx(x, a_val), *get_xmin_xmax(a_val))[0] for a_val in a_range]
+        plt.plot(a_range, int01)
+        plt.xlabel(&quot;a&quot;)
+        plt.grid();
+        plt.title(&quot;value of $\int_0^1 q_a(x) dx$&quot;)
+        plt.ylim(.9,1.1)
 </pre></div>
 </div>
 </div>
@@ -473,12 +473,12 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>a function<a class="headerlink" href="#a-function" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="c1">#f = sy.sin((a-np.pi/20)**2*x**2)</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">sy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">x</span>
-<span class="c1">#f = sy.sin(x)*(x-1)**2</span>
-<span class="c1">#f = sy.N(1)</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f = sy.sin(x)
+#f = sy.sin((a-np.pi/20)**2*x**2)
+f = a*sy.sin(-a**2)*x
+#f = sy.sin(x)*(x-1)**2
+#f = sy.N(1)
+f = sy.sin(a)**2 + (x-2)**2
 </pre></div>
 </div>
 </div>
@@ -488,53 +488,53 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>fix <span class="math notranslate nohighlight">\(a\)</span> and comparing eq (1) and eq (2)<a class="headerlink" href="#fix-a-and-comparing-eq-1-and-eq-2" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_gradient_analytical</span><span class="p">(</span><span class="n">a_val</span><span class="p">):</span>
-    <span class="n">eint_fn</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">pdfx</span><span class="o">*</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">a</span><span class="p">:</span> <span class="n">a_val</span><span class="p">}),</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def compute_gradient_analytical(a_val):
+    eint_fn = sy.lambdify(x, (pdfx*f).diff(a).subs({a: a_val}), &quot;numpy&quot;)
     
-    <span class="k">return</span> <span class="n">quad</span><span class="p">(</span><span class="n">eint_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">get_xmin_xmax</span><span class="p">(</span><span class="n">a_val</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    return quad(eint_fn, *get_xmin_xmax(a_val))[0]
 
-<span class="k">def</span> <span class="nf">compute_gradient_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">qs</span> <span class="o">=</span> <span class="n">samplex</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-    <span class="n">grad_fn</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">sy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pdfx</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">a</span><span class="p">:</span> <span class="n">a_val</span><span class="p">}),</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">grad_fn</span><span class="p">(</span><span class="n">qs</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+def compute_gradient_mc(a_val, N=1000):
+    qs = samplex(a_val, N)
+    grad_fn = sy.lambdify(x, (f.diff(a) + sy.log(pdfx).diff(a)*f).subs({a: a_val}), &quot;numpy&quot;)
+    return grad_fn(qs).mean()
 
-<span class="k">def</span> <span class="nf">compute_expectation_analytical</span><span class="p">(</span><span class="n">a_val</span><span class="p">):</span>
-    <span class="n">eint_fn</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">pdfx</span><span class="o">*</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">a</span><span class="p">:</span> <span class="n">a_val</span><span class="p">}),</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">quad</span><span class="p">(</span><span class="n">eint_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">get_xmin_xmax</span><span class="p">(</span><span class="n">a_val</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+def compute_expectation_analytical(a_val):
+    eint_fn = sy.lambdify(x, (pdfx*f).subs({a: a_val}), &quot;numpy&quot;)
+    return quad(eint_fn, *get_xmin_xmax(a_val))[0]
 
-<span class="k">def</span> <span class="nf">compute_expectation_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">qs</span> <span class="o">=</span> <span class="n">samplex</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-    <span class="n">grad_fn</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">a</span><span class="p">:</span> <span class="n">a_val</span><span class="p">}),</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">grad_fn</span><span class="p">(</span><span class="n">qs</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+def compute_expectation_mc(a_val, N=1000):
+    qs = samplex(a_val, N)
+    grad_fn = sy.lambdify(x, f.subs({a: a_val}), &quot;numpy&quot;)
+    return grad_fn(qs).mean()
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## using the reparametrization trick</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## using the reparametrization trick
 
-<span class="k">def</span> <span class="nf">compute_egradient_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">es</span> <span class="o">=</span> <span class="n">samplee</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+def compute_egradient_mc(a_val, N=1000):
+    es = samplee(N)
     
-    <span class="n">e</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;\epsilon&quot;</span><span class="p">)</span>
-    <span class="n">fdiff</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">a</span><span class="o">+</span><span class="n">e</span><span class="p">})</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">a</span><span class="p">:</span> <span class="n">a_val</span><span class="p">})</span>
-    <span class="k">return</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">fdiff</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)(</span><span class="n">es</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    e = sy.symbols(&quot;\epsilon&quot;)
+    fdiff = f.subs({x: a+e}).diff(a).subs({a: a_val})
+    return sy.lambdify(e, fdiff, &quot;numpy&quot;)(es).mean()
 
 
-<span class="k">def</span> <span class="nf">compute_eexpectation_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
-    <span class="n">es</span> <span class="o">=</span> <span class="n">samplee</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>    
-    <span class="n">e</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;\epsilon&quot;</span><span class="p">)</span>
-    <span class="n">eint</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">a</span><span class="o">+</span><span class="n">e</span><span class="p">})</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">a</span><span class="p">:</span> <span class="n">a_val</span><span class="p">})</span>    
-    <span class="n">exp_fn</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">eint</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">exp_fn</span><span class="p">(</span><span class="n">es</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+def compute_eexpectation_mc(a_val, N=1000):
+    es = samplee(N)    
+    e = sy.symbols(&quot;\epsilon&quot;)
+    eint = f.subs({x: a+e}).subs({a: a_val})    
+    exp_fn = sy.lambdify(e, eint, &quot;numpy&quot;)
+    return exp_fn(es).mean()
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_expectation_mc</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000000</span><span class="p">),</span> <span class="n">compute_eexpectation_mc</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000000</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>compute_expectation_mc(2, N=1000000), compute_eexpectation_mc(2, N=1000000)
 </pre></div>
 </div>
 </div>
@@ -552,40 +552,41 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="n">amax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">ge_analitical</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_gradient_analytical</span><span class="p">(</span><span class="n">a_val</span><span class="p">)</span> <span class="k">for</span> <span class="n">a_val</span> <span class="ow">in</span> <span class="n">a_range</span><span class="p">]</span>
-<span class="n">ge_mc</span>  <span class="o">=</span> <span class="p">[</span><span class="n">compute_gradient_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">a_val</span> <span class="ow">in</span> <span class="n">a_range</span><span class="p">]</span>
-<span class="n">ege_mc</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_egradient_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">a_val</span> <span class="ow">in</span> <span class="n">a_range</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>a_range = np.linspace(amin, amax, 100)
+N = 10
+ge_analitical = [compute_gradient_analytical(a_val) for a_val in a_range]
+ge_mc  = [compute_gradient_mc(a_val, N=N) for a_val in a_range]
+ege_mc = [compute_egradient_mc(a_val, N=N) for a_val in a_range]
 
-<span class="n">e_analitical</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_expectation_analytical</span><span class="p">(</span><span class="n">a_val</span><span class="p">)</span> <span class="k">for</span> <span class="n">a_val</span> <span class="ow">in</span> <span class="n">a_range</span><span class="p">]</span>
-<span class="n">e_mc</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_expectation_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">a_val</span> <span class="ow">in</span> <span class="n">a_range</span><span class="p">]</span>
-<span class="n">ee_mc</span> <span class="o">=</span> <span class="p">[</span><span class="n">compute_eexpectation_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">a_val</span> <span class="ow">in</span> <span class="n">a_range</span><span class="p">]</span>
+e_analitical = [compute_expectation_analytical(a_val) for a_val in a_range]
+e_mc = [compute_expectation_mc(a_val, N=N) for a_val in a_range]
+ee_mc = [compute_eexpectation_mc(a_val, N=N) for a_val in a_range]
 
-<span class="n">a_best</span> <span class="o">=</span> <span class="n">a_range</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">ge_analitical</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span>
+a_best = a_range[np.argmin(np.r_[ge_analitical]**2)]
 
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_range</span><span class="p">,</span> <span class="n">ge_analitical</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_range</span><span class="p">,</span> <span class="n">ge_mc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;mc with N=</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_range</span><span class="p">,</span> <span class="n">ege_mc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;mc_trick with N=</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;gradient of the expectation $\rightarrow$  $\nabla_a \mathbb</span><span class="si">{E}</span><span class="s2"> f_a(x)$&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">a_best</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;best $a$ = </span><span class="si">{</span><span class="n">a_best</span><span class="si">:</span><span class="s2"> .3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">))</span>        
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_range</span><span class="p">,</span> <span class="n">e_analitical</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_range</span><span class="p">,</span> <span class="n">e_mc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;montecarlo with N=</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_range</span><span class="p">,</span> <span class="n">ee_mc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;mc_trick with N=</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">a_best</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;best $a$ = </span><span class="si">{</span><span class="n">a_best</span><span class="si">:</span><span class="s2"> .3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;expectation $\rightarrow$  $\mathbb</span><span class="si">{E}</span><span class="s2"> f_a(x)$&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">))</span>     
+for ax, i in subplots(2, usizex=6, usizey=5):
+    if i==0:
+        plt.plot(a_range, ge_analitical, label=&quot;analytical&quot;, lw=5, color=&quot;red&quot;, alpha=.5)
+        plt.plot(a_range, ge_mc, label=f&quot;mc with N={N}&quot;, color=&quot;orange&quot;)
+        plt.plot(a_range, ege_mc, label=f&quot;mc_trick with N={N}&quot;, color=&quot;black&quot;)
+        plt.grid();
+        plt.title(r&quot;gradient of the expectation $\rightarrow$  $\nabla_a \mathbb{E} f_a(x)$&quot;)
+        plt.xlabel(&quot;a&quot;)
+        plt.axvline(a_best, color=&quot;black&quot;, label=f&quot;best $a$ = {a_best: .3f}&quot;, ls=&quot;--&quot;)
+        plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
+        plt.legend(loc=&#39;upper center&#39;, ncol=2, bbox_to_anchor=(0.5, -0.2))        
+    if i==1:
+        plt.plot(a_range, e_analitical, label=&quot;analytical&quot;, lw=5, color=&quot;red&quot;, alpha=.5)
+        plt.plot(a_range, e_mc, label=f&quot;montecarlo with N={N}&quot;, color=&quot;orange&quot;)
+        plt.plot(a_range, ee_mc, label=f&quot;mc_trick with N={N}&quot;, color=&quot;black&quot;)
+        plt.grid();
+        plt.axvline(a_best, color=&quot;black&quot;, label=f&quot;best $a$ = {a_best: .3f}&quot;, ls=&quot;--&quot;)
+        plt.title(r&quot;expectation $\rightarrow$  $\mathbb{E} f_a(x)$&quot;)
+        plt.xlabel(&quot;a&quot;)
+        plt.legend(loc=&#39;upper center&#39;, ncol=2, bbox_to_anchor=(0.5, -0.2))     
         
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+plt.tight_layout()
+
 </pre></div>
 </div>
 </div>
@@ -605,51 +606,53 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">use_reparametrization_trick</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">init_a_val</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 
-    <span class="k">if</span> <span class="n">init_a_val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">a_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">amax</span><span class="o">-</span><span class="n">amin</span><span class="p">)</span> <span class="o">+</span> <span class="n">amin</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">a_val</span> <span class="o">=</span> <span class="n">init_a_val</span>
+def optimize(N=1, use_reparametrization_trick=True, init_a_val=None):
+
+    if init_a_val is None:
+        a_val = np.random.random()*(amax-amin) + amin
+    else:
+        a_val = init_a_val
         
-    <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">.1</span>
-    <span class="n">lr_decay</span> <span class="o">=</span> <span class="mf">1e-2</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="p">[]</span>
+    learning_rate = .1
+    lr_decay = 1e-2
+    h = []
     
-    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;initial a&quot;</span><span class="p">,</span> <span class="n">a_val</span><span class="p">)</span>
+    print (&quot;initial a&quot;, a_val)
     
-    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">101</span><span class="p">):</span>
+    for step in range(101):
 
-        <span class="k">if</span> <span class="n">use_reparametrization_trick</span><span class="p">:</span>
-            <span class="n">grad</span> <span class="o">=</span> <span class="n">compute_egradient_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">grad</span> <span class="o">=</span> <span class="n">compute_gradient_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-        <span class="n">expectation</span> <span class="o">=</span> <span class="n">compute_expectation_mc</span><span class="p">(</span><span class="n">a_val</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        if use_reparametrization_trick:
+            grad = compute_egradient_mc(a_val, N)
+        else:
+            grad = compute_gradient_mc(a_val, N)
+        expectation = compute_expectation_mc(a_val, N)
 
-        <span class="k">if</span> <span class="n">step</span><span class="o">%</span><span class="k">10</span>==0:
-            <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;step </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">: expectation for a=</span><span class="si">{</span><span class="n">a_val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">expectation</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, grad is </span><span class="si">{</span><span class="n">grad</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, lr is </span><span class="si">{</span><span class="n">learning_rate</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        if step%10==0:
+            print (f&quot;step {step:2d}: expectation for a={a_val:.3f} is {expectation:.5f}, grad is {grad:.5f}, lr is {learning_rate:.5f}&quot;)
 
-        <span class="n">a_val</span> <span class="o">-=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">grad</span>
-        <span class="n">learning_rate</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">lr_decay</span><span class="p">)</span>
-        <span class="n">h</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">step</span><span class="p">,</span> <span class="n">a_val</span><span class="p">,</span> <span class="n">expectation</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">learning_rate</span><span class="p">])</span>
+        a_val -= learning_rate * grad
+        learning_rate *= (1-lr_decay)
+        h.append([step, a_val, expectation, grad, learning_rate])
 
-    <span class="n">h</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;expectation&#39;</span><span class="p">,</span> <span class="s1">&#39;grad&#39;</span><span class="p">,</span> <span class="s1">&#39;lr&#39;</span><span class="p">])</span>
+    h = pd.DataFrame(h, columns=[&#39;step&#39;, &#39;a&#39;, &#39;expectation&#39;, &#39;grad&#39;, &#39;lr&#39;])
     
-    <span class="k">return</span> <span class="n">h</span>
+    return h
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init_a_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="n">amax</span><span class="o">-</span><span class="n">amin</span><span class="p">)</span> <span class="o">+</span> <span class="n">amin</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>init_a_val = np.random.random()*(amax-amin) + amin
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h_trick</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">use_reparametrization_trick</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">init_a_val</span><span class="o">=</span><span class="n">init_a_val</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>h_trick = optimize(use_reparametrization_trick=True, N=2, init_a_val=init_a_val)
 </pre></div>
 </div>
 </div>
@@ -672,7 +675,7 @@ step 100: expectation for a=2.524 is 0.67570, grad is -0.37034, lr is 0.03660
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h_notrick</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">use_reparametrization_trick</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">init_a_val</span><span class="o">=</span><span class="n">init_a_val</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>h_notrick = optimize(use_reparametrization_trick=False, N=2, init_a_val=init_a_val)
 </pre></div>
 </div>
 </div>
@@ -695,19 +698,19 @@ step 100: expectation for a=2.638 is 0.34662, grad is -2.84563, lr is 0.03660
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h_trick</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;with rep trick&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h_notrick</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;no trick&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;step&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;gradient&quot;</span><span class="p">);</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h_trick</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;with rep trick&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h_notrick</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;no trick&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;step&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">);</span>
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h_trick</span><span class="o">.</span><span class="n">expectation</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;with rep trick&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h_notrick</span><span class="o">.</span><span class="n">expectation</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;no trick&quot;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;step&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;expectation&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax,i in subplots(3, usizex=5):
+    if i==0:
+        plt.plot(h_trick.grad.values, label=&quot;with rep trick&quot;)
+        plt.plot(h_notrick.grad.values, label=&quot;no trick&quot;)
+        plt.grid(); plt.legend(); plt.xlabel(&quot;step&quot;); plt.title(&quot;gradient&quot;);
+    if i==1:
+        plt.plot(h_trick.a.values, label=&quot;with rep trick&quot;)
+        plt.plot(h_notrick.a.values, label=&quot;no trick&quot;)
+        plt.grid(); plt.legend(); plt.xlabel(&quot;step&quot;); plt.title(&quot;a&quot;);
+    if i==2:
+        plt.plot(h_trick.expectation.values, label=&quot;with rep trick&quot;)
+        plt.plot(h_notrick.expectation.values, label=&quot;no trick&quot;)
+        plt.grid(); plt.legend(); plt.xlabel(&quot;step&quot;); plt.title(&quot;expectation&quot;);
 </pre></div>
 </div>
 </div>

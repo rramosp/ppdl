@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -262,70 +262,70 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
-<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+from scipy.integrate import quad
+from progressbar import progressbar as pbar
+from rlxutils import subplots, copy_func
 
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
-<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
-<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
+import tensorflow as tf
+import tensorflow_probability as tfp
+tfd = tfp.distributions
+tfb = tfp.bijectors
 
-<span class="o">%</span><span class="k">matplotlib</span> inline
+%matplotlib inline
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_distribution</span><span class="p">(</span><span class="n">c0</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale1</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scale2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shift1</span><span class="o">=-</span><span class="mf">.5</span><span class="p">,</span> <span class="n">shift2</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="n">concentration0</span><span class="o">=</span><span class="n">c0</span><span class="p">,</span> <span class="n">concentration1</span><span class="o">=</span><span class="n">c1</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">(</span> <span class="p">[</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">scale2</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Shift</span><span class="p">(</span><span class="n">shift2</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">scale1</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Shift</span><span class="p">(</span><span class="n">shift1</span><span class="p">)])</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">TransformedDistribution</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">d</span><span class="p">,</span><span class="n">t</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def get_distribution(c0=3, c1=2, scale1=5, scale2=1, shift1=-.5, shift2=0):
+    d = tfd.Beta(concentration0=c0, concentration1=c1)
+    b = tfb.Chain( [ tfb.Scale(scale2), tfb.Shift(shift2), tfb.Tanh(), tfb.Scale(scale1), tfb.Shift(shift1)])
+    t = tfd.TransformedDistribution(d, b)
+    return d,t
 
 
-<span class="k">def</span> <span class="nf">get_distribution</span><span class="p">(</span><span class="n">c0</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shift</span><span class="o">=-</span><span class="mf">.5</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="n">concentration0</span><span class="o">=</span><span class="n">c0</span><span class="p">,</span> <span class="n">concentration1</span><span class="o">=</span><span class="n">c1</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">(</span> <span class="p">[</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">scale</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Shift</span><span class="p">(</span><span class="n">shift</span><span class="p">)])</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">TransformedDistribution</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">d</span><span class="p">,</span><span class="n">t</span>
+def get_distribution(c0=3, c1=2, scale=5, shift=-.5):
+    d = tfd.Beta(concentration0=c0, concentration1=c1)
+    b = tfb.Chain( [ tfb.Scale(scale), tfb.Shift(shift)])
+    t = tfd.TransformedDistribution(d, b)
+    return d,t
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_params</span><span class="p">():</span>
-    <span class="n">c0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="mf">0.5</span>
-    <span class="n">c1</span> <span class="o">=</span> <span class="n">c0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="n">c0</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">c0</span><span class="o">/</span><span class="mi">4</span>
-    <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">5</span>
-    <span class="n">shift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">10</span><span class="o">-</span><span class="mi">5</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;c0&quot;</span><span class="p">:</span> <span class="n">c0</span><span class="p">,</span> <span class="s2">&quot;c1&quot;</span><span class="p">:</span> <span class="n">c1</span><span class="p">,</span> <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="n">scale</span><span class="p">,</span> <span class="s2">&quot;shift&quot;</span><span class="p">:</span> <span class="n">shift</span><span class="p">}</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
-    <span class="k">return</span> <span class="n">r</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def sample_params():
+    c0 = np.random.random()*3 + 0.5
+    c1 = c0 + np.random.random()*c0/2 - c0/4
+    scale = np.random.random()*5
+    shift = np.random.random()*10-5
+    r = {&quot;c0&quot;: c0, &quot;c1&quot;: c1, &quot;scale&quot;: scale, &quot;shift&quot;: shift}
+    r = {k:np.float64(v) for k,v in r.items()}
+    return r
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="n">sample_params</span><span class="p">()</span>
-    <span class="n">d</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">get_distribution</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax,i in subplots(20, n_cols=5):
+    params = sample_params()
+    d,t = get_distribution(**params)
 
-    <span class="n">td</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">td</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+    td = t.sample(10000).numpy()
+    plt.hist(td, bins=100, alpha=.5, density=True);
     
-    <span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">td</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">td</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">xr</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    xr = np.linspace(np.min(td), np.max(td), 100)
+    plt.plot(xr, np.exp(t.log_prob(xr).numpy()), color=&quot;black&quot;)
     
-    <span class="nb">print</span> <span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    print (params)
     
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+plt.tight_layout()
 </pre></div>
 </div>
 </div>

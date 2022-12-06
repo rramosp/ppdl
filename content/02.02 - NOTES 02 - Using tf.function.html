@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -370,10 +370,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
-<span class="o">!</span>git clone https://github.com/rramosp/ppdl.git &gt; /dev/null <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>mv -n ppdl/content/init.py ppdl/content/local . <span class="m">2</span>&gt; /dev/null
-<span class="o">!</span>pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
+!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
+!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
+!pip install -r ppdl/content/requirements.txt &gt; /dev/null
 </pre></div>
 </div>
 </div>
@@ -382,15 +382,15 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Using <code class="docutils literal notranslate"><span class="pre">tf.function</span></code><a class="headerlink" href="#using-tf-function" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">load_ext</span> tensorboard
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+%matplotlib inline
+%load_ext tensorboard
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">local.lib</span> <span class="kn">import</span> <span class="n">mlutils</span>
-<span class="n">tf</span><span class="o">.</span><span class="n">__version__</span>
+from sklearn.datasets import *
+from local.lib import mlutils
+tf.__version__
 </pre></div>
 </div>
 </div>
@@ -404,9 +404,9 @@ const thebe_selector_output = ".output, .cell_output"
 <h2><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> automatically converts pythonic code to a computational graph, using Tensors<a class="headerlink" href="#tf-function-automatically-converts-pythonic-code-to-a-computational-graph-using-tensors" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="mi">3</span>
-<span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def f(x):
+    return x**2 + x*3
+f(2)
 </pre></div>
 </div>
 </div>
@@ -418,10 +418,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="mi">3</span>
-<span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>@tf.function
+def f(x):
+    return x**2 + x*3
+f(2)
 </pre></div>
 </div>
 </div>
@@ -434,8 +434,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>and also works with a symbolic tensor</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">3.</span><span class="p">)</span>
-<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = tf.Variable(3.)
+f(x)
 </pre></div>
 </div>
 </div>
@@ -448,18 +448,18 @@ const thebe_selector_output = ".output, .cell_output"
 <p>a <code class="docutils literal notranslate"><span class="pre">tf.function</span></code> is <strong>traced</strong> (converted to computation graph) the first time it is executed, then it is cached <strong>IF IT IS REUSED WITH THE SAME TF VARIABLES</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">f47</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tracing!&#39;</span><span class="p">)</span>
-    <span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s1">&#39;Executing&#39;</span><span class="p">)</span>  
-    <span class="k">return</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="mi">47</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>@tf.function
+def f47(t):
+    print(&#39;Tracing!&#39;)
+    tf.print(&#39;Executing&#39;)  
+    return t**2 + t*47
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f47</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f47(2)
 </pre></div>
 </div>
 </div>
@@ -475,7 +475,7 @@ Executing
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f47</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f47(2)
 </pre></div>
 </div>
 </div>
@@ -491,8 +491,8 @@ Executing
 <p>observe that if the type changes, the function is <strong>traced</strong> again since a different computational graph must be created</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">f47</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = tf.Variable(2, dtype=tf.float32)
+f47(x)
 </pre></div>
 </div>
 </div>
@@ -508,8 +508,8 @@ Executing
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="mf">3.4</span><span class="p">)</span>
-<span class="n">f47</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x.assign(3.4)
+f47(x)
 </pre></div>
 </div>
 </div>
@@ -525,8 +525,8 @@ Executing
 <p>tracing happens for <strong>EACH VARIABLE</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">f47</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y = tf.Variable(2, dtype=tf.float32)
+f47(y)
 </pre></div>
 </div>
 </div>
@@ -542,7 +542,7 @@ Executing
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f47</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f47(y)
 </pre></div>
 </div>
 </div>
@@ -557,7 +557,7 @@ Executing
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f47</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f47(x)
 </pre></div>
 </div>
 </div>
@@ -572,8 +572,8 @@ Executing
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
-<span class="n">f47</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = tf.Variable(3, dtype=tf.int32)
+f47(x)
 </pre></div>
 </div>
 </div>
@@ -589,8 +589,8 @@ Executing
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
-<span class="n">f47</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x.assign(9)
+f47(x)
 </pre></div>
 </div>
 </div>
@@ -605,7 +605,7 @@ Executing
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="n">f47</span><span class="o">.</span><span class="n">pretty_printed_concrete_signatures</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print (f47.pretty_printed_concrete_signatures())
 </pre></div>
 </div>
 </div>
@@ -638,7 +638,7 @@ f47(t)
 <p>observe the actual generated code by <code class="docutils literal notranslate"><span class="pre">tf.autograph</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">autograph</span><span class="o">.</span><span class="n">to_code</span><span class="p">(</span><span class="n">f47</span><span class="o">.</span><span class="n">python_function</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(tf.autograph.to_code(f47.python_function))
 </pre></div>
 </div>
 </div>
@@ -665,42 +665,42 @@ f47(t)
 <h2>performance of <code class="docutils literal notranslate"><span class="pre">tf.function</span></code><a class="headerlink" href="#performance-of-tf-function" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def f1(x):
+    return np.mean(x**2 + x*3)
 
-<span class="k">def</span> <span class="nf">f11</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="mi">3</span>
+def f11(x):
+    return x**2 + x*3
 
-<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+@tf.function
+def f2(x):
+    return np.mean(x**2+x*3)
 
-<span class="k">def</span> <span class="nf">f3</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+def f3(x):
+    return tf.reduce_mean(x**2+x**3)
 
-<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">f4</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+@tf.function
+def f4(x):
+    return tf.reduce_mean(x**2+x**3)
 
-<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">f5</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">f3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+@tf.function
+def f5(x):
+    return f3(x)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">tX</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>X = np.random.random(size=(1000,20)).astype(np.float32)
+tX = tf.Variable(X, dtype=tf.float32)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># f2(X) --&gt; error, why?</span>
-<span class="n">f1</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">f3</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">f4</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">f5</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># f2(X) --&gt; error, why?
+f1(X), f3(X), f4(X), f5(X)
 </pre></div>
 </div>
 </div>
@@ -715,7 +715,7 @@ f47(t)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span><span class="p">(</span><span class="n">tX</span><span class="p">),</span> <span class="n">f3</span><span class="p">(</span><span class="n">tX</span><span class="p">),</span> <span class="n">f4</span><span class="p">(</span><span class="n">tX</span><span class="p">),</span> <span class="n">f5</span><span class="p">(</span><span class="n">tX</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f1(tX), f3(tX), f4(tX), f5(tX)
 </pre></div>
 </div>
 </div>
@@ -730,8 +730,8 @@ f47(t)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># but</span>
-<span class="n">f11</span><span class="p">(</span><span class="n">tX</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># but
+f11(tX)
 </pre></div>
 </div>
 </div>
@@ -756,10 +756,10 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def f1(x):
+    return np.mean(x**2 + x*3)
 
-<span class="o">%</span><span class="k">timeit</span> f1(X)
+%timeit f1(X)
 </pre></div>
 </div>
 </div>
@@ -771,7 +771,7 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> f1(tX)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit f1(tX)
 </pre></div>
 </div>
 </div>
@@ -783,10 +783,10 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f3</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def f3(x):
+    return tf.reduce_mean(x**2+x**3)
 
-<span class="o">%</span><span class="k">timeit</span> f3(tX)
+%timeit f3(tX)
 </pre></div>
 </div>
 </div>
@@ -798,11 +798,11 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">f4</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>@tf.function
+def f4(x):
+    return tf.reduce_mean(x**2+x**3)
 
-<span class="o">%</span><span class="k">timeit</span> f4(tX)
+%timeit f4(tX)
 </pre></div>
 </div>
 </div>
@@ -814,7 +814,7 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> f4.python_function(tX)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit f4.python_function(tX)
 </pre></div>
 </div>
 </div>
@@ -826,11 +826,11 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">f5</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">f3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>@tf.function
+def f5(x):
+    return f3(x)
 
-<span class="o">%</span><span class="k">timeit</span> f5(tX)
+%timeit f5(tX)
 </pre></div>
 </div>
 </div>
@@ -846,16 +846,16 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 <p><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> maps python polymorphism to a set of different underlying concrete functions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">x</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>@tf.function
+def f(x):
+    return x+x
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="mf">10.</span><span class="p">),</span> <span class="n">f</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f(10), f(10.), f(&quot;a&quot;)
 </pre></div>
 </div>
 </div>
@@ -870,8 +870,8 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 <p>observe different hash codes for each concrete function</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get_concrete_function</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">string</span><span class="p">))</span>
-<span class="n">fs</span><span class="p">,</span> <span class="n">fs</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;aa&quot;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fs = f.get_concrete_function(tf.TensorSpec(shape=None, dtype=tf.string))
+fs, fs(tf.constant(&quot;aa&quot;))
 </pre></div>
 </div>
 </div>
@@ -884,8 +884,8 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fi</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get_concrete_function</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
-<span class="n">fi</span><span class="p">,</span> <span class="n">fi</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fi = f.get_concrete_function(tf.TensorSpec(shape=None, dtype=tf.int32))
+fi, fi(tf.constant(1))
 </pre></div>
 </div>
 </div>
@@ -898,8 +898,8 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">get_concrete_function</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
-<span class="n">ff</span><span class="p">,</span> <span class="n">ff</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">1.</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ff = f.get_concrete_function(tf.TensorSpec(shape=None, dtype=tf.float32))
+ff, ff(tf.constant(1.))
 </pre></div>
 </div>
 </div>
@@ -915,10 +915,10 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 <h2><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> with <code class="docutils literal notranslate"><span class="pre">keras</span></code> layers<a class="headerlink" href="#tf-function-with-keras-layers" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+np.random.seed(0)
+data = np.random.randn(3, 2)
+data
 </pre></div>
 </div>
 </div>
@@ -932,9 +932,9 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inputer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">InputLayer</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">denser1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span>
-<span class="n">denser2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>inputer = tf.keras.layers.InputLayer(input_shape=(2))
+denser1 = tf.keras.layers.Dense(4, activation=&#39;relu&#39;)
+denser2 = tf.keras.layers.Dense(1, activation=&#39;sigmoid&#39;)
 </pre></div>
 </div>
 </div>
@@ -942,17 +942,17 @@ array([[2.3446867 , 3.1720169 , 2.4340954 , ..., 0.94587123, 3.915599  ,
 <p>observe that, in eager mode, layers graphs are created as their code is being executed</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model_1</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">inputer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">denser1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After the first layer:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">denser2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After the second layer:&#39;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">out</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def model_1(data):
+    x = inputer(data)
+    x = denser1(x)
+    print(&#39;After the first layer:&#39;, x)
+    out = denser2(x)
+    print(&#39;After the second layer:&#39;, out)
+    return out
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model output:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">model_1</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model output:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">model_1</span><span class="p">(</span><span class="n">data</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+print(&#39;Model output:\n&#39;, model_1(data))
+print(&quot;--&quot;)
+print(&#39;Model output:\n&#39;, model_1(data+1))
 </pre></div>
 </div>
 </div>
@@ -991,19 +991,19 @@ Model output:
 <p>however, with <code class="docutils literal notranslate"><span class="pre">tf.function</span></code>, <strong>FIRST</strong> the function is <strong>traced</strong> resulting in a computational graph, which is what is <strong>THEN</strong> used in subsequent calls</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">model_2</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">inputer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">denser1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After the first layer:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">denser2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After the second layer:&#39;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">out</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>@tf.function
+def model_2(data):
+    x = inputer(data)
+    x = denser1(x)
+    print(&#39;After the first layer:&#39;, x)
+    out = denser2(x)
+    print(&#39;After the second layer:&#39;, out)
+    return out
 
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model</span><span class="se">\&#39;</span><span class="s1">s output:&#39;</span><span class="p">,</span> <span class="n">model_2</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model</span><span class="se">\&#39;</span><span class="s1">s output:&#39;</span><span class="p">,</span> <span class="n">model_2</span><span class="p">(</span><span class="n">data</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+print(&#39;Model\&#39;s output:&#39;, model_2(data))
+print(&#39;--&#39;)
+print(&#39;Model\&#39;s output:&#39;, model_2(data+1))
 </pre></div>
 </div>
 </div>
@@ -1026,25 +1026,25 @@ Model&#39;s output: tf.Tensor(
 <p><code class="docutils literal notranslate"><span class="pre">tf.function</span></code> usually requires less compute time, since in eager mode, everytime the function is called the graph is created</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model_1</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">inputer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">denser1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">denser2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">out</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def model_1(data):
+    x = inputer(data)
+    x = denser1(x)
+    out = denser2(x)
+    return out
 
-<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">model_2</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">inputer</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">denser1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">denser2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">out</span>
+@tf.function
+def model_2(data):
+    x = inputer(data)
+    x = denser1(x)
+    out = denser2(x)
+    return out
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> model_1(data)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit model_1(data)
 </pre></div>
 </div>
 </div>
@@ -1056,7 +1056,7 @@ Model&#39;s output: tf.Tensor(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> model_2(data)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit model_2(data)
 </pre></div>
 </div>
 </div>
@@ -1075,19 +1075,20 @@ Model&#39;s output: tf.Tensor(
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g1</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">model_1</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def g1(data):
+    with tf.GradientTape() as t:
+        y = model_1(data)
 
-    <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">denser1</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+    return t.gradient(y, denser1.variables)
 
-<span class="k">def</span> <span class="nf">g2</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">model_2</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+def g2(data):
+    with tf.GradientTape() as t:
+        y = model_2(data)
 
-    <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">denser1</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+    return t.gradient(y, denser1.variables)
 
-<span class="n">g2</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">g1</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+g2(data), g1(data)
+
 </pre></div>
 </div>
 </div>
@@ -1108,7 +1109,7 @@ Model&#39;s output: tf.Tensor(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> g1(data)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit g1(data)
 </pre></div>
 </div>
 </div>
@@ -1120,7 +1121,7 @@ Model&#39;s output: tf.Tensor(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> g2(data)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit g2(data)
 </pre></div>
 </div>
 </div>
@@ -1134,8 +1135,8 @@ Model&#39;s output: tf.Tensor(
 <p>if we wrap either function, now everything is a cached computational graph.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fg1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span>
-<span class="o">%</span><span class="k">timeit</span> fg1(data)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fg1 = tf.function(g1)
+%timeit fg1(data)
 </pre></div>
 </div>
 </div>
@@ -1147,8 +1148,8 @@ Model&#39;s output: tf.Tensor(
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fg2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">g2</span><span class="p">)</span>
-<span class="o">%</span><span class="k">timeit</span> fg2(data)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fg2 = tf.function(g2)
+%timeit fg2(data)
 </pre></div>
 </div>
 </div>

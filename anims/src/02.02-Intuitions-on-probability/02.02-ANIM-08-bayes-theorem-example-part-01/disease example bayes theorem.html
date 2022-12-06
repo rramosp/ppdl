@@ -29,9 +29,9 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -282,39 +282,39 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+from rlxutils import subplots
+%matplotlib inline
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_cancer</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">P_nocancer</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">P_cancer</span>
-<span class="n">P_pos_given_cancer</span> <span class="o">=</span> <span class="mf">0.85</span>
-<span class="n">P_pos_given_nocancer</span> <span class="o">=</span> <span class="mf">0.05</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_cancer = 0.01
+P_nocancer = 1 - P_cancer
+P_pos_given_cancer = 0.85
+P_pos_given_nocancer = 0.05
 
-<span class="n">P_neg_given_cancer</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">P_pos_given_cancer</span>
-<span class="n">P_neg_given_nocancer</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span>  <span class="n">P_pos_given_nocancer</span>
+P_neg_given_cancer = 1 - P_pos_given_cancer
+P_neg_given_nocancer = 1 -  P_pos_given_nocancer
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">posterior</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">P_B_given_A</span><span class="p">,</span> <span class="n">P_A</span><span class="p">,</span> <span class="n">P_B</span><span class="p">:</span> <span class="n">P_B_given_A</span> <span class="o">*</span> <span class="n">P_A</span> <span class="o">/</span> <span class="n">P_B</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>posterior = lambda P_B_given_A, P_A, P_B: P_B_given_A * P_A / P_B 
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_pos</span> <span class="o">=</span> <span class="n">P_pos_given_cancer</span> <span class="o">*</span> <span class="n">P_cancer</span> <span class="o">+</span> <span class="n">P_pos_given_nocancer</span> <span class="o">*</span> <span class="n">P_nocancer</span>
-<span class="n">P_neg</span> <span class="o">=</span> <span class="n">P_neg_given_cancer</span> <span class="o">*</span> <span class="n">P_cancer</span> <span class="o">+</span> <span class="n">P_neg_given_nocancer</span> <span class="o">*</span> <span class="n">P_nocancer</span>
-<span class="n">P_pos</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_pos = P_pos_given_cancer * P_cancer + P_pos_given_nocancer * P_nocancer
+P_neg = P_neg_given_cancer * P_cancer + P_neg_given_nocancer * P_nocancer
+P_pos
 </pre></div>
 </div>
 </div>
@@ -326,7 +326,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_pos_given_cancer</span> <span class="p">,</span> <span class="n">P_cancer</span> <span class="p">,</span> <span class="n">P_pos_given_nocancer</span> <span class="p">,</span> <span class="n">P_nocancer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_pos_given_cancer , P_cancer , P_pos_given_nocancer , P_nocancer
 </pre></div>
 </div>
 </div>
@@ -338,8 +338,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_cancer_given_pos</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">(</span><span class="n">P_pos_given_cancer</span><span class="p">,</span> <span class="n">P_cancer</span><span class="p">,</span> <span class="n">P_pos</span><span class="p">)</span>
-<span class="n">P_cancer_given_pos</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_cancer_given_pos = posterior(P_pos_given_cancer, P_cancer, P_pos)
+P_cancer_given_pos
 </pre></div>
 </div>
 </div>
@@ -351,8 +351,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_nocancer_given_pos</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">(</span><span class="n">P_pos_given_nocancer</span><span class="p">,</span> <span class="n">P_nocancer</span><span class="p">,</span> <span class="n">P_pos</span><span class="p">)</span>
-<span class="n">P_nocancer_given_pos</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_nocancer_given_pos = posterior(P_pos_given_nocancer, P_nocancer, P_pos)
+P_nocancer_given_pos
 </pre></div>
 </div>
 </div>
@@ -364,10 +364,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_neg</span> <span class="o">=</span> <span class="n">P_neg_given_cancer</span> <span class="o">*</span> <span class="n">P_cancer</span> <span class="o">+</span> <span class="n">P_neg_given_nocancer</span> <span class="o">*</span> <span class="n">P_nocancer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_neg = P_neg_given_cancer * P_cancer + P_neg_given_nocancer * P_nocancer
 
-<span class="n">P_nocancer_given_neg</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">(</span><span class="n">P_neg_given_nocancer</span><span class="p">,</span> <span class="n">P_nocancer</span><span class="p">,</span> <span class="n">P_neg</span><span class="p">)</span>
-<span class="n">P_nocancer_given_neg</span>
+P_nocancer_given_neg = posterior(P_neg_given_nocancer, P_nocancer, P_neg)
+P_nocancer_given_neg
 </pre></div>
 </div>
 </div>
@@ -379,7 +379,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">0.85</span> <span class="o">*</span> <span class="mf">0.147</span> <span class="o">/</span> <span class="mf">0.1676</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>0.85 * 0.147 / 0.1676
 </pre></div>
 </div>
 </div>
@@ -393,27 +393,27 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>reduce FNR<a class="headerlink" href="#reduce-fnr" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rP_pos_given_cancer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">P_pos_given_cancer</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">rP_neg_given_cancer</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">rP_pos_given_cancer</span>
-<span class="n">P_pos</span> <span class="o">=</span> <span class="n">rP_pos_given_cancer</span> <span class="o">*</span> <span class="n">P_cancer</span> <span class="o">+</span> <span class="n">P_pos_given_nocancer</span> <span class="o">*</span> <span class="n">P_nocancer</span>
-<span class="n">P_neg</span> <span class="o">=</span> <span class="n">rP_neg_given_cancer</span> <span class="o">*</span> <span class="n">P_cancer</span> <span class="o">+</span> <span class="n">P_neg_given_nocancer</span> <span class="o">*</span> <span class="n">P_nocancer</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>rP_pos_given_cancer = np.linspace(P_pos_given_cancer,1, 100)
+rP_neg_given_cancer = 1 - rP_pos_given_cancer
+P_pos = rP_pos_given_cancer * P_cancer + P_pos_given_nocancer * P_nocancer
+P_neg = rP_neg_given_cancer * P_cancer + P_neg_given_nocancer * P_nocancer
 
 
-<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+for ax,i in subplots(1):
 
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rP_neg_given_cancer</span><span class="p">,</span> <span class="n">posterior</span><span class="p">(</span><span class="n">rP_pos_given_cancer</span><span class="p">,</span> <span class="n">P_cancer</span><span class="p">,</span> <span class="n">P_pos</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$P(cancer|pos)$&quot;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;FNR&quot;</span><span class="p">)</span>
+    if i==0:
+        plt.plot(rP_neg_given_cancer, posterior(rP_pos_given_cancer, P_cancer, P_pos))
+        plt.grid();
+        plt.title(&quot;$P(cancer|pos)$&quot;);
+        plt.xlabel(&quot;FNR&quot;)
         
-    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rP_neg_given_cancer</span><span class="p">,</span> <span class="n">posterior</span><span class="p">(</span><span class="n">rP_neg_given_cancer</span><span class="p">,</span> <span class="n">P_cancer</span><span class="p">,</span> <span class="n">P_neg</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$P(cancer|neg)$&quot;</span><span class="p">);</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;FNR&quot;</span><span class="p">)</span>
+    if i==1:
+        plt.plot(rP_neg_given_cancer, posterior(rP_neg_given_cancer, P_cancer, P_neg))
+        plt.grid();
+        plt.title(&quot;$P(cancer|neg)$&quot;);
+        plt.xlabel(&quot;FNR&quot;)
         
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+plt.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -426,13 +426,13 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>reduce FPR<a class="headerlink" href="#reduce-fpr" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">P_pos_given_nocancer</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">rP_pos_given_nocancer</span> <span class="o">=</span> <span class="n">xr</span>
-    <span class="n">P_pos</span> <span class="o">=</span> <span class="n">P_pos_given_cancer</span> <span class="o">*</span> <span class="n">P_cancer</span> <span class="o">+</span> <span class="n">rP_pos_given_nocancer</span> <span class="o">*</span> <span class="n">P_nocancer</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rP_pos_given_nocancer</span><span class="p">,</span> <span class="n">posterior</span><span class="p">(</span><span class="n">P_pos_given_cancer</span><span class="p">,</span> <span class="n">P_cancer</span><span class="p">,</span> <span class="n">P_pos</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$P(cancer|pos)$&quot;</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax,i in subplots(1):
+    xr = np.linspace(0,P_pos_given_nocancer,100)
+    rP_pos_given_nocancer = xr
+    P_pos = P_pos_given_cancer * P_cancer + rP_pos_given_nocancer * P_nocancer
+    plt.plot(rP_pos_given_nocancer, posterior(P_pos_given_cancer, P_cancer, P_pos))
+    plt.grid();
+    plt.title(&quot;$P(cancer|pos)$&quot;);
 </pre></div>
 </div>
 </div>
@@ -443,21 +443,21 @@ const thebe_selector_output = ".output, .cell_output"
 <p>if the incidence of cancer if very high, reducing FNR is far more important</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_cancer</span> <span class="o">=</span> <span class="mf">0.8</span>
-<span class="n">P_nocancer</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">P_cancer</span>
-<span class="n">P_pos_given_cancer</span> <span class="o">=</span> <span class="mf">0.85</span>
-<span class="n">P_pos_given_nocancer</span> <span class="o">=</span> <span class="mf">0.05</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_cancer = 0.8
+P_nocancer = 1 - P_cancer
+P_pos_given_cancer = 0.85
+P_pos_given_nocancer = 0.05
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">P_pos_given_cancer</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rP_pos_given_cancer</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">xr</span>
-<span class="n">P_pos</span> <span class="o">=</span> <span class="n">rP_pos_given_cancer</span> <span class="o">*</span> <span class="n">P_cancer</span> <span class="o">+</span> <span class="n">P_pos_given_nocancer</span> <span class="o">*</span> <span class="n">P_nocancer</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rP_pos_given_cancer</span><span class="p">,</span> <span class="n">posterior</span><span class="p">(</span><span class="n">rP_pos_given_cancer</span><span class="p">,</span> <span class="n">P_cancer</span><span class="p">,</span> <span class="n">P_pos</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr = np.linspace(0,1-P_pos_given_cancer,100)
+rP_pos_given_cancer = 1 - xr
+P_pos = rP_pos_given_cancer * P_cancer + P_pos_given_nocancer * P_nocancer
+plt.plot(rP_pos_given_cancer, posterior(rP_pos_given_cancer, P_cancer, P_pos))
+plt.grid();
 </pre></div>
 </div>
 </div>
@@ -467,11 +467,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">P_pos_given_nocancer</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">rP_pos_given_nocancer</span> <span class="o">=</span> <span class="n">xr</span>
-<span class="n">P_pos</span> <span class="o">=</span> <span class="n">P_pos_given_cancer</span> <span class="o">*</span> <span class="n">P_cancer</span> <span class="o">+</span> <span class="n">rP_pos_given_nocancer</span> <span class="o">*</span> <span class="n">P_nocancer</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rP_pos_given_nocancer</span><span class="p">,</span> <span class="n">posterior</span><span class="p">(</span><span class="n">P_pos_given_cancer</span><span class="p">,</span> <span class="n">P_cancer</span><span class="p">,</span> <span class="n">P_pos</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr = np.linspace(0,P_pos_given_nocancer,100)
+rP_pos_given_nocancer = xr
+P_pos = P_pos_given_cancer * P_cancer + rP_pos_given_nocancer * P_nocancer
+plt.plot(rP_pos_given_nocancer, posterior(P_pos_given_cancer, P_cancer, P_pos))
+plt.grid();
 </pre></div>
 </div>
 </div>
