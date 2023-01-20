@@ -61,6 +61,11 @@
         <div class="timeline-content"> 11. Bayes theorem with continuous distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
                 <a href="05.01 - NOTES 02 - Bayes theorem continuous.html"> Notebook</a>
             </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> <b><font color="red">LAB 01</font> Bayes posterior and classifiers</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.01 - LAB 01 - Bayes posterior and classifiers.html"> Notebook</a>
+            </span></div>        
     </div><h2></br> 5.2 Bayesian inference</h2>
 <div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
@@ -93,18 +98,13 @@
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 8. Bayesian linear regression<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="05.02 - NOTES 05 - Bayesian linear regression.html"> Notebook</a>
+        <div class="timeline-content"> <b><font color="red">LAB 02</font> Bayesian modelling of a Dice</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.02 - LAB 02 - Bayesian Model for a Dice.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 9. Bayesian neural networks<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="05.02 - NOTES 06 - Bayesian neural networks.html"> Notebook</a>
-            </span></div>        
-    </div><div class="timeline-item">
-        <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> <b><font color="red">LAB 1</font> Bayesian modelling</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="05.02 - LAB 1 - Bayesian modelling.html"> Notebook</a>
+        <div class="timeline-content"> <b><font color="red">LAB 03</font> Truncated regression</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="05.02 - LAB 03 - Truncated regression.html"> Notebook</a>
             </span></div>        
     </div>
 </div>
