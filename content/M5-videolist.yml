@@ -44,6 +44,11 @@ videos:
   - name: 11. Bayes theorem with continuous distributions
     notebook: 05.01 - NOTES 02 - Bayes theorem continuous.html
 
+  - name: <b><font color="red">LAB 01</font> Bayes posterior and classifiers</b>
+    notebook: 05.01 - LAB 01 - Bayes posterior and classifiers.html
+  
+  
+
 
 - name: </br> 5.2 Bayesian inference
   order: 2
@@ -59,12 +64,8 @@ videos:
     notebook: 05.02 - NOTES 03 - MCMC in TF Probability.html
   - name: 7. Modelling a coin flip with TF Probability
     notebook: 05.02 - NOTES 04 - coin flip with TF Probability.html
-  - name: 8. Bayesian linear regression
-    notebook: 05.02 - NOTES 05 - Bayesian linear regression.html
-  - name: 9. Bayesian neural networks
-    notebook: 05.02 - NOTES 06 - Bayesian neural networks.html
-  - name: <b><font color="red">LAB 1</font> Bayesian modelling</b>
-    notebook: 05.02 - LAB 1 - Bayesian modelling.html
-    description: Task 1 iterative posterior estimation with conjugate
-    description: Task 2 probabilistic model sampling 
-    description: Task 3 Bayesian neural networks
+  - name: <b><font color="red">LAB 02</font> Bayesian modelling of a Dice</b>
+    notebook: 05.02 - LAB 02 - Bayesian Model for a Dice.html
+  - name: <b><font color="red">LAB 03</font> Truncated regression</b>
+    notebook: 05.02 - LAB 03 - Truncated regression.html
+     
