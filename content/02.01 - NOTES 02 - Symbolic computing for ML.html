@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -360,10 +360,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
-!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
-!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
-!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
+<span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rramosp/ppdl.git<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>mv<span class="w"> </span>-n<span class="w"> </span>ppdl/content/init.py<span class="w"> </span>ppdl/content/local<span class="w"> </span>.<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>ppdl/content/requirements.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
 </div>
@@ -372,10 +372,10 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Symbolic computing for ML<a class="headerlink" href="#symbolic-computing-for-ml" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import sys
-import sympy as sy
-import numpy as np
-import pandas as pd
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -384,15 +384,15 @@ import pandas as pd
 <h2>Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> computer algebra system (CAS)<a class="headerlink" href="#using-sympy-computer-algebra-system-cas" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x,y = sy.symbols(&quot;x y&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x y&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>z = x**2 + x*sy.cos(y)
-z
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">sy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">z</span>
 </pre></div>
 </div>
 </div>
@@ -404,7 +404,7 @@ z
 <p>we can evaluate the expresion by providing concrete values for the symbolic variables</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>z.subs({x: 2, y: sy.pi/4})
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -416,7 +416,7 @@ z
 <p>and obtain numerical approximations of these values</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sy.N(z.subs({x: 2, y: sy.pi/4}))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">}))</span>
 </pre></div>
 </div>
 </div>
@@ -429,7 +429,7 @@ z
 <p>observe how we compute <span class="math notranslate nohighlight">\(\frac{\partial z}{\partial x}\)</span> and <span class="math notranslate nohighlight">\(\frac{\partial z}{\partial y}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>z.diff(x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -440,7 +440,7 @@ z
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>z.diff(y)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -451,8 +451,8 @@ z
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>r = z.diff(x).subs({x: 2, y: sy.pi/4})
-r, sy.N(r)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">})</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -464,8 +464,8 @@ r, sy.N(r)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>r = z.diff(y).subs({x: 2, y: sy.pi/4})
-r, sy.N(r)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">sy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">})</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">sy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -479,7 +479,7 @@ r, sy.N(r)
 <p>More things you can do with <code class="docutils literal notranslate"><span class="pre">sympy</span></code> (and almost any CAS)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sy.expand((x+2)**2)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">expand</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -490,7 +490,7 @@ r, sy.N(r)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sy.factor( x**2-2*x-8 )
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">8</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -501,7 +501,7 @@ r, sy.N(r)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sy.solve( x**2 + 2*x - 8, x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">8</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -513,8 +513,8 @@ r, sy.N(r)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>a = sy.symbols(&quot;alpha&quot;)
-sy.solve( a*x**2 + 2*x - 8, x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;alpha&quot;</span><span class="p">)</span>
+<span class="n">sy</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">8</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -527,12 +527,12 @@ sy.solve( a*x**2 + 2*x - 8, x)
 <p>differential equations, solving <span class="math notranslate nohighlight">\(\frac{df}{dt}=f(t)+t\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t, C1 = sy.symbols(&quot;t C1&quot;)
-f = sy.symbols(&quot;f&quot;, cls=sy.Function)
-dydt = f(t)+t
-eq = dydt-sy.diff(f(t),t)
-yt = sy.dsolve(eq, f(t))
-yt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">,</span> <span class="n">C1</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t C1&quot;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">sy</span><span class="o">.</span><span class="n">Function</span><span class="p">)</span>
+<span class="n">dydt</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">+</span><span class="n">t</span>
+<span class="n">eq</span> <span class="o">=</span> <span class="n">dydt</span><span class="o">-</span><span class="n">sy</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">t</span><span class="p">)</span>
+<span class="n">yt</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">dsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="n">yt</span>
 </pre></div>
 </div>
 </div>
@@ -544,7 +544,7 @@ yt
 <p>systems of equations</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sy.solve ([x**2+y, 3*y-x])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">solve</span> <span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -560,8 +560,8 @@ yt
 <p>See <a class="reference external" href="http://docs.sympy.org/latest/modules/numeric-computation.html">Sympy Numeric Computation</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f = (sy.sin(x) + x**2)/2
-f
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">sy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">f</span>
 </pre></div>
 </div>
 </div>
@@ -572,7 +572,7 @@ f
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f.subs({x:10})
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="mi">10</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
@@ -583,7 +583,7 @@ f
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sy.N(f.subs({x:10}))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sy</span><span class="o">.</span><span class="n">N</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="mi">10</span><span class="p">}))</span>
 </pre></div>
 </div>
 </div>
@@ -594,8 +594,8 @@ f
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f1 = sy.lambdify(x, f)
-f1(10)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+<span class="n">f1</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -608,14 +608,14 @@ f1(10)
 <p>and a vectorized version</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f2 = sy.lambdify(x, f, &quot;numpy&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f2(10)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -627,7 +627,7 @@ f1(10)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f2(np.array([10,2,3]))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -640,7 +640,7 @@ f1(10)
 <p>the <em>lambdified</em> version is faster, and the vectorized one is even faster</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit sy.N(f.subs({x:10}))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> sy.N(f.subs({x:10}))
 </pre></div>
 </div>
 </div>
@@ -652,7 +652,7 @@ f1(10)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit f1(10)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> f1(10)
 </pre></div>
 </div>
 </div>
@@ -664,7 +664,7 @@ f1(10)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit [f1(i) for i in range(1000)]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> [f1(i) for i in range(1000)]
 </pre></div>
 </div>
 </div>
@@ -676,7 +676,7 @@ f1(10)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit f2(np.arange(1000))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> f2(np.arange(1000))
 </pre></div>
 </div>
 </div>
@@ -691,13 +691,13 @@ f1(10)
 <h2>Using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> to obtain the gradient for Linear Regression.<a class="headerlink" href="#using-sympy-to-obtain-the-gradient-for-linear-regression" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d = pd.read_csv(&quot;local/data/trilotropicos.csv&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;local/data/trilotropicos.csv&quot;</span><span class="p">)</span>
 
-y = d.densidad_escamas.values
-X = np.r_[[[1]*len(d), d.longitud.values]].T
+<span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="o">.</span><span class="n">values</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
 
-t0,t1 = sy.symbols(&quot;theta_0 theta_1&quot;)
-t0,t1
+<span class="n">t0</span><span class="p">,</span><span class="n">t1</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;theta_0 theta_1&quot;</span><span class="p">)</span>
+<span class="n">t0</span><span class="p">,</span><span class="n">t1</span>
 </pre></div>
 </div>
 </div>
@@ -710,11 +710,11 @@ t0,t1
 <p>we first obtain the cost expression for a few summation terms, so that we can print it out and understand it</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>expr = 0
-for i in range(10):
-    expr += (X[i,0]*t0+X[i,1]*t1-y[i])**2
-expr = expr/len(X)
-expr
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">expr</span> <span class="o">+=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">t0</span><span class="o">+</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">t1</span><span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">expr</span>
 </pre></div>
 </div>
 </div>
@@ -726,7 +726,7 @@ expr
 <p>find <code class="docutils literal notranslate"><span class="pre">X[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">y[0]</span></code> in the expression above, beware that you might get simplifications and reordering of the expression by <code class="docutils literal notranslate"><span class="pre">sympy</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y[:10]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -740,8 +740,8 @@ expr
 <p>we can now simplify the expression, using <code class="docutils literal notranslate"><span class="pre">sympy</span></code> mechanics</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>expr = expr.simplify()
-expr
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+<span class="n">expr</span>
 </pre></div>
 </div>
 </div>
@@ -753,23 +753,23 @@ expr
 <p>we now build the full expression</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def build_logisitic_regression_cost_expression(X,y):
-    expr_cost = 0
-    for i in range(len(X)):
-        expr_cost += (X[i,0]*t0+X[i,1]*t1-y[i])**2/len(X)
-    expr_cost = expr_cost.simplify()
-    return expr_cost
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_logisitic_regression_cost_expression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">expr_cost</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">expr_cost</span> <span class="o">+=</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">t0</span><span class="o">+</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">t1</span><span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">expr_cost</span> <span class="o">=</span> <span class="n">expr_cost</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">expr_cost</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y = d.densidad_escamas.values
-X = np.r_[[[1]*len(d), d.longitud.values]].T
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="o">.</span><span class="n">values</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
 
-expr_cost = build_logisitic_regression_cost_expression(X,y)
-expr_cost
+<span class="n">expr_cost</span> <span class="o">=</span> <span class="n">build_logisitic_regression_cost_expression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">expr_cost</span>
 </pre></div>
 </div>
 </div>
@@ -780,7 +780,7 @@ expr_cost
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%timeit build_logisitic_regression_cost_expression(X,y)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> build_logisitic_regression_cost_expression(X,y)
 </pre></div>
 </div>
 </div>
@@ -793,15 +793,15 @@ expr_cost
 <p>obtain derivatives symbolically</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>expr_dt0 = expr_cost.diff(t0)
-expr_dt1 = expr_cost.diff(t1)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr_dt0</span> <span class="o">=</span> <span class="n">expr_cost</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t0</span><span class="p">)</span>
+<span class="n">expr_dt1</span> <span class="o">=</span> <span class="n">expr_cost</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>expr_dt0
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr_dt0</span>
 </pre></div>
 </div>
 </div>
@@ -812,7 +812,7 @@ expr_dt1 = expr_cost.diff(t1)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>expr_dt1
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expr_dt1</span>
 </pre></div>
 </div>
 </div>
@@ -824,11 +824,11 @@ expr_dt1 = expr_cost.diff(t1)
 <p>and now we can minimize</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s_cost = sy.lambdify([[t0,t1]], expr_cost, &quot;numpy&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_cost</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([[</span><span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">]],</span> <span class="n">expr_cost</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
 
-d0 = sy.lambdify([[t0,t1]], expr_dt0, &quot;numpy&quot;)
-d1 = sy.lambdify([[t0,t1]], expr_dt1, &quot;numpy&quot;)
-s_grad = lambda x: np.array([d0(x), d1(x)])
+<span class="n">d0</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([[</span><span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">]],</span> <span class="n">expr_dt0</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="n">sy</span><span class="o">.</span><span class="n">lambdify</span><span class="p">([[</span><span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">]],</span> <span class="n">expr_dt1</span><span class="p">,</span> <span class="s2">&quot;numpy&quot;</span><span class="p">)</span>
+<span class="n">s_grad</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">d0</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">d1</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
 </pre></div>
 </div>
 </div>
@@ -836,8 +836,8 @@ s_grad = lambda x: np.array([d0(x), d1(x)])
 <p>and now we can minimize</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>r = minimize(s_cost, [0,0], jac=s_grad, method=&quot;BFGS&quot;)
-r
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">s_cost</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">jac</span><span class="o">=</span><span class="n">s_grad</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;BFGS&quot;</span><span class="p">)</span>
+<span class="n">r</span>
 </pre></div>
 </div>
 </div>
@@ -860,16 +860,16 @@ r
 <p>observe that hand derived functions and the ones obtained by <code class="docutils literal notranslate"><span class="pre">sympy</span></code> evaluate to the same values</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>t0 = np.random.random()*5+10
-t1 = np.random.random()*4-3
-t = np.r_[t0,t1]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">5</span><span class="o">+</span><span class="mi">10</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">4</span><span class="o">-</span><span class="mi">3</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">]</span>
 
-print (&quot;theta:&quot;,t)
-print (&quot;cost analytic:&quot;, n_cost(t))
-print (&quot;cost symbolic:&quot;, s_cost(t))
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;theta:&quot;</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;cost analytic:&quot;</span><span class="p">,</span> <span class="n">n_cost</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;cost symbolic:&quot;</span><span class="p">,</span> <span class="n">s_cost</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 
-print (&quot;gradient analytic:&quot;, n_grad(t))
-print (&quot;gradient symbolic:&quot;, s_grad(t))
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;gradient analytic:&quot;</span><span class="p">,</span> <span class="n">n_grad</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;gradient symbolic:&quot;</span><span class="p">,</span> <span class="n">s_grad</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>

@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -304,19 +304,19 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import matplotlib.pyplot as plt
-from scipy import stats
-from scipy.integrate import quad
-from progressbar import progressbar as pbar
-from rlxutils import subplots, copy_func
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
 
-import tensorflow as tf
-import tensorflow_probability as tfp
-tfd = tfp.distributions
-tfb = tfp.bijectors
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
 
-%matplotlib inline
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -333,34 +333,34 @@ X_i &amp;= \begin{cases} \text{Poisson}(2), &amp; \tau &gt; i/N \\ \text{Poisson
 \end{align*}\end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># real (and unknown) parameter
-real_tau = 0.8
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># real (and unknown) parameter</span>
+<span class="n">real_tau</span> <span class="o">=</span> <span class="mf">0.8</span>
 
-# possible range of values for tau
-tau_support = 0,1
+<span class="c1"># possible range of values for tau</span>
+<span class="n">tau_support</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>class TModel:
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TModel</span><span class="p">:</span>
         
-    poisson_A = stats.poisson(2)
-    poisson_B = stats.poisson(4)
+    <span class="n">poisson_A</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">poisson_B</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 
-    def __init__(self, tau):        
-        assert tau&gt;=0 and tau&lt;=1        
-        self.tau = tau
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>        
+        <span class="k">assert</span> <span class="n">tau</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">tau</span><span class="o">&lt;=</span><span class="mi">1</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="n">tau</span>
         
-    def rvs(self, n):
-        n1 = int(n*self.tau)        
-        r = list(self.poisson_A.rvs(n1)) + list(self.poisson_B.rvs(n - n1))
-        return r
+    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">n1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">)</span>        
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poisson_A</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n1</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poisson_B</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">n1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">r</span>
     
-    def logprob(self, x):
-        n = int(len(x)*self.tau)
-        return np.sum(np.log(self.poisson_A.pmf(x[:n]))) + np.sum(np.log(self.poisson_B.pmf(x[n:])))    
+    <span class="k">def</span> <span class="nf">logprob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poisson_A</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">])))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poisson_B</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:])))</span>    
          
 </pre></div>
 </div>
@@ -371,22 +371,21 @@ tau_support = 0,1
 <h1>Our observations<a class="headerlink" href="#our-observations" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = TModel(tau=real_tau).rvs(30)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">TModel</span><span class="p">(</span><span class="n">tau</span><span class="o">=</span><span class="n">real_tau</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 
-# use this small sample for comparisons with other notebooks
-x = [3, 3, 2, 3, 1, 1, 1, 1, 0, 1, 0, 2, 0, 2, 3, 2, 0, 3, 2, 2, 2, 2, 2, 1, 1, 5, 6, 2, 3, 4]
-
+<span class="c1"># use this small sample for comparisons with other notebooks</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(10,3))
-plt.scatter(np.arange(len(x))/len(x), x)
-plt.axvline((real_tau*len(x)+.5)/len(x), ls=&quot;--&quot;, color=&quot;black&quot;, label=r&quot;the real (unknown) $\tau$&quot;)
-plt.grid(); plt.legend();
-plt.xlabel(r&quot;$\tau$&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">((</span><span class="n">real_tau</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">.5</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;the real (unknown) $\tau$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\tau$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -409,77 +408,77 @@ plt.xlabel(r&quot;$\tau$&quot;)
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># wrap the mcmc sampling call in a @tf.function to speed it up
-@tf.function(autograph=False)
-def graph_sample_chain(*args, **kwargs):
-  return tfp.mcmc.sample_chain(*args, **kwargs)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wrap the mcmc sampling call in a @tf.function to speed it up</span>
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">autograph</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">graph_sample_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">sample_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-def sample(x):
-    num_burnin_steps = 5000
-    num_results = 20000
+<span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">num_burnin_steps</span> <span class="o">=</span> <span class="mi">5000</span>
+    <span class="n">num_results</span> <span class="o">=</span> <span class="mi">20000</span>
     
-    # -------------------------------------------------------
-    #  our model definitions
-    # -------------------------------------------------------    
-    def log_likelihood(x, tau):
-        lambda_A, lambda_B = 2., 4.
+    <span class="c1"># -------------------------------------------------------</span>
+    <span class="c1">#  our model definitions</span>
+    <span class="c1"># -------------------------------------------------------    </span>
+    <span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+        <span class="n">lambda_A</span><span class="p">,</span> <span class="n">lambda_B</span> <span class="o">=</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">4.</span>
 
-        n = tf.size(x)
-        n1 = tf.cast(tf.cast(n, tf.float32)*tau, tf.int32)
+        <span class="n">n</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">n1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">*</span><span class="n">tau</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
 
-        lambdas = tf.concat([tf.ones(n1)*lambda_A, tf.ones(n-n1)*lambda_B], 0)
+        <span class="n">lambdas</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span><span class="o">*</span><span class="n">lambda_A</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">n1</span><span class="p">)</span><span class="o">*</span><span class="n">lambda_B</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
 
-        return tf.reduce_sum(tfd.Poisson(rate=lambdas).log_prob(x))
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="n">lambdas</span><span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
-    def log_prior(tau):
-        return tfd.Uniform().log_prob(tau)
+    <span class="k">def</span> <span class="nf">log_prior</span><span class="p">(</span><span class="n">tau</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Uniform</span><span class="p">()</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
 
-    # -------------------------------------------------------
-    # -------------------------------------------------------
+    <span class="c1"># -------------------------------------------------------</span>
+    <span class="c1"># -------------------------------------------------------</span>
     
     
-    unnormalized_log_posterior = lambda tau: log_likelihood(x, tau) + log_prior(tau)    
+    <span class="n">unnormalized_log_posterior</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tau</span><span class="p">:</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>    
 
 
-    # Set the chain&#39;s start state.
-    initial_chain_state = [
-        0.5 * tf.ones([], dtype=tf.float32, name=&quot;init_tau&quot;),
-    ]
+    <span class="c1"># Set the chain&#39;s start state.</span>
+    <span class="n">initial_chain_state</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;init_tau&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
 
-    # Since HMC operates over unconstrained space, we need to transform the
-    # samples so they live in real-space.
-    unconstraining_bijectors = [
-        tfp.bijectors.Sigmoid(),   # Maps [0,1] to R.  
-    ]
+    <span class="c1"># Since HMC operates over unconstrained space, we need to transform the</span>
+    <span class="c1"># samples so they live in real-space.</span>
+    <span class="n">unconstraining_bijectors</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>   <span class="c1"># Maps [0,1] to R.  </span>
+    <span class="p">]</span>
 
-    step_size = 0.2
+    <span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.2</span>
 
-    kernel=tfp.mcmc.TransformedTransitionKernel(
-            inner_kernel=tfp.mcmc.HamiltonianMonteCarlo(
-                target_log_prob_fn=unnormalized_log_posterior,
-                num_leapfrog_steps=2,
-                step_size=step_size,
-                state_gradients_are_stopped=True),
-            bijector=unconstraining_bijectors)
+    <span class="n">kernel</span><span class="o">=</span><span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">TransformedTransitionKernel</span><span class="p">(</span>
+            <span class="n">inner_kernel</span><span class="o">=</span><span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">HamiltonianMonteCarlo</span><span class="p">(</span>
+                <span class="n">target_log_prob_fn</span><span class="o">=</span><span class="n">unnormalized_log_posterior</span><span class="p">,</span>
+                <span class="n">num_leapfrog_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span>
+                <span class="n">state_gradients_are_stopped</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">bijector</span><span class="o">=</span><span class="n">unconstraining_bijectors</span><span class="p">)</span>
 
-    # Sample from the chain.
-    [
-        posterior_tau
-    ], kernel_results = graph_sample_chain(
-        num_results=num_results,
-        num_burnin_steps=num_burnin_steps,
-        current_state=initial_chain_state,
-        kernel = kernel)
+    <span class="c1"># Sample from the chain.</span>
+    <span class="p">[</span>
+        <span class="n">posterior_tau</span>
+    <span class="p">],</span> <span class="n">kernel_results</span> <span class="o">=</span> <span class="n">graph_sample_chain</span><span class="p">(</span>
+        <span class="n">num_results</span><span class="o">=</span><span class="n">num_results</span><span class="p">,</span>
+        <span class="n">num_burnin_steps</span><span class="o">=</span><span class="n">num_burnin_steps</span><span class="p">,</span>
+        <span class="n">current_state</span><span class="o">=</span><span class="n">initial_chain_state</span><span class="p">,</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">)</span>
 
-    return posterior_tau
+    <span class="k">return</span> <span class="n">posterior_tau</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>posterior_tau = sample(x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">posterior_tau</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -509,12 +508,12 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.hist(posterior_tau.numpy(), density=True, bins=50, alpha=1.);
-plt.axvline(real_tau, color=&quot;black&quot;, label=r&quot;real (unknown) $\tau$&quot;, alpha=.5, ls=&quot;--&quot;)
-plt.title(&quot;mcmc samples histogram&quot;)
-plt.grid(); plt.legend();
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">posterior_tau</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">real_tau</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;real (unknown) $\tau$&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;mcmc samples histogram&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 
-plt.xlim(0,1)
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -530,23 +529,23 @@ plt.xlim(0,1)
 <h1>With a larger dataset<a class="headerlink" href="#with-a-larger-dataset" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = TModel(tau=real_tau).rvs(200)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">TModel</span><span class="p">(</span><span class="n">tau</span><span class="o">=</span><span class="n">real_tau</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
-# use this large sample for comparisons with other notebooks
-x = [3, 2, 3, 2, 2, 1, 2, 1, 0, 6, 0, 2, 0, 1, 3, 1, 2, 2, 2, 4, 6, 2, 3, 4, 1, 6, 
-     1, 3, 2, 2, 0, 2, 0, 1, 1, 1, 2, 2, 1, 4, 0, 3, 2, 5, 4, 1, 4, 2, 1, 0, 2, 2,
-     2, 3, 2, 3, 0, 0, 0, 5, 0, 2, 1, 0, 0, 3, 0, 0, 1, 4, 2, 2, 4, 3, 1, 2, 3, 3, 
-     3, 1, 1, 2, 3, 4, 4, 4, 5, 1, 4, 3, 4, 1, 1, 1, 2, 0, 0, 1, 2, 2, 2, 0, 4, 1, 
-     2, 3, 0, 3, 2, 1, 0, 4, 2, 3, 5, 3, 1, 3, 2, 0, 2, 2, 1, 0, 3, 1, 2, 5, 3, 3, 
-     5, 2, 2, 3, 2, 3, 3, 2, 1, 1, 0, 4, 1, 1, 1, 1, 1, 1, 1, 4, 0, 3, 3, 0, 5, 2, 
-     3, 2, 1, 1, 5, 3, 2, 4, 5, 4, 5, 6, 6, 2, 5, 5, 4, 3, 3, 6, 8, 6, 3, 5, 7, 5, 
-     6, 3, 6, 1, 7, 8, 6, 2, 1, 6, 5, 2, 6, 5, 5, 3, 4, 5]
+<span class="c1"># use this large sample for comparisons with other notebooks</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> 
+     <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+     <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> 
+     <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> 
+     <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> 
+     <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> 
+     <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> 
+     <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 
-plt.figure(figsize=(10,3))
-plt.scatter(np.arange(len(x))/len(x), x)
-plt.axvline((real_tau*len(x)+.5)/len(x), ls=&quot;--&quot;, color=&quot;black&quot;, label=r&quot;the real (unknown) $\tau$&quot;)
-plt.grid(); plt.legend();
-plt.xlabel(r&quot;$\tau$&quot;)
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">((</span><span class="n">real_tau</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">.5</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;the real (unknown) $\tau$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\tau$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -559,7 +558,7 @@ plt.xlabel(r&quot;$\tau$&quot;)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>posterior_tau = sample(x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">posterior_tau</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -572,12 +571,12 @@ plt.xlabel(r&quot;$\tau$&quot;)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.hist(posterior_tau.numpy(), density=True, bins=10, alpha=1.);
-plt.axvline(real_tau, color=&quot;black&quot;, label=r&quot;real (unknown) $\tau$&quot;, alpha=.5, ls=&quot;--&quot;)
-plt.title(&quot;mcmc samples histogram&quot;)
-plt.grid(); plt.legend();
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">posterior_tau</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">real_tau</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;real (unknown) $\tau$&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;mcmc samples histogram&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 
-plt.xlim(0,1)
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

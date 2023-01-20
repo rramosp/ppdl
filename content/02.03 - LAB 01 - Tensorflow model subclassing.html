@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -324,10 +324,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
-!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
-!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
-!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
+<span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rramosp/ppdl.git<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>mv<span class="w"> </span>-n<span class="w"> </span>ppdl/content/init.py<span class="w"> </span>ppdl/content/local<span class="w"> </span>.<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>ppdl/content/requirements.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
 </div>
@@ -336,26 +336,26 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>LAB 3.1 - TF model subclassing<a class="headerlink" href="#lab-3-1-tf-model-subclassing" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from local.lib.rlxmoocapi import submit, session
-import inspect
-session.LoginSequence(endpoint=init.endpoint, course_id=init.course_id, lab_id=&quot;L03.01&quot;, varname=&quot;student&quot;);
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">local.lib.rlxmoocapi</span> <span class="kn">import</span> <span class="n">submit</span><span class="p">,</span> <span class="n">session</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="n">session</span><span class="o">.</span><span class="n">LoginSequence</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="n">init</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">course_id</span><span class="o">=</span><span class="n">init</span><span class="o">.</span><span class="n">course_id</span><span class="p">,</span> <span class="n">lab_id</span><span class="o">=</span><span class="s2">&quot;L03.01&quot;</span><span class="p">,</span> <span class="n">varname</span><span class="o">=</span><span class="s2">&quot;student&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import os
-os.environ[&#39;TF_CPP_MIN_LOG_LEVEL&#39;] = &#39;3&#39; 
-import tensorflow as tf
-import matplotlib.pyplot as plt
-%matplotlib inline
-%load_ext tensorboard
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TF_CPP_MIN_LOG_LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;3&#39;</span> 
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">load_ext</span> tensorboard
 
-from sklearn.datasets import *
-from local.lib import mlutils
-tf.__version__
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">local.lib</span> <span class="kn">import</span> <span class="n">mlutils</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
 </div>
@@ -397,38 +397,38 @@ b shapes [TensorShape([10]), TensorShape([5]), TensorShape([1])]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def MLP(neurons, activations, reg=0.):
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MLP</span><span class="p">(</span><span class="n">neurons</span><span class="p">,</span> <span class="n">activations</span><span class="p">,</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
 
-    from tensorflow.keras import Model
-    from tensorflow.keras.activations import relu, sigmoid, tanh, linear
-    import numpy as np
-    import tensorflow as tf    
+    <span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">Model</span>
+    <span class="kn">from</span> <span class="nn">tensorflow.keras.activations</span> <span class="kn">import</span> <span class="n">relu</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">,</span> <span class="n">tanh</span><span class="p">,</span> <span class="n">linear</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>    
 
-    class MLP_class(Model):
-        def __init__(self, neurons, activations, reg=0.):
-            super().__init__()
-            self.activation_map = {&quot;linear&quot;: linear, &quot;relu&quot;: relu, &quot;tanh&quot;:tanh, &quot;sigmoid&quot;: sigmoid}
+    <span class="k">class</span> <span class="nc">MLP_class</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neurons</span><span class="p">,</span> <span class="n">activations</span><span class="p">,</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation_map</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;linear&quot;</span><span class="p">:</span> <span class="n">linear</span><span class="p">,</span> <span class="s2">&quot;relu&quot;</span><span class="p">:</span> <span class="n">relu</span><span class="p">,</span> <span class="s2">&quot;tanh&quot;</span><span class="p">:</span><span class="n">tanh</span><span class="p">,</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">:</span> <span class="n">sigmoid</span><span class="p">}</span>
             
-            assert len(neurons)==len(activations), \
-                        &quot;must have the same number of neurons and activations&quot;
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">neurons</span><span class="p">)</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">activations</span><span class="p">),</span> \
+                        <span class="s2">&quot;must have the same number of neurons and activations&quot;</span>
                 
-            assert np.alltrue([i in self.activation_map.keys() for i in activations]), \
-                                &quot;activation string not recognized&quot;
+            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">alltrue</span><span class="p">([</span><span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_map</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">activations</span><span class="p">]),</span> \
+                                <span class="s2">&quot;activation string not recognized&quot;</span>
             
-            self.neurons = neurons
-            self.reg = reg
-            self.activations = [self.activation_map[i] for i in activations]
+            <span class="bp">self</span><span class="o">.</span><span class="n">neurons</span> <span class="o">=</span> <span class="n">neurons</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reg</span> <span class="o">=</span> <span class="n">reg</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activations</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">activation_map</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">activations</span><span class="p">]</span>
 
-            super().__init__()
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-        def build(self, input_shape):
-            self.W = []
-            self.b = []
+        <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
 
-            ... # YOUR CODE HERE
+            <span class="o">...</span> <span class="c1"># YOUR CODE HERE</span>
 
             
-    return MLP_class(neurons, activations, reg)
+    <span class="k">return</span> <span class="n">MLP_class</span><span class="p">(</span><span class="n">neurons</span><span class="p">,</span> <span class="n">activations</span><span class="p">,</span> <span class="n">reg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -436,10 +436,10 @@ b shapes [TensorShape([10]), TensorShape([5]), TensorShape([1])]
 <p>test manually your code</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mlp = MLP(neurons=[10,5,1], activations=[&quot;tanh&quot;,&quot;tanh&quot;, &quot;sigmoid&quot;])
-mlp.build([None, 2])
-print (&quot;W shapes&quot;, [i.shape for i in mlp.W])
-print (&quot;b shapes&quot;, [i.shape for i in mlp.b])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="n">neurons</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">activations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tanh&quot;</span><span class="p">,</span><span class="s2">&quot;tanh&quot;</span><span class="p">,</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">])</span>
+<span class="n">mlp</span><span class="o">.</span><span class="n">build</span><span class="p">([</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;W shapes&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mlp</span><span class="o">.</span><span class="n">W</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;b shapes&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">shape</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mlp</span><span class="o">.</span><span class="n">b</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -447,7 +447,7 @@ print (&quot;b shapes&quot;, [i.shape for i in mlp.b])
 <p><strong>Registra tu solución en linea</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&#39;T1&#39;);
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;T1&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -461,40 +461,40 @@ print (&quot;b shapes&quot;, [i.shape for i in mlp.b])
 <p>as described above. Use <code class="docutils literal notranslate"><span class="pre">self.W</span></code>, <code class="docutils literal notranslate"><span class="pre">self.b</span></code> and <code class="docutils literal notranslate"><span class="pre">self.activations</span></code> as constructed previously on the <code class="docutils literal notranslate"><span class="pre">build</span></code> and <code class="docutils literal notranslate"><span class="pre">__init__</span></code> methods.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def MLP2(neurons, activations, reg=0.):
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MLP2</span><span class="p">(</span><span class="n">neurons</span><span class="p">,</span> <span class="n">activations</span><span class="p">,</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
     
-    from tensorflow.keras import Model
-    from tensorflow.keras.activations import relu, sigmoid, tanh, linear   
+    <span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">Model</span>
+    <span class="kn">from</span> <span class="nn">tensorflow.keras.activations</span> <span class="kn">import</span> <span class="n">relu</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">,</span> <span class="n">tanh</span><span class="p">,</span> <span class="n">linear</span>   
 
-    class MLP_class(Model):
-        def __init__(self, neurons, activations, reg=0.):
-            super().__init__()
-            self.activation_map = {&quot;linear&quot;: linear, &quot;relu&quot;: relu, &quot;tanh&quot;:tanh, &quot;sigmoid&quot;: sigmoid}
+    <span class="k">class</span> <span class="nc">MLP_class</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neurons</span><span class="p">,</span> <span class="n">activations</span><span class="p">,</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation_map</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;linear&quot;</span><span class="p">:</span> <span class="n">linear</span><span class="p">,</span> <span class="s2">&quot;relu&quot;</span><span class="p">:</span> <span class="n">relu</span><span class="p">,</span> <span class="s2">&quot;tanh&quot;</span><span class="p">:</span><span class="n">tanh</span><span class="p">,</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">:</span> <span class="n">sigmoid</span><span class="p">}</span>
             
-            assert len(neurons)==len(activations), \
-                        &quot;must have the same number of neurons and activations&quot;
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">neurons</span><span class="p">)</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">activations</span><span class="p">),</span> \
+                        <span class="s2">&quot;must have the same number of neurons and activations&quot;</span>
                 
-            assert np.alltrue([i in self.activation_map.keys() for i in activations]), \
-                                &quot;activation string not recognized&quot;
+            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">alltrue</span><span class="p">([</span><span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_map</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">activations</span><span class="p">]),</span> \
+                                <span class="s2">&quot;activation string not recognized&quot;</span>
             
-            self.neurons = neurons
-            self.reg = reg
-            self.activations = [self.activation_map[i] for i in activations]
+            <span class="bp">self</span><span class="o">.</span><span class="n">neurons</span> <span class="o">=</span> <span class="n">neurons</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reg</span> <span class="o">=</span> <span class="n">reg</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activations</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">activation_map</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">activations</span><span class="p">]</span>
 
-            super().__init__()
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-        def build(self, input_shape):
-            self.W = []
-            self.b = []
+        <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
 
-            ... # YOUR CODE HERE (copy from previous task )
+            <span class="o">...</span> <span class="c1"># YOUR CODE HERE (copy from previous task )</span>
             
-        @tf.function
-        def call(self, X):
-            a = ... # YOUR CODE HERE
-            return s
+        <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+        <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># YOUR CODE HERE</span>
+            <span class="k">return</span> <span class="n">s</span>
         
-    return MLP_class(neurons, activations, reg)
+    <span class="k">return</span> <span class="n">MLP_class</span><span class="p">(</span><span class="n">neurons</span><span class="p">,</span> <span class="n">activations</span><span class="p">,</span> <span class="n">reg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -502,20 +502,20 @@ print (&quot;b shapes&quot;, [i.shape for i in mlp.b])
 <p>test manually your code, the following two cells must return the same value everytime you execute them. Observe your MLP will initialize to different random weights each time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>X = np.random.random(size=(4,2))
-neurons = [3,2]
-mlp = MLP2(neurons=[3,2], activations=[&quot;linear&quot;, &quot;sigmoid&quot;])
-mlp(X)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">neurons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">mlp</span> <span class="o">=</span> <span class="n">MLP2</span><span class="p">(</span><span class="n">neurons</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">activations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">])</span>
+<span class="n">mlp</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sigm = lambda x: 1/(1+np.exp(-x))
-W = [i.numpy() for i in mlp.W]
-b = [i.numpy() for i in mlp.b]
-sigm((X.dot(W[0])+b[0]).dot(W[1])+b[1])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+<span class="n">W</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mlp</span><span class="o">.</span><span class="n">W</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mlp</span><span class="o">.</span><span class="n">b</span><span class="p">]</span>
+<span class="n">sigm</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -523,7 +523,7 @@ sigm((X.dot(W[0])+b[0]).dot(W[1])+b[1])
 <p><strong>Registra tu solución en linea</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&#39;T2&#39;);
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;T2&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -538,46 +538,46 @@ sigm((X.dot(W[0])+b[0]).dot(W[1])+b[1])
 <p>For any weight or bias <span class="math notranslate nohighlight">\(\mathbf{k}\)</span>, the expression <span class="math notranslate nohighlight">\(\| \mathbf{k}\|^2_{mean}\)</span> is the mean of all its elements squared.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def MLP3(neurons, activations, reg=0.):
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MLP3</span><span class="p">(</span><span class="n">neurons</span><span class="p">,</span> <span class="n">activations</span><span class="p">,</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
     
-    from tensorflow.keras import Model
-    from tensorflow.keras.activations import relu, sigmoid, tanh, linear   
+    <span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">Model</span>
+    <span class="kn">from</span> <span class="nn">tensorflow.keras.activations</span> <span class="kn">import</span> <span class="n">relu</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">,</span> <span class="n">tanh</span><span class="p">,</span> <span class="n">linear</span>   
 
-    class MLP_class(Model):
-        def __init__(self, neurons, activations, reg=0.):
-            super().__init__()
-            self.activation_map = {&quot;linear&quot;: linear, &quot;relu&quot;: relu, &quot;tanh&quot;:tanh, &quot;sigmoid&quot;: sigmoid}
+    <span class="k">class</span> <span class="nc">MLP_class</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">neurons</span><span class="p">,</span> <span class="n">activations</span><span class="p">,</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activation_map</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;linear&quot;</span><span class="p">:</span> <span class="n">linear</span><span class="p">,</span> <span class="s2">&quot;relu&quot;</span><span class="p">:</span> <span class="n">relu</span><span class="p">,</span> <span class="s2">&quot;tanh&quot;</span><span class="p">:</span><span class="n">tanh</span><span class="p">,</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">:</span> <span class="n">sigmoid</span><span class="p">}</span>
             
-            assert len(neurons)==len(activations), \
-                        &quot;must have the same number of neurons and activations&quot;
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">neurons</span><span class="p">)</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">activations</span><span class="p">),</span> \
+                        <span class="s2">&quot;must have the same number of neurons and activations&quot;</span>
                 
-            assert np.alltrue([i in self.activation_map.keys() for i in activations]), \
-                                &quot;activation string not recognized&quot;
+            <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">alltrue</span><span class="p">([</span><span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_map</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">activations</span><span class="p">]),</span> \
+                                <span class="s2">&quot;activation string not recognized&quot;</span>
             
-            self.neurons = neurons
-            self.reg = reg
-            self.activations = [self.activation_map[i] for i in activations]
+            <span class="bp">self</span><span class="o">.</span><span class="n">neurons</span> <span class="o">=</span> <span class="n">neurons</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reg</span> <span class="o">=</span> <span class="n">reg</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">activations</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">activation_map</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">activations</span><span class="p">]</span>
 
-            super().__init__()
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-        def build(self, input_shape):
-            self.W = []
-            self.b = []
+        <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
 
-            ... # YOUR CODE HERE (copy from previous task)
+            <span class="o">...</span> <span class="c1"># YOUR CODE HERE (copy from previous task)</span>
             
-        @tf.function
-        def call(self, X):
-            a = ... # YOUR CODE HERE (copy from previous task)
-            return s
+        <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+        <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># YOUR CODE HERE (copy from previous task)</span>
+            <span class="k">return</span> <span class="n">s</span>
 
         
-        @tf.function
-        def loss(self, y_true, y_pred):
-            r = ... # YOUR CODE HERE
-            return ...
+        <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+        <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># YOUR CODE HERE</span>
+            <span class="k">return</span> <span class="o">...</span>
         
-    return MLP_class(neurons, activations, reg)
+    <span class="k">return</span> <span class="n">MLP_class</span><span class="p">(</span><span class="n">neurons</span><span class="p">,</span> <span class="n">activations</span><span class="p">,</span> <span class="n">reg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -585,22 +585,22 @@ sigm((X.dot(W[0])+b[0]).dot(W[1])+b[1])
 <p>test manually your code, the following two cells must return the same value everytime you execute them. Observe your MLP will initialize to different random weights each time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>X = np.random.random(size=(4,2)).astype(np.float32)
-y_true = np.random.randint(2, size=(len(X),1)).astype(np.float32)
-neurons = [3,2]
-mlp = MLP3(neurons=[3,1], activations=[&quot;linear&quot;, &quot;sigmoid&quot;], reg=0.2)
-mlp.loss(mlp(X), y_true).numpy()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">neurons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">mlp</span> <span class="o">=</span> <span class="n">MLP3</span><span class="p">(</span><span class="n">neurons</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">activations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">],</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">mlp</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">mlp</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">y_true</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sigm = lambda x: 1/(1+np.exp(-x))
-W = [i.numpy() for i in mlp.W]
-b = [i.numpy() for i in mlp.b]
-y_pred = sigm((X.dot(W[0])+b[0]).dot(W[1])+b[1])
-((y_pred-y_true)**2).mean() + mlp.reg * np.sum([(i**2).numpy().mean() for i in mlp.W+mlp.b])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+<span class="n">W</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mlp</span><span class="o">.</span><span class="n">W</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mlp</span><span class="o">.</span><span class="n">b</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">sigm</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="p">((</span><span class="n">y_pred</span><span class="o">-</span><span class="n">y_true</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">mlp</span><span class="o">.</span><span class="n">reg</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mlp</span><span class="o">.</span><span class="n">W</span><span class="o">+</span><span class="n">mlp</span><span class="o">.</span><span class="n">b</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -608,7 +608,7 @@ y_pred = sigm((X.dot(W[0])+b[0]).dot(W[1])+b[1])
 <p><strong>Registra tu solución en linea</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&#39;T3&#39;);
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;T3&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -619,10 +619,10 @@ y_pred = sigm((X.dot(W[0])+b[0]).dot(W[1])+b[1])
 <p>now you can try your class with synthetic data</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>X, y = make_moons(200, noise=.35)
-X, y = X.astype(np.float32), y.astype(np.float32).reshape(-1,1)
-plt.scatter(X[:,0][y[:,0]==0], X[:,1][y[:,0]==0], color=&quot;red&quot;, label=&quot;class 0&quot;)
-plt.scatter(X[:,0][y[:,0]==1], X[:,1][y[:,0]==1], color=&quot;blue&quot;, label=&quot;class 1&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">.35</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;class 0&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;class 1&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -630,19 +630,19 @@ plt.scatter(X[:,0][y[:,0]==1], X[:,1][y[:,0]==1], color=&quot;blue&quot;, label=
 <p>create MLP and train!!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mlp = MLP(neurons=[10,1], activations=[&quot;tanh&quot;,&quot;sigmoid&quot;], reg=0.)
-mlp.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.1), loss=mlp.loss,
-           metrics=[tf.keras.metrics.mae, tf.keras.metrics.binary_accuracy])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="n">neurons</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">activations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tanh&quot;</span><span class="p">,</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">],</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+<span class="n">mlp</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="n">mlp</span><span class="o">.</span><span class="n">loss</span><span class="p">,</span>
+           <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mae</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">binary_accuracy</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!rm -rf logs
-tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=&quot;logs/no_regularization&quot;)
-mlp.fit(X,y, epochs=400, batch_size=16, verbose=0, 
-        callbacks=[tensorboard_callback])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>rm<span class="w"> </span>-rf<span class="w"> </span>logs
+<span class="n">tensorboard_callback</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">TensorBoard</span><span class="p">(</span><span class="n">log_dir</span><span class="o">=</span><span class="s2">&quot;logs/no_regularization&quot;</span><span class="p">)</span>
+<span class="n">mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+        <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">tensorboard_callback</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -650,9 +650,9 @@ mlp.fit(X,y, epochs=400, batch_size=16, verbose=0,
 <p>observe the accuracy and classification frontier</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>predict = lambda X: (mlp.predict(X)[:,0]&gt;0.5).astype(int)
-mlutils.plot_2Ddata_with_boundary(predict, X, y.reshape(-1));
-plt.title(&quot;accuracy %.2f&quot;%np.mean(predict(X)==y.reshape(-1)));
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predict</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="p">(</span><span class="n">mlp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">mlutils</span><span class="o">.</span><span class="n">plot_2Ddata_with_boundary</span><span class="p">(</span><span class="n">predict</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;accuracy </span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">np</span>.mean(predict(X)==y.reshape(-1)));
 </pre></div>
 </div>
 </div>
@@ -660,15 +660,15 @@ plt.title(&quot;accuracy %.2f&quot;%np.mean(predict(X)==y.reshape(-1)));
 <p>regularization must work!!!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=&quot;logs/with_regularization&quot;)
-mlp = MLP(neurons=[10,1], activations=[&quot;tanh&quot;,&quot;sigmoid&quot;], reg=0.005)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tensorboard_callback</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">TensorBoard</span><span class="p">(</span><span class="n">log_dir</span><span class="o">=</span><span class="s2">&quot;logs/with_regularization&quot;</span><span class="p">)</span>
+<span class="n">mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="n">neurons</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">activations</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;tanh&quot;</span><span class="p">,</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">],</span> <span class="n">reg</span><span class="o">=</span><span class="mf">0.005</span><span class="p">)</span>
 
-mlp.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.1), loss=mlp.loss,
-           metrics=[tf.keras.metrics.mae, tf.keras.metrics.binary_accuracy])
+<span class="n">mlp</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="n">mlp</span><span class="o">.</span><span class="n">loss</span><span class="p">,</span>
+           <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">mae</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">binary_accuracy</span><span class="p">])</span>
 
-mlp.fit(X,y, epochs=400, batch_size=10, verbose=0, callbacks=[tensorboard_callback])
-mlutils.plot_2Ddata_with_boundary(predict, X, y.reshape(-1))
-plt.title(&quot;accuracy %.2f&quot;%np.mean(predict(X)==y.reshape(-1)));
+<span class="n">mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">tensorboard_callback</span><span class="p">])</span>
+<span class="n">mlutils</span><span class="o">.</span><span class="n">plot_2Ddata_with_boundary</span><span class="p">(</span><span class="n">predict</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;accuracy </span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="o">%</span><span class="k">np</span>.mean(predict(X)==y.reshape(-1)));
 </pre></div>
 </div>
 </div>
@@ -676,8 +676,8 @@ plt.title(&quot;accuracy %.2f&quot;%np.mean(predict(X)==y.reshape(-1)));
 <p>and inspect tensorboard</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%load_ext tensorboard
-%tensorboard --logdir logs
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> tensorboard
+<span class="o">%</span><span class="k">tensorboard</span> --logdir logs
 </pre></div>
 </div>
 </div>

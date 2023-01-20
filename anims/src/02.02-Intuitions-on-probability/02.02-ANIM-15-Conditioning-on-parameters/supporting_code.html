@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -262,28 +262,28 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import matplotlib.pyplot as plt
-from scipy import stats
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>w = np.linspace(0,1,100)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 
-l_mean = 2+(w)**2
-l_std  = .1+.5*w
+<span class="n">l_mean</span> <span class="o">=</span> <span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">l_std</span>  <span class="o">=</span> <span class="mf">.1</span><span class="o">+</span><span class="mf">.5</span><span class="o">*</span><span class="n">w</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.plot(w, l_mean)
-plt.plot(w, l_mean + l_std, color=&quot;black&quot;)
-plt.plot(w, l_mean - l_std, color=&quot;black&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">l_mean</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">l_mean</span> <span class="o">+</span> <span class="n">l_std</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">l_mean</span> <span class="o">-</span> <span class="n">l_std</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -296,12 +296,12 @@ plt.plot(w, l_mean - l_std, color=&quot;black&quot;)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p_l_given_w = lambda w: stats.norm(loc=2+w**2, scale=.1+w/2).pdf
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_l_given_w</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">.1</span><span class="o">+</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span>
 
-lr = np.linspace(1,4,100)
+<span class="n">lr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 
-plt.plot(lr, p_l_given_w(w=.3)(lr))
-plt.plot(lr, p_l_given_w(w=.8)(lr))
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">p_l_given_w</span><span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="mf">.3</span><span class="p">)(</span><span class="n">lr</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">p_l_given_w</span><span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="mf">.8</span><span class="p">)(</span><span class="n">lr</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -314,16 +314,16 @@ plt.plot(lr, p_l_given_w(w=.8)(lr))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>n = 10000
-w = np.random.random(n)
-l = [stats.norm(loc=2+wi**2, scale=.1+wi/2).rvs(1) for wi in w]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="n">wi</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">.1</span><span class="o">+</span><span class="n">wi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">wi</span> <span class="ow">in</span> <span class="n">w</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.scatter(w,l, alpha=.2, s=10)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">l</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -336,20 +336,20 @@ l = [stats.norm(loc=2+wi**2, scale=.1+wi/2).rvs(1) for wi in w]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p_w = lambda w: 1.
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_w</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="mf">1.</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.integrate import quad, dblquad
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span><span class="p">,</span> <span class="n">dblquad</span>
 
-p_w = lambda w: 1.
-p_conditional = lambda l,w: stats.norm(loc=2+w**2, scale=.1+w/2).pdf(l)
-p_lw = np.vectorize(lambda l,w: p_l_given_w(l,w)*p_w(w))
+<span class="n">p_w</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="mf">1.</span>
+<span class="n">p_conditional</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">.1</span><span class="o">+</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="n">p_lw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">:</span> <span class="n">p_l_given_w</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">)</span><span class="o">*</span><span class="n">p_w</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
 
-dblquad(p_lw, 0, 1, lambda w: 0, lambda l: 5)
+<span class="n">dblquad</span><span class="p">(</span><span class="n">p_lw</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -361,17 +361,17 @@ dblquad(p_lw, 0, 1, lambda w: 0, lambda l: 5)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p_w = lambda w: stats.norm(loc=.5,scale=.2).pdf(w)
-p_w = lambda w: stats.beta(3,2).pdf(w)
-p_conditional = np.vectorize(lambda l,w: stats.norm(loc=2+w**2, scale=.1+w/2).pdf(l))
-p_lw = np.vectorize(lambda l,w: p_conditional(l,w)*p_w(w))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_w</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="n">p_w</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="n">p_conditional</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">:</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">.1</span><span class="o">+</span><span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+<span class="n">p_lw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">:</span> <span class="n">p_conditional</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">)</span><span class="o">*</span><span class="n">p_w</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dblquad(p_lw, 0, 1, lambda w: 0, lambda l: 5)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dblquad</span><span class="p">(</span><span class="n">p_lw</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -383,7 +383,7 @@ p_lw = np.vectorize(lambda l,w: p_conditional(l,w)*p_w(w))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p_conditional(0.3, 0.5)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_conditional</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -395,10 +395,10 @@ p_lw = np.vectorize(lambda l,w: p_conditional(l,w)*p_w(w))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p_l = np.vectorize(lambda l: quad(lambda w: p_lw(l,w), 0,1)[0])
-p_ww = np.vectorize(lambda w: quad(lambda l: p_lw(l,w), 0,5)[0])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">p_ww</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 
-#quad(p_l, 0,5)
+<span class="c1">#quad(p_l, 0,5)</span>
                    
 </pre></div>
 </div>
@@ -406,7 +406,7 @@ p_ww = np.vectorize(lambda w: quad(lambda l: p_lw(l,w), 0,5)[0])
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p_l([2,3])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p_l</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -418,8 +418,8 @@ p_ww = np.vectorize(lambda w: quad(lambda l: p_lw(l,w), 0,5)[0])
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>lr = np.linspace(0,5,100)
-plt.plot(lr,p_l(lr))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span><span class="n">p_l</span><span class="p">(</span><span class="n">lr</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -432,8 +432,8 @@ plt.plot(lr,p_l(lr))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>wr = np.linspace(0,1,100)
-plt.plot(wr,p_ww(wr))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wr</span><span class="p">,</span><span class="n">p_ww</span><span class="p">(</span><span class="n">wr</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -446,8 +446,8 @@ plt.plot(wr,p_ww(wr))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>wr = np.linspace(0,1,100)
-plt.plot(wr,p_w(wr))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wr</span><span class="p">,</span><span class="n">p_w</span><span class="p">(</span><span class="n">wr</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -460,27 +460,27 @@ plt.plot(wr,p_w(wr))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>lr = np.linspace(0,5,20)
-wr = np.linspace(0,1,20)
-L,W = np.meshgrid(lr,wr)
-Z = p_lw(L,W)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">L</span><span class="p">,</span><span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span><span class="n">wr</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">W</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib
-matplotlib.rcParams.update({&#39;font.size&#39;: 18})
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>a = 1.23
-s = &quot;a&#39;s value is {a:.1f}&quot;
-s.format(a=a)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">1.23</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;a&#39;s value is </span><span class="si">{a:.1f}</span><span class="s2">&quot;</span>
+<span class="n">s</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -492,12 +492,12 @@ s.format(a=a)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = plt.figure(figsize=(10,8))
-cp = plt.contourf(W, L, Z, cmap=plt.cm.Blues)
-plt.colorbar(cp)
-plt.xlabel(&quot;width&quot;)
-plt.ylabel(&quot;length&quot;)
-plt.savefig(&quot;aa.png&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">cp</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;width&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;aa.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -507,8 +507,8 @@ plt.savefig(&quot;aa.png&quot;)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>a = False
-a, 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">a</span><span class="p">,</span> 
 </pre></div>
 </div>
 </div>
@@ -520,7 +520,7 @@ a,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>Z.max()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -532,7 +532,7 @@ a,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>list(range(1, 5))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -544,7 +544,7 @@ a,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>list(range(5,0,-1))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -556,21 +556,21 @@ a,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from skimage.io import imread
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = imread(&quot;aa.png&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s2">&quot;aa.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.imshow(x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -583,8 +583,8 @@ a,
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xr = np.linspace(0,1,100)
-plt.plot(xr, stats.beta(3,2).pdf(xr))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xr</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -597,7 +597,7 @@ plt.plot(xr, stats.beta(3,2).pdf(xr))
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>quad(stats.norm(loc=.5, scale=.2).pdf, 0,1)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quad</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

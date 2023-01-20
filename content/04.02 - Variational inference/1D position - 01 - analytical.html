@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -298,13 +298,13 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import matplotlib.pyplot as plt
-from scipy import stats
-from scipy.integrate import quad
-from progressbar import progressbar as pbar
-from rlxutils import subplots, copy_func
-%matplotlib inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -323,35 +323,35 @@ x_0 &amp;= 1.5&amp;\;\;\;\text{a measurement}\\
 \[P(\mu|x_0) = \frac{P(x_0|\mu) P (\mu)}{P(x_0)}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># real (and unknown) parameter
-real_mu = 0.8
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># real (and unknown) parameter</span>
+<span class="n">real_mu</span> <span class="o">=</span> <span class="mf">0.8</span>
 
-# possible range of values for mu
-mu_support = np.r_[-10,10]
+<span class="c1"># possible range of values for mu</span>
+<span class="n">mu_support</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
 
-eps=1e-10
+<span class="n">eps</span><span class="o">=</span><span class="mf">1e-10</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>class Model:
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Model</span><span class="p">:</span>
     
-    def __init__(self, mu):
-        self.mu = mu
-        self.dist = stats.norm(loc=mu, scale=1)
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         
-    def rvs(self, n):
-        return self.dist.rvs(n)
+    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     
-    def log_prob(self, x):
-        return np.log(self.dist.pdf(x) + eps)
+    <span class="k">def</span> <span class="nf">log_prob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
     
-    # loglikelihood on mu
-    @classmethod
-    def log_likelihood(cls, mu, x):
-        return cls(mu).log_prob(x)
+    <span class="c1"># loglikelihood on mu</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">log_likelihood</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -361,29 +361,29 @@ eps=1e-10
 <h1>An observation<a class="headerlink" href="#an-observation" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#x = Model(real_mu).rvs(1)[0]
-# a very extreme (low probability) observation
-x = 2
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#x = Model(real_mu).rvs(1)[0]</span>
+<span class="c1"># a very extreme (low probability) observation</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># fix the likelihood to the observed data, so that it is
-# only a function of mu
-log_likelihood = lambda mu: Model.log_likelihood(mu, x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fix the likelihood to the observed data, so that it is</span>
+<span class="c1"># only a function of mu</span>
+<span class="n">log_likelihood</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">mu</span><span class="p">:</span> <span class="n">Model</span><span class="o">.</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>rmu = np.linspace(*mu_support, 100)
-plt.plot(rmu, [np.exp(log_likelihood(mu)) for mu in rmu])
-plt.axvline(real_mu, color=&quot;black&quot;, label=r&quot;real (unknown) $\mu$&quot;)
-plt.legend();
-plt.grid(); plt.xlabel(r&quot;$\mu$&quot;); plt.title(r&quot;log likelihood for $\mu$&quot;);
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rmu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">mu_support</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rmu</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_likelihood</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span> <span class="k">for</span> <span class="n">mu</span> <span class="ow">in</span> <span class="n">rmu</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">real_mu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;real (unknown) $\mu$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\mu$&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;log likelihood for $\mu$&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -393,62 +393,62 @@ plt.grid(); plt.xlabel(r&quot;$\mu$&quot;); plt.title(r&quot;log likelihood for 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># the posterior (using Bayes theorem)
-def get_logposterior_fn(loglikelihood_fn, logprior_fn, support, integration_intervals=1000):
-    assert len(support)==2
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the posterior (using Bayes theorem)</span>
+<span class="k">def</span> <span class="nf">get_logposterior_fn</span><span class="p">(</span><span class="n">loglikelihood_fn</span><span class="p">,</span> <span class="n">logprior_fn</span><span class="p">,</span> <span class="n">support</span><span class="p">,</span> <span class="n">integration_intervals</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">support</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span>
 
-    # Montecarlo computation of the integral
-    xr = np.linspace(*support, integration_intervals)
-    Z = np.log(np.sum([np.exp(loglikelihood_fn(x) + logprior_fn(x)) for x in xr]) * (xr[1]-xr[0]))
-    posterior_fn = lambda x: loglikelihood_fn(x) + logprior_fn(x) -  Z
-    return posterior_fn
+    <span class="c1"># Montecarlo computation of the integral</span>
+    <span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">support</span><span class="p">,</span> <span class="n">integration_intervals</span><span class="p">)</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">loglikelihood_fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">logprior_fn</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xr</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">posterior_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">loglikelihood_fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">logprior_fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span>  <span class="n">Z</span>
+    <span class="k">return</span> <span class="n">posterior_fn</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def plot_logprobs(logprior, logposterior):
-    rmu = np.linspace(*mu_support,100)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_logprobs</span><span class="p">(</span><span class="n">logprior</span><span class="p">,</span> <span class="n">logposterior</span><span class="p">):</span>
+    <span class="n">rmu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">mu_support</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 
-    for ax,i in subplots(4, usizex=5, n_cols=2):
-        if i in [0,2]:
-            p = logprior if i==0 else lambda x: np.exp(logprior(x))
-            plt.plot(rmu, [p(mu) for mu in rmu])
-            plt.axvline(x, color=&quot;black&quot;,  ls=&quot;--&quot;, label=r&quot;measurement&quot;)
-            plt.grid();   
-            plt.title((&quot;log &quot; if i==0 else &quot;&quot;)+&quot;prior probability (analitical)&quot;)
-        if i in [1,3]:
-            p = logposterior if i==1 else lambda x: np.exp(logposterior(x))
-            plt.plot(rmu, [p(mu) for mu in rmu])
-            plt.axvline(real_mu, color=&quot;black&quot;, label=r&quot;real (unknown) $\mu$&quot;)
-            plt.axvline(x, color=&quot;black&quot;,  ls=&quot;--&quot;, label=r&quot;measurement&quot;)
-            plt.title((&quot;log &quot; if i==1 else &quot;&quot;)+&quot;posterior probability (analitical)&quot;)
-            plt.grid(); plt.legend();
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">logprior</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logprior</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rmu</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="k">for</span> <span class="n">mu</span> <span class="ow">in</span> <span class="n">rmu</span><span class="p">])</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>  <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;measurement&quot;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>   
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">((</span><span class="s2">&quot;log &quot;</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;prior probability (analitical)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">logposterior</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logposterior</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rmu</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="k">for</span> <span class="n">mu</span> <span class="ow">in</span> <span class="n">rmu</span><span class="p">])</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">real_mu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;real (unknown) $\mu$&quot;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>  <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;measurement&quot;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">((</span><span class="s2">&quot;log &quot;</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;posterior probability (analitical)&quot;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 
-        plt.xlabel(r&quot;$\mu$&quot;)
-    plt.tight_layout()
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\mu$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_prior = lambda mu: np.log(stats.norm(loc=-2,scale=3).pdf(mu) + eps)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_prior</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">mu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_posterior = get_logposterior_fn(log_likelihood, log_prior, mu_support)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_posterior</span> <span class="o">=</span> <span class="n">get_logposterior_fn</span><span class="p">(</span><span class="n">log_likelihood</span><span class="p">,</span> <span class="n">log_prior</span><span class="p">,</span> <span class="n">mu_support</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_logprobs(log_prior, log_posterior)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_logprobs</span><span class="p">(</span><span class="n">log_prior</span><span class="p">,</span> <span class="n">log_posterior</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -458,12 +458,12 @@ def get_logposterior_fn(loglikelihood_fn, logprior_fn, support, integration_inte
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## check the integral of the posterior adds up to 1
-## we do this for sanity, as numerical errors computing the 
-## integral in bayes theorem might arise very easily
-rmu = np.linspace(mu_support[0] - 10, mu_support[1] + 10, 1000)
-dmu = rmu[1] - rmu[0]
-np.sum([np.exp(log_posterior(mu))*dmu for mu in rmu])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## check the integral of the posterior adds up to 1</span>
+<span class="c1">## we do this for sanity, as numerical errors computing the </span>
+<span class="c1">## integral in bayes theorem might arise very easily</span>
+<span class="n">rmu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu_support</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="n">mu_support</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">dmu</span> <span class="o">=</span> <span class="n">rmu</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">rmu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span><span class="o">*</span><span class="n">dmu</span> <span class="k">for</span> <span class="n">mu</span> <span class="ow">in</span> <span class="n">rmu</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -478,9 +478,9 @@ np.sum([np.exp(log_posterior(mu))*dmu for mu in rmu])
 <p>through expectations</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># mean
-mean_ev = np.sum([np.exp(log_posterior(mu))*mu*dmu for mu in rmu])
-mean_ev
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mean</span>
+<span class="n">mean_ev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span><span class="o">*</span><span class="n">mu</span><span class="o">*</span><span class="n">dmu</span> <span class="k">for</span> <span class="n">mu</span> <span class="ow">in</span> <span class="n">rmu</span><span class="p">])</span>
+<span class="n">mean_ev</span>
 </pre></div>
 </div>
 </div>
@@ -492,9 +492,9 @@ mean_ev
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># std
-std_ev = np.sqrt(np.sum([np.exp(log_posterior(mu))*(mu-mean_ev)**2*dmu for mu in rmu]))
-std_ev
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># std</span>
+<span class="n">std_ev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_posterior</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">mu</span><span class="o">-</span><span class="n">mean_ev</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">dmu</span> <span class="k">for</span> <span class="n">mu</span> <span class="ow">in</span> <span class="n">rmu</span><span class="p">]))</span>
+<span class="n">std_ev</span>
 </pre></div>
 </div>
 </div>

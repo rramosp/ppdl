@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -187,7 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/06.03 - NOTES 01 - Single observation posterior.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/content/06.01 - NOTES 04 - Variational inference for data estimation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -214,7 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/06.03 - NOTES 01 - Single observation posterior.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/06.01 - NOTES 04 - Variational inference for data estimation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -505,8 +505,8 @@ For instance</p>
 <div class="section" id="analytical-or-numerical-solutions-for-all-distributions">
 <h2>analytical or numerical solutions for all distributions<a class="headerlink" href="#analytical-or-numerical-solutions-for-all-distributions" title="Permalink to this headline">¶</a></h2>
 <p>in theory with <span class="math notranslate nohighlight">\(p(z)\)</span> and <span class="math notranslate nohighlight">\(p(x|z)\)</span> we could obtain the rest of distributions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-39db1a2d-0c4c-4cb0-8eb9-2882c2a5cf1c">
-<span class="eqno">()<a class="headerlink" href="#equation-39db1a2d-0c4c-4cb0-8eb9-2882c2a5cf1c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-03674382-1146-409b-9281-137359a880aa">
+<span class="eqno">()<a class="headerlink" href="#equation-03674382-1146-409b-9281-137359a880aa" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \text{joint} &amp; \;\;\;\;p(z,x) = p(x|z)p(z)\\
 \text{marginal for }x &amp;\;\;\;\;p(x) = \int p(x|z)p(z) dz\\
 \text{posterior for }z &amp;\;\;\;\;p(z|x) = \frac{p(x|z)p(z)}{p(x)}
@@ -562,7 +562,7 @@ For instance</p>
         <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>    
 
   <span class="k">def</span> <span class="nf">plot_pz_given_xi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observed_xi</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    for a given observation:</span>
 <span class="sd">      - take one sample zi from p(z|xi)</span>
 <span class="sd">      - take one sample xhati from p(x|zi)</span>
@@ -637,8 +637,8 @@ For instance</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_7_0.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_7_0.png" />
-<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_7_1.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_7_1.png" />
+<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_7_0.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_7_0.png" />
+<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_7_1.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_7_1.png" />
 </div>
 </div>
 </div>
@@ -692,7 +692,7 @@ For instance</p>
 <span class="g g-Whitespace">     </span><span class="mi">22</span>   <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
 <span class="nn">/usr/local/lib/python3.7/dist-packages/tensorflow_probability/python/distributions/joint_distribution.py</span> in <span class="ni">prob</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">917</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">917</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">918</span><span class="sd">     name = kwargs.pop(&#39;name&#39;, &#39;prob&#39;)</span>
 <span class="ne">--&gt; </span><span class="mi">919</span><span class="sd">     return self._call_prob(self._resolve_value(*args, **kwargs), name=name)</span>
 <span class="g g-Whitespace">    </span><span class="mi">920</span><span class="sd"> </span>
@@ -897,7 +897,7 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;a&#39;)
 </pre></div>
 </div>
-<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_14_1.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_14_1.png" />
+<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_14_1.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_14_1.png" />
 </div>
 </div>
 </div>
@@ -1024,7 +1024,7 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_20_0.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_20_0.png" />
+<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_20_0.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_20_0.png" />
 </div>
 </div>
 </div>
@@ -1091,7 +1091,38 @@ n &amp; \text{ the number of gaussians in the mixture}\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06.03 - NOTES 01 - Single observation posterior_26_0.png" src="../_images/06.03 - NOTES 01 - Single observation posterior_26_0.png" />
+<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_26_0.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_26_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;1.13.0+cu116&#39;
+</pre></div>
+</div>
 </div>
 </div>
 </div>

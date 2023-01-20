@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -362,10 +362,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
-!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
-!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
-!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
+<span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rramosp/ppdl.git<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>mv<span class="w"> </span>-n<span class="w"> </span>ppdl/content/init.py<span class="w"> </span>ppdl/content/local<span class="w"> </span>.<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>ppdl/content/requirements.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
 </div>
@@ -388,22 +388,22 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Tenemos <strong>datos anotados</strong> (alguien contó las escamas de unos cuantos trilotrópicos) <span class="math notranslate nohighlight">\(\rightarrow\)</span> estamos ante una tarea de <strong>aprendizaje supervisado</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-from scipy.optimize import minimize
-%matplotlib inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>d = pd.read_csv(&quot;local/data/trilotropicos.csv&quot;)
-print(d.shape)
-plt.scatter(d.longitud, d.densidad_escamas)
-plt.xlabel(d.columns[0])
-plt.ylabel(d.columns[1]);
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;local/data/trilotropicos.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
@@ -431,30 +431,30 @@ plt.ylabel(d.columns[1]);
 <p>La siguiente es una posible combinación de <span class="math notranslate nohighlight">\(\theta_0\)</span> y <span class="math notranslate nohighlight">\(\theta_1\)</span> seleccionada aleatoriamente. Ejecútalo varias veces para entender el error.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def linear_prediction(t, x):
-    t0,t1 = t
-    return t0 + t1*x
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">linear_prediction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">t0</span><span class="p">,</span><span class="n">t1</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="k">return</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">t1</span><span class="o">*</span><span class="n">x</span>
 
-def plot_model(t, prediction):
-    xr = np.linspace(np.min(d.longitud), np.max(d.longitud), 100)
-    plt.scatter(d.longitud, d.densidad_escamas, s=40, alpha=.2, color=&quot;blue&quot;, label=&quot;&quot;)
-    plt.plot(xr,prediction(t,xr), lw=2, color=&quot;black&quot;)
-    plt.title(&quot;   &quot;.join([r&quot;$\theta_%d$=%.2f&quot;%(i, t[i]) for i in range(len(t))]));
+<span class="k">def</span> <span class="nf">plot_model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+    <span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span><span class="n">prediction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xr</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;$\theta_</span><span class="si">%d</span><span class="s2">$=</span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))]));</span>
 
-    p = d.iloc[np.random.randint(len(d))]
-    pred = prediction(t, p.longitud)
-    plt.plot([p.longitud, p.longitud], [p.densidad_escamas, pred], ls=&quot;--&quot;, color=&quot;gray&quot;, label=u&quot;error de predicción&quot;)
-    plt.scatter(p.longitud, p.densidad_escamas, s=70, alpha=.5, color=&quot;red&quot;, label=&quot;random trilobite&quot;)
-    plt.scatter(p.longitud, pred, s=70, alpha=1., color=&quot;black&quot;, label=u&quot;predicción&quot;)
-    plt.legend(loc=&#39;center left&#39;, bbox_to_anchor=(1, 0.5))
+    <span class="n">p</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">))]</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">longitud</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">longitud</span><span class="p">],</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">pred</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;error de predicción&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;random trilobite&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;predicción&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
 
-    plt.xlabel(d.columns[0])
-    plt.ylabel(d.columns[1]);
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
     
-t0 = np.random.random()*5+10
-t1 = np.random.random()*4-3
+<span class="n">t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">5</span><span class="o">+</span><span class="mi">10</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">4</span><span class="o">-</span><span class="mi">3</span>
 
-plot_model([t0,t1], linear_prediction)
+<span class="n">plot_model</span><span class="p">([</span><span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">],</span> <span class="n">linear_prediction</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -467,8 +467,8 @@ plot_model([t0,t1], linear_prediction)
 <h3>2. Definimos una medida de error<a class="headerlink" href="#definimos-una-medida-de-error" title="Permalink to this headline">¶</a></h3>
 <p>Para un dato cualquiera <span class="math notranslate nohighlight">\((i)\)</span>
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a9854bdf-f28a-4ea8-965b-0c29a8d56ef6">
-<span class="eqno">()<a class="headerlink" href="#equation-a9854bdf-f28a-4ea8-965b-0c29a8d56ef6" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b3f97e21-9f40-4fdf-bdd7-40b583a41849">
+<span class="eqno">()<a class="headerlink" href="#equation-b3f97e21-9f40-4fdf-bdd7-40b583a41849" title="Permalink to this equation">¶</a></span>\[\begin{align}
 err^{(i)} &amp;= (\hat{y}^{(i)}-y^{(i)})^2\\
 &amp;=(\theta_0 + \theta_1 x^{(i)} - y^{(i)})^2
 \end{align}\]</div>
@@ -485,8 +485,8 @@ err^{(i)} &amp;= (\hat{y}^{(i)}-y^{(i)})^2\\
 \[J(\overline{\theta}) = \frac{1}{m} \sum_{i=0}^{m-1}(\overline{\theta} \dot \;  \mathbf{x}^{(i)} - y^{(i)})^2\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def J(t, x, y, prediction):
-    return np.mean( (prediction(t,x)-y)**2)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="p">(</span><span class="n">prediction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     
 </pre></div>
 </div>
@@ -494,7 +494,7 @@ err^{(i)} &amp;= (\hat{y}^{(i)}-y^{(i)})^2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>J([t0,t1], d.longitud, d.densidad_escamas, linear_prediction)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">J</span><span class="p">([</span><span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">],</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -510,8 +510,8 @@ err^{(i)} &amp;= (\hat{y}^{(i)}-y^{(i)})^2\\
 <p>observa cómo usamos un <strong>algoritmo genérico de optimización</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>r1 = minimize(lambda t: J(t, d.longitud, d.densidad_escamas, linear_prediction), np.random.random(size=2))
-r1
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">J</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">r1</span>
 </pre></div>
 </div>
 </div>
@@ -533,8 +533,8 @@ r1
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_model(r1.x, linear_prediction)
-print(&quot;error total %.2f&quot;%(J(r1.x, d.longitud, d.densidad_escamas, linear_prediction)))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_model</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error total </span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -548,14 +548,14 @@ print(&quot;error total %.2f&quot;%(J(r1.x, d.longitud, d.densidad_escamas, line
 <p>fíjate que son los mismos valores que la regresión lineal clásica</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.linear_model import LinearRegression
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 
-lr = LinearRegression()
-lr.fit(d.longitud.values.reshape(-1,1), d.densidad_escamas)
-t0, t1 = lr.intercept_, lr.coef_
-print(t0, t1)
-plot_model([t0,t1], linear_prediction)
-print(&quot;error total %.2f&quot;%(J([t0, t1], d.longitud, d.densidad_escamas, linear_prediction)))
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">)</span>
+<span class="n">t0</span><span class="p">,</span> <span class="n">t1</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">intercept_</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">coef_</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
+<span class="n">plot_model</span><span class="p">([</span><span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">],</span> <span class="n">linear_prediction</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error total </span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">J</span><span class="p">([</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">],</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -575,12 +575,12 @@ error total 2.74
 \[\hat{y}^{(i)} = \theta_0 + \theta_1 x^{(i)} + \theta_2 (x^{(i)})^2\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def quad_prediction(t, x):
-    t0,t1,t2 = t
-    return t0 + t1*x + t2*x**2
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quad_prediction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">t0</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="k">return</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">t1</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">t2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 
-r2 = minimize(lambda t: J(t, d.longitud, d.densidad_escamas, quad_prediction), np.random.random(size=3))
-r2
+<span class="n">r2</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">J</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">quad_prediction</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">r2</span>
 </pre></div>
 </div>
 </div>
@@ -603,8 +603,8 @@ r2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_model(r2.x, quad_prediction)
-print(&quot;error total %.2f&quot;%(J(r2.x, d.longitud, d.densidad_escamas, quad_prediction)))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_model</span><span class="p">(</span><span class="n">r2</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">quad_prediction</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error total </span><span class="si">%.2f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">r2</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">quad_prediction</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -618,10 +618,10 @@ print(&quot;error total %.2f&quot;%(J(r2.x, d.longitud, d.densidad_escamas, quad
 <p>observa como indirectamente hacemos lo mismo con la regresión lineal de <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> añadiendo explícitamente una columna con la longitud al cuadrado</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>lr = LinearRegression()
-lr.fit(np.r_[[d.longitud.values, d.longitud.values**2]].T, d.densidad_escamas)
-t0, (t1, t2) = lr.intercept_, lr.coef_
-t0, t1, t2
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[</span><span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="o">.</span><span class="n">values</span><span class="o">**</span><span class="mi">2</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">)</span>
+<span class="n">t0</span><span class="p">,</span> <span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">intercept_</span><span class="p">,</span> <span class="n">lr</span><span class="o">.</span><span class="n">coef_</span>
+<span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span>
 </pre></div>
 </div>
 </div>
@@ -659,26 +659,26 @@ t0, t1, t2
 <p><strong>EN ML, SIN EL GRADIENTE LA OPTIMIZACIÓN NO ES POSIBLE</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>g = []
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="p">[]</span>
 
-init_t = np.random.random()*40-5, np.random.random()*20-10
+<span class="n">init_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">40</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">20</span><span class="o">-</span><span class="mi">10</span>
 
-y = d.densidad_escamas.values
-X = np.r_[[[1]*len(d), d.longitud.values]].T
+<span class="n">y</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="o">.</span><span class="n">values</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
 
-def n_cost(t):
-    return np.mean((X.dot(t)-y)**2)
+<span class="k">def</span> <span class="nf">n_cost</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-def n_grad(t):
-    return 2*X.T.dot(X.dot(t)-y)/len(X)
+<span class="k">def</span> <span class="nf">n_grad</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
-print(&quot;sin usar el gradiente&quot;)
-r = minimize(n_cost, init_t, method=&quot;BFGS&quot;)
-print(r)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sin usar el gradiente&quot;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">n_cost</span><span class="p">,</span> <span class="n">init_t</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;BFGS&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
-print(&quot;\n usando el gradiente&quot;)
-r = minimize(n_cost, init_t, method=&quot;BFGS&quot;, jac=n_grad)
-print(r)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> usando el gradiente&quot;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">n_cost</span><span class="p">,</span> <span class="n">init_t</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;BFGS&quot;</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">n_grad</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -720,28 +720,28 @@ print(r)
 <p>fíjate cómo la optimización busca un camino en el espacio de parámetros para llegar al mínimo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import itertools
-def plot_cost(cost, t0_range, t1_range, vx=None,vy=None):
-    k0,k1 = 40,40
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="k">def</span> <span class="nf">plot_cost</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">t0_range</span><span class="p">,</span> <span class="n">t1_range</span><span class="p">,</span> <span class="n">vx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vy</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">k0</span><span class="p">,</span><span class="n">k1</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span><span class="mi">40</span>
 
-    t0 = np.linspace(t0_range[0], t0_range[1], k0)
-    t1 = np.linspace(t1_range[0], t1_range[1], k1)
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t0_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t0_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">k0</span><span class="p">)</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t1_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t1_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">k1</span><span class="p">)</span>
 
-    p = np.zeros((k0,k1))
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">k0</span><span class="p">,</span><span class="n">k1</span><span class="p">))</span>
 
-    for i,j in itertools.product(range(k0), range(k1)):
-        p[i,j] = np.log(cost(np.r_[t0[i],t1[j]]))
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">k0</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">k1</span><span class="p">)):</span>
+        <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">cost</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">t0</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">t1</span><span class="p">[</span><span class="n">j</span><span class="p">]]))</span>
 
-    plt.contourf(t0, t1, p.T, cmap=plt.cm.hot, levels=np.linspace(np.min(p), np.max(p), 20))
-    plt.ylabel(r&quot;$\theta_1$&quot;)
-    plt.xlabel(r&quot;$\theta_0$&quot;)
-    plt.title(&quot;loss&quot;)
-    plt.colorbar()
+    <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">hot</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="mi">20</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta_1$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta_0$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 
-    if vx is not None:
-        plt.axvline(vx, color=&quot;white&quot;)
-    if vy is not None:
-        plt.axhline(vy, color=&quot;white&quot;)
+    <span class="k">if</span> <span class="n">vx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">vx</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">vy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">vy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
     
 </pre></div>
 </div>
@@ -749,19 +749,19 @@ def plot_cost(cost, t0_range, t1_range, vx=None,vy=None):
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>g = []
-loss_history = []
-def log(xk):
-    loss_history.append(loss(xk))
-    g.append(xk)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">loss_history</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">xk</span><span class="p">):</span>
+    <span class="n">loss_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">(</span><span class="n">xk</span><span class="p">))</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xk</span><span class="p">)</span>
 
-init_t = np.random.random()*40-5, np.random.random()*20-10
+<span class="n">init_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">40</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">20</span><span class="o">-</span><span class="mi">10</span>
 
-loss = lambda t: J(t, d.longitud, d.densidad_escamas, linear_prediction)
+<span class="n">loss</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">J</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">longitud</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">densidad_escamas</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">)</span>
 
 
-r = minimize(loss, init_t, callback=log, method=&quot;BFGS&quot;)
-r
+<span class="n">r</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">init_t</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">log</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;BFGS&quot;</span><span class="p">)</span>
+<span class="n">r</span>
 </pre></div>
 </div>
 </div>
@@ -783,27 +783,27 @@ r
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(15,6))
-plt.subplot(121)
-plot_cost(loss, (-10,30), (-10,10), vx=r1.x[0], vy=r1.x[1])
-g = np.r_[g]
-plt.plot(g[:,0], g[:,1], color=&quot;white&quot;)
-plt.scatter(g[:,0], g[:,1], color=&quot;white&quot;, s=20)
-plt.scatter(g[-1,0], g[-1,1], marker=&quot;x&quot;, color=&quot;white&quot;, s=200)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plot_cost</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">vx</span><span class="o">=</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vy</span><span class="o">=</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">g</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">g</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">g</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">g</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 
-# plot gradient at some points
-for _ in range(10):
-    t = np.random.random()*30-5, np.random.random()*20-10
-    grad = n_grad(t)
-    grad = grad/200
-    plt.scatter(t[0],t[1], c=&quot;green&quot;, s=5)
-    plt.arrow(t[0], t[1], -grad[0], -grad[1], head_width=1, head_length=0.5, fc=&#39;green&#39;, ec=&#39;green&#39;)
+<span class="c1"># plot gradient at some points</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">30</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">20</span><span class="o">-</span><span class="mi">10</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">n_grad</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">grad</span><span class="o">/</span><span class="mi">200</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">head_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
 
-plt.subplot(122)
-plt.plot(loss_history, marker=&quot;o&quot;)
-plt.xlabel(&quot;iteration number&quot;)
-plt.ylabel(&quot;loss&quot;)
-plt.grid()
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loss_history</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;iteration number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

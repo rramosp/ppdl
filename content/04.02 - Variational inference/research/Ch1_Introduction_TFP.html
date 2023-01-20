@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -601,88 +601,88 @@ const thebe_selector_output = ".output, .cell_output"
 Again, if you are running this in a Colab, Tensorflow and TFP are already installed
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#@title Imports and Global Variables (make sure to run this cell)  { display-mode: &quot;form&quot; }
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#@title Imports and Global Variables (make sure to run this cell)  { display-mode: &quot;form&quot; }</span>
 
-try:
-  # %tensorflow_version only exists in Colab.
-  %tensorflow_version 2.x
-except Exception:
-  pass
-
-
-from __future__ import absolute_import, division, print_function
+<span class="k">try</span><span class="p">:</span>
+  <span class="c1"># %tensorflow_version only exists in Colab.</span>
+  <span class="o">%</span><span class="k">tensorflow_version</span> 2.x
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+  <span class="k">pass</span>
 
 
-#@markdown This sets the warning status (default is `ignore`, since this notebook runs correctly)
-warning_status = &quot;ignore&quot; #@param [&quot;ignore&quot;, &quot;always&quot;, &quot;module&quot;, &quot;once&quot;, &quot;default&quot;, &quot;error&quot;]
-import warnings
-warnings.filterwarnings(warning_status)
-with warnings.catch_warnings():
-    warnings.filterwarnings(warning_status, category=DeprecationWarning)
-    warnings.filterwarnings(warning_status, category=UserWarning)
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
 
-import numpy as np
-import os
-#@markdown This sets the styles of the plotting (default is styled like plots from [FiveThirtyeight.com](https://fivethirtyeight.com/)
-matplotlib_style = &#39;fivethirtyeight&#39; #@param [&#39;fivethirtyeight&#39;, &#39;bmh&#39;, &#39;ggplot&#39;, &#39;seaborn&#39;, &#39;default&#39;, &#39;Solarize_Light2&#39;, &#39;classic&#39;, &#39;dark_background&#39;, &#39;seaborn-colorblind&#39;, &#39;seaborn-notebook&#39;]
-import matplotlib.pyplot as plt; plt.style.use(matplotlib_style)
-import matplotlib.axes as axes;
-from matplotlib.patches import Ellipse
-#%matplotlib inline
-import seaborn as sns; sns.set_context(&#39;notebook&#39;)
-from IPython.core.pylabtools import figsize
-#@markdown This sets the resolution of the plot outputs (`retina` is the highest resolution)
-notebook_screen_res = &#39;retina&#39; #@param [&#39;retina&#39;, &#39;png&#39;, &#39;jpeg&#39;, &#39;svg&#39;, &#39;pdf&#39;]
-#%config InlineBackend.figure_format = notebook_screen_res
 
-import tensorflow as tf
+<span class="c1">#@markdown This sets the warning status (default is `ignore`, since this notebook runs correctly)</span>
+<span class="n">warning_status</span> <span class="o">=</span> <span class="s2">&quot;ignore&quot;</span> <span class="c1">#@param [&quot;ignore&quot;, &quot;always&quot;, &quot;module&quot;, &quot;once&quot;, &quot;default&quot;, &quot;error&quot;]</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">warning_status</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">warning_status</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">warning_status</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
 
-import tensorflow_probability as tfp
-tfd = tfp.distributions
-tfb = tfp.bijectors
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1">#@markdown This sets the styles of the plotting (default is styled like plots from [FiveThirtyeight.com](https://fivethirtyeight.com/)</span>
+<span class="n">matplotlib_style</span> <span class="o">=</span> <span class="s1">&#39;fivethirtyeight&#39;</span> <span class="c1">#@param [&#39;fivethirtyeight&#39;, &#39;bmh&#39;, &#39;ggplot&#39;, &#39;seaborn&#39;, &#39;default&#39;, &#39;Solarize_Light2&#39;, &#39;classic&#39;, &#39;dark_background&#39;, &#39;seaborn-colorblind&#39;, &#39;seaborn-notebook&#39;]</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span><span class="p">;</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">matplotlib_style</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.axes</span> <span class="k">as</span> <span class="nn">axes</span><span class="p">;</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Ellipse</span>
+<span class="c1">#%matplotlib inline</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span><span class="p">;</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s1">&#39;notebook&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">IPython.core.pylabtools</span> <span class="kn">import</span> <span class="n">figsize</span>
+<span class="c1">#@markdown This sets the resolution of the plot outputs (`retina` is the highest resolution)</span>
+<span class="n">notebook_screen_res</span> <span class="o">=</span> <span class="s1">&#39;retina&#39;</span> <span class="c1">#@param [&#39;retina&#39;, &#39;png&#39;, &#39;jpeg&#39;, &#39;svg&#39;, &#39;pdf&#39;]</span>
+<span class="c1">#%config InlineBackend.figure_format = notebook_screen_res</span>
 
-class _TFColor(object):
-    &quot;&quot;&quot;Enum of colors used in TF docs.&quot;&quot;&quot;
-    red = &#39;#F15854&#39;
-    blue = &#39;#5DA5DA&#39;
-    orange = &#39;#FAA43A&#39;
-    green = &#39;#60BD68&#39;
-    pink = &#39;#F17CB0&#39;
-    brown = &#39;#B2912F&#39;
-    purple = &#39;#B276B2&#39;
-    yellow = &#39;#DECF3F&#39;
-    gray = &#39;#4D4D4D&#39;
-    def __getitem__(self, i):
-        return [
-            self.red,
-            self.orange,
-            self.green,
-            self.blue,
-            self.pink,
-            self.brown,
-            self.purple,
-            self.yellow,
-            self.gray,
-        ][i % 9]
-TFColor = _TFColor()
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 
-def session_options(enable_gpu_ram_resizing=True, enable_xla=False):
-    &quot;&quot;&quot;
-    Allowing the notebook to make use of GPUs if they&#39;re available.
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
 
-    XLA (Accelerated Linear Algebra) is a domain-specific compiler for linear
-    algebra that optimizes TensorFlow computations.
-    &quot;&quot;&quot;
-    config = tf.config
-    gpu_devices = config.experimental.list_physical_devices(&#39;GPU&#39;)
-    if enable_gpu_ram_resizing:
-        for device in gpu_devices:
-           tf.config.experimental.set_memory_growth(device, True)
-    if enable_xla:
-        config.optimizer.set_jit(True)
-    return config
+<span class="k">class</span> <span class="nc">_TFColor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enum of colors used in TF docs.&quot;&quot;&quot;</span>
+    <span class="n">red</span> <span class="o">=</span> <span class="s1">&#39;#F15854&#39;</span>
+    <span class="n">blue</span> <span class="o">=</span> <span class="s1">&#39;#5DA5DA&#39;</span>
+    <span class="n">orange</span> <span class="o">=</span> <span class="s1">&#39;#FAA43A&#39;</span>
+    <span class="n">green</span> <span class="o">=</span> <span class="s1">&#39;#60BD68&#39;</span>
+    <span class="n">pink</span> <span class="o">=</span> <span class="s1">&#39;#F17CB0&#39;</span>
+    <span class="n">brown</span> <span class="o">=</span> <span class="s1">&#39;#B2912F&#39;</span>
+    <span class="n">purple</span> <span class="o">=</span> <span class="s1">&#39;#B276B2&#39;</span>
+    <span class="n">yellow</span> <span class="o">=</span> <span class="s1">&#39;#DECF3F&#39;</span>
+    <span class="n">gray</span> <span class="o">=</span> <span class="s1">&#39;#4D4D4D&#39;</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">orange</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pink</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">brown</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">yellow</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gray</span><span class="p">,</span>
+        <span class="p">][</span><span class="n">i</span> <span class="o">%</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">TFColor</span> <span class="o">=</span> <span class="n">_TFColor</span><span class="p">()</span>
 
-session_options(enable_gpu_ram_resizing=True, enable_xla=True)
+<span class="k">def</span> <span class="nf">session_options</span><span class="p">(</span><span class="n">enable_gpu_ram_resizing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">enable_xla</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Allowing the notebook to make use of GPUs if they&#39;re available.</span>
+
+<span class="sd">    XLA (Accelerated Linear Algebra) is a domain-specific compiler for linear</span>
+<span class="sd">    algebra that optimizes TensorFlow computations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span>
+    <span class="n">gpu_devices</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">enable_gpu_ram_resizing</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">gpu_devices</span><span class="p">:</span>
+           <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">set_memory_growth</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">enable_xla</span><span class="p">:</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">set_jit</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">config</span>
+
+<span class="n">session_options</span><span class="p">(</span><span class="n">enable_gpu_ram_resizing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">enable_xla</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -770,25 +770,25 @@ session_options(enable_gpu_ram_resizing=True, enable_xla=True)
 <p>Below we plot a sequence of updating posterior probabilities as we observe increasing amounts of data (coin flips), while also demonstrating some of the best practices when it comes to evaluating tensors and plotting the data. First, the easy part: We define the values in our Tensorflow graph</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Build Graph
-rv_coin_flip_prior = tfp.distributions.Bernoulli(probs=0.5, dtype=tf.int32)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build Graph</span>
+<span class="n">rv_coin_flip_prior</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Bernoulli</span><span class="p">(</span><span class="n">probs</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
 
-num_trials = tf.constant([0,1, 2, 3, 4, 5, 8, 15, 50, 500, 1000, 2000])
+<span class="n">num_trials</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">])</span>
 
-coin_flip_data = rv_coin_flip_prior.sample(num_trials[-1])
+<span class="n">coin_flip_data</span> <span class="o">=</span> <span class="n">rv_coin_flip_prior</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_trials</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-# prepend a 0 onto tally of heads and tails, for zeroth flip
-coin_flip_data = tf.pad(coin_flip_data,tf.constant([[1, 0,]]),&quot;CONSTANT&quot;)
+<span class="c1"># prepend a 0 onto tally of heads and tails, for zeroth flip</span>
+<span class="n">coin_flip_data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">coin_flip_data</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,]]),</span><span class="s2">&quot;CONSTANT&quot;</span><span class="p">)</span>
 
-# compute cumulative headcounts from 0 to 2000 flips, and then grab them at each of num_trials intervals
-cumulative_headcounts = tf.gather(tf.cumsum(coin_flip_data), num_trials)
+<span class="c1"># compute cumulative headcounts from 0 to 2000 flips, and then grab them at each of num_trials intervals</span>
+<span class="n">cumulative_headcounts</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">coin_flip_data</span><span class="p">),</span> <span class="n">num_trials</span><span class="p">)</span>
 
-rv_observed_heads = tfp.distributions.Beta(
-    concentration1=tf.cast(1 + cumulative_headcounts, tf.float32),
-    concentration0=tf.cast(1 + num_trials - cumulative_headcounts, tf.float32))
+<span class="n">rv_observed_heads</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span>
+    <span class="n">concentration1</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">cumulative_headcounts</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span>
+    <span class="n">concentration0</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">num_trials</span> <span class="o">-</span> <span class="n">cumulative_headcounts</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
 
-probs_of_heads = tf.linspace(start=0., stop=1., num=100, name=&quot;linspace&quot;)
-observed_probs_heads = tf.transpose(rv_observed_heads.prob(probs_of_heads[:, tf.newaxis]))
+<span class="n">probs_of_heads</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;linspace&quot;</span><span class="p">)</span>
+<span class="n">observed_probs_heads</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">rv_observed_heads</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">probs_of_heads</span><span class="p">[:,</span> <span class="n">tf</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -796,26 +796,26 @@ observed_probs_heads = tf.transpose(rv_observed_heads.prob(probs_of_heads[:, tf.
 <p>Finally, we move onto plotting our tensors in matplotlib.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># For the already prepared, I&#39;m using Binomial&#39;s conj. prior.
-plt.figure(figsize(16, 9))
-for i in range(len(num_trials)):
-    sx = plt.subplot(len(num_trials)/2, 2, i+1)
-    plt.xlabel(&quot;$p$, probability of heads&quot;) \
-    if i in [0, len(num_trials)-1] else None
-    plt.setp(sx.get_yticklabels(), visible=False)
-    plt.plot(probs_of_heads, observed_probs_heads[i], 
-             label=&quot;observe %d tosses,\n %d heads&quot; % (num_trials[i], cumulative_headcounts[i]))
-    plt.fill_between(probs_of_heads, 0, observed_probs_heads[i], 
-                     color=TFColor[3], alpha=0.4)
-    plt.vlines(0.5, 0, 4, color=&quot;k&quot;, linestyles=&quot;--&quot;, lw=1)
-    leg = plt.legend()
-    leg.get_frame().set_alpha(0.4)
-    plt.autoscale(tight=True)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For the already prepared, I&#39;m using Binomial&#39;s conj. prior.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_trials</span><span class="p">)):</span>
+    <span class="n">sx</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_trials</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$p$, probability of heads&quot;</span><span class="p">)</span> \
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_trials</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">sx</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">(),</span> <span class="n">visible</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">probs_of_heads</span><span class="p">,</span> <span class="n">observed_probs_heads</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;observe </span><span class="si">%d</span><span class="s2"> tosses,</span><span class="se">\n</span><span class="s2"> </span><span class="si">%d</span><span class="s2"> heads&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">num_trials</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cumulative_headcounts</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">probs_of_heads</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">observed_probs_heads</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                     <span class="n">color</span><span class="o">=</span><span class="n">TFColor</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">linestyles</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">leg</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.4</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">autoscale</span><span class="p">(</span><span class="n">tight</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
-plt.suptitle(&quot;Bayesian updating of posterior probabilities&quot;, y=1.02,
-             fontsize=14)
-plt.tight_layout()
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Bayesian updating of posterior probabilities&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -847,19 +847,19 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 <p>This is the posterior probability. What does it look like as a function of our prior, <span class="math notranslate nohighlight">\(p\in[0,1]\)</span>?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Defining our range of probabilities
-p = tf.linspace(start=0., stop=1., num=50)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining our range of probabilities</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 
-# Visualization.
-plt.figure(figsize=(12.5, 6))
-plt.plot(p, 2*p/(1+p), color=TFColor[3], lw=3)
-#plt.fill_between(p, 2*p/(1+p), alpha=.5, facecolor=[&quot;#A60628&quot;])
-plt.scatter(0.2, 2*(0.2)/1.2, s=140, c=TFColor[3])
-plt.xlim(0, 1)
-plt.ylim(0, 1)
-plt.xlabel(r&quot;Prior, $P(A) = p$&quot;)
-plt.ylabel(r&quot;Posterior, $P(A|X)$, with $P(A) = p$&quot;)
-plt.title(r&quot;Are there bugs in my code?&quot;);
+<span class="c1"># Visualization.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">p</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">p</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">TFColor</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1">#plt.fill_between(p, 2*p/(1+p), alpha=.5, facecolor=[&quot;#A60628&quot;])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span><span class="o">/</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">TFColor</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Prior, $P(A) = p$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Posterior, $P(A|X)$, with $P(A) = p$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Are there bugs in my code?&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -872,25 +872,25 @@ plt.title(r&quot;Are there bugs in my code?&quot;);
 <p>Similarly, our posterior is also a probability, with <span class="math notranslate nohighlight">\(P(A|X)\)</span> the probability there is no bug given we saw all tests pass, hence <span class="math notranslate nohighlight">\(1 \text{-} P(A|X)\)</span> is the probability there is a bug given all tests passed. What does our posterior probability look like? Below is a chart of both the prior and the posterior probabilities.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Defining our priors and posteriors
-prior = tf.constant([0.20, 0.80])
-posterior = tf.constant([1./3, 2./3])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining our priors and posteriors</span>
+<span class="n">prior</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.80</span><span class="p">])</span>
+<span class="n">posterior</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">1.</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mf">2.</span><span class="o">/</span><span class="mi">3</span><span class="p">])</span>
 
-# Our Simple Visualization
-plt.figure(figsize=(12.5, 4))
-colours = [TFColor[0], TFColor[3]]
-plt.bar([0, .7], prior, alpha=0.70, width=0.25,
-        color=colours[0], label=&quot;prior distribution&quot;,
-        lw=&quot;3&quot;, edgecolor=colours[0])
-plt.bar([0+0.25, .7+0.25], posterior, alpha=0.7,
-        width=0.25, color=colours[1],
-        label=r&quot;posterior distribution&quot;,
-        lw=&quot;3&quot;, edgecolor=colours[1])
+<span class="c1"># Our Simple Visualization</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">colours</span> <span class="o">=</span> <span class="p">[</span><span class="n">TFColor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">TFColor</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.7</span><span class="p">],</span> <span class="n">prior</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.70</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;prior distribution&quot;</span><span class="p">,</span>
+        <span class="n">lw</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="mi">0</span><span class="o">+</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">.7</span><span class="o">+</span><span class="mf">0.25</span><span class="p">],</span> <span class="n">posterior</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;posterior distribution&quot;</span><span class="p">,</span>
+        <span class="n">lw</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-plt.xticks([0.20, .95], [&quot;Bugs Absent&quot;, &quot;Bugs Present&quot;])
-plt.title(r&quot;Prior and Posterior probability of bugs present&quot;)
-plt.ylabel(&quot;Probability&quot;)
-plt.legend(loc=&quot;upper left&quot;);
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">.95</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Bugs Absent&quot;</span><span class="p">,</span> <span class="s2">&quot;Bugs Present&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Prior and Posterior probability of bugs present&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -926,32 +926,32 @@ plt.legend(loc=&quot;upper left&quot;);
 <p>We will use this property often, so it’s useful to remember. Below, we plot the probability mass distribution for different <span class="math notranslate nohighlight">\(\lambda\)</span> values. The first thing to notice is that by increasing <span class="math notranslate nohighlight">\(\lambda\)</span>, we add more probability of larger values occurring. Second, notice that although the graph ends at 15, the distributions do not. They assign positive probability to every non-negative integer.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Build graph.
-x = tf.range (start=0., limit=16.,dtype=tf.float32)
-lambdas = tf.constant([1.5, 4.25])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build graph.</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">range</span> <span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mf">16.</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">lambdas</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">4.25</span><span class="p">])</span>
 
-poi_pmf = tfd.Poisson(
-  rate=lambdas[:, tf.newaxis]).prob(x)
+<span class="n">poi_pmf</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span>
+  <span class="n">rate</span><span class="o">=</span><span class="n">lambdas</span><span class="p">[:,</span> <span class="n">tf</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
-plt.figure(figsize=(12.5, 8))
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
-# Display results in two different histograms, for easier comparison
-colours = [TFColor[0], TFColor[3]]
-for i in [0,1]:
-  ax = plt.subplot(2,1,i+1)
-  ax.set_autoscaley_on(False)
-  plt.title(&quot;Probability mass function of a Poisson random variable&quot;);
+<span class="c1"># Display results in two different histograms, for easier comparison</span>
+<span class="n">colours</span> <span class="o">=</span> <span class="p">[</span><span class="n">TFColor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">TFColor</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]:</span>
+  <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_autoscaley_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Probability mass function of a Poisson random variable&quot;</span><span class="p">);</span>
 
-  plt.bar(x,
-          poi_pmf[i],
-          color=colours[i],
-          label=r&quot;$\lambda = %.1f$&quot; % lambdas[i], alpha=0.60,
-          edgecolor=colours[i], lw=&quot;3&quot;)
-  plt.xticks(x)
-  plt.ylim([0, .5])
-  plt.legend()
-  plt.ylabel(r&quot;probability of $k$&quot;)
-  plt.xlabel(r&quot;$k$&quot;)
+  <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>
+          <span class="n">poi_pmf</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+          <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+          <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\lambda = </span><span class="si">%.1f</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">lambdas</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.60</span><span class="p">,</span>
+          <span class="n">edgecolor</span><span class="o">=</span><span class="n">colours</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span><span class="p">])</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;probability of $k$&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$k$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -974,26 +974,26 @@ for i in [0,1]:
 \[E[\; Z \;|\; \lambda \;] = \frac{1}{\lambda}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Defining our Data and assumptions (use tf.linspace for continuous)
-a = tf.range(start=0., limit=4., delta=0.04)
-a = a[..., tf.newaxis]
-lambdas = tf.constant([0.5, 1.])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining our Data and assumptions (use tf.linspace for continuous)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mf">4.</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">lambdas</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
 
-# Now we use TFP to compute probabilities in a vectorized manner.
-expo_pdf = tfd.Exponential(rate=lambdas).prob(a)
+<span class="c1"># Now we use TFP to compute probabilities in a vectorized manner.</span>
+<span class="n">expo_pdf</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="n">lambdas</span><span class="p">)</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
-# Visualizing our results
-plt.figure(figsize=(12.5, 4))
-for i in range(lambdas.shape[0]):
-    plt.plot(tf.transpose(a)[0], tf.transpose(expo_pdf)[i],
-             lw=3, color=TFColor[i], label=r&quot;$\lambda = %.1f$&quot; % lambdas[i])
-    plt.fill_between(tf.transpose(a)[0], tf.transpose(expo_pdf)[i],
-                         color=TFColor[i], alpha=.33)
-plt.legend()
-plt.ylabel(&quot;PDF at $z$&quot;)
-plt.xlabel(&quot;$z$&quot;)
-plt.ylim(0,1.2)
-plt.title(r&quot;Probability density function of an Exponential random variable; differing $\lambda$&quot;);
+<span class="c1"># Visualizing our results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lambdas</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">expo_pdf</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span>
+             <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TFColor</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\lambda = </span><span class="si">%.1f</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">lambdas</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">a</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">expo_pdf</span><span class="p">)[</span><span class="n">i</span><span class="p">],</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">TFColor</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.33</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PDF at $z$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$z$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Probability density function of an Exponential random variable; differing $\lambda$&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1016,25 +1016,25 @@ plt.title(r&quot;Probability density function of an Exponential random variable;
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Defining our Data and assumptions
-count_data = tf.constant([
-    13,  24,   8,  24,   7,  35,  14,  11,  15,  11,  22,  22,  11,  57,  
-    11,  19,  29,   6,  19,  12,  22,  12,  18,  72,  32,   9,   7,  13,  
-    19,  23,  27,  20,   6,  17,  13,  10,  14,   6,  16,  15,   7,   2,  
-    15,  15,  19,  70,  49,   7,  53,  22,  21,  31,  19,  11,  18,  20,  
-    12,  35,  17,  23,  17,   4,   2,  31,  30,  13,  27,   0,  39,  37,   
-    5,  14,  13,  22,
-], dtype=tf.float32)
-n_count_data = tf.shape(count_data)
-days = tf.range(n_count_data[0],dtype=tf.int32)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defining our Data and assumptions</span>
+<span class="n">count_data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span>
+    <span class="mi">13</span><span class="p">,</span>  <span class="mi">24</span><span class="p">,</span>   <span class="mi">8</span><span class="p">,</span>  <span class="mi">24</span><span class="p">,</span>   <span class="mi">7</span><span class="p">,</span>  <span class="mi">35</span><span class="p">,</span>  <span class="mi">14</span><span class="p">,</span>  <span class="mi">11</span><span class="p">,</span>  <span class="mi">15</span><span class="p">,</span>  <span class="mi">11</span><span class="p">,</span>  <span class="mi">22</span><span class="p">,</span>  <span class="mi">22</span><span class="p">,</span>  <span class="mi">11</span><span class="p">,</span>  <span class="mi">57</span><span class="p">,</span>  
+    <span class="mi">11</span><span class="p">,</span>  <span class="mi">19</span><span class="p">,</span>  <span class="mi">29</span><span class="p">,</span>   <span class="mi">6</span><span class="p">,</span>  <span class="mi">19</span><span class="p">,</span>  <span class="mi">12</span><span class="p">,</span>  <span class="mi">22</span><span class="p">,</span>  <span class="mi">12</span><span class="p">,</span>  <span class="mi">18</span><span class="p">,</span>  <span class="mi">72</span><span class="p">,</span>  <span class="mi">32</span><span class="p">,</span>   <span class="mi">9</span><span class="p">,</span>   <span class="mi">7</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span>  
+    <span class="mi">19</span><span class="p">,</span>  <span class="mi">23</span><span class="p">,</span>  <span class="mi">27</span><span class="p">,</span>  <span class="mi">20</span><span class="p">,</span>   <span class="mi">6</span><span class="p">,</span>  <span class="mi">17</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span>  <span class="mi">10</span><span class="p">,</span>  <span class="mi">14</span><span class="p">,</span>   <span class="mi">6</span><span class="p">,</span>  <span class="mi">16</span><span class="p">,</span>  <span class="mi">15</span><span class="p">,</span>   <span class="mi">7</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>  
+    <span class="mi">15</span><span class="p">,</span>  <span class="mi">15</span><span class="p">,</span>  <span class="mi">19</span><span class="p">,</span>  <span class="mi">70</span><span class="p">,</span>  <span class="mi">49</span><span class="p">,</span>   <span class="mi">7</span><span class="p">,</span>  <span class="mi">53</span><span class="p">,</span>  <span class="mi">22</span><span class="p">,</span>  <span class="mi">21</span><span class="p">,</span>  <span class="mi">31</span><span class="p">,</span>  <span class="mi">19</span><span class="p">,</span>  <span class="mi">11</span><span class="p">,</span>  <span class="mi">18</span><span class="p">,</span>  <span class="mi">20</span><span class="p">,</span>  
+    <span class="mi">12</span><span class="p">,</span>  <span class="mi">35</span><span class="p">,</span>  <span class="mi">17</span><span class="p">,</span>  <span class="mi">23</span><span class="p">,</span>  <span class="mi">17</span><span class="p">,</span>   <span class="mi">4</span><span class="p">,</span>   <span class="mi">2</span><span class="p">,</span>  <span class="mi">31</span><span class="p">,</span>  <span class="mi">30</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span>  <span class="mi">27</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="mi">39</span><span class="p">,</span>  <span class="mi">37</span><span class="p">,</span>   
+    <span class="mi">5</span><span class="p">,</span>  <span class="mi">14</span><span class="p">,</span>  <span class="mi">13</span><span class="p">,</span>  <span class="mi">22</span><span class="p">,</span>
+<span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">n_count_data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">count_data</span><span class="p">)</span>
+<span class="n">days</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">n_count_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
 
-# Visualizing the Results
-plt.figure(figsize=(12.5, 4))
-plt.bar(days.numpy(), count_data, color=&quot;#5DA5DA&quot;)
-plt.xlabel(&quot;Time (days)&quot;)
-plt.ylabel(&quot;count of text-msgs received&quot;)
-plt.title(&quot;Did the user&#39;s texting habits change over time?&quot;)
-plt.xlim(0, n_count_data[0].numpy());
+<span class="c1"># Visualizing the Results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">days</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">count_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#5DA5DA&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (days)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;count of text-msgs received&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Did the user&#39;s texting habits change over time?&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_count_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">());</span>
 </pre></div>
 </div>
 </div>
@@ -1057,8 +1057,8 @@ plt.xlim(0, n_count_data[0].numpy());
 <p>If, in reality, no sudden change occurred and indeed <span class="math notranslate nohighlight">\(\lambda_1 = \lambda_2\)</span>, then the <span class="math notranslate nohighlight">\(\lambda\)</span>s posterior distributions should look about equal.</p>
 <p>We are interested in inferring the unknown <span class="math notranslate nohighlight">\(\lambda\)</span>s. To use Bayesian inference, we need to assign prior probabilities to the different possible values of <span class="math notranslate nohighlight">\(\lambda\)</span>. What would be good prior probability distributions for <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>? Recall that <span class="math notranslate nohighlight">\(\lambda\)</span> can be any positive number. As we saw earlier, the <em>exponential</em> distribution provides a continuous density function for positive numbers, so it might be a good choice for modeling <span class="math notranslate nohighlight">\(\lambda_i\)</span>. But recall that the exponential distribution takes a parameter of its own, so we’ll need to include that parameter in our model. Let’s call that parameter <span class="math notranslate nohighlight">\(\alpha\)</span>.
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eaf8fc06-fd0a-478b-afdc-53b4cbde39d6">
-<span class="eqno">()<a class="headerlink" href="#equation-eaf8fc06-fd0a-478b-afdc-53b4cbde39d6" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1f66a2f1-4c06-47ca-80a0-4c7e98c5ca91">
+<span class="eqno">()<a class="headerlink" href="#equation-1f66a2f1-4c06-47ca-80a0-4c7e98c5ca91" title="Permalink to this equation">¶</a></span>\[\begin{align}
 &amp;\lambda_1 \sim \text{Exp}( \alpha ) \\
 &amp;\lambda_2 \sim \text{Exp}( \alpha )
 \end{align}\]</div>
@@ -1068,8 +1068,8 @@ $\alpha$ is called a *hyper-parameter* or *parent variable*. In literal terms, i
 <p>An alternative, and something I encourage the reader to try, would be to have two priors: one for each <span class="math notranslate nohighlight">\(\lambda_i\)</span>. Creating two exponential distributions with different <span class="math notranslate nohighlight">\(\alpha\)</span> values reflects our prior belief that the rate changed at some point during the observations.</p>
 <p>What about <span class="math notranslate nohighlight">\(\tau\)</span>? Because of the noisiness of the data, it’s difficult to pick out a priori when <span class="math notranslate nohighlight">\(\tau\)</span> might have occurred. Instead, we can assign a <em>uniform prior belief</em> to every possible day. This is equivalent to saying
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-049e5148-230a-4ac0-ac48-4e274266e459">
-<span class="eqno">()<a class="headerlink" href="#equation-049e5148-230a-4ac0-ac48-4e274266e459" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e4f34384-0d2b-4f4b-9dc4-0482105f5d62">
+<span class="eqno">()<a class="headerlink" href="#equation-e4f34384-0d2b-4f4b-9dc4-0482105f5d62" title="Permalink to this equation">¶</a></span>\[\begin{align}
 &amp; \tau \sim \text{DiscreteUniform(1,70) }\\
 &amp; \Rightarrow P( \tau = k ) = \frac{1}{70}
 \end{align}\]</div>
@@ -1109,31 +1109,31 @@ especially docs and examples that bridge the gap between beginner and hacker. On
 <p>TFP performs probabilistic inference by evaluating the model parameters using a joint_log_prob function, which we’ll describe more in Chapter 2.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def joint_log_prob(count_data, lambda_1, lambda_2, tau):
-    tfd = tfp.distributions
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">joint_log_prob</span><span class="p">(</span><span class="n">count_data</span><span class="p">,</span> <span class="n">lambda_1</span><span class="p">,</span> <span class="n">lambda_2</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+    <span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
  
-    alpha = (1. / tf.reduce_mean(count_data))
-    rv_lambda_1 = tfd.Exponential(rate=alpha)
-    rv_lambda_2 = tfd.Exponential(rate=alpha)
+    <span class="n">alpha</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">count_data</span><span class="p">))</span>
+    <span class="n">rv_lambda_1</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="n">rv_lambda_2</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Exponential</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
  
-    rv_tau = tfd.Uniform()
+    <span class="n">rv_tau</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Uniform</span><span class="p">()</span>
  
-    lambda_ = tf.gather(
-         [lambda_1, lambda_2],
-         indices=tf.cast(tau * tf.cast(tf.size(count_data), dtype=tf.float32) &lt;= tf.cast(tf.range(tf.size(count_data)), dtype=tf.float32), dtype=tf.int32))
-    rv_observation = tfd.Poisson(rate=lambda_)
+    <span class="n">lambda_</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+         <span class="p">[</span><span class="n">lambda_1</span><span class="p">,</span> <span class="n">lambda_2</span><span class="p">],</span>
+         <span class="n">indices</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tau</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">count_data</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">count_data</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
+    <span class="n">rv_observation</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Poisson</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="n">lambda_</span><span class="p">)</span>
  
-    return (
-         rv_lambda_1.log_prob(lambda_1)
-         + rv_lambda_2.log_prob(lambda_2)
-         + rv_tau.log_prob(tau)
-         + tf.reduce_sum(rv_observation.log_prob(count_data))
-    )
+    <span class="k">return</span> <span class="p">(</span>
+         <span class="n">rv_lambda_1</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">lambda_1</span><span class="p">)</span>
+         <span class="o">+</span> <span class="n">rv_lambda_2</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">lambda_2</span><span class="p">)</span>
+         <span class="o">+</span> <span class="n">rv_tau</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+         <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">rv_observation</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">count_data</span><span class="p">))</span>
+    <span class="p">)</span>
 
 
-# Define a closure over our joint_log_prob.
-def unnormalized_log_posterior(lambda1, lambda2, tau):
-    return joint_log_prob(count_data, lambda1, lambda2, tau)
+<span class="c1"># Define a closure over our joint_log_prob.</span>
+<span class="k">def</span> <span class="nf">unnormalized_log_posterior</span><span class="p">(</span><span class="n">lambda1</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">joint_log_prob</span><span class="p">(</span><span class="n">count_data</span><span class="p">,</span> <span class="n">lambda1</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1144,67 +1144,67 @@ def unnormalized_log_posterior(lambda1, lambda2, tau):
 <h2>Specify the posterior sampler<a class="headerlink" href="#specify-the-posterior-sampler" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># wrap the mcmc sampling call in a @tf.function to speed it up
-@tf.function(autograph=False)
-def graph_sample_chain(*args, **kwargs):
-  return tfp.mcmc.sample_chain(*args, **kwargs)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wrap the mcmc sampling call in a @tf.function to speed it up</span>
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">autograph</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">graph_sample_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">sample_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-num_burnin_steps = 5000
-num_results = 20000
-
-
-# Set the chain&#39;s start state.
-initial_chain_state = [
-    tf.cast(tf.reduce_mean(count_data), tf.float32) * tf.ones([], dtype=tf.float32, name=&quot;init_lambda1&quot;),
-    tf.cast(tf.reduce_mean(count_data), tf.float32) * tf.ones([], dtype=tf.float32, name=&quot;init_lambda2&quot;),
-    0.5 * tf.ones([], dtype=tf.float32, name=&quot;init_tau&quot;),
-]
+<span class="n">num_burnin_steps</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">num_results</span> <span class="o">=</span> <span class="mi">20000</span>
 
 
-# Since HMC operates over unconstrained space, we need to transform the
-# samples so they live in real-space.
-unconstraining_bijectors = [
-    tfp.bijectors.Exp(),       # Maps a positive real to R.
-    tfp.bijectors.Exp(),       # Maps a positive real to R.
-    tfp.bijectors.Sigmoid(),   # Maps [0,1] to R.  
-]
-
-step_size = 0.2
-
-kernel=tfp.mcmc.TransformedTransitionKernel(
-        inner_kernel=tfp.mcmc.HamiltonianMonteCarlo(
-            target_log_prob_fn=unnormalized_log_posterior,
-            num_leapfrog_steps=2,
-            step_size=step_size,
-            state_gradients_are_stopped=True),
-        bijector=unconstraining_bijectors)
-
-kernel = tfp.mcmc.SimpleStepSizeAdaptation(
-    inner_kernel=kernel, num_adaptation_steps=int(num_burnin_steps * 0.8))
+<span class="c1"># Set the chain&#39;s start state.</span>
+<span class="n">initial_chain_state</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">count_data</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;init_lambda1&quot;</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">count_data</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;init_lambda2&quot;</span><span class="p">),</span>
+    <span class="mf">0.5</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;init_tau&quot;</span><span class="p">),</span>
+<span class="p">]</span>
 
 
-# Sample from the chain.
-[
-    lambda_1_samples,
-    lambda_2_samples,
-    posterior_tau,
-], kernel_results = graph_sample_chain(
-    num_results=num_results,
-    num_burnin_steps=num_burnin_steps,
-    current_state=initial_chain_state,
-    kernel = kernel)
+<span class="c1"># Since HMC operates over unconstrained space, we need to transform the</span>
+<span class="c1"># samples so they live in real-space.</span>
+<span class="n">unconstraining_bijectors</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span><span class="o">.</span><span class="n">Exp</span><span class="p">(),</span>       <span class="c1"># Maps a positive real to R.</span>
+    <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span><span class="o">.</span><span class="n">Exp</span><span class="p">(),</span>       <span class="c1"># Maps a positive real to R.</span>
+    <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>   <span class="c1"># Maps [0,1] to R.  </span>
+<span class="p">]</span>
+
+<span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">kernel</span><span class="o">=</span><span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">TransformedTransitionKernel</span><span class="p">(</span>
+        <span class="n">inner_kernel</span><span class="o">=</span><span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">HamiltonianMonteCarlo</span><span class="p">(</span>
+            <span class="n">target_log_prob_fn</span><span class="o">=</span><span class="n">unnormalized_log_posterior</span><span class="p">,</span>
+            <span class="n">num_leapfrog_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span>
+            <span class="n">state_gradients_are_stopped</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">bijector</span><span class="o">=</span><span class="n">unconstraining_bijectors</span><span class="p">)</span>
+
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">SimpleStepSizeAdaptation</span><span class="p">(</span>
+    <span class="n">inner_kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">num_adaptation_steps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">num_burnin_steps</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">))</span>
+
+
+<span class="c1"># Sample from the chain.</span>
+<span class="p">[</span>
+    <span class="n">lambda_1_samples</span><span class="p">,</span>
+    <span class="n">lambda_2_samples</span><span class="p">,</span>
+    <span class="n">posterior_tau</span><span class="p">,</span>
+<span class="p">],</span> <span class="n">kernel_results</span> <span class="o">=</span> <span class="n">graph_sample_chain</span><span class="p">(</span>
+    <span class="n">num_results</span><span class="o">=</span><span class="n">num_results</span><span class="p">,</span>
+    <span class="n">num_burnin_steps</span><span class="o">=</span><span class="n">num_burnin_steps</span><span class="p">,</span>
+    <span class="n">current_state</span><span class="o">=</span><span class="n">initial_chain_state</span><span class="p">,</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span><span class="p">)</span>
     
-tau_samples = tf.floor(posterior_tau * tf.cast(tf.size(count_data),dtype=tf.float32))
+<span class="n">tau_samples</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">posterior_tau</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">count_data</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&quot;acceptance rate: {}&quot;.format(
-    tf.reduce_mean(tf.cast(kernel_results.inner_results.inner_results.is_accepted,dtype=tf.float32))))
-print(&quot;final step size: {}&quot;.format(
-    tf.reduce_mean(kernel_results.inner_results.inner_results.accepted_results.step_size[-100:])))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;acceptance rate: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">kernel_results</span><span class="o">.</span><span class="n">inner_results</span><span class="o">.</span><span class="n">inner_results</span><span class="o">.</span><span class="n">is_accepted</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;final step size: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">kernel_results</span><span class="o">.</span><span class="n">inner_results</span><span class="o">.</span><span class="n">inner_results</span><span class="o">.</span><span class="n">accepted_results</span><span class="o">.</span><span class="n">step_size</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">:])))</span>
 </pre></div>
 </div>
 </div>
@@ -1220,39 +1220,39 @@ final step size: 0.030197443440556526
 <h2>Plot the Results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(12.5, 15))
-#histogram of the samples:
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="c1">#histogram of the samples:</span>
 
-ax = plt.subplot(311)
-ax.set_autoscaley_on(False)
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_autoscaley_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-plt.hist(lambda_1_samples, histtype=&#39;stepfilled&#39;, bins=30, alpha=0.85,
-         label=r&quot;posterior of $\lambda_1$&quot;, color=TFColor[0], density=True)
-plt.legend(loc=&quot;upper left&quot;)
-plt.title(r&quot;&quot;&quot;Posterior distributions of the variables $\lambda_1,\;\lambda_2,\;\tau$&quot;&quot;&quot;)
-plt.xlim([15, 30])
-plt.xlabel(r&quot;$\lambda_1$ value&quot;)
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">lambda_1_samples</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;posterior of $\lambda_1$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TFColor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;Posterior distributions of the variables $\lambda_1,\;\lambda_2,\;\tau$&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\lambda_1$ value&quot;</span><span class="p">)</span>
 
-ax = plt.subplot(312)
-ax.set_autoscaley_on(False)
-plt.hist(lambda_2_samples, histtype=&#39;stepfilled&#39;, bins=30, alpha=0.85,
-         label=r&quot;posterior of $\lambda_2$&quot;, color=TFColor[6], density=True)
-plt.legend(loc=&quot;upper left&quot;)
-plt.xlim([15, 30])
-plt.xlabel(r&quot;$\lambda_2$ value&quot;)
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_autoscaley_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">lambda_2_samples</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;stepfilled&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;posterior of $\lambda_2$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">TFColor</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\lambda_2$ value&quot;</span><span class="p">)</span>
 
-plt.subplot(313)
-w = 1.0 / tau_samples.shape[0] * np.ones_like(tau_samples)
-plt.hist(tau_samples, bins=n_count_data[0], alpha=1,
-         label=r&quot;posterior of $\tau$&quot;,
-         color=TFColor[2], weights=w, rwidth=2.)
-plt.xticks(np.arange(n_count_data[0]))
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">tau_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">tau_samples</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">tau_samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">n_count_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;posterior of $\tau$&quot;</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="n">TFColor</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">2.</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_count_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
-plt.legend(loc=&quot;upper left&quot;)
-plt.ylim([0, .75])
-plt.xlim([35, len(count_data)-20])
-plt.xlabel(r&quot;$\tau$ (in days)&quot;)
-plt.ylabel(r&quot;probability&quot;);
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.75</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">35</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">count_data</span><span class="p">)</span><span class="o">-</span><span class="mi">20</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\tau$ (in days)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;probability&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1274,46 +1274,46 @@ plt.ylabel(r&quot;probability&quot;);
 <p>In the code below, let <span class="math notranslate nohighlight">\(i\)</span> index samples from the posterior distributions. Given a day <span class="math notranslate nohighlight">\(t\)</span>, we average over all possible <span class="math notranslate nohighlight">\(\lambda_i\)</span> for that day <span class="math notranslate nohighlight">\(t\)</span>, using <span class="math notranslate nohighlight">\(\lambda_i = \lambda_{1,i}\)</span> if <span class="math notranslate nohighlight">\(t \lt \tau_i\)</span> (that is, if the behaviour change has not yet occurred), else we use <span class="math notranslate nohighlight">\(\lambda_i = \lambda_{2,i}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># tau_samples, lambda_1_samples, lambda_2_samples contain
-# N samples from the corresponding posterior distribution
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tau_samples, lambda_1_samples, lambda_2_samples contain</span>
+<span class="c1"># N samples from the corresponding posterior distribution</span>
 
-N_ = tau_samples.shape[0]
-expected_texts_per_day = tf.zeros(N_,n_count_data.shape[0]) #(10000,74)
+<span class="n">N_</span> <span class="o">=</span> <span class="n">tau_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">expected_texts_per_day</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N_</span><span class="p">,</span><span class="n">n_count_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1">#(10000,74)</span>
 
-plt.figure(figsize=(12.5, 9))
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
 
-day_range = tf.range(0,n_count_data[0],delta=1,dtype = tf.int32)
+<span class="n">day_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n_count_data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">delta</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
 
-# expand from shape of 74 to (10000,74)
-day_range = tf.expand_dims(day_range,0)
-day_range = tf.tile(day_range,tf.constant([N_,1]))
+<span class="c1"># expand from shape of 74 to (10000,74)</span>
+<span class="n">day_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">day_range</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">day_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">day_range</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="n">N_</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
 
-# expand from shape of 10000 to 10000,74
-tau_samples_per_day = tf.expand_dims(tau_samples,0)
-tau_samples_per_day = tf.transpose(tf.tile(tau_samples_per_day,tf.constant([day_range.shape[1],1])))
+<span class="c1"># expand from shape of 10000 to 10000,74</span>
+<span class="n">tau_samples_per_day</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">tau_samples</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tau_samples_per_day</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">tau_samples_per_day</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="n">day_range</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">])))</span>
 
-tau_samples_per_day = tf.cast(tau_samples_per_day,dtype=tf.int32)
-#ix_day is (10000,74) tensor where axis=0 is number of samples, axis=1 is day. each value is true iff sampleXday value is &lt; tau_sample value
-ix_day = day_range &lt; tau_samples_per_day
+<span class="n">tau_samples_per_day</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tau_samples_per_day</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+<span class="c1">#ix_day is (10000,74) tensor where axis=0 is number of samples, axis=1 is day. each value is true iff sampleXday value is &lt; tau_sample value</span>
+<span class="n">ix_day</span> <span class="o">=</span> <span class="n">day_range</span> <span class="o">&lt;</span> <span class="n">tau_samples_per_day</span>
 
-lambda_1_samples_per_day = tf.expand_dims(lambda_1_samples,0)
-lambda_1_samples_per_day = tf.transpose(tf.tile(lambda_1_samples_per_day,tf.constant([day_range.shape[1],1])))
-lambda_2_samples_per_day = tf.expand_dims(lambda_2_samples,0)
-lambda_2_samples_per_day = tf.transpose(tf.tile(lambda_2_samples_per_day,tf.constant([day_range.shape[1],1])))
+<span class="n">lambda_1_samples_per_day</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">lambda_1_samples</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lambda_1_samples_per_day</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">lambda_1_samples_per_day</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="n">day_range</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">])))</span>
+<span class="n">lambda_2_samples_per_day</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">lambda_2_samples</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lambda_2_samples_per_day</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">lambda_2_samples_per_day</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="n">day_range</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">1</span><span class="p">])))</span>
 
-expected_texts_per_day = ((tf.reduce_sum(lambda_1_samples_per_day*tf.cast(ix_day,dtype=tf.float32),axis=0) + tf.reduce_sum(lambda_2_samples_per_day*tf.cast(~ix_day,dtype=tf.float32),axis=0))/N_)
+<span class="n">expected_texts_per_day</span> <span class="o">=</span> <span class="p">((</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">lambda_1_samples_per_day</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">ix_day</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">lambda_2_samples_per_day</span><span class="o">*</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="o">~</span><span class="n">ix_day</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="n">N_</span><span class="p">)</span>
 
-plt.plot(range(n_count_data[0]), expected_texts_per_day, lw=4, color=&quot;#E24A33&quot;,
-         label=&quot;expected number of text-messages received&quot;)
-plt.xlim(0, n_count_data.numpy()[0])
-plt.xlabel(&quot;Day&quot;)
-plt.ylabel(&quot;Expected # text-messages&quot;)
-plt.title(&quot;Expected number of text-messages received&quot;)
-plt.ylim(0, 60)
-plt.bar(np.arange(len(count_data)), count_data, color=&quot;#5DA5DA&quot;, alpha=0.65,
-        label=&quot;observed texts per day&quot;)
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_count_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">expected_texts_per_day</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#E24A33&quot;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s2">&quot;expected number of text-messages received&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_count_data</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Day&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Expected # text-messages&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Expected number of text-messages received&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">count_data</span><span class="p">)),</span> <span class="n">count_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#5DA5DA&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.65</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;observed texts per day&quot;</span><span class="p">)</span>
 
-plt.legend(loc=&quot;upper left&quot;);
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -1331,7 +1331,7 @@ plt.legend(loc=&quot;upper left&quot;);
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#type your code here.
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#type your code here.</span>
 </pre></div>
 </div>
 </div>
@@ -1341,7 +1341,7 @@ plt.legend(loc=&quot;upper left&quot;);
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#type your code here.
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#type your code here.</span>
 </pre></div>
 </div>
 </div>
@@ -1351,7 +1351,7 @@ plt.legend(loc=&quot;upper left&quot;);
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#type your code here.
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#type your code here.</span>
 </pre></div>
 </div>
 </div>

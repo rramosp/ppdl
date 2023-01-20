@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -334,10 +334,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
-!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
-!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
-!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
+<span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rramosp/ppdl.git<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>mv<span class="w"> </span>-n<span class="w"> </span>ppdl/content/init.py<span class="w"> </span>ppdl/content/local<span class="w"> </span>.<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>ppdl/content/requirements.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
 </div>
@@ -346,15 +346,15 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Continuous distributions<a class="headerlink" href="#continuous-distributions" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from scipy import stats
-import matplotlib.pyplot as plt
-import pandas as pd
-from rlxutils import subplots
-import sys
-import init
-import seaborn as sns
-%matplotlib inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">init</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -364,10 +364,10 @@ import seaborn as sns
 <p>from UCI ML repository, <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Abalone">Abalone dataset</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = pd.read_csv(&quot;local/data/abalone.data.gz&quot;, 
-                names=[&quot;sex&quot;, &quot;length&quot;, &quot;diameter&quot;, &quot;height&quot;, &quot;whole weight&quot;, &quot;shucked weight&quot;,
-                         &quot;viscera weigth&quot;, &quot;shell weight&quot;, &quot;rings&quot;])
-x.head()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;local/data/abalone.data.gz&quot;</span><span class="p">,</span> 
+                <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="s2">&quot;diameter&quot;</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="s2">&quot;whole weight&quot;</span><span class="p">,</span> <span class="s2">&quot;shucked weight&quot;</span><span class="p">,</span>
+                         <span class="s2">&quot;viscera weigth&quot;</span><span class="p">,</span> <span class="s2">&quot;shell weight&quot;</span><span class="p">,</span> <span class="s2">&quot;rings&quot;</span><span class="p">])</span>
+<span class="n">x</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -468,7 +468,7 @@ x.head()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.jointplot(data=x, x=&quot;length&quot;, y=&quot;whole weight&quot;, kind=&quot;scatter&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;whole weight&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -488,9 +488,9 @@ x.head()
 <p>We can compute probabilities, by using the empirical data and counting.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dlen = x[&#39;length&#39;].values
-plt.hist(dlen, bins=30, density=True, alpha=.5);
-plt.grid();
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dlen</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dlen</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -500,9 +500,9 @@ plt.grid();
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># prob len &gt; 0.5
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prob len &gt; 0.5</span>
 
-np.mean(dlen&gt;0.5)
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dlen</span><span class="o">&gt;</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -519,9 +519,9 @@ np.mean(dlen&gt;0.5)
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># observe that it does not make much sense to ask for a specific value
-# 
-np.sum(dlen==0.6)/len(dlen)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># observe that it does not make much sense to ask for a specific value</span>
+<span class="c1"># </span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dlen</span><span class="o">==</span><span class="mf">0.6</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">dlen</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -534,22 +534,22 @@ np.sum(dlen==0.6)/len(dlen)
 <p>or we can approximate it by estimating a continuous function, with <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KernelDensity.html">KernelDensity</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from sklearn.neighbors import KernelDensity
-kde = KernelDensity(kernel=&#39;gaussian&#39;, bandwidth=0.02).fit(dlen.reshape(-1,1))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<span class="n">kde</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dlen</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 
-# kde provides log probabilities, so we make a utility function 
-P = np.vectorize(lambda x: np.exp(kde.score_samples([[x]]))[0])
+<span class="c1"># kde provides log probabilities, so we make a utility function </span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">kde</span><span class="o">.</span><span class="n">score_samples</span><span class="p">([[</span><span class="n">x</span><span class="p">]]))[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>r = np.linspace(np.min(dlen), np.max(dlen), 100)
-plt.hist(dlen, bins=30, density=True, alpha=.5, label=&quot;data&quot;);
-plt.plot(r, P(r), color=&quot;black&quot;, label=&quot;kde&quot;)
-plt.grid()
-plt.legend()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dlen</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -563,7 +563,7 @@ plt.legend()
 <p>we can know compute any <strong>infinitesimal</strong> probability</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P(0.5)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -576,8 +576,8 @@ plt.legend()
 <p>observe that the infinitesimal probability can be &gt;1, but the integration is 1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.integrate import quad
-quad(P, np.min(dlen), np.max(dlen))[0]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+<span class="n">quad</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dlen</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -593,9 +593,9 @@ quad(P, np.min(dlen), np.max(dlen))[0]
 \[CDF(x) = \int_{-\infty}^x P(x)dx\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># note very efficient but works
-CDF = np.vectorize(lambda x: quad(P, np.min(dlen), x)[0])
-CDF(.2)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># note very efficient but works</span>
+<span class="n">CDF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">quad</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">CDF</span><span class="p">(</span><span class="mf">.2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -607,8 +607,8 @@ CDF(.2)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.plot(r, CDF(r))
-plt.grid()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">CDF</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -621,9 +621,9 @@ plt.grid()
 \[P(x\in(a,b)) = \int_a^b P(x) dx = \int_{-\infty}^b P(x)dx - \int_{-\infty}^a P(x)dx = CDF(b) - CDF(a)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>a = 0.6
-b = 0.7
-CDF(0.7) - CDF(0.6)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">CDF</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span> <span class="o">-</span> <span class="n">CDF</span><span class="p">(</span><span class="mf">0.6</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -635,13 +635,13 @@ CDF(0.7) - CDF(0.6)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.hist(dlen, bins=30, density=True, alpha=.5, label=&quot;data&quot;);
-plt.plot(r, P(r), color=&quot;black&quot;, label=&quot;kde&quot;)
-plt.grid()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dlen</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 
-ix = np.linspace(a,b,100)
-plt.fill_between(ix, ix*0, P(ix), color=&quot;blue&quot;, label=&quot;P(a&lt;x&lt;b)&quot;)
-plt.legend();
+<span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ix</span><span class="p">,</span> <span class="n">ix</span><span class="o">*</span><span class="mi">0</span><span class="p">,</span> <span class="n">P</span><span class="p">(</span><span class="n">ix</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;P(a&lt;x&lt;b)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -655,8 +655,8 @@ plt.legend();
 <p>we can use also KDE for sampling new data</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = kde.sample(100000)[:,0]
-s
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">kde</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100000</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">s</span>
 </pre></div>
 </div>
 </div>
@@ -669,9 +669,9 @@ s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.hist(dlen, bins=30, density=True, alpha=.5, label=&quot;data&quot;);
-plt.hist(s, bins=30, density=True, alpha=.5, label=&quot;samples&quot;);
-plt.grid()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dlen</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -685,15 +685,15 @@ plt.grid()
 <p>we can also get a density estimate for the joint distribution</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dlen = x[&#39;length&#39;]
-dwei = x[&#39;whole weight&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dlen</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;length&#39;</span><span class="p">]</span>
+<span class="n">dwei</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;whole weight&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>g = sns.jointplot(x=dlen, y=dwei, kind=&quot;kde&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">dlen</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">dwei</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -703,7 +703,7 @@ dwei = x[&#39;whole weight&#39;]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>kde2d = KernelDensity(bandwidth=.02).fit(x[[&#39;length&#39;, &#39;whole weight&#39;]].values)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kde2d</span> <span class="o">=</span> <span class="n">KernelDensity</span><span class="p">(</span><span class="n">bandwidth</span><span class="o">=</span><span class="mf">.02</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">[[</span><span class="s1">&#39;length&#39;</span><span class="p">,</span> <span class="s1">&#39;whole weight&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -711,14 +711,14 @@ dwei = x[&#39;whole weight&#39;]
 <p>we can compute the pdf at any point (maybe <span class="math notranslate nohighlight">\(&gt;1\)</span>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P = lambda x: np.exp(kde2d.score_samples(np.r_[x].reshape(-1,2)))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">kde2d</span><span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P([0.6,1])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P</span><span class="p">([</span><span class="mf">0.6</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -739,8 +739,8 @@ dwei = x[&#39;whole weight&#39;]
 <p>but observe the two dimensional numerical integration struggles to compute the value.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.integrate import dblquad
-dblquad(lambda x,y: P([x,y]), np.min(dwei), np.max(dwei), lambda k: np.min(dlen), lambda k: np.max(dlen))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">dblquad</span>
+<span class="n">dblquad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">P</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dwei</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dwei</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dlen</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -757,25 +757,25 @@ dblquad(lambda x,y: P([x,y]), np.min(dwei), np.max(dwei), lambda k: np.min(dlen)
 <p>and of course the CDF becomes more complex since we need to accumulate in 2D and becomes almost impractical.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>la,lb = 0.5,0.7
-wa,wb = 0.9,1.1
-pl,pw = 0.6,1.0
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">la</span><span class="p">,</span><span class="n">lb</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span><span class="mf">0.7</span>
+<span class="n">wa</span><span class="p">,</span><span class="n">wb</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span><span class="mf">1.1</span>
+<span class="n">pl</span><span class="p">,</span><span class="n">pw</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span><span class="mf">1.0</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>g = sns.jointplot(x=dlen, y=dwei, kind=&quot;kde&quot;, 
-                  joint_kws={&quot;alpha&quot;:.5, &quot;color&quot;: &quot;gray&quot;},
-                  marginal_kws={&quot;alpha&quot;:.5, &quot;color&quot;: &quot;gray&quot;})
-g.ax_joint.fill_between(np.linspace(la,lb,20), [wa]*20, [wb]*20, color=&quot;red&quot;, alpha=.5)
-g.ax_joint.axvline(la, color=&quot;black&quot;, ls=&quot;--&quot;)
-g.ax_joint.axvline(lb, color=&quot;black&quot;, ls=&quot;--&quot;)
-g.ax_joint.axhline(wa, color=&quot;black&quot;, ls=&quot;--&quot;)
-g.ax_joint.axhline(wb, color=&quot;black&quot;, ls=&quot;--&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">dlen</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">dwei</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span> 
+                  <span class="n">joint_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span><span class="mf">.5</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;gray&quot;</span><span class="p">},</span>
+                  <span class="n">marginal_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span><span class="mf">.5</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;gray&quot;</span><span class="p">})</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">la</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span> <span class="p">[</span><span class="n">wa</span><span class="p">]</span><span class="o">*</span><span class="mi">20</span><span class="p">,</span> <span class="p">[</span><span class="n">wb</span><span class="p">]</span><span class="o">*</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">la</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">lb</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">wa</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
 
-g.ax_joint.scatter(pl, pw, color=&quot;black&quot;, s=50);
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span> <span class="n">pw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -785,8 +785,8 @@ g.ax_joint.scatter(pl, pw, color=&quot;black&quot;, s=50);
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># the integration of the 2D interval
-dblquad(lambda x,y: P([x,y]), wa, wb, lambda k: la, lambda k: lb)[0]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the integration of the 2D interval</span>
+<span class="n">dblquad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">P</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]),</span> <span class="n">wa</span><span class="p">,</span> <span class="n">wb</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">la</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">lb</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -798,8 +798,8 @@ dblquad(lambda x,y: P([x,y]), wa, wb, lambda k: la, lambda k: lb)[0]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># the PDF value of a point within the interval
-P([pl,pw])[0]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the PDF value of a point within the interval</span>
+<span class="n">P</span><span class="p">([</span><span class="n">pl</span><span class="p">,</span><span class="n">pw</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -820,9 +820,9 @@ P([pl,pw])[0]
 <p>These marginals match the ones as plotted above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_len = np.vectorize(lambda x: quad(lambda y: P([x,y]), np.min(dwei), np.max(dwei))[0])
-# check marginal integraetes to 1
-quad(P_len, np.min(dlen), np.max(dlen))[0]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_len</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">P</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dwei</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dwei</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># check marginal integraetes to 1</span>
+<span class="n">quad</span><span class="p">(</span><span class="n">P_len</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dlen</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -834,9 +834,9 @@ quad(P_len, np.min(dlen), np.max(dlen))[0]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>rlen = np.linspace(np.min(dlen), np.max(dlen), 50)
-plt.plot(rlen, P_len(rlen))                     
-plt.grid();
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rlen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rlen</span><span class="p">,</span> <span class="n">P_len</span><span class="p">(</span><span class="n">rlen</span><span class="p">))</span>                     
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -847,9 +847,9 @@ plt.grid();
 <p>observe the numerical instabilities</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>P_wei = np.vectorize(lambda y: quad(lambda x: P([x,y]), np.min(dlen), np.max(dlen))[0])
-# check marginal integraetes to 1
-quad(P_wei, np.min(dwei), np.max(dwei))[0]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_wei</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">P</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dlen</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># check marginal integraetes to 1</span>
+<span class="n">quad</span><span class="p">(</span><span class="n">P_wei</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dwei</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dwei</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -861,9 +861,9 @@ quad(P_wei, np.min(dwei), np.max(dwei))[0]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>rwei = np.linspace(np.min(dwei), np.max(dwei), 50)
-plt.plot(rwei, P_wei(rwei))                     
-plt.grid();
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rwei</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dwei</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dwei</span><span class="p">),</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rwei</span><span class="p">,</span> <span class="n">P_wei</span><span class="p">(</span><span class="n">rwei</span><span class="p">))</span>                     
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -880,11 +880,11 @@ plt.grid();
 <p>for instance <span class="math notranslate nohighlight">\(P(l|w=1)\)</span> looks as follows</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>w = 1
-g = sns.jointplot(x=dlen, y=dwei, kind=&quot;kde&quot;, 
-                  joint_kws={&quot;alpha&quot;:.5, &quot;color&quot;: &quot;gray&quot;},
-                  marginal_kws={&quot;alpha&quot;:.5, &quot;color&quot;: &quot;gray&quot;})
-g.ax_joint.axhline(w, color=&quot;black&quot;, ls=&quot;--&quot;, label=&quot;w&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">dlen</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">dwei</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span> 
+                  <span class="n">joint_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span><span class="mf">.5</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;gray&quot;</span><span class="p">},</span>
+                  <span class="n">marginal_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;alpha&quot;</span><span class="p">:</span><span class="mf">.5</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;gray&quot;</span><span class="p">})</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -897,17 +897,17 @@ g.ax_joint.axhline(w, color=&quot;black&quot;, ls=&quot;--&quot;, label=&quot;w&
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>Pu = lambda x: P([x,w]) # unnormalized conditional
-Z = quad(Pu, np.min(dlen), np.max(dlen))[0]
-Pc = np.vectorize(lambda x: Pu(x)/Z)   # normalized conditional
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Pu</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">P</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">w</span><span class="p">])</span> <span class="c1"># unnormalized conditional</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">Pu</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dlen</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Pc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Pu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">Z</span><span class="p">)</span>   <span class="c1"># normalized conditional</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>r = np.linspace(np.min(dlen), np.max(dlen), 100)
-plt.plot(r, Pc(r))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">dlen</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">Pc</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -923,19 +923,19 @@ plt.plot(r, Pc(r))
 <h2>sampling<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax,i in subplots(2):
-    s = kde2d.sample(100000)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">kde2d</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
     
-    if i==0: 
-        plt.hist2d(s[:,0], s[:,1], bins=100, label=&quot;samples&quot;, cmap=plt.cm.Reds);
-        plt.title(&quot;samples histogram&quot;)
-    if i==1: 
-        plt.hist2d(dlen, dwei, bins=100, label=&quot;samples&quot;, cmap=plt.cm.Reds);
-        plt.title(&quot;original data&quot;)
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist2d</span><span class="p">(</span><span class="n">s</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Reds</span><span class="p">);</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;samples histogram&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist2d</span><span class="p">(</span><span class="n">dlen</span><span class="p">,</span> <span class="n">dwei</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;samples&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Reds</span><span class="p">);</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;original data&quot;</span><span class="p">)</span>
 
-    plt.xlabel(&quot;length&quot;)
-    plt.ylabel(&quot;weight&quot;)
-plt.tight_layout()
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;weight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -945,7 +945,7 @@ plt.tight_layout()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span>
 </pre></div>
 </div>
 </div>
@@ -963,7 +963,7 @@ plt.tight_layout()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>len(s), len(dlen)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">dlen</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

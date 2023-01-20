@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -282,30 +282,30 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import matplotlib.pyplot as plt
-from scipy import stats
-from scipy.integrate import quad
-from progressbar import progressbar as pbar
-from rlxutils import subplots, copy_func
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
 
-import tensorflow as tf
-import tensorflow_probability as tfp
-tfd = tfp.distributions
-tfb = tfp.bijectors
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
 
-%matplotlib inline
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># real (and unknown) parameter
-real_mu = 0.8
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># real (and unknown) parameter</span>
+<span class="n">real_mu</span> <span class="o">=</span> <span class="mf">0.8</span>
 
-# possible range of values for mu
-mu_support = np.r_[-10,10]
+<span class="c1"># possible range of values for mu</span>
+<span class="n">mu_support</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -314,9 +314,9 @@ mu_support = np.r_[-10,10]
 <h1>An observation<a class="headerlink" href="#an-observation" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#x = Model(real_mu).rvs(1)[0]
-# a very extreme (low probability) observation
-x = 2
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#x = Model(real_mu).rvs(1)[0]</span>
+<span class="c1"># a very extreme (low probability) observation</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -333,55 +333,55 @@ x = 2
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>log_likelihood = lambda mu: tfd.Normal(loc=mu, scale=1).log_prob(x)
-log_prior      = lambda mu: tfd.Normal(loc=-2, scale=3).log_prob(mu)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log_likelihood</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">mu</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">log_prior</span>      <span class="o">=</span> <span class="k">lambda</span> <span class="n">mu</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># wrap the mcmc sampling call in a @tf.function to speed it up
-@tf.function(autograph=False)
-def graph_sample_chain(*args, **kwargs):
-    return tfp.mcmc.sample_chain(*args, **kwargs)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wrap the mcmc sampling call in a @tf.function to speed it up</span>
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">autograph</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">graph_sample_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">sample_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-def sample(x):
-    num_burnin_steps = 5000
-    num_results = 20000
+<span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">num_burnin_steps</span> <span class="o">=</span> <span class="mi">5000</span>
+    <span class="n">num_results</span> <span class="o">=</span> <span class="mi">20000</span>
         
-    unnormalized_log_posterior = lambda mu: log_likelihood(mu) + log_prior(mu)    
+    <span class="n">unnormalized_log_posterior</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">mu</span><span class="p">:</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>    
 
-    initial_chain_state = [
-         tf.ones([], dtype=tf.float32, name=&quot;init_mu&quot;),
-    ]
+    <span class="n">initial_chain_state</span> <span class="o">=</span> <span class="p">[</span>
+         <span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;init_mu&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
 
-    step_size = 1
+    <span class="n">step_size</span> <span class="o">=</span> <span class="mi">1</span>
 
-    kernel = tfp.mcmc.HamiltonianMonteCarlo(
-                target_log_prob_fn=unnormalized_log_posterior,
-                num_leapfrog_steps=2,
-                step_size=step_size,
-                state_gradients_are_stopped=True
-    )
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">mcmc</span><span class="o">.</span><span class="n">HamiltonianMonteCarlo</span><span class="p">(</span>
+                <span class="n">target_log_prob_fn</span><span class="o">=</span><span class="n">unnormalized_log_posterior</span><span class="p">,</span>
+                <span class="n">num_leapfrog_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">,</span>
+                <span class="n">state_gradients_are_stopped</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
     
-    [
-        posterior_mu
-    ], kernel_results = graph_sample_chain(
-                num_results=num_results,
-                num_burnin_steps=num_burnin_steps,
-                current_state=initial_chain_state,
-                kernel = kernel
-        )
+    <span class="p">[</span>
+        <span class="n">posterior_mu</span>
+    <span class="p">],</span> <span class="n">kernel_results</span> <span class="o">=</span> <span class="n">graph_sample_chain</span><span class="p">(</span>
+                <span class="n">num_results</span><span class="o">=</span><span class="n">num_results</span><span class="p">,</span>
+                <span class="n">num_burnin_steps</span><span class="o">=</span><span class="n">num_burnin_steps</span><span class="p">,</span>
+                <span class="n">current_state</span><span class="o">=</span><span class="n">initial_chain_state</span><span class="p">,</span>
+                <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span>
+        <span class="p">)</span>
 
-    return posterior_mu
+    <span class="k">return</span> <span class="n">posterior_mu</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>posterior_mu = sample(x).numpy()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">posterior_mu</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -395,14 +395,14 @@ def sample(x):
 <p>observe that, as we are sampling, we do not have an analytical expression for the PDF</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax,i in subplots(1, usizex=6):
-    plt.hist(posterior_mu, density=True, bins=50, alpha=.5);
-    plt.axvline(real_mu, color=&quot;black&quot;, label=r&quot;real (unknown) $\mu$&quot;, alpha=.5, lw=2)
-    plt.axvline(x, color=&quot;black&quot;, label=r&quot;measurement&quot;, alpha=.5, ls=&quot;--&quot;)
-    plt.title(&quot;mcmc samples histogram&quot;)
-    plt.grid(); plt.legend();
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">posterior_mu</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">real_mu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;real (unknown) $\mu$&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;measurement&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;mcmc samples histogram&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 
-    plt.xlim(*mu_support)
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">*</span><span class="n">mu_support</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -412,7 +412,7 @@ def sample(x):
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>posterior_mu.mean(), posterior_mu.std()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">posterior_mu</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">posterior_mu</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -334,13 +334,13 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import matplotlib.pyplot as plt
-from scipy import stats
-from scipy.integrate import quad
-from progressbar import progressbar as pbar
-from rlxutils import subplots, copy_func
-%matplotlib inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -357,11 +357,11 @@ X_i &amp;= \begin{cases} \text{Poisson}(2), &amp; \tau &gt; i/N \\ \text{Poisson
 \end{align*}\end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># real (and unknown) parameter
-real_tau = 0.8
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># real (and unknown) parameter</span>
+<span class="n">real_tau</span> <span class="o">=</span> <span class="mf">0.8</span>
 
-# possible range of values for tau
-tau_support = 0,1
+<span class="c1"># possible range of values for tau</span>
+<span class="n">tau_support</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -376,28 +376,28 @@ tau_support = 0,1
 \[\log P(\tau|X) = \log \Bigg[\frac{P(X|\tau)P(\tau)}{P(X)}\Bigg] = \log P(X|\tau) + \log P(\tau) - \log P(X)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>class TModel:
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TModel</span><span class="p">:</span>
         
-    poisson_A = stats.poisson(2)
-    poisson_B = stats.poisson(4)
+    <span class="n">poisson_A</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">poisson_B</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 
-    def __init__(self, tau):        
-        assert tau&gt;=0 and tau&lt;=1        
-        self.tau = tau
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tau</span><span class="p">):</span>        
+        <span class="k">assert</span> <span class="n">tau</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">tau</span><span class="o">&lt;=</span><span class="mi">1</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">tau</span> <span class="o">=</span> <span class="n">tau</span>
         
-    def rvs(self, n):
-        n1 = int(n*self.tau)        
-        r = list(self.poisson_A.rvs(n1)) + list(self.poisson_B.rvs(n - n1))
-        return r
+    <span class="k">def</span> <span class="nf">rvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">n1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">)</span>        
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poisson_A</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n1</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poisson_B</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">n1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">r</span>
     
-    def logprob(self, x):
-        n = int(len(x)*self.tau)
-        return np.sum(np.log(self.poisson_A.pmf(x[:n]))) + np.sum(np.log(self.poisson_B.pmf(x[n:])))    
+    <span class="k">def</span> <span class="nf">logprob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tau</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poisson_A</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="n">n</span><span class="p">])))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poisson_B</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">:])))</span>    
     
-    # loglikelihood on tau
-    @classmethod
-    def loglikelihood(cls, tau, x):
-        return cls(tau).logprob(x)
+    <span class="c1"># loglikelihood on tau</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">loglikelihood</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span><span class="o">.</span><span class="n">logprob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     
 </pre></div>
 </div>
@@ -408,30 +408,30 @@ tau_support = 0,1
 <h1>our observations<a class="headerlink" href="#our-observations" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = TModel(tau=real_tau).rvs(30)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">TModel</span><span class="p">(</span><span class="n">tau</span><span class="o">=</span><span class="n">real_tau</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 
-# use this sample for comparison
-x = [3, 3, 2, 3, 1, 1, 1, 1, 0, 1, 0, 2, 0, 2, 3, 2, 0, 3, 2, 2, 2, 2, 2, 1, 1, 5, 6, 2, 3, 4]
+<span class="c1"># use this sample for comparison</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># fix the likelihood to the observed data, so that it is
-# only a function of tau
-loglikelihood = lambda tau: TModel.loglikelihood(tau, x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fix the likelihood to the observed data, so that it is</span>
+<span class="c1"># only a function of tau</span>
+<span class="n">loglikelihood</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tau</span><span class="p">:</span> <span class="n">TModel</span><span class="o">.</span><span class="n">loglikelihood</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(10,3))
-plt.scatter(np.arange(len(x))/len(x), x)
-plt.axvline((real_tau*len(x)+.5)/len(x), ls=&quot;--&quot;, color=&quot;black&quot;, label=r&quot;the real (unknown) $\tau$&quot;)
-plt.grid(); plt.legend();
-plt.xlabel(r&quot;$\tau$&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">((</span><span class="n">real_tau</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">.5</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;the real (unknown) $\tau$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\tau$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -444,7 +444,7 @@ plt.xlabel(r&quot;$\tau$&quot;)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>TModel.loglikelihood(0.2, x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TModel</span><span class="o">.</span><span class="n">loglikelihood</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -456,11 +456,11 @@ plt.xlabel(r&quot;$\tau$&quot;)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>rtau = np.linspace(*tau_support, 100)
-plt.plot(rtau, [loglikelihood(tau) for tau in rtau])
-plt.axvline(real_tau, color=&quot;black&quot;, label=r&quot;real (unknown) $\tau$&quot;)
-plt.legend();
-plt.grid(); plt.xlabel(r&quot;$\tau$&quot;); plt.title(r&quot;log likelihood for $\tau$&quot;);
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rtau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">tau_support</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rtau</span><span class="p">,</span> <span class="p">[</span><span class="n">loglikelihood</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">rtau</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">real_tau</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;real (unknown) $\tau$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\tau$&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;log likelihood for $\tau$&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -474,16 +474,16 @@ plt.grid(); plt.xlabel(r&quot;$\tau$&quot;); plt.title(r&quot;log likelihood for
 <p>Observe how we compute the normalization factor in <code class="docutils literal notranslate"><span class="pre">get_logposterior_fn</span></code> very naively with <strong>Montecarlo integration</strong>. This will have its limitations if our problem gets more complex even if it is very slightly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># the posterior (using Bayes theorem)
-def get_logposterior_fn(loglikelihood_fn, logprior_fn, support, integration_intervals=1000):
-    assert len(support)==2
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the posterior (using Bayes theorem)</span>
+<span class="k">def</span> <span class="nf">get_logposterior_fn</span><span class="p">(</span><span class="n">loglikelihood_fn</span><span class="p">,</span> <span class="n">logprior_fn</span><span class="p">,</span> <span class="n">support</span><span class="p">,</span> <span class="n">integration_intervals</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">support</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span>
 
-    # Montecarlo computation of the integral
-    xr = np.linspace(*support, integration_intervals)
-    Z = np.log(np.sum([np.exp(loglikelihood_fn(x) + logprior_fn(x)) for x in xr]) * (xr[1]-xr[0]))
+    <span class="c1"># Montecarlo computation of the integral</span>
+    <span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">support</span><span class="p">,</span> <span class="n">integration_intervals</span><span class="p">)</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">loglikelihood_fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">logprior_fn</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xr</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">xr</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
     
-    posterior_fn = lambda x: loglikelihood_fn(x) + logprior_fn(x) -  Z
-    return posterior_fn
+    <span class="n">posterior_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">loglikelihood_fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">logprior_fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span>  <span class="n">Z</span>
+    <span class="k">return</span> <span class="n">posterior_fn</span>
 </pre></div>
 </div>
 </div>
@@ -491,24 +491,24 @@ def get_logposterior_fn(loglikelihood_fn, logprior_fn, support, integration_inte
 <p>The plots below show <strong>both</strong> probabilities and log probabilities for comparison.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def plot_logprobs(logprior, logposterior):
-    rtau = np.linspace(*tau_support,100)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_logprobs</span><span class="p">(</span><span class="n">logprior</span><span class="p">,</span> <span class="n">logposterior</span><span class="p">):</span>
+    <span class="n">rtau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">tau_support</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 
-    for ax,i in subplots(4, usizex=5, n_cols=2):
-        if i in [0,2]:
-            p = logprior if i==0 else lambda x: np.exp(logprior(x))
-            plt.plot(rtau, [p(tau) for tau in rtau])
-            plt.grid();   
-            plt.title((&quot;log &quot; if i==0 else &quot;&quot;)+&quot;prior probability (analitical)&quot;)
-        if i in [1,3]:
-            p = logposterior if i==1 else lambda x: np.exp(logposterior(x))
-            plt.plot(rtau, [p(tau) for tau in rtau])
-            plt.axvline(real_tau, color=&quot;black&quot;, label=r&quot;real (unknown) $\tau$&quot;)
-            plt.title((&quot;log &quot; if i==1 else &quot;&quot;)+&quot;posterior probability (analitical)&quot;)
-            plt.grid(); plt.legend();
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">logprior</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logprior</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rtau</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">rtau</span><span class="p">])</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>   
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">((</span><span class="s2">&quot;log &quot;</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;prior probability (analitical)&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">logposterior</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logposterior</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rtau</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">rtau</span><span class="p">])</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">real_tau</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;real (unknown) $\tau$&quot;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">((</span><span class="s2">&quot;log &quot;</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;posterior probability (analitical)&quot;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 
-        plt.xlabel(r&quot;$\tau$&quot;)
-    plt.tight_layout()
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\tau$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -528,21 +528,21 @@ def get_logposterior_fn(loglikelihood_fn, logprior_fn, support, integration_inte
 \[P(\tau|X) = \frac{P(X|\tau)P(\tau)}{P(X)} = \frac{P(X|\tau) P(\tau)}{\int P(X|\tau)P(\tau) d\tau} = \frac{P(X|\tau)}{\int P(X|\tau) d\tau}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>logprior = lambda tau: np.log(stats.uniform(*tau_support).pdf(tau))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logprior</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tau</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">tau_support</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>logposterior = get_logposterior_fn(loglikelihood, logprior, tau_support)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logposterior</span> <span class="o">=</span> <span class="n">get_logposterior_fn</span><span class="p">(</span><span class="n">loglikelihood</span><span class="p">,</span> <span class="n">logprior</span><span class="p">,</span> <span class="n">tau_support</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_logprobs(logprior, logposterior)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_logprobs</span><span class="p">(</span><span class="n">logprior</span><span class="p">,</span> <span class="n">logposterior</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -552,11 +552,11 @@ def get_logposterior_fn(loglikelihood_fn, logprior_fn, support, integration_inte
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## check the integral of the posterior adds up to 1
-## we do this for sanity, as numerical errors computing the 
-## integral in bayes theorem might arise very easily
-rtau = np.linspace(*tau_support,1000)
-np.sum([np.exp(logposterior(tau))/len(rtau) for tau in rtau])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## check the integral of the posterior adds up to 1</span>
+<span class="c1">## we do this for sanity, as numerical errors computing the </span>
+<span class="c1">## integral in bayes theorem might arise very easily</span>
+<span class="n">rtau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">tau_support</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logposterior</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">rtau</span><span class="p">)</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">rtau</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -576,23 +576,23 @@ np.sum([np.exp(logposterior(tau))/len(rtau) for tau in rtau])
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>unnormalized_prior = lambda x: (1-x+.01)**20
-Z = quad(unnormalized_prior, *tau_support)[0]
-logprior = lambda x: np.log(unnormalized_prior(x)/Z)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unnormalized_prior</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="o">+</span><span class="mf">.01</span><span class="p">)</span><span class="o">**</span><span class="mi">20</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">unnormalized_prior</span><span class="p">,</span> <span class="o">*</span><span class="n">tau_support</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">logprior</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">unnormalized_prior</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">Z</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>logposterior = get_logposterior_fn(loglikelihood, logprior, tau_support)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logposterior</span> <span class="o">=</span> <span class="n">get_logposterior_fn</span><span class="p">(</span><span class="n">loglikelihood</span><span class="p">,</span> <span class="n">logprior</span><span class="p">,</span> <span class="n">tau_support</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_logprobs(logprior, logposterior)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_logprobs</span><span class="p">(</span><span class="n">logprior</span><span class="p">,</span> <span class="n">logposterior</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -602,9 +602,9 @@ logprior = lambda x: np.log(unnormalized_prior(x)/Z)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## check the integral of the posterior adds up to 1
-rtau = np.linspace(*tau_support,1000)
-np.sum([np.exp(logposterior(tau))/len(rtau) for tau in rtau])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## check the integral of the posterior adds up to 1</span>
+<span class="n">rtau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">tau_support</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logposterior</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">rtau</span><span class="p">)</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">rtau</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -620,23 +620,23 @@ np.sum([np.exp(logposterior(tau))/len(rtau) for tau in rtau])
 <p>Question: from how many data points the posterior has a maximum around the real <span class="math notranslate nohighlight">\(\tau\)</span>?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = TModel(tau=real_tau).rvs(200)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">TModel</span><span class="p">(</span><span class="n">tau</span><span class="o">=</span><span class="n">real_tau</span><span class="p">)</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
-# use this sample for comparison
-x = [3, 2, 3, 2, 2, 1, 2, 1, 0, 6, 0, 2, 0, 1, 3, 1, 2, 2, 2, 4, 6, 2, 3, 4, 1, 6, 
-     1, 3, 2, 2, 0, 2, 0, 1, 1, 1, 2, 2, 1, 4, 0, 3, 2, 5, 4, 1, 4, 2, 1, 0, 2, 2,
-     2, 3, 2, 3, 0, 0, 0, 5, 0, 2, 1, 0, 0, 3, 0, 0, 1, 4, 2, 2, 4, 3, 1, 2, 3, 3, 
-     3, 1, 1, 2, 3, 4, 4, 4, 5, 1, 4, 3, 4, 1, 1, 1, 2, 0, 0, 1, 2, 2, 2, 0, 4, 1, 
-     2, 3, 0, 3, 2, 1, 0, 4, 2, 3, 5, 3, 1, 3, 2, 0, 2, 2, 1, 0, 3, 1, 2, 5, 3, 3, 
-     5, 2, 2, 3, 2, 3, 3, 2, 1, 1, 0, 4, 1, 1, 1, 1, 1, 1, 1, 4, 0, 3, 3, 0, 5, 2, 
-     3, 2, 1, 1, 5, 3, 2, 4, 5, 4, 5, 6, 6, 2, 5, 5, 4, 3, 3, 6, 8, 6, 3, 5, 7, 5, 
-     6, 3, 6, 1, 7, 8, 6, 2, 1, 6, 5, 2, 6, 5, 5, 3, 4, 5]
+<span class="c1"># use this sample for comparison</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> 
+     <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+     <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> 
+     <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> 
+     <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> 
+     <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> 
+     <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> 
+     <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 
-plt.figure(figsize=(10,3))
-plt.scatter(np.arange(len(x))/len(x), x)
-#plt.axvline((real_tau*len(x)+.5)/len(x), ls=&quot;--&quot;, color=&quot;black&quot;)
-plt.xlabel(r&quot;$\tau$&quot;)
-plt.grid();
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<span class="c1">#plt.axvline((real_tau*len(x)+.5)/len(x), ls=&quot;--&quot;, color=&quot;black&quot;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\tau$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -646,14 +646,14 @@ plt.grid();
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>logposterior = get_logposterior_fn(loglikelihood, logprior, tau_support)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logposterior</span> <span class="o">=</span> <span class="n">get_logposterior_fn</span><span class="p">(</span><span class="n">loglikelihood</span><span class="p">,</span> <span class="n">logprior</span><span class="p">,</span> <span class="n">tau_support</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_logprobs(logprior, logposterior)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_logprobs</span><span class="p">(</span><span class="n">logprior</span><span class="p">,</span> <span class="n">logposterior</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -663,9 +663,9 @@ plt.grid();
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## check the integral of the posterior adds up to 1
-rtau = np.linspace(*tau_support,1000)
-np.sum([np.exp(logposterior(tau))/len(rtau) for tau in rtau])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## check the integral of the posterior adds up to 1</span>
+<span class="n">rtau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">tau_support</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logposterior</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">rtau</span><span class="p">)</span> <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">rtau</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -681,21 +681,21 @@ np.sum([np.exp(logposterior(tau))/len(rtau) for tau in rtau])
 <p>if we use an uninformative prior again</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>logprior = lambda tau: np.log(stats.uniform(*tau_support).pdf(tau))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logprior</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">tau</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">tau_support</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>logposterior = get_logposterior_fn(loglikelihood, logprior, tau_support)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logposterior</span> <span class="o">=</span> <span class="n">get_logposterior_fn</span><span class="p">(</span><span class="n">loglikelihood</span><span class="p">,</span> <span class="n">logprior</span><span class="p">,</span> <span class="n">tau_support</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_logprobs(logprior, logposterior)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_logprobs</span><span class="p">(</span><span class="n">logprior</span><span class="p">,</span> <span class="n">logposterior</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

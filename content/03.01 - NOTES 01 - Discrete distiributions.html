@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -318,10 +318,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
-!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
-!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
-!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
+<span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rramosp/ppdl.git<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>mv<span class="w"> </span>-n<span class="w"> </span>ppdl/content/init.py<span class="w"> </span>ppdl/content/local<span class="w"> </span>.<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>ppdl/content/requirements.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
 </div>
@@ -330,14 +330,14 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Discrete distributions<a class="headerlink" href="#discrete-distributions" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from scipy import stats
-import matplotlib.pyplot as plt
-import pandas as pd
-from rlxutils import subplots
-import sys
-import init
-%matplotlib inline
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">init</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -360,20 +360,20 @@ import init
 <p>This is the data of <strong>people ages</strong> and <strong>district</strong> in Medellin where they live, taken from <a class="reference external" href="http://medata.gov.co/dataset/proyecci%C3%B3n-de-poblaci%C3%B3n-medell%C3%ADn-2017">medata.gov.co</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = pd.read_csv(&quot;local/data/proyecciones_de_poblacion_medellin_2017.csv.gz&quot;, delimiter=&quot;;&quot;)
-x[&#39;grupo_edad&#39;] = x.grupo_edad.str.strip().str.lower()
-x = x.rename({&quot;codigo&quot;: &quot;barrio&quot;, &quot;grupo_edad&quot;: &quot;edad&quot;}, axis=1)
-x = x.replace(&quot;0-4&quot;, &#39;00-04&#39;).replace(&#39;5-9&#39;, &#39;05-09&#39;).replace(&#39;80 y más&#39;, &#39;80-&#39;)
-x = x[x.edad.str.lower().str.strip()!=&quot;total&quot;]
-x = x[[(&quot;Suma&quot; not in i)&amp;(&quot;Total&quot; not in i) for i in x.barrio]]
-x = x.groupby([&quot;edad&quot;, &quot;barrio&quot; ])[[&#39;total_2017&#39;]].sum().unstack().T.loc[&#39;total_2017&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;local/data/proyecciones_de_poblacion_medellin_2017.csv.gz&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="n">x</span><span class="p">[</span><span class="s1">&#39;grupo_edad&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">grupo_edad</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&quot;codigo&quot;</span><span class="p">:</span> <span class="s2">&quot;barrio&quot;</span><span class="p">,</span> <span class="s2">&quot;grupo_edad&quot;</span><span class="p">:</span> <span class="s2">&quot;edad&quot;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;0-4&quot;</span><span class="p">,</span> <span class="s1">&#39;00-04&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;5-9&#39;</span><span class="p">,</span> <span class="s1">&#39;05-09&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;80 y más&#39;</span><span class="p">,</span> <span class="s1">&#39;80-&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">edad</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">!=</span><span class="s2">&quot;total&quot;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[[(</span><span class="s2">&quot;Suma&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="s2">&quot;Total&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">barrio</span><span class="p">]]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;edad&quot;</span><span class="p">,</span> <span class="s2">&quot;barrio&quot;</span> <span class="p">])[[</span><span class="s1">&#39;total_2017&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;total_2017&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -865,8 +865,8 @@ x = x.groupby([&quot;edad&quot;, &quot;barrio&quot; ])[[&#39;total_2017&#39;]].s
 <p>we turn it into a <strong>joint distribution</strong>. This is an <strong>empirical</strong> distribution, because the data was obtained by counting using some method  on the real world and not derived or assumed by some analytical procedure or calculation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xd = x/x.values.sum()
-xd
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xd</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">xd</span>
 </pre></div>
 </div>
 </div>
@@ -1355,8 +1355,8 @@ xd
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># it must add up to 1
-xd.values.sum()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># it must add up to 1</span>
+<span class="n">xd</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1372,15 +1372,15 @@ xd.values.sum()
 <p>This are the <strong>TWO</strong> marginal distributions, for each one of the variables</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dbarrio = xd.sum(axis=1)
-dedad   = xd.sum(axis=0)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbarrio</span> <span class="o">=</span> <span class="n">xd</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dedad</span>   <span class="o">=</span> <span class="n">xd</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dbarrio.sum(), dedad.sum()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbarrio</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">dedad</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1392,12 +1392,12 @@ dedad   = xd.sum(axis=0)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax,i in subplots(2, usizex=5, usizey=3.5):
-    if i==0: dbarrio.plot(kind=&quot;bar&quot;)
-    if i==1: dedad.plot(kind=&quot;bar&quot;)
-    plt.grid()
-    plt.ylim(0,0.1)
-plt.tight_layout()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mf">3.5</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">dbarrio</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">dedad</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
         
 </pre></div>
 </div>
@@ -1417,9 +1417,9 @@ plt.tight_layout()
 <p>This normalization will become very important later on in the course.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># unnormalized conditional
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># unnormalized conditional</span>
 
-xd.loc[&#39;Belén&#39;]
+<span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Belén&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1449,8 +1449,8 @@ Name: Belén, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># it does not add up to one
-xd.loc[&#39;Belén&#39;].sum()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># it does not add up to one</span>
+<span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Belén&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1462,11 +1462,11 @@ xd.loc[&#39;Belén&#39;].sum()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># we normalized it
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we normalized it</span>
 
-dbelen = xd.loc[&#39;Belén&#39;] / xd.loc[&#39;Belén&#39;].sum()
-print (&quot;check sum =&quot;, dbelen.sum())
-dbelen
+<span class="n">dbelen</span> <span class="o">=</span> <span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Belén&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Belén&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;check sum =&quot;</span><span class="p">,</span> <span class="n">dbelen</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">dbelen</span>
 </pre></div>
 </div>
 </div>
@@ -1499,8 +1499,8 @@ Name: Belén, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dbelen.plot(kind=&#39;bar&#39;, figsize=(6,2))
-plt.grid();
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dbelen</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -1519,14 +1519,13 @@ plt.grid();
 <p>Observe <strong>carefully</strong>. If all conditional distributions look the same this suggests that both variables <strong>are independant</strong>, <span class="math notranslate nohighlight">\(\rightarrow\)</span> knowing something about one does not tell us anything about the other one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-for ax,barrio in subplots(xd.index, usizex=5, usizey=3, n_cols=4):
-    dmarginal = xd.loc[barrio] / xd.loc[barrio].sum()
-    dmarginal.plot(kind=&#39;bar&#39;, ax=ax)
-    plt.title(barrio)
-    plt.ylim(0,.11)
-    plt.grid();
-plt.tight_layout()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">barrio</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="n">xd</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">dmarginal</span> <span class="o">=</span> <span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">barrio</span><span class="p">]</span> <span class="o">/</span> <span class="n">xd</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">barrio</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">dmarginal</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">barrio</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">.11</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1537,13 +1536,13 @@ plt.tight_layout()
 <p>or for each value of <span class="math notranslate nohighlight">\(edad\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for ax,edad in subplots(xd.columns, usizex=5, usizey=3, n_cols=4):
-    dmarginal = xd[edad] / xd[edad].sum()
-    dmarginal.plot(kind=&#39;bar&#39;, ax=ax)
-    plt.title(edad)
-    plt.ylim(0,.11)
-    plt.grid();
-plt.tight_layout()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">edad</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="n">xd</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">usizey</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">dmarginal</span> <span class="o">=</span> <span class="n">xd</span><span class="p">[</span><span class="n">edad</span><span class="p">]</span> <span class="o">/</span> <span class="n">xd</span><span class="p">[</span><span class="n">edad</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">dmarginal</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">edad</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">.11</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

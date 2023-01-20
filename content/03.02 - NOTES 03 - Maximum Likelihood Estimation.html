@@ -1,0 +1,673 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maximum likelihood estimation &#8212; Probabilistic Programming for Machine Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-MBFEZ3PF64');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="outline.html">
+   Course outline
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M1-videolist.html">
+   1 Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M2-videolist.html">
+   2 TF for Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M3-videolist.html">
+   3 Intuitions on Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M4-videolist.html">
+   4 Tensorflow Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M5-videolist.html">
+   5 Bayesian Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="M6-videolist.html">
+   6 Variational Inference
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/03.02 - NOTES 03 - Maximum Likelihood Estimation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/03.02 - NOTES 03 - Maximum Likelihood Estimation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-machine-learning-through-loss-optimization">
+   General machine learning through loss optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mle-approach">
+   MLE approach
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimating-also-sigma">
+     Estimating also
+     <span class="math notranslate nohighlight">
+      \(\sigma\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Maximum likelihood estimation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-machine-learning-through-loss-optimization">
+   General machine learning through loss optimization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mle-approach">
+   MLE approach
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimating-also-sigma">
+     Estimating also
+     <span class="math notranslate nohighlight">
+      \(\sigma\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
+<span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rramosp/ppdl.git<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>mv<span class="w"> </span>-n<span class="w"> </span>ppdl/content/init.py<span class="w"> </span>ppdl/content/local<span class="w"> </span>.<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>ppdl/content/requirements.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="maximum-likelihood-estimation">
+<h1>Maximum likelihood estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-machine-learning-through-loss-optimization">
+<h2>General machine learning through loss optimization<a class="headerlink" href="#general-machine-learning-through-loss-optimization" title="Permalink to this headline">¶</a></h2>
+<p>Usually a machine learning algorithm is formulated as an optimization process on a loss function. For instance, in linear regression</p>
+<div class="math notranslate nohighlight">
+\[\hat{y}^{(i)} = Wx^{(i)}\]</div>
+<p>with <span class="math notranslate nohighlight">\(x^{(i)}, W \in \mathbb{R}^n\)</span> in a scenario with <span class="math notranslate nohighlight">\(n\)</span>-dimensional data (or <span class="math notranslate nohighlight">\(n-1\)</span> considering adding an element vith value <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(x\)</span> to account for the bias).</p>
+<p>If we consider a MSE loss, we want to learn weights <span class="math notranslate nohighlight">\(W\)</span> that minimize it</p>
+<div class="math notranslate nohighlight">
+\[\underset{W}{\text{arg min}}\;\;\frac{1}{N}\sum_i \big(y^{(i)}-\hat{y}^{(i)}\big)^2\]</div>
+<p>This is regularly referred to as the Ordinary Least Squares (OLS) solution.</p>
+<p>Observe how we do this with <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code> (we also did it previously with tensorflow optimizers)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.2</span><span class="o">*</span><span class="n">X</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_3_0.png" src="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_3_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">linear_prediction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">t0</span><span class="p">,</span><span class="n">t1</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="k">return</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">t1</span><span class="o">*</span><span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span> <span class="p">(</span><span class="n">prediction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">r1</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">J</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+
+<span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">yr</span> <span class="o">=</span> <span class="n">linear_prediction</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">xr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">yr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;linear regression model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_5_0.png" src="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_5_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="mle-approach">
+<h2>MLE approach<a class="headerlink" href="#mle-approach" title="Permalink to this headline">¶</a></h2>
+<p>we know consider the same model but <strong>from a probabilistic perspective</strong>. Our variable es predicted through the same method (a linear regression with weights <span class="math notranslate nohighlight">\(W\)</span>), but we <strong>explicitely</strong> consider a error term <span class="math notranslate nohighlight">\(\varepsilon^{(i)}\)</span> that we <strong>ASSUME</strong> it follows a normal distribution, centered on zero with unknown standard distribution <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[y^{(i)} = Wx^{(i)} + \varepsilon^{(i)}\]</div>
+<div class="math notranslate nohighlight">
+\[\varepsilon^{(i)} \sim \mathcal{N}(0, \sigma)\]</div>
+<p>The consequence of this is that then <span class="math notranslate nohighlight">\(y^{(i)}\)</span> becomes a random variable which can be seen as a certain operation that is done over the random variable <span class="math notranslate nohighlight">\( \varepsilon^{(i)}\)</span>, thus producing a new random variable. Since we assume <span class="math notranslate nohighlight">\(\varepsilon^{(i)}\)</span> has a normal distribution, then <span class="math notranslate nohighlight">\(y^{(i)}\)</span> has a normal distribution, but centered around the prediction of the linear model</p>
+<div class="math notranslate nohighlight">
+\[y^{(i)} \sim \mathcal{N}(Wx^{(i)}, \sigma)\]</div>
+<p>This is, for every <span class="math notranslate nohighlight">\(x^{(i)}\)</span> we have a distribution over the possible values <span class="math notranslate nohighlight">\(\hat{y}^{(i)}\)</span> following the prediction of our linear model.</p>
+<p>Following the PDF of a normal distribution, the probability of a certain <span class="math notranslate nohighlight">\(y^{(i)}\)</span></p>
+<div class="math notranslate nohighlight">
+\[P(y^{(i)}|x^{(i)}, W) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\Big(\frac{y^{(i)} - Wx^{(i)}}{\sigma}\Big)^2}\]</div>
+<p>Observe we are referring to <span class="math notranslate nohighlight">\(y^{(i)}\)</span> and not <span class="math notranslate nohighlight">\(\hat{y}^{(i)}\)</span>, since now we have a distribution (under certain assumptions), and the <span class="math notranslate nohighlight">\(\hat{hat}\)</span> notation refers to a point estimator. With the assumed distribution of <span class="math notranslate nohighlight">\(y^{(i)}\)</span> we can do many things, among which, compute an estimator.</p>
+<p><strong>Intuition</strong></p>
+<p>What we want is to make the probability of our predictions as high as possible. This is</p>
+<div class="math notranslate nohighlight">
+\[\underset{W}{\text{arg max}}\;\;P(Y|X,W)\]</div>
+<p>where <span class="math notranslate nohighlight">\(Y\)</span> is the vector containing all <span class="math notranslate nohighlight">\(y^{(i)}\)</span> and <span class="math notranslate nohighlight">\(X\)</span> the matrix containing all our <span class="math notranslate nohighlight">\(x^{(i)}\)</span>. And we obtain <span class="math notranslate nohighlight">\(P(Y|X,W)\)</span> simply considering the joint probability of all data points, assuming they are independant among each other</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+P(Y|X,W) =&amp; \prod_i P(y^{(i)}|x^{(i)}, W)\\
+         =&amp; \prod_i \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\Big(\frac{y^{(i)} - Wx^{(i)}}{\sigma}\Big)^2}
+\end{align}\end{split}\]</div>
+<p>and, if we take the <span class="math notranslate nohighlight">\(\log\)</span> everything is easier</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\log P(Y|X,W) =&amp; \sum_i \log P(y^{(i)}|x^{(i)}, W)\\
+         =&amp; \sum_i \log \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\Big(\frac{y^{(i)} - Wx^{(i)}}{\sigma}\Big)^2}\\
+\end{align}\end{split}\]</div>
+<p>observe that we can maximize by minimizing the negative and we obtain the same result, <strong>regardles <span class="math notranslate nohighlight">\(\sigma\)</span></strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logprob</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e-15</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">prediction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))))</span>
+
+<span class="n">r1</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="n">logprob</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+
+<span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">yr</span> <span class="o">=</span> <span class="n">linear_prediction</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">xr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">yr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;linear regression model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_11_0.png" src="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_11_0.png" />
+</div>
+</div>
+<p>In fact, observe that in this particular case (assuming normal noise <span class="math notranslate nohighlight">\(\varepsilon\)</span>) both approaches are mathematically equivalent</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\log P(Y|X,W) =&amp; \sum_i \log P(y^{(i)}|x^{(i)}, W)\\
+         =&amp; \sum_i \log \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\Big(\frac{y^{(i)} - Wx^{(i)}}{\sigma}\Big)^2}\\
+         =&amp; \sum_i -\frac{1}{2\sigma^2}\Big(y^{(i)} - Wx^{(i)}\Big)^2 - \log \sigma\sqrt{2\pi}\\
+         =&amp; \frac{1}{2\sigma^2} \sum_i -\Big(y^{(i)} - Wx^{(i)}\Big)^2 - C
+\end{align}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(C\)</span> being a constant that does not depend on the parameters we want to optimize</p>
+<p>And finally:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\underset{W}{\text{arg max}}\;\;P(Y|X,W) =&amp; \;\;\underset{W}{\text{arg max}}\;\; \frac{1}{2\sigma^2} \sum_i -\Big(y^{(i)} - Wx^{(i)}\Big)^2 - C \\
+=&amp;\;\;\underset{W}{\text{arg max}}\;\; - \sum_i \Big(y^{(i)} - Wx^{(i)}\Big)^2 \\
+=&amp;\;\;\underset{W}{\text{arg min}}\;\; \sum_i \Big(y^{(i)} - Wx^{(i)}\Big)^2 \\
+\end{align}
+\end{split}\]</div>
+<p>which happens to be equivalent to the OLS above</p>
+<div class="section" id="estimating-also-sigma">
+<h3>Estimating also <span class="math notranslate nohighlight">\(\sigma\)</span><a class="headerlink" href="#estimating-also-sigma" title="Permalink to this headline">¶</a></h3>
+<p>we can use the MLE approach to estimate the parameters we want. For instance, we could estimate sigma too. Note that we fit for a parameter squared, since <span class="math notranslate nohighlight">\(\sigma\)</span> must be <span class="math notranslate nohighlight">\(&gt;0\)</span></p>
+<p>In this case we want</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\underset{W,\sigma}{\text{arg max}}\;\;P(Y|X,W, \sigma) =&amp; \;\;\underset{W, \sigma}{\text{arg max}}\;\; \frac{1}{2\sigma^2} \sum_i -\Big(y^{(i)} - Wx^{(i)}\Big)^2- \log \sigma\sqrt{2\pi} \\
+\end{align}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">logprob</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e-15</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">prediction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))))</span>
+
+<span class="n">r1</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="n">logprob</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      fun: 92.2637054790662
+ hess_inv: array([[ 2.67610785e-03, -4.12027711e-04, -2.22786783e-06],
+       [-4.12027711e-04,  8.66261977e-05, -5.23064883e-07],
+       [-2.22786783e-06, -5.23064883e-07,  2.38812031e-04]])
+      jac: array([ 0.00000000e+00, -9.53674316e-07,  0.00000000e+00])
+  message: &#39;Optimization terminated successfully.&#39;
+     nfev: 88
+      nit: 16
+     njev: 22
+   status: 0
+  success: True
+        x: array([0.92582263, 0.38523908, 0.61952017])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+
+<span class="n">r1_sigma</span> <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">r1_t</span>     <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">yr</span> <span class="o">=</span> <span class="n">linear_prediction</span><span class="p">(</span><span class="n">r1_t</span><span class="p">,</span> <span class="n">xr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">yr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;linear regression model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">yr</span><span class="o">+</span><span class="n">r1_sigma</span><span class="p">,</span> <span class="n">yr</span><span class="o">-</span><span class="n">r1_sigma</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;estimated sigma&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_18_0.png" src="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_18_0.png" />
+</div>
+</div>
+<p>in a scenario with larger noise in data, sigma gets estimated larger as expected</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="mf">.2</span><span class="o">*</span><span class="n">X</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">*</span><span class="mi">3</span>
+
+<span class="n">r1</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="n">logprob</span><span class="p">(</span><span class="n">t</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">linear_prediction</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+
+<span class="n">r1_sigma</span> <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">r1_t</span>     <span class="o">=</span> <span class="n">r1</span><span class="o">.</span><span class="n">x</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">yr</span> <span class="o">=</span> <span class="n">linear_prediction</span><span class="p">(</span><span class="n">r1_t</span><span class="p">,</span> <span class="n">xr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">yr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;linear regression model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">yr</span><span class="o">+</span><span class="n">r1_sigma</span><span class="p">,</span> <span class="n">yr</span><span class="o">-</span><span class="n">r1_sigma</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;estimated sigma&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(),</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_20_0.png" src="../_images/03.02 - NOTES 03 - Maximum Likelihood Estimation_20_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ejercicio</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">SparseMatrix</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    
+    
+    <span class="k">class</span> <span class="nc">_SparseMatrix</span><span class="p">:</span>
+        
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="o">...</span> <span class="n">YOUR</span> <span class="n">CODE</span> <span class="n">HERE</span> <span class="o">...</span>
+
+        <span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="o">...</span> <span class="n">YOUR</span> <span class="n">CODE</span> <span class="n">HERE</span> <span class="o">...</span>
+            
+    <span class="k">return</span> <span class="n">_SparseMatrix</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="n">ejercicio</span> <span class="mi">2</span>
+
+
+<span class="k">def</span> <span class="nf">SparseMatrix2</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    
+    
+    <span class="k">class</span> <span class="nc">_SparseMatrix2</span><span class="p">:</span>
+        
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="o">...</span> <span class="n">YOUR</span> <span class="n">CODE</span> <span class="n">HERE</span> <span class="o">...</span>
+            
+        <span class="k">def</span> <span class="nf">to_dense</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="o">...</span> <span class="n">YOUR</span> <span class="n">CODE</span> <span class="n">HERE</span> <span class="o">...</span>
+
+        <span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="o">...</span> <span class="n">YOUR</span> <span class="n">CODE</span> <span class="n">HERE</span> <span class="o">...</span>
+            
+    <span class="k">return</span> <span class="n">_SparseMatrix2</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grader_ejercicio1</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">functions</span><span class="p">,</span> <span class="n">student</span><span class="p">):</span>
+    
+    <span class="n">st_SparseMatrix</span> <span class="o">=</span> <span class="n">namespace</span><span class="p">[</span><span class="s1">&#39;SparseMatrix&#39;</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">teacher_SparseMatrix</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">class</span> <span class="nc">_SparseMatrix</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                <span class="o">...</span> <span class="n">YOUR</span> <span class="n">CODE</span> <span class="n">HERE</span> <span class="o">...</span>
+
+            <span class="k">def</span> <span class="nf">T</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="o">...</span> <span class="n">YOUR</span> <span class="n">CODE</span> <span class="n">HERE</span> <span class="o">...</span>
+
+        <span class="k">return</span> <span class="n">_SparseMatrix</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> 
+    
+    
+    <span class="n">student_SparseMatrix_instance</span> <span class="o">=</span> <span class="n">st_SparseMatrix</span><span class="p">(</span><span class="n">askldakslj</span><span class="p">)</span>
+    <span class="n">teacher_SparseMatriix_instance</span> <span class="o">=</span> <span class="n">teacher_SparseMatrix</span><span class="p">(</span><span class="n">askldakslj</span><span class="p">)</span>
+
+    
+    
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grader_ejercicio2</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">functions</span><span class="p">,</span> <span class="n">student</span><span class="p">):</span>
+    
+    <span class="n">st_SparseMatrix</span> <span class="o">=</span> <span class="n">namespace</span><span class="p">[</span><span class="s1">&#39;SparseMatrix2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

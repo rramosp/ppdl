@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -262,32 +262,32 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
-import numpy as np
-from scipy import stats
-import seaborn as sns
-import pandas as pd
-from progressbar import progressbar as pbar
-from scipy.integrate import quad, dblquad
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span><span class="p">,</span> <span class="n">dblquad</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f = np.vectorize(lambda l,w: np.exp(-(w*4+l/10-2)**2) * (np.exp(-(l*2-1-5*w)**2) + np.exp(-(w+l-3.5)**2)))
-nZ = dblquad(f, 0,1, lambda k: 0, lambda k: 5)[0]
-p_lw = np.vectorize(lambda l,w: np.exp(-(w*4+l/10-2)**2) * (np.exp(-(l*2-1-5*w)**2) + np.exp(-(w+l-3.5)**2)) / nZ)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="n">l</span><span class="o">/</span><span class="mi">10</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">+</span><span class="n">l</span><span class="o">-</span><span class="mf">3.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">nZ</span> <span class="o">=</span> <span class="n">dblquad</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="mi">5</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">p_lw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="n">l</span><span class="o">/</span><span class="mi">10</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">5</span><span class="o">*</span><span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">w</span><span class="o">+</span><span class="n">l</span><span class="o">-</span><span class="mf">3.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="n">nZ</span><span class="p">)</span>
 
-p_l = np.vectorize(lambda l: quad(lambda w: p_lw(l,w), 0,1)[0])
-p_w = np.vectorize(lambda w: quad(lambda l: p_lw(l,w), 0,5)[0])
+<span class="n">p_l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">p_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 
-lr = np.linspace(0,5,200)
-wr = np.linspace(0,1,200)
-L,W = np.meshgrid(lr,wr)
-Z = p_lw(L,W)
+<span class="n">lr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">wr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">L</span><span class="p">,</span><span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span><span class="n">wr</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">W</span><span class="p">)</span>
 
-dblquad(p_lw, 0,1, lambda k: 0, lambda k: 5)[0]
+<span class="n">dblquad</span><span class="p">(</span><span class="n">p_lw</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="mi">5</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -299,15 +299,15 @@ dblquad(p_lw, 0,1, lambda k: 0, lambda k: 5)[0]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># definitions for the axes
-g = sns.JointGrid(height=8)
-cp = g.ax_joint.contourf(W, L, Z, levels=20, cmap=plt.cm.Blues)
-g.ax_marg_x.plot(wr, Z.sum(axis=1))
-g.ax_marg_y.plot(Z.sum(axis=0), lr)
-g.ax_joint.set_xlabel(&quot;width&quot;)
-g.ax_joint.set_ylabel(&quot;length&quot;)
-cbar_ax = g.fig.add_axes([-.1, .05, .02, .77])
-plt.colorbar(cp, cax=cbar_ax)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># definitions for the axes</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">JointGrid</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">cp</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_x</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wr</span><span class="p">,</span> <span class="n">Z</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_marg_y</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Z</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">lr</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;width&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax_joint</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">)</span>
+<span class="n">cbar_ax</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="o">-</span><span class="mf">.1</span><span class="p">,</span> <span class="mf">.05</span><span class="p">,</span> <span class="mf">.02</span><span class="p">,</span> <span class="mf">.77</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">cbar_ax</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -320,22 +320,22 @@ plt.colorbar(cp, cax=cbar_ax)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>@np.vectorize
-def p_l_given_w(l,w):
-    nZ = quad(lambda l: p_lw(l,w), 0,5)[0]
-    return p_lw(l,w)/nZ
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@np</span><span class="o">.</span><span class="n">vectorize</span>
+<span class="k">def</span> <span class="nf">p_l_given_w</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">):</span>
+    <span class="n">nZ</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">)</span><span class="o">/</span><span class="n">nZ</span>
 
-@np.vectorize
-def p_w_given_l(l,w):
-    nZ = quad(lambda w: p_lw(l,w), 0,1)[0]
-    return p_lw(l,w)/nZ
+<span class="nd">@np</span><span class="o">.</span><span class="n">vectorize</span>
+<span class="k">def</span> <span class="nf">p_w_given_l</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">):</span>
+    <span class="n">nZ</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">p_lw</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">)</span><span class="o">/</span><span class="n">nZ</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>quad(lambda l: p_l_given_w(l,0.3), 0, 5)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">p_l_given_w</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="mf">0.3</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -347,7 +347,7 @@ def p_w_given_l(l,w):
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>quad(lambda w: p_w_given_l(2.1,w), 0, 1)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quad</span><span class="p">(</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">p_w_given_l</span><span class="p">(</span><span class="mf">2.1</span><span class="p">,</span><span class="n">w</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

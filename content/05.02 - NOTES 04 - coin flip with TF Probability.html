@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -426,7 +426,7 @@ heads (<span class="math notranslate nohighlight">\(\# heads\)</span>) and tails
 <span class="n">num_heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15</span><span class="p">])</span>
 
 <span class="k">def</span> <span class="nf">target_log_prob_fn</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-  <span class="sd">&quot;&quot;&quot;Unnormalized target density as a function of states.&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Unnormalized target density as a function of states.&quot;&quot;&quot;</span>
   <span class="k">return</span> <span class="n">jd</span><span class="o">.</span><span class="n">log_prob</span><span class="p">((</span>
       <span class="n">theta</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">))</span>
 </pre></div>

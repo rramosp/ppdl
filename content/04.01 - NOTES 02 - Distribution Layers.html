@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
@@ -284,10 +284,10 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># init repo notebook
-!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
-!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
-!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
+<span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rramosp/ppdl.git<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>mv<span class="w"> </span>-n<span class="w"> </span>ppdl/content/init.py<span class="w"> </span>ppdl/content/local<span class="w"> </span>.<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>ppdl/content/requirements.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
 </div>
@@ -296,21 +296,21 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>Distribution Layers<a class="headerlink" href="#distribution-layers" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-import matplotlib.pyplot as plt
-from scipy import stats
-from scipy.integrate import quad
-from progressbar import progressbar as pbar
-from rlxutils import subplots, copy_func
-import seaborn as sns
-import pandas as pd 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">from</span> <span class="nn">progressbar</span> <span class="kn">import</span> <span class="n">progressbar</span> <span class="k">as</span> <span class="n">pbar</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
 
-import tensorflow as tf
-import tensorflow_probability as tfp
-tfd = tfp.distributions
-tfb = tfp.bijectors
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
 
-%matplotlib inline
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -336,14 +336,14 @@ tfb = tfp.bijectors
 \[(x,y) \sim \mathcal{N}_x(-10, 5) \times \mathcal{N}_y(20, 8)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>inormal_layer = tfp.layers.IndependentNormal(event_shape=1)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inormal_layer</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">IndependentNormal</span><span class="p">(</span><span class="n">event_shape</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>inormal_layer.get_config()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inormal_layer</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -375,11 +375,11 @@ tfb = tfp.bijectors
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>input_x = np.random.randint(5, size=(2,2))*1.+5
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="mf">1.</span><span class="o">+</span><span class="mi">5</span>
 
-print(input_x)
-output_distribution = inormal_layer(input_x)
-type(output_distribution)
+<span class="nb">print</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="n">output_distribution</span> <span class="o">=</span> <span class="n">inormal_layer</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">output_distribution</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -403,7 +403,7 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>output_distribution.batch_shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_distribution</span><span class="o">.</span><span class="n">batch_shape</span>
 </pre></div>
 </div>
 </div>
@@ -415,9 +415,9 @@ To enable them in other operations, rebuild TensorFlow with the appropriate comp
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># which we can use as any distribution object
-s = output_distribution.sample(1000).numpy()
-s.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># which we can use as any distribution object</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">output_distribution</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -429,8 +429,8 @@ s.shape
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print (&quot;means&quot;, np.mean(s, axis=0)[:,0])
-print (&quot;stds &quot;, np.std(s, axis=0)[:,0])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;means&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;stds &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -443,14 +443,14 @@ stds  [9.426311 6.080694]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ev = 0
-sns.displot(
-    x = s[:,0,ev],
-    y = s[:,1,ev],
-    kind=&quot;kde&quot;, rug=False
-)
-plt.axis(&quot;equal&quot;)
-plt.grid();
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ev</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="n">ev</span><span class="p">],</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:,</span><span class="mi">1</span><span class="p">,</span><span class="n">ev</span><span class="p">],</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;kde&quot;</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;equal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
@@ -465,10 +465,10 @@ plt.grid();
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>input_x = np.random.randint(5, size=(2,3,4,2))*1.+5
-print(input_x)
-output_distribution = inormal_layer(input_x)
-output_distribution.batch_shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="mf">1.</span><span class="o">+</span><span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="n">output_distribution</span> <span class="o">=</span> <span class="n">inormal_layer</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="n">output_distribution</span><span class="o">.</span><span class="n">batch_shape</span>
 </pre></div>
 </div>
 </div>
@@ -513,9 +513,9 @@ output_distribution.batch_shape
 <p>observe how continuous input data can parametrize a continuum of distributions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = np.linspace(0,2*np.pi,100)
-input_x = np.vstack([np.sin(x), 1+np.cos(x*2)]).T
-input_x.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">input_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">input_x</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -527,8 +527,8 @@ input_x.shape
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>output_distribution = inormal_layer(input_x)
-output_distribution.batch_shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_distribution</span> <span class="o">=</span> <span class="n">inormal_layer</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="n">output_distribution</span><span class="o">.</span><span class="n">batch_shape</span>
 </pre></div>
 </div>
 </div>
@@ -540,8 +540,8 @@ output_distribution.batch_shape
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = output_distribution.sample(10000).numpy()[:,:,0]
-s.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">output_distribution</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[:,:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -554,12 +554,12 @@ s.shape
 <p>so, for each <code class="docutils literal notranslate"><span class="pre">x</span></code> we have a different distribution (with different mean and std) and we have a sample of 10K elements of each distribution</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>smean = np.mean(s, axis=0)
-sstd  = np.std(s, axis=0)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sstd</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-plt.plot(x, smean, color=&quot;black&quot;, lw=2, label=&quot;distribution mean at x&quot;)
-plt.fill_between(x, smean-sstd, smean+sstd, alpha=.5, label=&quot;distribution std at x&quot;)
-plt.grid(); plt.legend(); plt.xlabel(&quot;x&quot;)
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">smean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;distribution mean at x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">smean</span><span class="o">-</span><span class="n">sstd</span><span class="p">,</span> <span class="n">smean</span><span class="o">+</span><span class="n">sstd</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;distribution std at x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -581,10 +581,10 @@ plt.grid(); plt.legend(); plt.xlabel(&quot;x&quot;)
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># some example points
-input_x = np.r_[[[10.,1.],[11.,2.], [12.,3.]]]
-output_distribution = inormal_layer(input_x)
-output_distribution.batch_shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># some example points</span>
+<span class="n">input_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[[[</span><span class="mf">10.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">11.</span><span class="p">,</span><span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mf">12.</span><span class="p">,</span><span class="mf">3.</span><span class="p">]]]</span>
+<span class="n">output_distribution</span> <span class="o">=</span> <span class="n">inormal_layer</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="n">output_distribution</span><span class="o">.</span><span class="n">batch_shape</span>
 </pre></div>
 </div>
 </div>
@@ -596,9 +596,9 @@ output_distribution.batch_shape
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = np.linspace(10,12,6)
-print (x)
-output_distribution.log_prob(x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">output_distribution</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -613,10 +613,10 @@ output_distribution.log_prob(x)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># create a scipy.stats distribution for each input_x
-distrs = [stats.norm(*i) for i in input_x]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a scipy.stats distribution for each input_x</span>
+<span class="n">distrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="o">*</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">input_x</span><span class="p">]</span>
 
-[np.sum(np.log(i.pdf(x))) for i in distrs]
+<span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">distrs</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -633,13 +633,13 @@ distrs = [stats.norm(*i) for i in input_x]
 <p>Either from an input layer directly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>input_x = np.random.randint(5, size=(3,2))*1.+5
-print (input_x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span><span class="mf">1.</span><span class="o">+</span><span class="mi">5</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
 
-inp  = tf.keras.layers.Input(shape=(2,))
-out  = tfp.layers.IndependentNormal(1)(inp)
+<span class="n">inp</span>  <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,))</span>
+<span class="n">out</span>  <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">IndependentNormal</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">inp</span><span class="p">)</span>
 
-m    = tf.keras.models.Model(inp, out)
+<span class="n">m</span>    <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -653,8 +653,8 @@ m    = tf.keras.models.Model(inp, out)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>moutput = m(input_x)
-moutput
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">moutput</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="n">moutput</span>
 </pre></div>
 </div>
 </div>
@@ -666,8 +666,8 @@ moutput
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = moutput.sample(10000).numpy()[:,:,0]
-s.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">moutput</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[:,:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -679,8 +679,8 @@ s.shape
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print (&quot;means&quot;, np.mean(s, axis=0))
-print (&quot;stds &quot;, np.std(s, axis=0))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;means&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;stds &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -694,7 +694,7 @@ stds  [8.997255  8.847788  7.1187677]
 <p><strong>The <code class="docutils literal notranslate"><span class="pre">.predict</span></code> of a model with a distribution layer output is a sample (by default)</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>m.predict(input_x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -710,14 +710,14 @@ stds  [8.997255  8.847788  7.1187677]
 <p>and everything is learnable.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>input_x = np.random.random(size=(3,5))+.1
-print (input_x)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span><span class="o">+</span><span class="mf">.1</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
 
-inp  = tf.keras.layers.Input(shape=(5,))
-den  = tf.keras.layers.Dense(2, activation=&quot;sigmoid&quot;, name=&quot;dense&quot;, bias_initializer=&quot;glorot_uniform&quot;)(inp)
-out  = tfp.layers.IndependentNormal(1)(den)
+<span class="n">inp</span>  <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,))</span>
+<span class="n">den</span>  <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;dense&quot;</span><span class="p">,</span> <span class="n">bias_initializer</span><span class="o">=</span><span class="s2">&quot;glorot_uniform&quot;</span><span class="p">)(</span><span class="n">inp</span><span class="p">)</span>
+<span class="n">out</span>  <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">IndependentNormal</span><span class="p">(</span><span class="mi">1</span><span class="p">)(</span><span class="n">den</span><span class="p">)</span>
 
-m    = tf.keras.models.Model(inp, out)
+<span class="n">m</span>    <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -731,8 +731,8 @@ m    = tf.keras.models.Model(inp, out)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>moutput = m(input_x)
-moutput
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">moutput</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">input_x</span><span class="p">)</span>
+<span class="n">moutput</span>
 </pre></div>
 </div>
 </div>
@@ -744,8 +744,8 @@ moutput
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>s = moutput.sample(100000).numpy()[:,:,0]
-s.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">moutput</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[:,:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">s</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -759,8 +759,8 @@ s.shape
 <p>observe that in this setting, the <code class="docutils literal notranslate"><span class="pre">IndependantNormal</span></code> layer passes the std parameter through a <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/activations/softplus"><code class="docutils literal notranslate"><span class="pre">tf.keras.activations.softplus</span></code></a> transformation to ensure the standard deviation is <span class="math notranslate nohighlight">\(&gt;0\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print (&quot;means&quot;, np.mean(s, axis=0))
-print (&quot;stds &quot;, np.std(s, axis=0))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;means&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;stds &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -773,8 +773,8 @@ stds  [1.0946325 1.1205078 1.1397614]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>W, b = m.get_layer(&quot;dense&quot;).get_weights()
-input_x.shape, W.shape, b.shape
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">W</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="s2">&quot;dense&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()</span>
+<span class="n">input_x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -786,9 +786,9 @@ input_x.shape, W.shape, b.shape
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sigm = lambda x: 1/(1+np.exp(-x))
-params = sigm(input_x.dot(W) +b)
-params
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigm</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">sigm</span><span class="p">(</span><span class="n">input_x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">)</span> <span class="o">+</span><span class="n">b</span><span class="p">)</span>
+<span class="n">params</span>
 </pre></div>
 </div>
 </div>
@@ -802,8 +802,8 @@ params
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print (&quot;means         &quot;, params[:,0])
-print (&quot;softplus stds &quot;, np.log(np.exp(params[:,1])+1))
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;means         &quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;softplus stds &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">params</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
