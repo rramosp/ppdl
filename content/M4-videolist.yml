@@ -20,13 +20,9 @@ videos:
     notebook: 04.01 - NOTES 07 - Bijectors.html
   - name: 8. TFP <tt>JointDistributionNames</tt>
     notebook: 04.01 - NOTES 08 - JointDistributionNamed.html
-
-- name: <br/><font color="red">LAB Assignments</font>
-  order: 2
-  videos:
-  - name: LAB 1. TFP Distributions
+  - name: <b><font color="red">LAB 1</font> TFP Distributions</b>
     notebook: 04.01 - LAB 01 - TFP distributions.html
-  - name: LAB 2. Distribution layers
+  - name: <b><font color="red">LAB 2</font> Distribution layers</b>
     notebook: 04.01 - LAB 02 - Distribution layers.html
-  - name: LAB 3. Joint distributions
+  - name: <b><font color="red">LAB 3</font> Joint distributions</b>
     notebook: 01.01 - LAB 03 - Joint Distributions.html

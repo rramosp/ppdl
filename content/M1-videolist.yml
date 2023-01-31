@@ -8,11 +8,6 @@ videos:
   - name: 1. What is probabilistic programming
   - name: 2. A simple example
     notebook: 01.01 - NOTES 01 - Probabilistic programming, a simple example.html
-
-
-- name: <br/>1.2 Course mechanics
-  order: 2
-  videos:
-  - name: 1. Course mechanics
+  - name: 3. Course mechanics
   - name: <b><font color="red">LAB 1.2</font> Warm up</b>
-    notebook: 01.02 - LAB 01 - Warmup.html
+    notebook: 01.01 - LAB 01 - Warmup.html
