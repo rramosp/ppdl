@@ -2,7 +2,7 @@
 
 <style>.timeline .timeline-item {margin-bottom: 0rem;}</style>
 <div class="timeline">
-    <h2>6.1 Variational inference</h2>
+    <h2>6.1 Why variational inference</h2>
 <div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
         <div class="timeline-content"> 1. Modelling aleatoric uncertainty (on data)<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
@@ -20,15 +20,15 @@
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 4. Variational inference for data estimation<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="06.01 - NOTES 04 - Variational inference for data estimation.html"> Notebook</a>
+        <div class="timeline-content"> 4. Expectations and reparametrization<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="06.01 - NOTES 04 - Expectations and reparametrization.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
         <div class="timeline-content"> <b><font color="red">LAB 1</font> Expectations and gradients</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
                 <a href="06.01 - LAB 01 - Expectations and gradients.html"> Notebook</a>
             </span></div>        
-    </div><h2><br/>6.2 Variational inference in practice</h2>
+    </div><h2><br/>6.2 Applications</h2>
 <div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
         <div class="timeline-content"> 1. Bayesian neural networks<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
@@ -36,13 +36,21 @@
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> XX. The DenseVariational layer<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
         <div class="timeline-content"> 2. Dirichlet distribution<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="06.02 - NOTES 03 - Dirichlet Distribution.html"> Notebook</a>
+                <a href="06.02 - NOTES 02 - Dirichlet Distribution.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
         <div class="timeline-content"> 3. Variational inference for text modeling<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="06.02 - NOTES 04 - Variational Inference for Text Modeling.html"> Notebook</a>
+                <a href="06.02 - NOTES 03 - Variational Inference for Text Modeling.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 4. Variational inference for data estimation<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="06.02 - NOTES 04 - Variational inference for data estimation.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>

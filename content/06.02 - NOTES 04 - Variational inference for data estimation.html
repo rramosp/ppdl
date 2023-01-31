@@ -187,7 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/06.01 - NOTES 04 - Variational inference for data estimation.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/content/06.02 - NOTES 04 - Variational inference for data estimation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -214,7 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/06.01 - NOTES 04 - Variational inference for data estimation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/06.02 - NOTES 04 - Variational inference for data estimation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -410,24 +410,24 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># init repo notebook
-!git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
-!mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
-!pip install -r ppdl/content/requirements.txt &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
+<span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/rramosp/ppdl.git<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>mv<span class="w"> </span>-n<span class="w"> </span>ppdl/content/init.py<span class="w"> </span>ppdl/content/local<span class="w"> </span>.<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>/dev/null
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>ppdl/content/requirements.txt<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install rlxutils &gt; /dev/null
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>rlxutils<span class="w"> </span>&gt;<span class="w"> </span>/dev/null
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span><span class="p">,</span> <span class="n">dblquad</span>
@@ -441,7 +441,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="n">tfd</span> <span class="o">=</span>  <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
 
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -505,8 +505,8 @@ For instance</p>
 <div class="section" id="analytical-or-numerical-solutions-for-all-distributions">
 <h2>analytical or numerical solutions for all distributions<a class="headerlink" href="#analytical-or-numerical-solutions-for-all-distributions" title="Permalink to this headline">¶</a></h2>
 <p>in theory with <span class="math notranslate nohighlight">\(p(z)\)</span> and <span class="math notranslate nohighlight">\(p(x|z)\)</span> we could obtain the rest of distributions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-03674382-1146-409b-9281-137359a880aa">
-<span class="eqno">()<a class="headerlink" href="#equation-03674382-1146-409b-9281-137359a880aa" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-da56ae98-0e86-4f0f-a7b6-56c148ce01e1">
+<span class="eqno">()<a class="headerlink" href="#equation-da56ae98-0e86-4f0f-a7b6-56c148ce01e1" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \text{joint} &amp; \;\;\;\;p(z,x) = p(x|z)p(z)\\
 \text{marginal for }x &amp;\;\;\;\;p(x) = \int p(x|z)p(z) dz\\
 \text{posterior for }z &amp;\;\;\;\;p(z|x) = \frac{p(x|z)p(z)}{p(x)}
@@ -515,7 +515,7 @@ For instance</p>
 <p>In this case, since it is a simple scenarion with known 1D variables, we can solve or compute the distributions above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Scenario</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Scenario</span><span class="p">:</span>
 
   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
       <span class="bp">self</span><span class="o">.</span><span class="n">zx_joint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_joint</span><span class="p">()</span>
@@ -629,7 +629,7 @@ For instance</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario</span> <span class="o">=</span> <span class="n">ScenarioDependantGaussian</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scenario</span> <span class="o">=</span> <span class="n">ScenarioDependantGaussian</span><span class="p">()</span>
 <span class="n">scenario</span> <span class="o">=</span> <span class="n">ScenarioMultiModal</span><span class="p">()</span>
 <span class="n">scenario</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">scenario</span><span class="o">.</span><span class="n">plot_pz_given_x</span><span class="p">(</span><span class="n">xis</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
@@ -637,8 +637,8 @@ For instance</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_7_0.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_7_0.png" />
-<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_7_1.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_7_1.png" />
+<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_7_0.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_7_0.png" />
+<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_7_1.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_7_1.png" />
 </div>
 </div>
 </div>
@@ -657,14 +657,14 @@ For instance</p>
 <p>In the experiment below we use <a class="reference external" href="https://en.wikipedia.org/wiki/Inverse_transform_sampling">Inverse Transform Sampling</a> by using the numerical CDF of each distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observed_xi</span><span class="o">=-</span><span class="mi">5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observed_xi</span><span class="o">=-</span><span class="mi">5</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scenario</span><span class="o">.</span><span class="n">plot_pz_given_xi</span><span class="p">(</span><span class="n">observed_xi</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scenario</span><span class="o">.</span><span class="n">plot_pz_given_xi</span><span class="p">(</span><span class="n">observed_xi</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -836,7 +836,7 @@ For instance</p>
 <h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with MCMC<a class="headerlink" href="#estimate-p-z-x-i-with-mcmc" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">num_results</span> <span class="o">=</span> <span class="mi">50000</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_results</span> <span class="o">=</span> <span class="mi">50000</span>
 <span class="n">num_burnin_steps</span> <span class="o">=</span> <span class="mi">10000</span>
 <span class="n">observed_x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">observed_x</span><span class="p">)</span>
@@ -851,7 +851,7 @@ For instance</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Improve performance by tracing the sampler using `tf.function`</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Improve performance by tracing the sampler using `tf.function`</span>
 <span class="c1"># and compiling it using XLA.</span>
 <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">autograph</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">jit_compile</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">do_sampling</span><span class="p">():</span>
@@ -886,7 +886,7 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span> <span class="n">scenario</span><span class="o">.</span><span class="n">pz_given_x</span><span class="p">(</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span><span class="n">observed_x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>  <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;actual p(z|x=</span><span class="si">{</span><span class="n">observed_x</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span> <span class="n">scenario</span><span class="o">.</span><span class="n">pz_given_x</span><span class="p">(</span><span class="n">scenario</span><span class="o">.</span><span class="n">zr</span><span class="p">,</span><span class="n">observed_x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>  <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;actual p(z|x=</span><span class="si">{</span><span class="n">observed_x</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MCMC samples&quot;</span><span class="p">);</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
@@ -897,7 +897,7 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;a&#39;)
 </pre></div>
 </div>
-<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_14_1.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_14_1.png" />
+<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_14_1.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_14_1.png" />
 </div>
 </div>
 </div>
@@ -929,7 +929,7 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 \[q_{\theta=\{\mu, \sigma\}}(z|x_i) = \mathcal{N}(\mu, \text{softplus}(\sigma))\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApproximatePosteriorDistribution</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApproximatePosteriorDistribution</span><span class="p">:</span>
 
   <span class="k">def</span> <span class="nf">get_qx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_batch</span><span class="p">):</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
@@ -982,7 +982,7 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApproximatePosteriorNormal</span><span class="p">(</span><span class="n">ApproximatePosteriorDistribution</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApproximatePosteriorNormal</span><span class="p">(</span><span class="n">ApproximatePosteriorDistribution</span><span class="p">):</span>
 
   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
       <span class="bp">self</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
@@ -1000,14 +1000,14 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span> <span class="o">=</span> <span class="n">ApproximatePosteriorNormal</span><span class="p">()</span><span class="o">.</span><span class="n">set_scenario</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span><span class="o">.</span><span class="n">set_observed_x</span><span class="p">(</span><span class="n">observed_x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span> <span class="o">=</span> <span class="n">ApproximatePosteriorNormal</span><span class="p">()</span><span class="o">.</span><span class="n">set_scenario</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span><span class="o">.</span><span class="n">set_observed_x</span><span class="p">(</span><span class="n">observed_x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1019,12 +1019,12 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">plot_loss</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">plot_loss</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_20_0.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_20_0.png" />
+<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_20_0.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_20_0.png" />
 </div>
 </div>
 </div>
@@ -1047,7 +1047,7 @@ n &amp; \text{ the number of gaussians in the mixture}\\
 <p>Observe that <span class="math notranslate nohighlight">\(\theta=\{\bar{\mu}, \bar{\sigma}, \bar{\alpha}\}\)</span> are the parameters that will be learnt through VI.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApproximatePosteriorMixOfNormals</span><span class="p">(</span><span class="n">ApproximatePosteriorDistribution</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ApproximatePosteriorMixOfNormals</span><span class="p">(</span><span class="n">ApproximatePosteriorDistribution</span><span class="p">):</span>
 
   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_gaussians</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">n_gaussians</span> <span class="o">=</span> <span class="n">n_gaussians</span>
@@ -1067,14 +1067,14 @@ n &amp; \text{ the number of gaussians in the mixture}\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span> <span class="o">=</span> <span class="n">ApproximatePosteriorMixOfNormals</span><span class="p">(</span><span class="n">n_gaussians</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">set_scenario</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span><span class="o">.</span><span class="n">set_observed_x</span><span class="p">(</span><span class="n">observed_x</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span> <span class="o">=</span> <span class="n">ApproximatePosteriorMixOfNormals</span><span class="p">(</span><span class="n">n_gaussians</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">set_scenario</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span><span class="o">.</span><span class="n">set_observed_x</span><span class="p">(</span><span class="n">observed_x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">epochs</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1086,17 +1086,17 @@ n &amp; \text{ the number of gaussians in the mixture}\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">plot_loss</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approximate_distrib</span><span class="o">.</span><span class="n">plot_loss</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06.01 - NOTES 04 - Variational inference for data estimation_26_0.png" src="../_images/06.01 - NOTES 04 - Variational inference for data estimation_26_0.png" />
+<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_26_0.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_26_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -1108,14 +1108,14 @@ n &amp; \text{ the number of gaussians in the mixture}\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
 </div>
 </div>
