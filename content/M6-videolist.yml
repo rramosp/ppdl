@@ -1,7 +1,7 @@
 title: 6 Variational Inference
 description: "<style>.timeline .timeline-item {margin-bottom: 0rem;}</style>"
 videos:
-- name: 6.1 Variational inference 
+- name: 6.1 Why variational inference 
   order: 1
   videos:
   - name: 1. Modelling aleatoric uncertainty (on data)
@@ -10,19 +10,22 @@ videos:
     notebook: 06.01 - NOTES 02 - Modelling epistemic uncertainty.html
   - name: 3. Variational inference for Bayesian regression  
     notebook: 06.01 - NOTES 03 - Variational Inference for Bayesian Regression.html
-  - name: 4. Variational inference for data estimation  
-    notebook: 06.01 - NOTES 04 - Variational inference for data estimation.html
+  - name: 4. Expectations and reparametrization  
+    notebook: 06.01 - NOTES 04 - Expectations and reparametrization.html
   - name: <b><font color="red">LAB 1</font> Expectations and gradients</b>
     notebook: 06.01 - LAB 01 - Expectations and gradients.html
-- name: <br/>6.2 Variational inference in practice
+- name: <br/>6.2 Applications
   order: 2
   videos:
   - name: 1. Bayesian neural networks
     notebook: 06.02 - NOTES 01 - Bayesian Neural Networks.html
+  - name: XX. The DenseVariational layer
   - name: 2. Dirichlet distribution
-    notebook: 06.02 - NOTES 03 - Dirichlet Distribution.html
+    notebook: 06.02 - NOTES 02 - Dirichlet Distribution.html
   - name: 3. Variational inference for text modeling
-    notebook: 06.02 - NOTES 04 - Variational Inference for Text Modeling.html
+    notebook: 06.02 - NOTES 03 - Variational Inference for Text Modeling.html
+  - name: 4. Variational inference for data estimation  
+    notebook: 06.02 - NOTES 04 - Variational inference for data estimation.html
   - name: <b><font color="red">LAB 1</font> Variational autoencoders</b>
     notebook: 06.02 - LAB 01 - Variational autoencoder.html
   - name: <b><font color="red">LAB 2</font> Topic modelling</b>

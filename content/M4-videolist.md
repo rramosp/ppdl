@@ -43,20 +43,19 @@
         <div class="timeline-content"> 8. TFP <tt>JointDistributionNames</tt><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
                 <a href="04.01 - NOTES 08 - JointDistributionNamed.html"> Notebook</a>
             </span></div>        
-    </div><h2><br/><font color="red">LAB Assignments</font></h2>
-<div class="timeline-item">
+    </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> LAB 1. TFP Distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+        <div class="timeline-content"> <b><font color="red">LAB 1</font> TFP Distributions</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
                 <a href="04.01 - LAB 01 - TFP distributions.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> LAB 2. Distribution layers<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+        <div class="timeline-content"> <b><font color="red">LAB 2</font> Distribution layers</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
                 <a href="04.01 - LAB 02 - Distribution layers.html"> Notebook</a>
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> LAB 3. Joint distributions<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+        <div class="timeline-content"> <b><font color="red">LAB 3</font> Joint distributions</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
                 <a href="01.01 - LAB 03 - Joint Distributions.html"> Notebook</a>
             </span></div>        
     </div>
