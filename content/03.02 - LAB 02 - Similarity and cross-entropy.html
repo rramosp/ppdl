@@ -342,8 +342,8 @@ const thebe_selector_output = ".output, .cell_output"
 H(P) = \mathbb{E}_{P}[-\text{log}(P(x))] = -\int_x P(x)\text{log}(P(x)) dx
 \]</div>
 <p>To this end, you must do the following numerical approximation to compute the integral:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c3ba419b-28f6-4fdf-9ed2-4afe5dec0979">
-<span class="eqno">()<a class="headerlink" href="#equation-c3ba419b-28f6-4fdf-9ed2-4afe5dec0979" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8b1b2d88-55eb-425f-9aae-352a82347ca8">
+<span class="eqno">()<a class="headerlink" href="#equation-8b1b2d88-55eb-425f-9aae-352a82347ca8" title="Permalink to this equation">¶</a></span>\[\begin{align}
 H(P) &amp;\approx \sum_{x} P(x)\text{log}(P(x)) \Delta x\\
      &amp;\approx \sum_i P(x)\text{log}(P(x)) (x_{i + 1} - x_i)
 \end{align}\]</div>
@@ -445,8 +445,8 @@ H(\mathcal{N}) = 0.5 (\text{log}(2 \pi \sigma ^ 2) + 1)
 <div class="section" id="task-2">
 <h2>Task 2<a class="headerlink" href="#task-2" title="Permalink to this headline">¶</a></h2>
 <p>In this task you must compute the continuous cross-entropy of two continuous distributions <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-55d85909-2245-4e4e-83ff-14c4a93958ff">
-<span class="eqno">()<a class="headerlink" href="#equation-55d85909-2245-4e4e-83ff-14c4a93958ff" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7cc4466d-34c3-4ee0-b8de-359db4660a29">
+<span class="eqno">()<a class="headerlink" href="#equation-7cc4466d-34c3-4ee0-b8de-359db4660a29" title="Permalink to this equation">¶</a></span>\[\begin{align}
 H_P(Q) = \underset{P}{\mathbb{E}}[-\text{log}Q(x)]\\
 H_P(Q) = - \int_x P(x) \text{log}(Q(x)) dx
 \end{align}\]</div>
@@ -507,8 +507,8 @@ x_{sample} \sim P
 <div class="section" id="task-3">
 <h2>Task 3<a class="headerlink" href="#task-3" title="Permalink to this headline">¶</a></h2>
 <p>In this task, you must compute the Kullback-Leibler (KL) divergence between two distributions <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>, as follows:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ce6129fe-d2f1-488f-aab4-8f6cb660c05e">
-<span class="eqno">()<a class="headerlink" href="#equation-ce6129fe-d2f1-488f-aab4-8f6cb660c05e" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-101b8c43-7aed-402a-ac28-c2b9b0115a98">
+<span class="eqno">()<a class="headerlink" href="#equation-101b8c43-7aed-402a-ac28-c2b9b0115a98" title="Permalink to this equation">¶</a></span>\[\begin{align}
 KL(P||Q) &amp;= \underset{P}{\mathbb{E}}[\text{log}(P) - \text{log}(Q)]\\
          &amp;= \int_x P(x) \text{log}\left(\frac{P(x)}{Q(x)}\right) dx
 \end{align}\]</div>
