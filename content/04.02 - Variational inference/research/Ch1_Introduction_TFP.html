@@ -1057,8 +1057,8 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 <p>If, in reality, no sudden change occurred and indeed <span class="math notranslate nohighlight">\(\lambda_1 = \lambda_2\)</span>, then the <span class="math notranslate nohighlight">\(\lambda\)</span>s posterior distributions should look about equal.</p>
 <p>We are interested in inferring the unknown <span class="math notranslate nohighlight">\(\lambda\)</span>s. To use Bayesian inference, we need to assign prior probabilities to the different possible values of <span class="math notranslate nohighlight">\(\lambda\)</span>. What would be good prior probability distributions for <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>? Recall that <span class="math notranslate nohighlight">\(\lambda\)</span> can be any positive number. As we saw earlier, the <em>exponential</em> distribution provides a continuous density function for positive numbers, so it might be a good choice for modeling <span class="math notranslate nohighlight">\(\lambda_i\)</span>. But recall that the exponential distribution takes a parameter of its own, so we’ll need to include that parameter in our model. Let’s call that parameter <span class="math notranslate nohighlight">\(\alpha\)</span>.
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c66da464-e387-447a-86bb-6c5433c0b7c4">
-<span class="eqno">()<a class="headerlink" href="#equation-c66da464-e387-447a-86bb-6c5433c0b7c4" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-36010f1e-418a-4b8b-b735-8ee209094caa">
+<span class="eqno">()<a class="headerlink" href="#equation-36010f1e-418a-4b8b-b735-8ee209094caa" title="Permalink to this equation">¶</a></span>\[\begin{align}
 &amp;\lambda_1 \sim \text{Exp}( \alpha ) \\
 &amp;\lambda_2 \sim \text{Exp}( \alpha )
 \end{align}\]</div>
@@ -1068,8 +1068,8 @@ $\alpha$ is called a *hyper-parameter* or *parent variable*. In literal terms, i
 <p>An alternative, and something I encourage the reader to try, would be to have two priors: one for each <span class="math notranslate nohighlight">\(\lambda_i\)</span>. Creating two exponential distributions with different <span class="math notranslate nohighlight">\(\alpha\)</span> values reflects our prior belief that the rate changed at some point during the observations.</p>
 <p>What about <span class="math notranslate nohighlight">\(\tau\)</span>? Because of the noisiness of the data, it’s difficult to pick out a priori when <span class="math notranslate nohighlight">\(\tau\)</span> might have occurred. Instead, we can assign a <em>uniform prior belief</em> to every possible day. This is equivalent to saying
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bafe162c-ebd5-4ad8-87be-4db79053136d">
-<span class="eqno">()<a class="headerlink" href="#equation-bafe162c-ebd5-4ad8-87be-4db79053136d" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-75dc5fa5-bd48-45c2-a623-4b15753f0171">
+<span class="eqno">()<a class="headerlink" href="#equation-75dc5fa5-bd48-45c2-a623-4b15753f0171" title="Permalink to this equation">¶</a></span>\[\begin{align}
 &amp; \tau \sim \text{DiscreteUniform(1,70) }\\
 &amp; \Rightarrow P( \tau = k ) = \frac{1}{70}
 \end{align}\]</div>
