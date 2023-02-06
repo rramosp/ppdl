@@ -1,15 +1,12 @@
 [tool.poetry]
-name = "ppdl"
+name = "ppml"
 version = "0.1.0"
 description = "Source code for probabilistic deep learning course."
 authors = ["Juan Lara <julara@unal.edu.co>"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
-numpy = "^1.24.2"
-pandas = "^1.5.3"
 matplotlib = "^3.6.3"
-scipy = "^1.10.0"
 simpy = "^4.0.1"
 rlxutils = "^0.1.10"
 progressbar2 = "^4.2.0"
