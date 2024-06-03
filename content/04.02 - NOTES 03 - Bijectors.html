@@ -1,0 +1,998 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Bijectors &#8212; Probabilistic Programming for Machine Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MBFEZ3PF64');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/04.02 - NOTES 03 - Bijectors';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-tf-udea-unal.png" class="logo__image only-light" alt="Probabilistic Programming for Machine Learning - Home"/>
+    <script>document.write(`<img src="../_static/logo-tf-udea-unal.png" class="logo__image only-dark" alt="Probabilistic Programming for Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Course outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M1-videolist.html">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M2-videolist.html">2 TF for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3-videolist.html">3 Intuitions on Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M4-videolist.html">4 Tensorflow Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M5-videolist.html">5 Bayesian Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M6-videolist.html">6 Variational Inference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/04.02 - NOTES 03 - Bijectors.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/04.02 - NOTES 03 - Bijectors.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bijectors</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijectors-are-invertible-transformations">Bijectors are invertible transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chaining-and-inveting-bijectors">Chaining and inveting bijectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijector-are-general-transformations-on-tf-objects">Bijector are general transformations on TF objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-stuff">Modelling stuff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-args"><code class="docutils literal notranslate"><span class="pre">validate_args</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijector-parameters-are-learnable">Bijector parameters are learnable</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bijectors">
+<h1>Bijectors<a class="headerlink" href="#bijectors" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span> <span class="nn">rlxutils</span> <span class="kn">import</span> <span class="n">subplots</span><span class="p">,</span> <span class="n">copy_func</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">ppdl</span> 
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<section id="bijectors-are-invertible-transformations">
+<h2>Bijectors are invertible transformations<a class="headerlink" href="#bijectors-are-invertible-transformations" title="Permalink to this heading">#</a></h2>
+<p>When applied to TFP distributions bijectors produce fully valid distributions</p>
+<p>TFP has a collection of <a class="reference external" href="https://www.tensorflow.org/probability/api_docs/python/tfp/bijectors/"><strong>Bijectors</strong></a> that allow you to transform distributions, keeping the capability for sampling and compute densities.</p>
+<p>We will see them more in detail later in the course, but for now, let’s understand what they do.</p>
+<p>Observe how we scale and shift a distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bscale</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">bshift</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Shift</span><span class="p">(</span><span class="mf">.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_orig</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="mf">1.8</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">d_scaled</span> <span class="o">=</span> <span class="n">bscale</span><span class="p">(</span><span class="n">d_orig</span><span class="p">)</span>
+<span class="n">d_scaled_and_shifted</span> <span class="o">=</span> <span class="n">bshift</span><span class="p">(</span><span class="n">d_scaled</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_orig</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;original&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_scaled</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;scaled&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_scaled_and_shifted</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;scaled and shifted&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/683819dbf48884c7f431dd69e9965ad50cd77da0e29d7c027a14bce793e258e1.png" src="../_images/683819dbf48884c7f431dd69e9965ad50cd77da0e29d7c027a14bce793e258e1.png" />
+</div>
+</div>
+<p>the resulting distribution are fully valid TFP distribution objects</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_scaled</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tfp.distributions.TransformedDistribution &#39;scaleBeta&#39; batch_shape=[] event_shape=[] dtype=float32&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">d_scaled</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(10,), dtype=float32, numpy=
+array([0.11156841, 0.39035392, 0.07765947, 0.19926141, 0.3500817 ,
+       0.19258274, 0.16098109, 0.31810397, 0.10686599, 0.09793448],
+      dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d_scaled</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(10,), dtype=float32, numpy=
+array([0.5458902 , 0.91539323, 0.29789424, 0.8819361 , 0.9846997 ,
+       0.86564505, 0.77117884, 1.0047415 , 0.5174571 , 0.4588679 ],
+      dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="chaining-and-inveting-bijectors">
+<h2>Chaining and inveting bijectors<a class="headerlink" href="#chaining-and-inveting-bijectors" title="Permalink to this heading">#</a></h2>
+<p>you can chain bijectors to crete a new bijector. Observe that they are specied in <strong>inverse order</strong> to which they are applied.</p>
+<p>you can also create an <strong>inverse bijector</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bc</span>     <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">([</span><span class="n">bshift</span><span class="p">,</span><span class="n">bscale</span><span class="p">])</span>
+<span class="n">bci</span>    <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Invert</span><span class="p">(</span><span class="n">bc</span><span class="p">)</span>
+
+<span class="n">dt</span>     <span class="o">=</span> <span class="n">bc</span><span class="p">(</span><span class="n">d_orig</span><span class="p">)</span>
+<span class="n">d_back</span> <span class="o">=</span> <span class="n">bci</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_orig</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;original distribution&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;chain transformed&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_back</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;transformed back&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/319cf3992974f453603fd9708371729aba00cd0bec1db5659490662e6fec4a15.png" src="../_images/319cf3992974f453603fd9708371729aba00cd0bec1db5659490662e6fec4a15.png" />
+</div>
+</div>
+</section>
+<section id="bijector-are-general-transformations-on-tf-objects">
+<h2>Bijector are general transformations on TF objects<a class="headerlink" href="#bijector-are-general-transformations-on-tf-objects" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">2.</span><span class="p">)</span>
+<span class="n">tx</span> <span class="o">=</span> <span class="n">bc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">tx</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(), dtype=float32, numpy=1.3&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bc</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">tx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(), dtype=float32, numpy=2.0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="modelling-stuff">
+<h2>Modelling stuff<a class="headerlink" href="#modelling-stuff" title="Permalink to this heading">#</a></h2>
+<p>bijectors make it easier to model stuff with non standard distributions, for instance</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">([</span><span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Shift</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mf">1.5</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Shift</span><span class="p">(</span><span class="o">+</span><span class="mf">.5</span><span class="p">)])</span>
+<span class="n">d1</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span><span class="mf">1.8</span><span class="p">)</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d1</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;original&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d2</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;transformed&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/063c72a81803e1003f1e7a57d5b958924a03022b56d3c08fdf96cbf1c6e01801.png" src="../_images/063c72a81803e1003f1e7a57d5b958924a03022b56d3c08fdf96cbf1c6e01801.png" />
+</div>
+</div>
+</section>
+<section id="validate-args">
+<h2><code class="docutils literal notranslate"><span class="pre">validate_args</span></code><a class="headerlink" href="#validate-args" title="Permalink to this heading">#</a></h2>
+<p>Observe that sometimes a bijector might not be invertible for certain input values.</p>
+<p>This is only checked in <code class="docutils literal notranslate"><span class="pre">validate_args</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, otherwise, <code class="docutils literal notranslate"><span class="pre">nan</span></code> are generated and the code downstream will fail somewhere</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">()</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(10,), dtype=float32, numpy=
+array([0.05243969, 0.00711866, 0.3022964 , 0.08465093, 1.0127188 ,
+       1.7130485 , 0.5749669 , 0.41861057, 0.9270925 , 0.80052745],
+      dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Tensor: shape=(10,), dtype=float32, numpy=
+array([0.84852153, 2.3557818 ,        nan, 0.6571772 , 0.1194611 ,
+       0.06471597, 0.19733593,        nan,        nan,        nan],
+      dtype=float32)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>with <code class="docutils literal notranslate"><span class="pre">validate_args</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> an exception is rised and can be dealt with</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">(</span><span class="n">validate_args</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>All elements must be non-negative..  
+Condition x &gt;= 0 did not hold element-wise:
+x (shape=(10,) dtype=float32) = 
+[&#39;-0.9586899&#39;, &#39;0.72535914&#39;, &#39;1.2406634&#39;, &#39;...&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>but the code is slower even for a simple scenario.
+We test both cases with positive samples which we know are valid</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">([</span><span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">validate_args</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">(</span><span class="n">validate_args</span><span class="o">=</span><span class="kc">True</span><span class="p">)])</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> s = dt.sample(1000)
+<span class="o">%</span><span class="k">timeit</span> dt.log_prob(s)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.12 ms ± 34 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+9.94 ms ± 252 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">()</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">([</span><span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Square</span><span class="p">()])</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="o">%</span><span class="k">timeit</span> s = dt.sample(1000)
+<span class="o">%</span><span class="k">timeit</span> dt.log_prob(s)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.92 ms ± 52.5 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+8.89 ms ± 413 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="bijector-parameters-are-learnable">
+<h2>Bijector parameters are learnable<a class="headerlink" href="#bijector-parameters-are-learnable" title="Permalink to this heading">#</a></h2>
+<p>observe how we can learn altogether bijector and distribution parameters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scale</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span>
+<span class="n">dbeta</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="n">d_orig</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">dbeta</span><span class="p">)</span>  
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">d_orig</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d_orig</span><span class="p">,</span> <span class="n">hist_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;bins&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">.5</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sample mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7e4801b095ebab162782a83d7f49e62b9845334d8788c400a89b21562e275fdf.png" src="../_images/7e4801b095ebab162782a83d7f49e62b9845334d8788c400a89b21562e275fdf.png" />
+</div>
+</div>
+<p>Although trivial, we will just learn the bijector parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="n">init_sc</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">validate_args</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    
+    <span class="n">sc</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">init_sc</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>    
+
+    <span class="n">hloss</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">hgrads</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">hparams</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">)):</span>
+
+        <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="n">tfd</span><span class="o">.</span><span class="n">Beta</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span> <span class="n">validate_args</span><span class="o">=</span><span class="n">validate_args</span><span class="p">))</span>
+            <span class="n">negloglik</span>    <span class="o">=</span> <span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">hloss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">negloglik</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+
+        <span class="n">gradients</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">negloglik</span><span class="p">,</span> <span class="p">[</span><span class="n">sc</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gradients</span><span class="p">]):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;nan gradients&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">gradients</span><span class="p">,[</span><span class="n">sc</span><span class="p">]))</span>
+        <span class="n">hgrads</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gradients</span><span class="p">)</span>
+        <span class="n">hparams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+
+    <span class="n">hgrads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">hgrads</span><span class="p">]</span>
+    <span class="n">hloss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">hloss</span><span class="p">]</span>
+    <span class="n">hparams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">hparams</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">,</span> <span class="n">sc</span>
+    
+<span class="k">def</span> <span class="nf">plot_optim</span><span class="p">(</span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">usizex</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hloss</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hparams</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;parameter value&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hgrads</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;paramter gradient&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;epoch&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">,</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">()</span>
+<span class="n">sc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100% (200 of 200) |######################| Elapsed Time: 0:00:03 Time:  0:00:03
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;Variable:0&#39; shape=() dtype=float32, numpy=3.1905434&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_optim</span><span class="p">(</span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0dc63d913331918545dbae23f5e8591db2fb9a0d899316c0d4a9f71a7e2b00d1.png" src="../_images/0dc63d913331918545dbae23f5e8591db2fb9a0d899316c0d4a9f71a7e2b00d1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ppdl</span><span class="o">.</span><span class="n">plot_pdf</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">hist_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;fitted distribution&#39;</span><span class="p">,</span> <span class="s1">&#39;bins&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">.5</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;original distribution&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/63a8a430cf28ffc5dccea9753a24e066c49c282805c4aeaaf1828d68787bf419.png" src="../_images/63a8a430cf28ffc5dccea9753a24e066c49c282805c4aeaaf1828d68787bf419.png" />
+</div>
+</div>
+<p>observe that we might hit invalid values during optimization. The Beta distribution returns <code class="docutils literal notranslate"><span class="pre">nan</span></code> if trying to compute densities for values outside its domain.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">,</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">init_sc</span><span class="o">=-</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 75% (150 of 200) |################      | Elapsed Time: 0:00:02 ETA:   0:00:00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nan gradients
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_optim</span><span class="p">(</span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7eacfaa76eeb9756a3bbb31eb05f55b023358db82793bea8107f83e43727e106.png" src="../_images/7eacfaa76eeb9756a3bbb31eb05f55b023358db82793bea8107f83e43727e106.png" />
+</div>
+</div>
+<p>with <code class="docutils literal notranslate"><span class="pre">validate_args</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code> TFP checks stuff and will hint these situations</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hloss</span><span class="p">,</span> <span class="n">hparams</span><span class="p">,</span> <span class="n">hgrads</span><span class="p">,</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">init_sc</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">validate_args</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0% (0 of 200) |                        | Elapsed Time: 0:00:00 ETA:  --:--:--
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
+InvalidArgumentError                      Traceback (most recent call last)
+/tmp/ipykernel_53908/1940918081.py in &lt;module&gt;
+----&gt; 1 hloss, hparams, hgrads, sc = optimize(init_sc=-5, validate_args=True)
+
+/tmp/ipykernel_53908/734260892.py in optimize(init_sc, validate_args)
+     13             c = tfb.Scale(sc)
+     14             d = c(tfd.Beta(a,b, validate_args=validate_args))
+---&gt; 15             negloglik    = -tf.reduce_mean(d.log_prob(x))
+     16             hloss.append(negloglik.numpy())
+     17 
+
+/opt/anaconda/envs/p39/lib/python3.9/site-packages/tensorflow_probability/python/distributions/distribution.py in log_prob(self, value, name, **kwargs)
+   1314         values of type `self.dtype`.
+   1315     &quot;&quot;&quot;
+-&gt; 1316     return self._call_log_prob(value, name, **kwargs)
+   1317 
+   1318   def _call_prob(self, value, name, **kwargs):
+
+/opt/anaconda/envs/p39/lib/python3.9/site-packages/tensorflow_probability/python/distributions/distribution.py in _call_log_prob(self, value, name, **kwargs)
+   1296     with self._name_and_control_scope(name, value, kwargs):
+   1297       if hasattr(self, &#39;_log_prob&#39;):
+-&gt; 1298         return self._log_prob(value, **kwargs)
+   1299       if hasattr(self, &#39;_prob&#39;):
+   1300         return tf.math.log(self._prob(value, **kwargs))
+
+/opt/anaconda/envs/p39/lib/python3.9/site-packages/tensorflow_probability/python/distributions/transformed_distribution.py in _log_prob(self, y, **kwargs)
+    368         y, event_ndims=event_ndims, **bijector_kwargs)
+    369     if self.bijector._is_injective:  # pylint: disable=protected-access
+--&gt; 370       base_log_prob = self.distribution.log_prob(x, **distribution_kwargs)
+    371       return base_log_prob + tf.cast(ildj, base_log_prob.dtype)
+    372 
+
+/opt/anaconda/envs/p39/lib/python3.9/site-packages/tensorflow_probability/python/distributions/distribution.py in log_prob(self, value, name, **kwargs)
+   1314         values of type `self.dtype`.
+   1315     &quot;&quot;&quot;
+-&gt; 1316     return self._call_log_prob(value, name, **kwargs)
+   1317 
+   1318   def _call_prob(self, value, name, **kwargs):
+
+/opt/anaconda/envs/p39/lib/python3.9/site-packages/tensorflow_probability/python/distributions/distribution.py in _call_log_prob(self, value, name, **kwargs)
+   1294         value, name=&#39;value&#39;, dtype_hint=self.dtype,
+   1295         allow_packing=True)
+-&gt; 1296     with self._name_and_control_scope(name, value, kwargs):
+   1297       if hasattr(self, &#39;_log_prob&#39;):
+   1298         return self._log_prob(value, **kwargs)
+
+/opt/anaconda/envs/p39/lib/python3.9/contextlib.py in __enter__(self)
+    117         del self.args, self.kwds, self.func
+    118         try:
+--&gt; 119             return next(self.gen)
+    120         except StopIteration:
+    121             raise RuntimeError(&quot;generator didn&#39;t yield&quot;) from None
+
+/opt/anaconda/envs/p39/lib/python3.9/site-packages/tensorflow_probability/python/distributions/distribution.py in _name_and_control_scope(self, name, value, kwargs)
+   1995         deps.extend(self._parameter_control_dependencies(is_init=False))
+   1996         if value is not UNSET_VALUE:
+-&gt; 1997           deps.extend(self._sample_control_dependencies(
+   1998               value, **({} if kwargs is None else kwargs)))
+   1999         if not deps:
+
+/opt/anaconda/envs/p39/lib/python3.9/site-packages/tensorflow_probability/python/distributions/beta.py in _sample_control_dependencies(self, x)
+    335     if not self.validate_args:
+    336       return assertions
+--&gt; 337     assertions.append(assert_util.assert_non_negative(
+    338         x, message=&#39;Sample must be non-negative.&#39;))
+    339     assertions.append(assert_util.assert_less_equal(
+
+/opt/anaconda/envs/p39/lib/python3.9/site-packages/tensorflow/python/util/traceback_utils.py in error_handler(*args, **kwargs)
+    151     except Exception as e:
+    152       filtered_tb = _process_traceback_frames(e.__traceback__)
+--&gt; 153       raise e.with_traceback(filtered_tb) from None
+    154     finally:
+    155       del filtered_tb
+
+/opt/anaconda/envs/p39/lib/python3.9/site-packages/tensorflow/python/ops/check_ops.py in _binary_assert(sym, opname, op_func, static_func, x, y, data, summarize, message, name)
+    407         data = [message] + list(data)
+    408 
+--&gt; 409       raise errors.InvalidArgumentError(
+    410           node_def=None,
+    411           op=None,
+
+InvalidArgumentError: Sample must be non-negative..  
+Condition x &gt;= 0 did not hold element-wise:
+x (shape=(100000,) dtype=float32) = 
+[&#39;-0.44549665&#39;, &#39;-0.05629177&#39;, &#39;-0.39321715&#39;, &#39;...&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "p39"
+        },
+        kernelOptions: {
+            name: "p39",
+            path: "./content"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'p39'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijectors-are-invertible-transformations">Bijectors are invertible transformations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chaining-and-inveting-bijectors">Chaining and inveting bijectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijector-are-general-transformations-on-tf-objects">Bijector are general transformations on TF objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-stuff">Modelling stuff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-args"><code class="docutils literal notranslate"><span class="pre">validate_args</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bijector-parameters-are-learnable">Bijector parameters are learnable</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

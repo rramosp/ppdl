@@ -1,54 +1,72 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Scenarios with Bayes &#8212; Probabilistic Programming for Machine Learning</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MBFEZ3PF64');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -57,357 +75,323 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/06.02 - NOTES 04 - Variational inference for data estimation';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MBFEZ3PF64');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo-tf-udea-unal.png" class="logo__image only-light" alt="Probabilistic Programming for Machine Learning - Home"/>
+    <script>document.write(`<img src="../_static/logo-tf-udea-unal.png" class="logo__image only-dark" alt="Probabilistic Programming for Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
-   Course outline
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M1-videolist.html">
-   1 Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M2-videolist.html">
-   2 TF for Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M3-videolist.html">
-   3 Intuitions on Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M4-videolist.html">
-   4 Tensorflow Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M5-videolist.html">
-   5 Bayesian Modelling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M6-videolist.html">
-   6 Variational Inference
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Course outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M1-videolist.html">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M2-videolist.html">2 TF for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3-videolist.html">3 Intuitions on Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M4-videolist.html">4 Tensorflow Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M5-videolist.html">5 Bayesian Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M6-videolist.html">6 Variational Inference</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/06.02 - NOTES 04 - Variational inference for data estimation.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
         
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/06.02 - NOTES 04 - Variational inference for data estimation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/06.02 - NOTES 04 - Variational inference for data estimation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/06.02 - NOTES 04 - Variational inference for data estimation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Scenarios with Bayes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Scenarios with Bayes
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#models-and-goals">
-   Models and goals
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#computing-vs-designing">
-   Computing vs designing
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#single-observation-posterior-with-model">
-   Single observation posterior with model
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#analytical-or-numerical-solutions-for-all-distributions">
-     analytical or numerical solutions for all distributions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chain-sampling">
-   Chain sampling
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#estimate-p-z-x-i">
-   Estimate
-   <span class="math notranslate nohighlight">
-    \(p(z|x_i)\)
-   </span>
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-mcmc">
-     Estimate
-     <span class="math notranslate nohighlight">
-      \(p(z|x_i)\)
-     </span>
-     with MCMC
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions">
-     Estimate
-     <span class="math notranslate nohighlight">
-      \(p(z|x_i)\)
-     </span>
-     with variational inference and a Gaussian class of distributions
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions">
-     Estimate
-     <span class="math notranslate nohighlight">
-      \(p(z|x_i)\)
-     </span>
-     with variational inference and a mixture of
-     <span class="math notranslate nohighlight">
-      \(n\)
-     </span>
-     Gaussians class of distributions
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Scenarios with Bayes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#models-and-goals">Models and goals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-vs-designing">Computing vs designing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-observation-posterior-with-model">Single observation posterior with model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-or-numerical-solutions-for-all-distributions">analytical or numerical solutions for all distributions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-sampling">Chain sampling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-p-z-x-i">Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-p-z-x-i-with-mcmc">Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with MCMC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions">Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a Gaussian class of distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions">Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a mixture of <span class="math notranslate nohighlight">\(n\)</span> Gaussians class of distributions</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Scenarios with Bayes</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Scenarios with Bayes
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#models-and-goals">
-   Models and goals
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#computing-vs-designing">
-   Computing vs designing
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#single-observation-posterior-with-model">
-   Single observation posterior with model
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#analytical-or-numerical-solutions-for-all-distributions">
-     analytical or numerical solutions for all distributions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chain-sampling">
-   Chain sampling
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#estimate-p-z-x-i">
-   Estimate
-   <span class="math notranslate nohighlight">
-    \(p(z|x_i)\)
-   </span>
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-mcmc">
-     Estimate
-     <span class="math notranslate nohighlight">
-      \(p(z|x_i)\)
-     </span>
-     with MCMC
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions">
-     Estimate
-     <span class="math notranslate nohighlight">
-      \(p(z|x_i)\)
-     </span>
-     with variational inference and a Gaussian class of distributions
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions">
-     Estimate
-     <span class="math notranslate nohighlight">
-      \(p(z|x_i)\)
-     </span>
-     with variational inference and a mixture of
-     <span class="math notranslate nohighlight">
-      \(n\)
-     </span>
-     Gaussians class of distributions
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># init repo notebook</span>
@@ -446,8 +430,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="scenarios-with-bayes">
-<h1>Scenarios with Bayes<a class="headerlink" href="#scenarios-with-bayes" title="Permalink to this headline">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="scenarios-with-bayes">
+<h1>Scenarios with Bayes<a class="headerlink" href="#scenarios-with-bayes" title="Permalink to this heading">#</a></h1>
 <p>Remember Bayes theorem:</p>
 <div class="math notranslate nohighlight">
 \[ p(z|x) = \frac{p(x|z)p(z)}{p(x)} = \frac{p(x,z)}{p(x)}\]</div>
@@ -466,9 +450,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><span class="math notranslate nohighlight">\(p(x|z)\)</span>: the <strong>model</strong>, the probability of seeing <span class="math notranslate nohighlight">\(x\)</span> is we assume a certain value of <span class="math notranslate nohighlight">\(z\)</span>. A model which, giving an aiming direction <span class="math notranslate nohighlight">\(z\)</span>, produces a probability distribution of possible positions of where would my shot hit the target. This would take into account the gravity, distance, direction, etc. <span class="math notranslate nohighlight">\(p(x|z)\)</span> is a result of applying Newton’s laws to <span class="math notranslate nohighlight">\(z\)</span> and the shooting conditions.</p></li>
 <li><p><span class="math notranslate nohighlight">\(p(z|x)\)</span>: the <strong>posterior</strong>. Given an observation <span class="math notranslate nohighlight">\(x\)</span>, what possible aiming directions could have produced it.</p></li>
 </ul>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="models-and-goals">
-<h1>Models and goals<a class="headerlink" href="#models-and-goals" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="models-and-goals">
+<h1>Models and goals<a class="headerlink" href="#models-and-goals" title="Permalink to this heading">#</a></h1>
 <p>In general we are given data (observations of <span class="math notranslate nohighlight">\(x\)</span>, and possibly of <span class="math notranslate nohighlight">\(z\)</span>) and we will be asked for the <strong>posterior</strong>. But the posterior might have different meanings in different settings. It is key to <strong>understand what question you are answering we you are asked to get the posterior</strong>:</p>
 <ul class="simple">
 <li><p>independance of measurements: <span class="math notranslate nohighlight">\(x\)</span> is cholesterol, <span class="math notranslate nohighlight">\(x\)</span> is age. If I make an observations of <span class="math notranslate nohighlight">\(x\)</span>, the posterior <span class="math notranslate nohighlight">\(p(z|x)\)</span> is answering the question <em>In what ages is more typical this observation cholesterol?</em></p></li>
@@ -481,18 +465,18 @@ For instance</p>
 <li><p>given <strong>many observations</strong>, <span class="math notranslate nohighlight">\(p(z)\)</span> and <span class="math notranslate nohighlight">\(p(x|z)\)</span> obtain a function that computes <span class="math notranslate nohighlight">\(p(z|x)\)</span> for any observation.</p></li>
 <li><p>give one or many observations and <strong>only</strong> <span class="math notranslate nohighlight">\(p(z)\)</span> <strong>design</strong> a parametrized version of <span class="math notranslate nohighlight">\(p(x)\)</span>, <span class="math notranslate nohighlight">\(p(x|z)\)</span> and <span class="math notranslate nohighlight">\(p(z|x)\)</span>, and try to obtain the parameters that best fit the data. This will be the case of the variational autoencoder.</p></li>
 </ul>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="computing-vs-designing">
-<h1>Computing vs designing<a class="headerlink" href="#computing-vs-designing" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computing-vs-designing">
+<h1>Computing vs designing<a class="headerlink" href="#computing-vs-designing" title="Permalink to this heading">#</a></h1>
 <p>Observe the subtlety between the statements above.</p>
 <ul class="simple">
 <li><p>When asked to <strong>obtain</strong> something we have <strong>no design choices</strong>. Obtaining typically refers to <em>computing</em> some result with a higher or lower degree of generality. This might be challenging for many reasons: intractability, numerical instabilities, hard to implement, lack of tools, etc.</p></li>
 <li><p>When asked to <strong>design</strong> something <strong>we make choices</strong> that imply different <strong>trade-offs</strong>. For instance, a variational autoencoder <strong>designs</strong> a setting in which <span class="math notranslate nohighlight">\(p(x|z)\)</span>, <span class="math notranslate nohighlight">\(p(z|x)\)</span>, <span class="math notranslate nohighlight">\(p(z)\)</span> and <span class="math notranslate nohighlight">\(p(x)\)</span> have certain desirable properties.</p></li>
 </ul>
 <p>See the chain sampling process below to follow up the discussion on this.</p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="single-observation-posterior-with-model">
-<h1>Single observation posterior with model<a class="headerlink" href="#single-observation-posterior-with-model" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="single-observation-posterior-with-model">
+<h1>Single observation posterior with model<a class="headerlink" href="#single-observation-posterior-with-model" title="Permalink to this heading">#</a></h1>
 <p>we have an scenario where we are given:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p(z)\)</span>, the prior</p></li>
@@ -502,11 +486,11 @@ For instance</p>
 <p>This may correspond to an scenario where <strong>we are given a model on how <span class="math notranslate nohighlight">\(x\)</span> is generated from <span class="math notranslate nohighlight">\(z\)</span></strong>.</p>
 <p>For instance, given a level of acidity of a liquid (<span class="math notranslate nohighlight">\(z\)</span>), we have a stochastical model that gives us the distribution of energies that we would get in a chemical reaction (<span class="math notranslate nohighlight">\(x\)</span>). This model is <span class="math notranslate nohighlight">\(p(x|z)\)</span>. This model has been tested and is given to us.</p>
 <p>We use <code class="docutils literal notranslate"><span class="pre">JointDistributionSequential</span></code> to model <span class="math notranslate nohighlight">\(p(z)\)</span> <strong>and</strong> <span class="math notranslate nohighlight">\(p(x|z)\)</span></p>
-<div class="section" id="analytical-or-numerical-solutions-for-all-distributions">
-<h2>analytical or numerical solutions for all distributions<a class="headerlink" href="#analytical-or-numerical-solutions-for-all-distributions" title="Permalink to this headline">¶</a></h2>
+<section id="analytical-or-numerical-solutions-for-all-distributions">
+<h2>analytical or numerical solutions for all distributions<a class="headerlink" href="#analytical-or-numerical-solutions-for-all-distributions" title="Permalink to this heading">#</a></h2>
 <p>in theory with <span class="math notranslate nohighlight">\(p(z)\)</span> and <span class="math notranslate nohighlight">\(p(x|z)\)</span> we could obtain the rest of distributions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eb34822d-08f6-452c-91b9-9d9faa19048f">
-<span class="eqno">()<a class="headerlink" href="#equation-eb34822d-08f6-452c-91b9-9d9faa19048f" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-11d47c83-7aa9-40d4-9bb6-a83647df0360">
+<span class="eqno">()<a class="headerlink" href="#equation-11d47c83-7aa9-40d4-9bb6-a83647df0360" title="Permalink to this equation">#</a></span>\[\begin{align}
 \text{joint} &amp; \;\;\;\;p(z,x) = p(x|z)p(z)\\
 \text{marginal for }x &amp;\;\;\;\;p(x) = \int p(x|z)p(z) dz\\
 \text{posterior for }z &amp;\;\;\;\;p(z|x) = \frac{p(x|z)p(z)}{p(x)}
@@ -637,16 +621,16 @@ For instance</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_7_0.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_7_0.png" />
-<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_7_1.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_7_1.png" />
+<img alt="../_images/d1903afa9a56171ad4a992d509d4306a41a6284c27392eecdba0d8f963e56087.png" src="../_images/d1903afa9a56171ad4a992d509d4306a41a6284c27392eecdba0d8f963e56087.png" />
+<img alt="../_images/ee789a0267e0dfce300686472a3fef191a69dda8095684b338ccccb81cc5abb5.png" src="../_images/ee789a0267e0dfce300686472a3fef191a69dda8095684b338ccccb81cc5abb5.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="chain-sampling">
-<h1>Chain sampling<a class="headerlink" href="#chain-sampling" title="Permalink to this headline">¶</a></h1>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="chain-sampling">
+<h1>Chain sampling<a class="headerlink" href="#chain-sampling" title="Permalink to this heading">#</a></h1>
 <p>We do the following process</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Make one observation <span class="math notranslate nohighlight">\(x_i\)</span></p></li>
 <li><p>Take one sample <span class="math notranslate nohighlight">\(z_i\)</span> from <span class="math notranslate nohighlight">\(p(z|x_i)\)</span></p></li>
 <li><p>Take one sample <span class="math notranslate nohighlight">\(\hat{x}_i\)</span> from <span class="math notranslate nohighlight">\(p(x|z_i)\)</span></p></li>
@@ -810,16 +794,16 @@ For instance</p>
 <span class="g g-Whitespace">    </span><span class="mi">818</span>     <span class="c1"># if the subclass used: `parameters = dict(locals())`.</span>
 <span class="ne">--&gt; </span><span class="mi">819</span>     <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_parameters_sanitized&#39;</span><span class="p">)</span> <span class="ow">or</span>
 <span class="g g-Whitespace">    </span><span class="mi">820</span>         <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters_sanitized</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">821</span>       <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">()</span> <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span>
+<span class="g g-Whitespace">    </span><span class="mi">821</span>       <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">()</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="estimate-p-z-x-i">
-<h1>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span><a class="headerlink" href="#estimate-p-z-x-i" title="Permalink to this headline">¶</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="estimate-p-z-x-i">
+<h1>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span><a class="headerlink" href="#estimate-p-z-x-i" title="Permalink to this heading">#</a></h1>
 <p>Above we used analytic/numerical methods to compute the different distributions. In almost all practical cases this is not possible and we need to resort to other methods.</p>
 <p>We now estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with:</p>
 <ul class="simple">
@@ -832,8 +816,8 @@ For instance</p>
 <li><p>for <span class="math notranslate nohighlight">\(observed_x=-10\)</span> all three methods have difficulty</p></li>
 <li><p>for <span class="math notranslate nohighlight">\(observed_x=-5\)</span> only VI on a mixture of gaussians produces a decent approximation</p></li>
 </ul>
-<div class="section" id="estimate-p-z-x-i-with-mcmc">
-<h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with MCMC<a class="headerlink" href="#estimate-p-z-x-i-with-mcmc" title="Permalink to this headline">¶</a></h2>
+<section id="estimate-p-z-x-i-with-mcmc">
+<h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with MCMC<a class="headerlink" href="#estimate-p-z-x-i-with-mcmc" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_results</span> <span class="o">=</span> <span class="mi">50000</span>
@@ -897,15 +881,15 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;a&#39;)
 </pre></div>
 </div>
-<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_14_1.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_14_1.png" />
+<img alt="../_images/7e88cc596689241e7642bfb04791de94c188f4a5347e94f3110f0fde98ada9de.png" src="../_images/7e88cc596689241e7642bfb04791de94c188f4a5347e94f3110f0fde98ada9de.png" />
 </div>
 </div>
-</div>
-<div class="section" id="estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions">
-<h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a Gaussian class of distributions<a class="headerlink" href="#estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions">
+<h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a Gaussian class of distributions<a class="headerlink" href="#estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions" title="Permalink to this heading">#</a></h2>
 <p>We want to find <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> given a certain observation <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
 <p>We do this by:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>define a class of distributions <span class="math notranslate nohighlight">\(Q(z|x_i) = \{q_\theta(z|x_i)\}\)</span> parametrized by <span class="math notranslate nohighlight">\(\theta\)</span> hoping some distribution of this class is able to approximate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span></p></li>
 <li><p>find the parameters <span class="math notranslate nohighlight">\(w\)</span> corresponding to the distribution <span class="math notranslate nohighlight">\(q_w\)</span> which is closer to <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> in KLdiv. This is</p></li>
 </ol>
@@ -1024,12 +1008,12 @@ WARNING:tensorflow:5 out of the last 5 calls to &lt;function do_sampling at 0x7f
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_20_0.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_20_0.png" />
+<img alt="../_images/4fd915405ad97f8b7472cd64bfdf486da3f0f7117bb6d3dd0a8e4cdb90777fae.png" src="../_images/4fd915405ad97f8b7472cd64bfdf486da3f0f7117bb6d3dd0a8e4cdb90777fae.png" />
 </div>
 </div>
-</div>
-<div class="section" id="estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions">
-<h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a mixture of <span class="math notranslate nohighlight">\(n\)</span> Gaussians class of distributions<a class="headerlink" href="#estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions">
+<h2>Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a mixture of <span class="math notranslate nohighlight">\(n\)</span> Gaussians class of distributions<a class="headerlink" href="#estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions" title="Permalink to this heading">#</a></h2>
 <p>We define</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1091,7 +1075,7 @@ n &amp; \text{ the number of gaussians in the mixture}\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/06.02 - NOTES 04 - Variational inference for data estimation_26_0.png" src="../_images/06.02 - NOTES 04 - Variational inference for data estimation_26_0.png" />
+<img alt="../_images/78b0a57c66ebf2bbc354e99ee9d9319b928a04d4b209f3a4b5d42ce614368884.png" src="../_images/78b0a57c66ebf2bbc354e99ee9d9319b928a04d4b209f3a4b5d42ce614368884.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1125,8 +1109,8 @@ n &amp; \text{ the number of gaussians in the mixture}\\
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1140,7 +1124,7 @@ n &amp; \text{ the number of gaussians in the mixture}\\
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
@@ -1148,30 +1132,98 @@ n &amp; \text{ the number of gaussians in the mixture}\\
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Scenarios with Bayes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#models-and-goals">Models and goals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-vs-designing">Computing vs designing</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#single-observation-posterior-with-model">Single observation posterior with model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-or-numerical-solutions-for-all-distributions">analytical or numerical solutions for all distributions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-sampling">Chain sampling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-p-z-x-i">Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-p-z-x-i-with-mcmc">Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with MCMC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-gaussian-class-of-distributions">Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a Gaussian class of distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-p-z-x-i-with-variational-inference-and-a-mixture-of-n-gaussians-class-of-distributions">Estimate <span class="math notranslate nohighlight">\(p(z|x_i)\)</span> with variational inference and a mixture of <span class="math notranslate nohighlight">\(n\)</span> Gaussians class of distributions</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-</div>
+          </div>
+          <footer class="bd-footer-content">
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
-      </div>
-    </div>
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

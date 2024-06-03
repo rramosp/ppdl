@@ -1,54 +1,72 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Variational Inference for Text Modeling &#8212; Probabilistic Programming for Machine Learning</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MBFEZ3PF64');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -57,218 +75,313 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/06.02 - NOTES 03 - Variational Inference for Text Modeling';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MBFEZ3PF64');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo-tf-udea-unal.png" class="logo__image only-light" alt="Probabilistic Programming for Machine Learning - Home"/>
+    <script>document.write(`<img src="../_static/logo-tf-udea-unal.png" class="logo__image only-dark" alt="Probabilistic Programming for Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
-   Course outline
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M1-videolist.html">
-   1 Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M2-videolist.html">
-   2 TF for Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M3-videolist.html">
-   3 Intuitions on Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M4-videolist.html">
-   4 Tensorflow Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M5-videolist.html">
-   5 Bayesian Modelling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M6-videolist.html">
-   6 Variational Inference
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Course outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M1-videolist.html">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M2-videolist.html">2 TF for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3-videolist.html">3 Intuitions on Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M4-videolist.html">4 Tensorflow Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M5-videolist.html">5 Bayesian Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M6-videolist.html">6 Variational Inference</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/06.02 - NOTES 03 - Variational Inference for Text Modeling.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/06.02 - NOTES 03 - Variational Inference for Text Modeling.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/06.02 - NOTES 03 - Variational Inference for Text Modeling.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Variational Inference for Text Modeling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#distributions-in-a-corpus-of-documents">
-   Distributions in a Corpus of Documents
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-modeling-for-the-corpus-distribution">
-   Bayesian Modeling for the Corpus Distribution
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions-in-a-corpus-of-documents">Distributions in a Corpus of Documents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-modeling-for-the-corpus-distribution">Bayesian Modeling for the Corpus Distribution</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Variational Inference for Text Modeling</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#distributions-in-a-corpus-of-documents">
-   Distributions in a Corpus of Documents
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-modeling-for-the-corpus-distribution">
-   Bayesian Modeling for the Corpus Distribution
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># init repo notebook
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># init repo notebook
 !git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
 !mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
 !pip install -r ppdl/content/requirements.txt &gt; /dev/null
@@ -276,36 +389,36 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="variational-inference-for-text-modeling">
-<h1>Variational Inference for Text Modeling<a class="headerlink" href="#variational-inference-for-text-modeling" title="Permalink to this headline">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="variational-inference-for-text-modeling">
+<h1>Variational Inference for Text Modeling<a class="headerlink" href="#variational-inference-for-text-modeling" title="Permalink to this heading">#</a></h1>
 <p>In this notebook, we will implement the variational inference algorithm for topic modeling using a neural network and Latent Dirichlet Allocation (LDA). We’ll review the bayesian concepts behind LDA, and its implementation using tensorflow probability.</p>
 <p>First, let us import the necessary libraries.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+import tensorflow_probability as tfp
+from collections import Counter
 
-<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
-<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;ggplot&quot;</span><span class="p">)</span>
+tfd = tfp.distributions
+tfb = tfp.bijectors
+plt.style.use(&quot;ggplot&quot;)
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="distributions-in-a-corpus-of-documents">
-<h2>Distributions in a Corpus of Documents<a class="headerlink" href="#distributions-in-a-corpus-of-documents" title="Permalink to this headline">¶</a></h2>
+<section id="distributions-in-a-corpus-of-documents">
+<h2>Distributions in a Corpus of Documents<a class="headerlink" href="#distributions-in-a-corpus-of-documents" title="Permalink to this heading">#</a></h2>
 <p>Let us consider the following simple corpus of documents:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;the cat sat on the mat the mat was on the cat the cat was on the mat&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;the dog sat on the mat the mat was on the dog the dog was on the mat&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;when the cat was on the roof the roof was on the cat the cat was on the roof&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;the bird sang a song the song sang the bird the bird sang a song&quot;</span>
-    <span class="p">]</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>corpus = [
+    &quot;the cat sat on the mat the mat was on the cat the cat was on the mat&quot;,
+    &quot;the dog sat on the mat the mat was on the dog the dog was on the mat&quot;,
+    &quot;when the cat was on the roof the roof was on the cat the cat was on the roof&quot;,
+    &quot;the bird sang a song the song sang the bird the bird sang a song&quot;
+    ]
 </pre></div>
 </div>
 </div>
@@ -314,8 +427,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let us tokenize the document into words by splitting on the space characters:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="n">corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>words = corpus[0].split()
+print(words)
 </pre></div>
 </div>
 </div>
@@ -323,10 +436,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Next, we’ll compute words occurences in the document and the vocabulary:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
-<span class="n">vocab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>counts = Counter(words)
+vocab = np.array(list(counts.keys()))
+print(vocab)
+print(counts)
 </pre></div>
 </div>
 </div>
@@ -334,14 +447,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Finally, we’ll estimate the parameters of the multinomial distribution for this document:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dist_params</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
-<span class="n">dist_params</span> <span class="o">=</span> <span class="n">dist_params</span> <span class="o">/</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">dist_params</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>dist_params = tf.Variable(list(counts.values()))
+dist_params = dist_params / tf.reduce_sum(dist_params)
 
-<span class="n">document_dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Multinomial</span><span class="p">(</span>
-        <span class="n">total_count</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)),</span>
-        <span class="n">probs</span><span class="o">=</span><span class="n">dist_params</span><span class="p">,</span>
-        <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">document_dist</span><span class="p">)</span>
+document_dist = tfd.Multinomial(
+        total_count=float(len(vocab)),
+        probs=dist_params,
+        )
+print(document_dist)
 </pre></div>
 </div>
 </div>
@@ -349,8 +462,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Using this distribution, we can sample documents counts with the counts distribution of the first document:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">document_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sample = document_dist.sample(10)
+print(sample)
 </pre></div>
 </div>
 </div>
@@ -358,18 +471,18 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can convert the sample into a list of words, here, We repeat each word in the vocabulary the number of times it appears in the <code class="docutils literal notranslate"><span class="pre">sample</span></code> matrix:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_np</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">sample</span>
-        <span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sample_np = (
+        sample
+        .numpy()
+        .astype(&quot;int&quot;)
+        )
 
-<span class="k">for</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">doc_counts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_np</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc_counts</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">count</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
+for sample_id, doc_counts in enumerate(sample_np):
+    print(f&quot;Sample {sample_id}: &quot;, end=&quot;&quot;)
+    for i, count in enumerate(doc_counts):
+        if count &gt; 0:
+            print(&quot; &quot;.join([vocab[i]] * count), end=&quot; &quot;)
+    print()
 </pre></div>
 </div>
 </div>
@@ -378,13 +491,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p>First, we’ll compute the vocabulary for the corpus:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vocab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-            <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">corpus</span>
-            <span class="p">])</span>
-        <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">vocab</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>vocab = np.unique(
+        np.concatenate([
+            np.array(doc.split())
+            for doc in corpus
+            ])
+        )
+print(vocab)
 </pre></div>
 </div>
 </div>
@@ -392,7 +505,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Also, we need a mapping from the vocabulary to the indices of the parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">word2idx</span> <span class="o">=</span> <span class="p">{</span><span class="n">w</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocab</span><span class="p">)}</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>word2idx = {w: i for i, w in enumerate(vocab)}
 </pre></div>
 </div>
 </div>
@@ -400,24 +513,24 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can compute the counts for each document:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">doc</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">corpus</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>words = list(map(lambda doc: doc.split(), corpus))
+print(words)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[[</span><span class="n">word2idx</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>tokens = [[word2idx[w] for w in doc] for doc in words]
+print(tokens)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">Counter</span><span class="p">,</span> <span class="n">tokens</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>counts = list(map(Counter, tokens))
+print(counts)
 </pre></div>
 </div>
 </div>
@@ -425,11 +538,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can now compute the parameters of the multinomial distribution for each document:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)))</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counts</span><span class="p">):</span>
-    <span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="o">/</span> <span class="n">params</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>params = np.zeros((len(corpus), len(vocab)))
+for i, doc in enumerate(counts):
+    params[i, list(doc.keys())] = list(doc.values())
+params = params / params.sum(axis=1, keepdims=True)
+print(params)
 </pre></div>
 </div>
 </div>
@@ -437,11 +550,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The distribution for each document in the corpus:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">document_dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Multinomial</span><span class="p">(</span>
-        <span class="n">total_count</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)),</span>
-        <span class="n">probs</span><span class="o">=</span><span class="n">params</span>
-        <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">document_dist</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>document_dist = tfd.Multinomial(
+        total_count=float(len(vocab)),
+        probs=params
+        )
+print(document_dist)
 </pre></div>
 </div>
 </div>
@@ -449,27 +562,27 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let us generate two sample corpuses from the distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">document_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">sample_np</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">sample</span>
-        <span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
-        <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sample_np</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sample = document_dist.sample(2)
+sample_np = (
+        sample
+        .numpy()
+        .astype(&quot;int&quot;)
+        )
+print(sample_np)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_np</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">document_id</span><span class="p">,</span> <span class="n">doc_counts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Document </span><span class="si">{</span><span class="n">document_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc_counts</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">count</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>for sample_id, sample in enumerate(sample_np):
+    print(f&quot;Sample {sample_id}: &quot;)
+    for document_id, doc_counts in enumerate(sample):
+        print(f&quot;\tDocument {document_id}: &quot;, end=&quot;&quot;)
+        for i, count in enumerate(doc_counts):
+            if count &gt; 0:
+                print(&quot; &quot;.join([vocab[i]] * count), end=&quot; &quot;)
+        print()
 </pre></div>
 </div>
 </div>
@@ -498,9 +611,9 @@ const thebe_selector_output = ".output, .cell_output"
 <blockquote>
 <div><p>Let us recap about Bayesian conjugates. First, consider the Bernoulli distribution (special case of the Multinomial distribution), its conjugate is the Beta distribution. We need a multivariate distribution that generalizes the beta distribution and that can be used for the Multinomial’s parameters distribution (Dirichlet).</p>
 </div></blockquote>
-</div>
-<div class="section" id="bayesian-modeling-for-the-corpus-distribution">
-<h2>Bayesian Modeling for the Corpus Distribution<a class="headerlink" href="#bayesian-modeling-for-the-corpus-distribution" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="bayesian-modeling-for-the-corpus-distribution">
+<h2>Bayesian Modeling for the Corpus Distribution<a class="headerlink" href="#bayesian-modeling-for-the-corpus-distribution" title="Permalink to this heading">#</a></h2>
 <p>Let us implement the following two-level hierarchical model for the corpus distribution:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -509,17 +622,17 @@ x \sim Multinomial(p)
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">corpus_dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionNamed</span><span class="p">(</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Dirichlet</span><span class="p">(</span>
-                <span class="n">concentration</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)))</span>
-                <span class="p">),</span>
-            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Multinomial</span><span class="p">(</span>
-                <span class="n">total_count</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)),</span>
-                <span class="n">probs</span><span class="o">=</span><span class="n">p</span>
-                <span class="p">)</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>corpus_dist = tfd.JointDistributionNamed(
+        {
+            &quot;p&quot;: tfd.Dirichlet(
+                concentration=tf.Variable(tf.ones(len(vocab)))
+                ),
+            &quot;x&quot;: lambda p: tfd.Multinomial(
+                total_count=float(len(vocab)),
+                probs=p
+                )
+            }
+        )
 </pre></div>
 </div>
 </div>
@@ -527,8 +640,8 @@ x \sim Multinomial(p)
 <p>We can generate some samples from this distribution, notice that the <code class="docutils literal notranslate"><span class="pre">JointDistributionNamed</span></code> object generates a sample for each of the levels:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">corpus_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sample = corpus_dist.sample(10)
+print(sample)
 </pre></div>
 </div>
 </div>
@@ -536,13 +649,13 @@ x \sim Multinomial(p)
 <p>Let’s view the corpus for this case:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_np</span> <span class="o">=</span> <span class="n">corpus_dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">document_id</span><span class="p">,</span> <span class="n">doc_counts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_np</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Document </span><span class="si">{</span><span class="n">document_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc_counts</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">count</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sample_np = corpus_dist.sample(10)[&quot;x&quot;].numpy().astype(&quot;int&quot;)
+for document_id, doc_counts in enumerate(sample_np):
+    print(f&quot;\tDocument {document_id}: &quot;, end=&quot;&quot;)
+    for i, count in enumerate(doc_counts):
+        if count &gt; 0:
+            print(&quot; &quot;.join([vocab[i]] * count), end=&quot; &quot;)
+    print()
 </pre></div>
 </div>
 </div>
@@ -550,14 +663,14 @@ x \sim Multinomial(p)
 <p>We can solve this problem using variational inference, in this matter, We would need a surrogate posterior distribution, whose parameters can be easily estimated with tensorflow’s automatic differentiation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">surrogate_posterior</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionNamedAutoBatched</span><span class="p">({</span>
-    <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">()(</span>
-        <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
-            <span class="n">loc</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))),</span>
-            <span class="n">scale</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">))</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
-    <span class="p">})</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>surrogate_posterior = tfd.JointDistributionNamedAutoBatched({
+    &quot;p&quot;: tfb.Sigmoid()(
+        tfd.Normal(
+            loc=tf.Variable(tf.ones(len(vocab))),
+            scale=tf.ones(len(vocab))
+            )
+        )
+    })
 </pre></div>
 </div>
 </div>
@@ -565,10 +678,10 @@ x \sim Multinomial(p)
 <p>We need the bag-of-words representation of the corpus:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">counts_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)))</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">counts</span><span class="p">):</span>
-    <span class="n">counts_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">keys</span><span class="p">())]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
-<span class="n">counts_mat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">counts_mat</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>counts_mat = np.zeros((len(corpus), len(vocab)))
+for i, doc in enumerate(counts):
+    counts_mat[i, list(doc.keys())] = list(doc.values())
+counts_mat = tf.constant(counts_mat, dtype=tf.float32)
 </pre></div>
 </div>
 </div>
@@ -576,8 +689,8 @@ x \sim Multinomial(p)
 <p>We can now compute the log-likelihood of the corpus distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">log_prob</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">corpus_dist</span><span class="o">.</span><span class="n">log_prob</span><span class="p">({</span><span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">counts_mat</span><span class="p">})</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def log_prob(p):
+    return corpus_dist.log_prob({&quot;p&quot;: p, &quot;x&quot;: counts_mat})
 </pre></div>
 </div>
 </div>
@@ -585,13 +698,13 @@ x \sim Multinomial(p)
 <p>Finally, we solve the problem using variational inference:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
-<span class="n">loss</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">vi</span><span class="o">.</span><span class="n">fit_surrogate_posterior</span><span class="p">(</span>
-        <span class="n">target_log_prob_fn</span><span class="o">=</span><span class="n">log_prob</span><span class="p">,</span>
-        <span class="n">surrogate_posterior</span><span class="o">=</span><span class="n">surrogate_posterior</span><span class="p">,</span>
-        <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
-        <span class="n">num_steps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e3</span><span class="p">),</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>optimizer = tf.optimizers.Adam(learning_rate=1e-3)
+loss = tfp.vi.fit_surrogate_posterior(
+        target_log_prob_fn=log_prob,
+        surrogate_posterior=surrogate_posterior,
+        optimizer=optimizer,
+        num_steps=int(1e3),
+        )
 </pre></div>
 </div>
 </div>
@@ -599,33 +712,33 @@ x \sim Multinomial(p)
 <p>Let’s view a sample of documents:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="n">surrogate_posterior</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)[</span><span class="s2">&quot;p&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="o">/</span> <span class="n">params</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">dist</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Multinomial</span><span class="p">(</span>
-        <span class="n">total_count</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)),</span>
-        <span class="n">probs</span><span class="o">=</span><span class="n">params</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>params = surrogate_posterior.sample(10)[&quot;p&quot;].numpy()
+params = params / params.sum(axis=1, keepdims=True)
+dist = tfd.Multinomial(
+        total_count=float(len(vocab)),
+        probs=params
+        )
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample_np</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">sample_id</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_np</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample </span><span class="si">{</span><span class="n">sample_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">document_id</span><span class="p">,</span> <span class="n">doc_counts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Document </span><span class="si">{</span><span class="n">document_id</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc_counts</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">*</span> <span class="n">count</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sample_np = dist.sample(4).numpy().astype(&quot;int&quot;)
+for sample_id, sample in enumerate(sample_np):
+    print(f&quot;Sample {sample_id}: &quot;)
+    for document_id, doc_counts in enumerate(sample):
+        print(f&quot;\tDocument {document_id}: &quot;, end=&quot;&quot;)
+        for i, count in enumerate(doc_counts):
+            if count &gt; 0:
+                print(&quot; &quot;.join([vocab[i]] * count), end=&quot; &quot;)
+        print()
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -639,7 +752,7 @@ x \sim Multinomial(p)
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
@@ -647,30 +760,85 @@ x \sim Multinomial(p)
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distributions-in-a-corpus-of-documents">Distributions in a Corpus of Documents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-modeling-for-the-corpus-distribution">Bayesian Modeling for the Corpus Distribution</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-</div>
+          </div>
+          <footer class="bd-footer-content">
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
-      </div>
-    </div>
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

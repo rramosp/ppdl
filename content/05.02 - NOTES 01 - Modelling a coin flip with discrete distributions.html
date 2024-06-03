@@ -1,54 +1,72 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Model-based reasoning and Bayesian inference &#8212; Probabilistic Programming for Machine Learning</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MBFEZ3PF64');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -57,286 +75,323 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/05.02 - NOTES 01 - Modelling a coin flip with discrete distributions';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MBFEZ3PF64');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo-tf-udea-unal.png" class="logo__image only-light" alt="Probabilistic Programming for Machine Learning - Home"/>
+    <script>document.write(`<img src="../_static/logo-tf-udea-unal.png" class="logo__image only-dark" alt="Probabilistic Programming for Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
-   Course outline
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M1-videolist.html">
-   1 Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M2-videolist.html">
-   2 TF for Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M3-videolist.html">
-   3 Intuitions on Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M4-videolist.html">
-   4 Tensorflow Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M5-videolist.html">
-   5 Bayesian Modelling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M6-videolist.html">
-   6 Variational Inference
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Course outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M1-videolist.html">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M2-videolist.html">2 TF for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3-videolist.html">3 Intuitions on Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M4-videolist.html">4 Tensorflow Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M5-videolist.html">5 Bayesian Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M6-videolist.html">6 Variational Inference</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/05.02 - NOTES 01 - Modelling a coin flip with discrete distributions.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/05.02 - NOTES 01 - Modelling a coin flip with discrete distributions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#coin-flipping-example">
-   Coin flipping example
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-formulation">
-     1. Model formulation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-collection">
-     2. Data collection
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#posterior-calculation">
-     3. Posterior calculation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-application">
-     4. Model application
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#maximum-aposteriori-probability">
-       Maximum Aposteriori Probability
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#posterior-expectation">
-       Posterior Expectation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#bayesian-model-averaging">
-       Bayesian Model Averaging
-      </a>
-     </li>
-    </ul>
-   </li>
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/05.02 - NOTES 01 - Modelling a coin flip with discrete distributions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
   </ul>
- </li>
-</ul>
+</div>
 
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Model-based reasoning and Bayesian inference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coin-flipping-example">Coin flipping example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-formulation">1. Model formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">2. Data collection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-calculation">3. Posterior calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-application">4. Model application</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-aposteriori-probability">Maximum Aposteriori Probability</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-expectation">Posterior Expectation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-model-averaging">Bayesian Model Averaging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Model-based reasoning and Bayesian inference</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#coin-flipping-example">
-   Coin flipping example
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-formulation">
-     1. Model formulation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-collection">
-     2. Data collection
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#posterior-calculation">
-     3. Posterior calculation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-application">
-     4. Model application
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#maximum-aposteriori-probability">
-       Maximum Aposteriori Probability
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#posterior-expectation">
-       Posterior Expectation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#bayesian-model-averaging">
-       Bayesian Model Averaging
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># init repo notebook
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># init repo notebook
 !git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
 !mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
 !pip install -r ppdl/content/requirements.txt &gt; /dev/null
@@ -344,18 +399,18 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="model-based-reasoning-and-bayesian-inference">
-<h1>Model-based reasoning and Bayesian inference<a class="headerlink" href="#model-based-reasoning-and-bayesian-inference" title="Permalink to this headline">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="model-based-reasoning-and-bayesian-inference">
+<h1>Model-based reasoning and Bayesian inference<a class="headerlink" href="#model-based-reasoning-and-bayesian-inference" title="Permalink to this heading">#</a></h1>
 <p>In model-based reasoning we assume a model of the process that generated our data. In Bayesian inference this model has a probabilistic nature, i.e., it encodes our knowledge (or assumptions) of the world in terms of random variables, probabilistic distributions of these random variables and dependence/independence relationships.</p>
 <p>The following is a summary of the Bayesian approach to machine learning (https://www.cs.toronto.edu/~radford/ftp/bayes-tut.pdf):</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><strong>Model formulation</strong>: We formulate our knowledge about the world (or the mechanism that generated our data) probabilistically:</p></li>
 </ol>
 <ul class="simple">
 <li><p>We define a <em>model</em> that represents qualitative aspects of our knowledge. This model is expressed in terms of random variables and their relationships. The model has unknown parameters.</p></li>
 <li><p>We specify our believes (before seeing any data) about how we expect the values of the unknown parameters to behave using a <em>prior</em> probability.</p></li>
 </ul>
-<ol class="simple">
+<ol class="arabic simple" start="2">
 <li><p><strong>Data collection</strong>: We obtain data.</p></li>
 <li><p><strong>Posterior calculation</strong>: We use the data to compute the <em>posterior</em> probability distribution of the unknown parameters, given the observed data and the priors.</p></li>
 <li><p><strong>Model application</strong>: The posterior probability distribution can be used to:</p></li>
@@ -369,19 +424,19 @@ const thebe_selector_output = ".output, .cell_output"
 <p>First, let us import the required libraries and modules.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;ggplot&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>from scipy.special import comb
+import numpy as np
+import matplotlib.pyplot as plt
+plt.style.use(&quot;ggplot&quot;)
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="coin-flipping-example">
-<h2>Coin flipping example<a class="headerlink" href="#coin-flipping-example" title="Permalink to this headline">¶</a></h2>
+<section id="coin-flipping-example">
+<h2>Coin flipping example<a class="headerlink" href="#coin-flipping-example" title="Permalink to this heading">#</a></h2>
 <p>In this example, we want to model the toss of a coin using a Bayesian approach.</p>
-<div class="section" id="model-formulation">
-<h3>1. Model formulation<a class="headerlink" href="#model-formulation" title="Permalink to this headline">¶</a></h3>
+<section id="model-formulation">
+<h3>1. Model formulation<a class="headerlink" href="#model-formulation" title="Permalink to this heading">#</a></h3>
 <p>Our model will have two random variables:</p>
 <p><span class="math notranslate nohighlight">\(X\)</span>: random variable representing the outcome of a coin toss</p>
 <p><span class="math notranslate nohighlight">\(\Theta\)</span>: probability of getting a head (<span class="math notranslate nohighlight">\(X=1\)</span>)</p>
@@ -398,12 +453,12 @@ P(\mathcal{D} | \theta) = \binom{N_{heads} + N_{tails}}{N_{heads}} \theta^{N_{he
 <p>This term is called the <em>likelihood</em>, the conditional probability of the data <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> given the model’s parameters <span class="math notranslate nohighlight">\(\theta\)</span>. The following function implements the likelihood:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">likelihood</span><span class="p">(</span><span class="n">num_heads</span><span class="p">,</span> <span class="n">num_tails</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span>
-        <span class="n">comb</span><span class="p">(</span><span class="n">num_heads</span> <span class="o">+</span> <span class="n">num_tails</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">)</span> <span class="o">*</span>
-        <span class="n">theta</span> <span class="o">**</span> <span class="n">num_heads</span> <span class="o">*</span>
-        <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="p">)</span> <span class="o">**</span> <span class="n">num_tails</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def likelihood(num_heads, num_tails, theta):
+    return (
+        comb(num_heads + num_tails, num_heads) *
+        theta ** num_heads *
+        (1 - theta) ** num_tails
+        )
 </pre></div>
 </div>
 </div>
@@ -417,24 +472,24 @@ P(\mathcal{D} | \theta) = \binom{N_{heads} + N_{tails}}{N_{heads}} \theta^{N_{he
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">n_heads</span> <span class="o">=</span> <span class="mi">6</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>n = 10
+n_heads = 6
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numpy implementation of the binomial coefficient</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n_heads</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">n_heads</span><span class="p">)))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Numpy implementation of the binomial coefficient
+print(np.math.factorial(n) / (np.math.factorial(n_heads) * np.math.factorial(n - n_heads)))
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># comb function</span>
-<span class="n">comb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n_heads</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># comb function
+comb(n, n_heads)
 </pre></div>
 </div>
 </div>
@@ -442,7 +497,7 @@ P(\mathcal{D} | \theta) = \binom{N_{heads} + N_{tails}}{N_{heads}} \theta^{N_{he
 <p>For instance if <span class="math notranslate nohighlight">\(\theta = 0.3\)</span>, the probability of getting 6 heads and 4 tails in 10 coin tosses would be:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">likelihood</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>likelihood(6, 4, 0.3)
 </pre></div>
 </div>
 </div>
@@ -450,7 +505,7 @@ P(\mathcal{D} | \theta) = \binom{N_{heads} + N_{tails}}{N_{heads}} \theta^{N_{he
 <p>But if <span class="math notranslate nohighlight">\(\theta=0.8\)</span> the likelihood would be:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">likelihood</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>likelihood(6, 4, 0.8)
 </pre></div>
 </div>
 </div>
@@ -463,18 +518,18 @@ P(\theta)
 <p>If we don’t have any prior knowledge, this can be encoded as a uniform prior distribution. Since we are dealing with a coin, we can assume that coins that are closer to be fair are more likely, this means that we give higher probabilities to values of <span class="math notranslate nohighlight">\(\theta\)</span> closer to <span class="math notranslate nohighlight">\(0.5\)</span>. To this end, We’ll use a discrete triangular distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">triangular_prior</span><span class="p">(</span><span class="n">n_points</span><span class="p">):</span>
-    <span class="n">theta_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_points</span><span class="p">)</span>
-    <span class="n">theta_prior_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_points</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_points</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
-        <span class="p">)</span>
-    <span class="n">theta_prior_p</span> <span class="o">=</span> <span class="n">theta_prior_p</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">theta_prior_p</span><span class="p">)</span>
-    <span class="n">theta_prior</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">theta_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">theta_prior_p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">)</span>
-            <span class="p">}</span>
-    <span class="k">return</span> <span class="n">theta_prior</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def triangular_prior(n_points):
+    theta_vals = np.linspace(0, 1, n_points)
+    theta_prior_p = np.concatenate([
+        np.arange(0, n_points // 2),
+        np.arange(n_points // 2, -1, -1)]
+        )
+    theta_prior_p = theta_prior_p / np.sum(theta_prior_p)
+    theta_prior = {
+            theta_vals[i]: theta_prior_p[i]
+            for i in range(n_points)
+            }
+    return theta_prior
 </pre></div>
 </div>
 </div>
@@ -482,34 +537,34 @@ P(\theta)
 <p>Let’s visualize this distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_points</span> <span class="o">=</span> <span class="mi">11</span>
-<span class="n">prior</span> <span class="o">=</span> <span class="n">triangular_prior</span><span class="p">(</span><span class="n">n_points</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
-        <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">prior</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
-        <span class="n">prior</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.05</span>
-        <span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$P(\theta)$&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>n_points = 11
+prior = triangular_prior(n_points)
+fig, ax = plt.subplots(figsize=(10, 7))
+ax.bar(
+        list(map(lambda x: f&quot;{x:.2f}&quot;, prior.keys())),
+        prior.values(), width=0.05
+        )
+ax.set_xlabel(r&quot;$\theta$&quot;)
+ax.set_ylabel(r&quot;$P(\theta)$&quot;)
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="data-collection">
-<h3>2. Data collection<a class="headerlink" href="#data-collection" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="data-collection">
+<h3>2. Data collection<a class="headerlink" href="#data-collection" title="Permalink to this heading">#</a></h3>
 <p>To collect data, we can toss a real coin a number of times and record how many heads (<span class="math notranslate nohighlight">\(N_{heads}\)</span>) and tails (<span class="math notranslate nohighlight">\(N_{tails}\)</span>) we get. This is our data <span class="math notranslate nohighlight">\(\mathcal{D}\)</span>. For this exercise let’s assume we got:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_heads</span> <span class="o">=</span> <span class="mi">15</span>
-<span class="n">n_tails</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>n_heads = 15
+n_tails = 5
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="posterior-calculation">
-<h3>3. Posterior calculation<a class="headerlink" href="#posterior-calculation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="posterior-calculation">
+<h3>3. Posterior calculation<a class="headerlink" href="#posterior-calculation" title="Permalink to this heading">#</a></h3>
 <p>To calculate the posterior we will use the the Bayes theorem:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -525,14 +580,14 @@ P(D) &amp;= \sum_{\theta_i}{P(\mathcal{D},\theta=\theta_i)} \\
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evidence</span><span class="p">(</span><span class="n">n_heads</span><span class="p">,</span> <span class="n">n_tails</span><span class="p">,</span> <span class="n">n_points</span><span class="p">):</span>
-    <span class="n">priors</span> <span class="o">=</span> <span class="n">triangular_prior</span><span class="p">(</span><span class="n">n_points</span><span class="p">)</span>
-    <span class="n">joints</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">likelihood</span><span class="p">(</span><span class="n">n_heads</span><span class="p">,</span> <span class="n">n_tails</span><span class="p">,</span> <span class="n">theta_i</span><span class="p">)</span> <span class="o">*</span>
-            <span class="n">prior_value</span>
-            <span class="k">for</span> <span class="n">theta_i</span><span class="p">,</span> <span class="n">prior_value</span> <span class="ow">in</span> <span class="n">priors</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-            <span class="p">]</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">joints</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def evidence(n_heads, n_tails, n_points):
+    priors = triangular_prior(n_points)
+    joints = [
+            likelihood(n_heads, n_tails, theta_i) *
+            prior_value
+            for theta_i, prior_value in priors.items()
+            ]
+    return sum(joints)
 </pre></div>
 </div>
 </div>
@@ -540,14 +595,14 @@ P(D) &amp;= \sum_{\theta_i}{P(\mathcal{D},\theta=\theta_i)} \\
 <p>We can compute the evidence for different values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evidence</span><span class="p">(</span><span class="n">n_heads</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_tails</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_points</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>evidence(n_heads=5, n_tails=5, n_points=3)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evidence</span><span class="p">(</span><span class="n">n_heads</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_tails</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_points</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>evidence(n_heads=10, n_tails=1, n_points=11)
 </pre></div>
 </div>
 </div>
@@ -555,17 +610,17 @@ P(D) &amp;= \sum_{\theta_i}{P(\mathcal{D},\theta=\theta_i)} \\
 <p>Now, we are prepared to compute the posterior distribution function (<span class="math notranslate nohighlight">\(P(\theta|\mathcal{D})\)</span>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">posterior</span><span class="p">(</span><span class="n">n_heads</span><span class="p">,</span> <span class="n">n_tails</span><span class="p">,</span> <span class="n">n_points</span><span class="p">):</span>
-    <span class="n">p_theta</span> <span class="o">=</span> <span class="n">triangular_prior</span><span class="p">(</span><span class="n">n_points</span><span class="p">)</span>
-    <span class="n">p_d</span> <span class="o">=</span> <span class="n">evidence</span><span class="p">(</span><span class="n">n_heads</span><span class="p">,</span> <span class="n">n_tails</span><span class="p">,</span> <span class="n">n_points</span><span class="p">)</span>
-    <span class="n">p_theta_d</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">theta_i</span><span class="p">:</span> 
-            <span class="n">likelihood</span><span class="p">(</span><span class="n">n_heads</span><span class="p">,</span> <span class="n">n_tails</span><span class="p">,</span> <span class="n">theta_i</span><span class="p">)</span> <span class="o">*</span>
-            <span class="n">prior_i</span> <span class="o">/</span> <span class="n">p_d</span>
-            <span class="k">for</span> <span class="n">theta_i</span><span class="p">,</span> <span class="n">prior_i</span> <span class="ow">in</span> <span class="n">p_theta</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-            <span class="p">}</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def posterior(n_heads, n_tails, n_points):
+    p_theta = triangular_prior(n_points)
+    p_d = evidence(n_heads, n_tails, n_points)
+    p_theta_d = {
+            theta_i: 
+            likelihood(n_heads, n_tails, theta_i) *
+            prior_i / p_d
+            for theta_i, prior_i in p_theta.items()
+            }
 
-    <span class="k">return</span> <span class="n">p_theta_d</span>
+    return p_theta_d
 </pre></div>
 </div>
 </div>
@@ -573,12 +628,12 @@ P(D) &amp;= \sum_{\theta_i}{P(\mathcal{D},\theta=\theta_i)} \\
 <p>Now we call the function with our data and plot the resulting posterior distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">theta_posterior</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">(</span>
-        <span class="n">n_heads</span><span class="o">=</span><span class="n">n_heads</span><span class="p">,</span>
-        <span class="n">n_tails</span><span class="o">=</span><span class="n">n_tails</span><span class="p">,</span>
-        <span class="n">n_points</span><span class="o">=</span><span class="n">n_points</span>
-        <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">theta_posterior</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>theta_posterior = posterior(
+        n_heads=n_heads,
+        n_tails=n_tails,
+        n_points=n_points
+        )
+print(theta_posterior)
 </pre></div>
 </div>
 </div>
@@ -586,41 +641,41 @@ P(D) &amp;= \sum_{\theta_i}{P(\mathcal{D},\theta=\theta_i)} \\
 <p>We can see a comparison between the prior distribution and the posterior:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots(figsize=(15, 7))
 
-<span class="n">theta_prior</span> <span class="o">=</span> <span class="n">triangular_prior</span><span class="p">(</span><span class="n">n_points</span><span class="p">)</span>
-<span class="n">theta_posterior</span> <span class="o">=</span> <span class="n">posterior</span><span class="p">(</span>
-        <span class="n">n_heads</span><span class="o">=</span><span class="n">n_heads</span><span class="p">,</span>
-        <span class="n">n_tails</span><span class="o">=</span><span class="n">n_tails</span><span class="p">,</span>
-        <span class="n">n_points</span><span class="o">=</span><span class="n">n_points</span>
-        <span class="p">)</span>
+theta_prior = triangular_prior(n_points)
+theta_posterior = posterior(
+        n_heads=n_heads,
+        n_tails=n_tails,
+        n_points=n_points
+        )
 
-<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
-        <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">prior</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
-        <span class="n">prior</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$P(\theta)$&quot;</span><span class="p">,</span>
-        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
-        <span class="p">)</span>
+ax.bar(
+        list(map(lambda x: f&quot;{x:.2f}&quot;, prior.keys())),
+        prior.values(), width=0.1, label=r&quot;$P(\theta)$&quot;,
+        alpha=0.5
+        )
 
-<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
-        <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">theta_posterior</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
-        <span class="n">theta_posterior</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-        <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$P(\theta|\mathcal</span><span class="si">{D}</span><span class="s2">)$&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
-        <span class="p">)</span>
+ax.bar(
+        list(map(lambda x: f&quot;{x:.2f}&quot;, theta_posterior.keys())),
+        theta_posterior.values(), width=0.1,
+        label=r&quot;$P(\theta|\mathcal{D})$&quot;, alpha=0.5
+        )
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Probability&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+ax.set_xlabel(r&quot;$\theta$&quot;)
+ax.set_ylabel(r&quot;Probability&quot;)
+ax.legend()
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="model-application">
-<h3>4. Model application<a class="headerlink" href="#model-application" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="model-application">
+<h3>4. Model application<a class="headerlink" href="#model-application" title="Permalink to this heading">#</a></h3>
 <p>We can see that the resulting posterior distribution gives higher probability to values of the parameter around <span class="math notranslate nohighlight">\(0.7\)</span>, this is consistent with the fact that the data from the experiment has more heads than tails.</p>
 <p>If we want to make a prediction of the outcome of a new coin toss, we can do it in different ways. Let’s see some common methods:</p>
-<div class="section" id="maximum-aposteriori-probability">
-<h4>Maximum Aposteriori Probability<a class="headerlink" href="#maximum-aposteriori-probability" title="Permalink to this headline">¶</a></h4>
+<section id="maximum-aposteriori-probability">
+<h4>Maximum Aposteriori Probability<a class="headerlink" href="#maximum-aposteriori-probability" title="Permalink to this heading">#</a></h4>
 <p>We can use the mode of the posterior distribution, i.e.:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -629,8 +684,8 @@ P(D) &amp;= \sum_{\theta_i}{P(\mathcal{D},\theta=\theta_i)} \\
 <p>This is called maximum a posteriori estimation (MAP). The following Python function calculates the MAP estimator for a given posterior distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">map_estimator</span><span class="p">(</span><span class="n">theta_posterior</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">theta_posterior</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def map_estimator(theta_posterior):
+    return max(theta_posterior.items(), key=lambda x: x[1])
 </pre></div>
 </div>
 </div>
@@ -638,15 +693,15 @@ P(D) &amp;= \sum_{\theta_i}{P(\mathcal{D},\theta=\theta_i)} \\
 <p>In our example the MAP estimator will be:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">theta_map</span><span class="p">,</span> <span class="n">map_p</span> <span class="o">=</span> <span class="n">map_estimator</span><span class="p">(</span><span class="n">theta_posterior</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>theta_map, map_p = map_estimator(theta_posterior)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">theta_map</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">map_p</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(theta_map)
+print(map_p)
 </pre></div>
 </div>
 </div>
@@ -656,9 +711,9 @@ P(D) &amp;= \sum_{\theta_i}{P(\mathcal{D},\theta=\theta_i)} \\
 \[
 P(Y=1|\theta = \theta_{\text{MAP}}) = \theta_{\text{MAP}} = 0.7
 \]</div>
-</div>
-<div class="section" id="posterior-expectation">
-<h4>Posterior Expectation<a class="headerlink" href="#posterior-expectation" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="posterior-expectation">
+<h4>Posterior Expectation<a class="headerlink" href="#posterior-expectation" title="Permalink to this heading">#</a></h4>
 <p>Another alternative is to calculate the expected value of <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -667,8 +722,8 @@ P(Y=1|\theta = \theta_{\text{MAP}}) = \theta_{\text{MAP}} = 0.7
 <p>This is called the Bayes estimator. The following function calculates the Bayes estimator:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bayes_estimator</span><span class="p">(</span><span class="n">theta_posterior</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">theta_i</span> <span class="o">*</span> <span class="n">p_i</span> <span class="k">for</span> <span class="n">theta_i</span><span class="p">,</span> <span class="n">p_i</span> <span class="ow">in</span> <span class="n">theta_posterior</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def bayes_estimator(theta_posterior):
+    return sum(theta_i * p_i for theta_i, p_i in theta_posterior.items())
 </pre></div>
 </div>
 </div>
@@ -676,7 +731,7 @@ P(Y=1|\theta = \theta_{\text{MAP}}) = \theta_{\text{MAP}} = 0.7
 <p>In our example the Bayes estimator will be:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">bayes_estimator</span><span class="p">(</span><span class="n">theta_posterior</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(bayes_estimator(theta_posterior))
 </pre></div>
 </div>
 </div>
@@ -686,9 +741,9 @@ P(Y=1|\theta = \theta_{\text{MAP}}) = \theta_{\text{MAP}} = 0.7
 \[
 P(Y=1|\theta = \theta_{\text{Bayes}}) = \theta_{\text{Bayes}} = 0.6961
 \]</div>
-</div>
-<div class="section" id="bayesian-model-averaging">
-<h4>Bayesian Model Averaging<a class="headerlink" href="#bayesian-model-averaging" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="bayesian-model-averaging">
+<h4>Bayesian Model Averaging<a class="headerlink" href="#bayesian-model-averaging" title="Permalink to this heading">#</a></h4>
 <p>Bayesian Model Averaging (BMA) leverages from random number generators and samplers from the posterior distribution to generate a prediction. In fact, We can generate any number of models from the Bayesian process, and then, average any quantity of interest. If we want to have an estimation of <span class="math notranslate nohighlight">\(\theta_{BMA}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -698,29 +753,29 @@ P(Y=1|\theta = \theta_{\text{Bayes}}) = \theta_{\text{Bayes}} = 0.6961
 <p>Let’s see an example for the coins:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">theta_values</span><span class="p">,</span> <span class="n">theta_probs</span> <span class="o">=</span> <span class="n">theta_posterior</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">theta_posterior</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-<span class="n">theta_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
-    <span class="nb">list</span><span class="p">(</span><span class="n">theta_values</span><span class="p">),</span>
-    <span class="n">p</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">theta_probs</span><span class="p">),</span>
-    <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span>
-    <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">theta_samples</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>n_samples = 100
+theta_values, theta_probs = theta_posterior.keys(), theta_posterior.values()
+theta_samples = np.random.choice(
+    list(theta_values),
+    p=list(theta_probs),
+    size=n_samples
+    )
+print(theta_samples)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">theta_samples</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(theta_samples.mean())
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -734,7 +789,7 @@ P(Y=1|\theta = \theta_{\text{Bayes}}) = \theta_{\text{Bayes}} = 0.6961
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
@@ -742,30 +797,95 @@ P(Y=1|\theta = \theta_{\text{Bayes}}) = \theta_{\text{Bayes}} = 0.6961
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coin-flipping-example">Coin flipping example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-formulation">1. Model formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection">2. Data collection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-calculation">3. Posterior calculation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-application">4. Model application</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-aposteriori-probability">Maximum Aposteriori Probability</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#posterior-expectation">Posterior Expectation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-model-averaging">Bayesian Model Averaging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-</div>
+          </div>
+          <footer class="bd-footer-content">
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
-      </div>
-    </div>
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

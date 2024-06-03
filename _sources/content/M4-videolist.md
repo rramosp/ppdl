@@ -25,26 +25,6 @@
             </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 5. Understanding shapes<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="04.01 - NOTES 05 - Understanding shapes.html"> Notebook</a>
-            </span></div>        
-    </div><div class="timeline-item">
-        <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 6. More distribution objects<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="04.01 - NOTES 06 - More distribution objects.html"> Notebook</a>
-            </span></div>        
-    </div><div class="timeline-item">
-        <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 7. Bijectors<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="04.01 - NOTES 07 - Bijectors.html"> Notebook</a>
-            </span></div>        
-    </div><div class="timeline-item">
-        <div class="timeline-left"><span class="timeline-icon"></span></div>
-        <div class="timeline-content"> 8. TFP <tt>JointDistributionNames</tt><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="04.01 - NOTES 08 - JointDistributionNamed.html"> Notebook</a>
-            </span></div>        
-    </div><div class="timeline-item">
-        <div class="timeline-left"><span class="timeline-icon"></span></div>
         <div class="timeline-content"> <b><font color="red">LAB 1</font> TFP Distributions</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
                 <a href="04.01 - LAB 01 - TFP distributions.html"> Notebook</a>
             </span></div>        
@@ -53,10 +33,31 @@
         <div class="timeline-content"> <b><font color="red">LAB 2</font> Distribution layers</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
                 <a href="04.01 - LAB 02 - Distribution layers.html"> Notebook</a>
             </span></div>        
+    </div><h2>4.2 Working with Tensorflow probability distributions</h2>
+<div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 1. Understanding shapes<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="04.02 - NOTES 01 - Understanding shapes.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 2. More distribution objects<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="04.02 - NOTES 02 - More distribution objects.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 3. Bijectors<span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="04.02 - NOTES 03 - Bijectors.html"> Notebook</a>
+            </span></div>        
+    </div><div class="timeline-item">
+        <div class="timeline-left"><span class="timeline-icon"></span></div>
+        <div class="timeline-content"> 3. TFP <tt>JointDistributionNames</tt><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
+                <a href="04.02 - NOTES 04 - JointDistributionNamed.html"> Notebook</a>
+            </span></div>        
     </div><div class="timeline-item">
         <div class="timeline-left"><span class="timeline-icon"></span></div>
         <div class="timeline-content"> <b><font color="red">LAB 3</font> Joint distributions</b><span class="chip float-right">Video &nbsp; <font color="SeaGreen">PENDING</font></span><span class="chip float-right">
-                <a href="01.01 - LAB 03 - Joint Distributions.html"> Notebook</a>
+                <a href="04.02 - LAB 01 - Joint Distributions.html"> Notebook</a>
             </span></div>        
     </div>
 </div>

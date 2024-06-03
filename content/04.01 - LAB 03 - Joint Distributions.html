@@ -1,54 +1,72 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Lab 02.03.3: Multiclass Bayesian Logistic Regression &#8212; Probabilistic Programming for Machine Learning</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MBFEZ3PF64');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -57,248 +75,316 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/04.01 - LAB 03 - Joint Distributions';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MBFEZ3PF64');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo-tf-udea-unal.png" class="logo__image only-light" alt="Probabilistic Programming for Machine Learning - Home"/>
+    <script>document.write(`<img src="../_static/logo-tf-udea-unal.png" class="logo__image only-dark" alt="Probabilistic Programming for Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
-   Course outline
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M1-videolist.html">
-   1 Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M2-videolist.html">
-   2 TF for Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M3-videolist.html">
-   3 Intuitions on Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M4-videolist.html">
-   4 Tensorflow Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M5-videolist.html">
-   5 Bayesian Modelling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M6-videolist.html">
-   6 Variational Inference
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Course outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M1-videolist.html">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M2-videolist.html">2 TF for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3-videolist.html">3 Intuitions on Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M4-videolist.html">4 Tensorflow Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M5-videolist.html">5 Bayesian Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M6-videolist.html">6 Variational Inference</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/04.01 - LAB 03 - Joint Distributions.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/04.01 - LAB 03 - Joint Distributions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/04.01 - LAB 03 - Joint Distributions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 02.03.3: Multiclass Bayesian Logistic Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-loading">
-   Data Loading
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-1-implement-a-logistic-regression-model">
-   Task 1: Implement a Logistic Regression Model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-2-markov-chain-monte-carlo">
-   Task 2: Markov Chain Monte Carlo
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-3-map-predictions">
-   Task 3: MAP Predictions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-evaluation">
-   Model Evaluation
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-implement-a-logistic-regression-model">Task 1: Implement a Logistic Regression Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-markov-chain-monte-carlo">Task 2: Markov Chain Monte Carlo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-map-predictions">Task 3: MAP Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Lab 02.03.3: Multiclass Bayesian Logistic Regression</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-loading">
-   Data Loading
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-1-implement-a-logistic-regression-model">
-   Task 1: Implement a Logistic Regression Model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-2-markov-chain-monte-carlo">
-   Task 2: Markov Chain Monte Carlo
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-3-map-predictions">
-   Task 3: MAP Predictions
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-evaluation">
-   Model Evaluation
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># init repo notebook
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># init repo notebook
 !git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
 !mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
 !pip install -r ppdl/content/requirements.txt &gt; /dev/null
@@ -306,60 +392,60 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="lab-02-03-3-multiclass-bayesian-logistic-regression">
-<h1>Lab 02.03.3: Multiclass Bayesian Logistic Regression<a class="headerlink" href="#lab-02-03-3-multiclass-bayesian-logistic-regression" title="Permalink to this headline">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="lab-02-03-3-multiclass-bayesian-logistic-regression">
+<h1>Lab 02.03.3: Multiclass Bayesian Logistic Regression<a class="headerlink" href="#lab-02-03-3-multiclass-bayesian-logistic-regression" title="Permalink to this heading">#</a></h1>
 <p>In this lab, we will implement a multilevel logistic regression model using the <code class="docutils literal notranslate"><span class="pre">tensorflow_probability</span></code>’s <code class="docutils literal notranslate"><span class="pre">JointDistribution</span></code> API.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inspect</span>
-<span class="kn">from</span> <span class="nn">rlxmoocapi</span> <span class="kn">import</span> <span class="n">submit</span><span class="p">,</span> <span class="n">session</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
-<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;ggplot&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import inspect
+from rlxmoocapi import submit, session
+import numpy as np
+import tensorflow as tf
+import tensorflow_probability as tfp
+from sklearn.datasets import make_blobs
+from sklearn.neighbors import KernelDensity
+from sklearn.metrics import classification_report
+import matplotlib.pyplot as plt
+plt.style.use(&quot;ggplot&quot;)
 
-<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+tfd = tfp.distributions
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">course_id</span> <span class="o">=</span> <span class="s2">&quot;ppdl.v1&quot;</span>
-<span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;https://m5knaekxo6.execute-api.us-west-2.amazonaws.com/dev-v0001/rlxmooc&quot;</span>
-<span class="n">lab</span> <span class="o">=</span> <span class="s2">&quot;L02.03.03&quot;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>course_id = &quot;ppdl.v1&quot;
+endpoint = &quot;https://m5knaekxo6.execute-api.us-west-2.amazonaws.com/dev-v0001/rlxmooc&quot;
+lab = &quot;L02.03.03&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">session</span><span class="o">.</span><span class="n">LoginSequence</span><span class="p">(</span>
-    <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
-    <span class="n">course_id</span><span class="o">=</span><span class="n">course_id</span><span class="p">,</span>
-    <span class="n">lab_id</span><span class="o">=</span><span class="n">lab</span><span class="p">,</span>
-    <span class="n">varname</span><span class="o">=</span><span class="s2">&quot;student&quot;</span>
-    <span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>session.LoginSequence(
+    endpoint=endpoint,
+    course_id=course_id,
+    lab_id=lab,
+    varname=&quot;student&quot;
+    );
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="data-loading">
-<h2>Data Loading<a class="headerlink" href="#data-loading" title="Permalink to this headline">¶</a></h2>
+<section id="data-loading">
+<h2>Data Loading<a class="headerlink" href="#data-loading" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_features</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">n_classes</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span>
-        <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
-        <span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span>
-        <span class="n">centers</span><span class="o">=</span><span class="n">n_classes</span><span class="p">,</span>
-        <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>n_features = 2
+n_classes = 3
+X, y = make_blobs(
+        n_samples=500,
+        n_features=n_features,
+        centers=n_classes,
+        random_state=42
+        )
 </pre></div>
 </div>
 </div>
@@ -367,17 +453,17 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can visualize the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x_1$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$x_2$&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots(1, 1, figsize=(8, 8))
+ax.scatter(X[:, 0], X[:, 1], c=y, s=50, cmap=&quot;viridis&quot;, alpha=0.5)
+ax.set_xlabel(&quot;$x_1$&quot;)
+ax.set_ylabel(&quot;$x_2$&quot;)
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="task-1-implement-a-logistic-regression-model">
-<h2>Task 1: Implement a Logistic Regression Model<a class="headerlink" href="#task-1-implement-a-logistic-regression-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="task-1-implement-a-logistic-regression-model">
+<h2>Task 1: Implement a Logistic Regression Model<a class="headerlink" href="#task-1-implement-a-logistic-regression-model" title="Permalink to this heading">#</a></h2>
 <p>In this task, you must define a logistic regression model using the <code class="docutils literal notranslate"><span class="pre">JointDistributionNamed</span></code> API, you must implement the following model:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -389,10 +475,10 @@ y \sim \text{categorical}(\text{logits})
 <p>The model must have the following distributions: <code class="docutils literal notranslate"><span class="pre">w</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prob_log_regression</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">):</span>
-    <span class="c1"># YOUR CODE HERE</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="o">...</span>
-    <span class="k">return</span> <span class="n">model</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def prob_log_regression(x, n_features, n_classes):
+    # YOUR CODE HERE
+    model = ...
+    return model
 </pre></div>
 </div>
 </div>
@@ -400,77 +486,77 @@ y \sim \text{categorical}(\text{logits})
 <p>You can use the model to generate samples:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">prob_log_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)</span>
-<span class="n">samples</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model = prob_log_regression(X, n_features, n_classes)
+samples = model.sample(1)
+print(samples[&quot;y&quot;].shape)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grader1</span><span class="p">(</span><span class="n">functions</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">caller_userid</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-    <span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
-    <span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def grader1(functions, variables, caller_userid):
+    import tensorflow as tf
+    import tensorflow_probability as tfp
+    tfd = tfp.distributions
 
-    <span class="n">namespace</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">exec</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+    namespace = locals()
+    for f in functions.values():
+        exec(f, namespace)
 
-    <span class="n">n_features</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">n_classes</span> <span class="o">=</span> <span class="mi">3</span>
-    <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">500</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span>
-            <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples</span><span class="p">,</span>
-            <span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span>
-            <span class="n">centers</span><span class="o">=</span><span class="n">n_classes</span><span class="p">,</span>
-            <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
-            <span class="p">)</span>
+    n_features = 2
+    n_classes = 3
+    n_samples = 500
+    X, y = make_blobs(
+            n_samples=n_samples,
+            n_features=n_features,
+            centers=n_classes,
+            random_state=42
+            )
     
-    <span class="n">prob_log_regression</span> <span class="o">=</span> <span class="n">namespace</span><span class="p">[</span><span class="s2">&quot;prob_log_regression&quot;</span><span class="p">]</span>
-    <span class="n">model_student</span> <span class="o">=</span> <span class="n">prob_log_regression</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Validating probabilistic model...&lt;/br&gt;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model_student</span><span class="p">,</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistribution</span><span class="p">):</span>
-        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;&lt;b&gt;Your model is not a joint distribution.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+    prob_log_regression = namespace[&quot;prob_log_regression&quot;]
+    model_student = prob_log_regression(X, n_features, n_classes)
+    msg = &quot;Validating probabilistic model...&lt;/br&gt;&quot;
+    if not isinstance(model_student, tfd.JointDistribution):
+        msg += &quot;&lt;b&gt;Your model is not a joint distribution.&lt;/b&gt;&lt;/br&gt;&quot;
+        return 0, msg
 
 
-    <span class="n">dists</span> <span class="o">=</span> <span class="n">model_student</span><span class="o">.</span><span class="n">sample_distributions</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">expected_dists</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span>
-                <span class="s2">&quot;batch_shape&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">n_features</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">],</span>
-                <span class="s2">&quot;event_shape&quot;</span><span class="p">:</span> <span class="p">[]</span>
-                <span class="p">},</span>
-            <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">,</span>
-                <span class="s2">&quot;batch_shape&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">n_classes</span><span class="p">],</span>
-                <span class="s2">&quot;event_shape&quot;</span><span class="p">:</span> <span class="p">[]</span>
-                <span class="p">},</span>
-            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">,</span>
-                <span class="s2">&quot;batch_shape&quot;</span><span class="p">:</span> <span class="p">[],</span>
-                <span class="s2">&quot;event_shape&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">n_samples</span><span class="p">],</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-    <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">expected_dists</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">param</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dists</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Your model doesn&#39;t contain the distribution &#39;</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">&#39;&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dists</span><span class="p">[</span><span class="n">param</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;The distribution &#39;</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">&#39; is incorrect.&lt;/b&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+    dists = model_student.sample_distributions()[0]
+    expected_dists = {
+            &quot;w&quot;: {
+                &quot;type&quot;: tfd.Normal,
+                &quot;batch_shape&quot;: [n_features, n_classes],
+                &quot;event_shape&quot;: []
+                },
+            &quot;b&quot;: {
+                &quot;type&quot;: tfd.Normal,
+                &quot;batch_shape&quot;: [n_classes],
+                &quot;event_shape&quot;: []
+                },
+            &quot;y&quot;: {
+                &quot;type&quot;: tfd.Independent,
+                &quot;batch_shape&quot;: [],
+                &quot;event_shape&quot;: [n_samples],
+                }
+            }
+    for param, values in expected_dists.items():
+        if param not in dists:
+            msg += f&quot;&lt;b&gt;Your model doesn&#39;t contain the distribution &#39;{param}&#39;&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
+        if not isinstance(dists[param], values[&quot;type&quot;]):
+            msg += f&quot;&lt;b&gt;The distribution &#39;{param}&#39; is incorrect.&lt;/b&gt;&quot;
+            return 0, msg
 
-        <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">dists</span><span class="p">[</span><span class="n">param</span><span class="p">]</span><span class="o">.</span><span class="n">batch_shape</span><span class="p">)</span> <span class="o">!=</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;batch_shape&quot;</span><span class="p">]:</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;The distribution &#39;</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">&#39; has a wrong batch_shape.&lt;/b&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if list(dists[param].batch_shape) != values[&quot;batch_shape&quot;]:
+            msg += f&quot;&lt;b&gt;The distribution &#39;{param}&#39; has a wrong batch_shape.&lt;/b&gt;&quot;
+            return 0, msg
 
-        <span class="k">if</span> <span class="nb">list</span><span class="p">(</span><span class="n">dists</span><span class="p">[</span><span class="n">param</span><span class="p">]</span><span class="o">.</span><span class="n">event_shape</span><span class="p">)</span> <span class="o">!=</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;event_shape&quot;</span><span class="p">]:</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;The distribution &#39;</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2">&#39; has a wrong event_shape.&lt;/b&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if list(dists[param].event_shape) != values[&quot;event_shape&quot;]:
+            msg += f&quot;&lt;b&gt;The distribution &#39;{param}&#39; has a wrong event_shape.&lt;/b&gt;&quot;
+            return 0, msg
 
-    <span class="k">return</span> <span class="mi">5</span><span class="p">,</span> <span class="n">msg</span> <span class="o">+</span> <span class="s2">&quot;&lt;b&gt;Success!&lt;/b&gt;&quot;</span>
+    return 5, msg + &quot;&lt;b&gt;Success!&lt;/b&gt;&quot;
 </pre></div>
 </div>
 </div>
@@ -478,36 +564,36 @@ y \sim \text{categorical}(\text{logits})
 <p>Use the following cell to grade your code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">teacher</span><span class="o">.</span><span class="n">set_grader</span><span class="p">(</span>
-        <span class="n">teacher</span><span class="o">.</span><span class="n">course_id</span><span class="p">,</span> <span class="n">lab</span><span class="p">,</span> <span class="s2">&quot;T1&quot;</span><span class="p">,</span>
-        <span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">grader1</span><span class="p">),</span> <span class="s2">&quot;grader1&quot;</span><span class="p">,</span>
-        <span class="n">source_functions</span><span class="p">,</span> <span class="n">source_variables</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>teacher.set_grader(
+        teacher.course_id, lab, &quot;T1&quot;,
+        inspect.getsource(grader1), &quot;grader1&quot;,
+        source_functions, source_variables
+        )
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T1&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="task-2-markov-chain-monte-carlo">
-<h2>Task 2: Markov Chain Monte Carlo<a class="headerlink" href="#task-2-markov-chain-monte-carlo" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="task-2-markov-chain-monte-carlo">
+<h2>Task 2: Markov Chain Monte Carlo<a class="headerlink" href="#task-2-markov-chain-monte-carlo" title="Permalink to this heading">#</a></h2>
 <p>Implement the <code class="docutils literal notranslate"><span class="pre">mcmc</span></code> function to train the model, you must use a Markov Chain Monte Carlo Strategy, We recommend using the <code class="docutils literal notranslate"><span class="pre">NoUTurnSampler</span></code> but feel free to experiment with the sampler.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span><span class="p">,</span> <span class="n">log_probs</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span>
-        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
-        <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
-        <span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span>
-        <span class="n">n_classes</span><span class="o">=</span><span class="n">n_classes</span><span class="p">,</span>
-        <span class="n">num_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-        <span class="n">burning_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>samples, log_probs = mcmc(
+        model=model,
+        y=y,
+        n_features=n_features,
+        n_classes=n_classes,
+        num_samples=100,
+        burning_steps=50,
+        )
 </pre></div>
 </div>
 </div>
@@ -519,108 +605,108 @@ y \sim \text{categorical}(\text{logits})
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">log_probs_viz</span> <span class="o">=</span> <span class="n">log_probs</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">log_probs_viz</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">log_probs_viz</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Sample&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Log Prob&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AVG Log Prob = </span><span class="si">{</span><span class="n">log_probs_viz</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>log_probs_viz = log_probs.numpy()
+fig, ax = plt.subplots(1, 1, figsize=(10, 7))
+ax.bar(np.arange(log_probs_viz.size), log_probs_viz, color=&quot;r&quot;)
+ax.set_xlabel(&quot;Sample&quot;)
+ax.set_xlabel(&quot;Log Prob&quot;)
+ax.set_title(f&quot;AVG Log Prob = {log_probs_viz.mean():.2f}&quot;) 
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grader2</span><span class="p">(</span><span class="n">functions</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">caller_userid</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def grader2(functions, variables, caller_userid):
+    import tensorflow as tf
+    import numpy as np
+    import tensorflow_probability as tfp
 
-    <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">set_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
+    tf.random.set_seed(0)
+    tfd = tfp.distributions
 
-    <span class="n">namespace</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">exec</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+    namespace = locals()
+    for f in functions.values():
+        exec(f, namespace)
 
-    <span class="c1"># compare descriptive stats using the same base model.</span>
+    # compare descriptive stats using the same base model.
 
-    <span class="n">n_features</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">n_classes</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">n_gen_samples</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">burnout</span> <span class="o">=</span> <span class="mi">100</span>
+    n_features = 2
+    n_classes = 2
+    n_gen_samples = 100
+    burnout = 100
 
-    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-        <span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;and&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">),</span>
-            <span class="s2">&quot;or&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">),</span>
-            <span class="p">}</span>
+    X = np.array([
+        [0, 0],
+        [0, 1],
+        [1, 0],
+        [1, 1]
+        ] * 10, dtype=&quot;float32&quot;)
+    y = {
+            &quot;and&quot;: np.array([0, 0, 0, 1] * 10),
+            &quot;or&quot;: np.array([0, 1, 1, 1] * 10),
+            }
 
-    <span class="n">mcmc</span> <span class="o">=</span> <span class="n">namespace</span><span class="p">[</span><span class="s2">&quot;mcmc&quot;</span><span class="p">]</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Validating mcmc procedure...&lt;/br&gt;&quot;</span>
+    mcmc = namespace[&quot;mcmc&quot;]
+    msg = &quot;Validating mcmc procedure...&lt;/br&gt;&quot;
 
-    <span class="k">for</span> <span class="n">case</span><span class="p">,</span> <span class="n">y_i</span> <span class="ow">in</span> <span class="n">y</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    for case, y_i in y.items():
 
-        <span class="n">model</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">JointDistributionNamedAutoBatched</span><span class="p">({</span>
-            <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_features</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">),</span>
-            <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_classes</span><span class="p">,</span> <span class="p">)),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.</span><span class="p">),</span>
-            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">b</span><span class="p">,</span> <span class="n">w</span><span class="p">:</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Independent</span><span class="p">(</span>
-                <span class="n">tfd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">logits</span><span class="o">=</span><span class="n">X</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span><span class="p">),</span>
-                <span class="n">reinterpreted_batch_ndims</span><span class="o">=</span><span class="mi">1</span>
-                <span class="p">)</span>
-            <span class="p">})</span>
-        <span class="n">samples</span><span class="p">,</span> <span class="n">log_probs</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span>
-                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
-                <span class="n">y</span><span class="o">=</span><span class="n">y_i</span><span class="p">,</span>
-                <span class="n">n_features</span><span class="o">=</span><span class="n">n_features</span><span class="p">,</span>
-                <span class="n">n_classes</span><span class="o">=</span><span class="n">n_classes</span><span class="p">,</span>
-                <span class="n">num_samples</span><span class="o">=</span><span class="n">n_gen_samples</span><span class="p">,</span>
-                <span class="n">burning_steps</span><span class="o">=</span><span class="n">burnout</span><span class="p">,</span>
-                <span class="p">)</span>
+        model = tfd.JointDistributionNamedAutoBatched({
+            &quot;w&quot;: tfd.Normal(loc=tf.zeros(shape=(n_features, n_classes)), scale=1.),
+            &quot;b&quot;: tfd.Normal(loc=tf.zeros(shape=(n_classes, )), scale=1.),
+            &quot;y&quot;: lambda b, w: tfd.Independent(
+                tfd.Categorical(logits=X @ w + b),
+                reinterpreted_batch_ndims=1
+                )
+            })
+        samples, log_probs = mcmc(
+                model=model,
+                y=y_i,
+                n_features=n_features,
+                n_classes=n_classes,
+                num_samples=n_gen_samples,
+                burning_steps=burnout,
+                )
 
-        <span class="k">if</span> <span class="n">samples</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([</span><span class="n">n_gen_samples</span><span class="p">,</span> <span class="n">n_features</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">]):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;&lt;b&gt;Your function returns samples with wrong w shapes.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if samples[0].shape != tf.TensorShape([n_gen_samples, n_features, n_classes]):
+            msg += &quot;&lt;b&gt;Your function returns samples with wrong w shapes.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="k">if</span> <span class="n">samples</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([</span><span class="n">n_gen_samples</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">]):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;&lt;b&gt;Your function returns samples with wrong b shapes.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if samples[1].shape != tf.TensorShape([n_gen_samples, n_classes]):
+            msg += &quot;&lt;b&gt;Your function returns samples with wrong b shapes.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="k">if</span> <span class="n">log_probs</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">tf</span><span class="o">.</span><span class="n">TensorShape</span><span class="p">([</span><span class="n">n_gen_samples</span><span class="p">]):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;&lt;b&gt;Your function returns log_probs with wrong shape.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if log_probs.shape != tf.TensorShape([n_gen_samples]):
+            msg += &quot;&lt;b&gt;Your function returns log_probs with wrong shape.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">w</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        w = samples[0].numpy().mean(axis=0)
+        b = samples[1].numpy().mean(axis=0)
 
-        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        y_pred = np.argmax(X @ w + b, axis=1)
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">y_pred</span> <span class="o">==</span> <span class="n">y_i</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">y_i</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mf">0.9</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;&lt;b&gt;The mcmc function does not optimize the specified model.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">y_i</span><span class="p">)</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if (y_pred == y_i).sum() / y_i.size &lt; 0.9:
+            msg += &quot;&lt;b&gt;The mcmc function does not optimize the specified model.&lt;/b&gt;&lt;/br&gt;&quot;
+            msg += str(y_pred)
+            msg += str(y_i)
+            return 0, msg
 
-    <span class="k">return</span> <span class="mi">5</span><span class="p">,</span> <span class="n">msg</span> <span class="o">+</span> <span class="s2">&quot;&lt;b&gt;Success!&lt;/b&gt;&quot;</span>
+    return 5, msg + &quot;&lt;b&gt;Success!&lt;/b&gt;&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T2&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T2&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="task-3-map-predictions">
-<h2>Task 3: MAP Predictions<a class="headerlink" href="#task-3-map-predictions" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="task-3-map-predictions">
+<h2>Task 3: MAP Predictions<a class="headerlink" href="#task-3-map-predictions" title="Permalink to this heading">#</a></h2>
 <p>Compute the Maximum Aposteriori predictions of the parameters as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -631,10 +717,10 @@ b_{map} = \text{argmax}(\text{kde}(w_{samples}))\\
 <p>You must use <code class="docutils literal notranslate"><span class="pre">KernelDensity</span></code> for the estimation of the MAP parameters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kde</span><span class="p">(</span><span class="n">w_samples</span><span class="p">,</span> <span class="n">b_samples</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
-    <span class="c1"># YOUR CODE HERE</span>
-    <span class="n">preds</span> <span class="o">=</span> <span class="o">...</span>
-    <span class="k">return</span> <span class="n">preds</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def kde(w_samples, b_samples, x, kernel=&quot;gaussian&quot;, bandwidth=0.1):
+    # YOUR CODE HERE
+    preds = ...
+    return preds
 </pre></div>
 </div>
 </div>
@@ -642,96 +728,96 @@ b_{map} = \text{argmax}(\text{kde}(w_{samples}))\\
 <p>Let’s generate some predictions:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">preds</span> <span class="o">=</span> <span class="n">kde</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">samples</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">X</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>preds = kde(samples[0].numpy(), samples[1].numpy(), X)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grader3</span><span class="p">(</span><span class="n">functions</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">caller_userid</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-    <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
-    <span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KernelDensity</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def grader3(functions, variables, caller_userid):
+    import numpy as np
+    import tensorflow as tf
+    from sklearn.datasets import make_blobs
+    from sklearn.neighbors import KernelDensity
 
-    <span class="n">namespace</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">exec</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+    namespace = locals()
+    for f in functions.values():
+        exec(f, namespace)
 
-    <span class="n">kde_student</span> <span class="o">=</span> <span class="n">namespace</span><span class="p">[</span><span class="s2">&quot;kde&quot;</span><span class="p">]</span>
+    kde_student = namespace[&quot;kde&quot;]
 
-    <span class="k">def</span> <span class="nf">kde</span><span class="p">(</span><span class="n">w_samples</span><span class="p">,</span> <span class="n">b_samples</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
-        <span class="n">flat_w</span> <span class="o">=</span> <span class="n">w_samples</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
-                <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">w_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
-                <span class="p">)</span>
-        <span class="n">w_densities</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="n">bandwidth</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">flat_w</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">flat_w</span><span class="p">)</span>
-                <span class="p">)</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">w_densities</span><span class="p">)</span>
-        <span class="n">w_map</span> <span class="o">=</span> <span class="n">w_samples</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    def kde(w_samples, b_samples, x, kernel=&quot;gaussian&quot;, bandwidth=0.1):
+        flat_w = w_samples.reshape(
+                (-1, np.prod(w_samples.shape[1:]))
+                )
+        w_densities = (
+                KernelDensity(kernel=kernel, bandwidth=bandwidth)
+                .fit(flat_w)
+                .score_samples(flat_w)
+                )
+        idx = np.argmax(w_densities)
+        w_map = w_samples[idx]
 
-        <span class="n">flat_b</span> <span class="o">=</span> <span class="n">b_samples</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
-                <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">b_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
-                <span class="p">)</span>
-        <span class="n">b_densities</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">KernelDensity</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span> <span class="n">bandwidth</span><span class="o">=</span><span class="n">bandwidth</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">flat_b</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">score_samples</span><span class="p">(</span><span class="n">flat_b</span><span class="p">)</span>
-                <span class="p">)</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">b_densities</span><span class="p">)</span>
-        <span class="n">b_map</span> <span class="o">=</span> <span class="n">b_samples</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        flat_b = b_samples.reshape(
+                (-1, np.prod(b_samples.shape[1:]))
+                )
+        b_densities = (
+                KernelDensity(kernel=kernel, bandwidth=bandwidth)
+                .fit(flat_b)
+                .score_samples(flat_b)
+                )
+        idx = np.argmax(b_densities)
+        b_map = b_samples[idx]
 
-        <span class="n">probs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">x</span> <span class="o">@</span> <span class="n">w_map</span> <span class="o">+</span> <span class="n">b_map</span><span class="p">)</span>
-        <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">preds</span>
+        probs = tf.nn.softmax(x @ w_map + b_map)
+        preds = np.argmax(probs, axis=1)
+        return preds
 
-    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Testing your kde function with 10 random trials&lt;/br&gt;&quot;</span>
+    msg = &quot;Testing your kde function with 10 random trials&lt;/br&gt;&quot;
 
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-        <span class="n">n_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-        <span class="n">n_gen_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-        <span class="n">num_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-        <span class="n">num_classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    for _ in range(10):
+        n_samples = np.random.randint(1, 100)
+        n_gen_samples = np.random.randint(1, 10)
+        num_features = np.random.randint(2, 10)
+        num_classes = np.random.randint(2, 10)
 
-        <span class="n">samples_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_gen_samples</span><span class="p">,</span> <span class="n">num_features</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">))</span>
-        <span class="n">samples_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_gen_samples</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">))</span>
-        <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">num_features</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="n">num_classes</span><span class="p">)</span>
+        samples_w = np.random.normal(size=(n_gen_samples, num_features, num_classes))
+        samples_b = np.random.normal(size=(n_gen_samples, num_classes))
+        x, _ = make_blobs(n_samples, num_features, centers=num_classes)
 
-        <span class="n">preds_student</span> <span class="o">=</span> <span class="n">kde_student</span><span class="p">(</span><span class="n">samples_w</span><span class="p">,</span> <span class="n">samples_b</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-        <span class="n">preds_teacher</span> <span class="o">=</span> <span class="n">kde</span><span class="p">(</span><span class="n">samples_w</span><span class="p">,</span> <span class="n">samples_b</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        preds_student = kde_student(samples_w, samples_b, x)
+        preds_teacher = kde(samples_w, samples_b, x)
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">preds_student</span><span class="p">,</span> <span class="n">preds_teacher</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;The MAP predictions do not match the expected results.&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not np.allclose(preds_student, preds_teacher):
+            msg += &quot;The MAP predictions do not match the expected results.&quot;
+            return 0, msg
 
-    <span class="k">return</span> <span class="mi">5</span><span class="p">,</span> <span class="n">msg</span> <span class="o">+</span> <span class="s2">&quot;&lt;b&gt;Success!&lt;/b&gt;&quot;</span>
+    return 5, msg + &quot;&lt;b&gt;Success!&lt;/b&gt;&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T3&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T3&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="model-evaluation">
-<h2>Model Evaluation<a class="headerlink" href="#model-evaluation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="model-evaluation">
+<h2>Model Evaluation<a class="headerlink" href="#model-evaluation" title="Permalink to this heading">#</a></h2>
 <p>Let’s evaluate the MAP model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">preds</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>print(classification_report(y, preds))
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -745,7 +831,7 @@ b_{map} = \text{argmax}(\text{kde}(w_{samples}))\\
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
@@ -753,30 +839,88 @@ b_{map} = \text{argmax}(\text{kde}(w_{samples}))\\
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading">Data Loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-implement-a-logistic-regression-model">Task 1: Implement a Logistic Regression Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-markov-chain-monte-carlo">Task 2: Markov Chain Monte Carlo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3-map-predictions">Task 3: MAP Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-evaluation">Model Evaluation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-</div>
+          </div>
+          <footer class="bd-footer-content">
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
-      </div>
-    </div>
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

@@ -1,54 +1,72 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>LAB 06.01.02 - Variational Autoencoder &#8212; Probabilistic Programming for Machine Learning</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MBFEZ3PF64');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -57,238 +75,315 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/06.02 - LAB 01 - Variational autoencoder';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MBFEZ3PF64');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo-tf-udea-unal.png" class="logo__image only-light" alt="Probabilistic Programming for Machine Learning - Home"/>
+    <script>document.write(`<img src="../_static/logo-tf-udea-unal.png" class="logo__image only-dark" alt="Probabilistic Programming for Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
-   Course outline
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M1-videolist.html">
-   1 Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M2-videolist.html">
-   2 TF for Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M3-videolist.html">
-   3 Intuitions on Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M4-videolist.html">
-   4 Tensorflow Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M5-videolist.html">
-   5 Bayesian Modelling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M6-videolist.html">
-   6 Variational Inference
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Course outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M1-videolist.html">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M2-videolist.html">2 TF for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3-videolist.html">3 Intuitions on Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M4-videolist.html">4 Tensorflow Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M5-videolist.html">5 Bayesian Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M6-videolist.html">6 Variational Inference</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/06.02 - LAB 01 - Variational autoencoder.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/06.02 - LAB 01 - Variational autoencoder.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/06.02 - LAB 01 - Variational autoencoder.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>LAB 06.01.02 - Variational Autoencoder</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-1">
-   Task 1
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-2">
-   Task 2
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-3">
-   Task 3
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-4">
-   Task 4
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1">Task 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2">Task 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3">Task 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4">Task 4</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>LAB 06.01.02 - Variational Autoencoder</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-1">
-   Task 1
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-2">
-   Task 2
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-3">
-   Task 3
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#task-4">
-   Task 4
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># init repo notebook
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># init repo notebook
 !git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
 !mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
 !pip install -r ppdl/content/requirements.txt &gt; /dev/null
@@ -296,18 +391,18 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="lab-06-01-02-variational-autoencoder">
-<h1>LAB 06.01.02 - Variational Autoencoder<a class="headerlink" href="#lab-06-01-02-variational-autoencoder" title="Permalink to this headline">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="lab-06-01-02-variational-autoencoder">
+<h1>LAB 06.01.02 - Variational Autoencoder<a class="headerlink" href="#lab-06-01-02-variational-autoencoder" title="Permalink to this heading">#</a></h1>
 <p>In this lab, you’ll see the relationship between classical unsupervised methods like PCA and the variational autoencoder (VAE).</p>
 <p>First, let us import the grading libraries:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inspect</span>
-<span class="kn">from</span> <span class="nn">rlxmoocapi</span> <span class="kn">import</span> <span class="n">submit</span><span class="p">,</span> <span class="n">session</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import inspect
+from rlxmoocapi import submit, session
 
-<span class="n">course_id</span> <span class="o">=</span> <span class="s2">&quot;ppdl.v1&quot;</span>
-<span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;https://m5knaekxo6.execute-api.us-west-2.amazonaws.com/dev-v0001/rlxmooc&quot;</span>
-<span class="n">lab</span> <span class="o">=</span> <span class="s2">&quot;L06.01.02&quot;</span>
+course_id = &quot;ppdl.v1&quot;
+endpoint = &quot;https://m5knaekxo6.execute-api.us-west-2.amazonaws.com/dev-v0001/rlxmooc&quot;
+lab = &quot;L06.01.02&quot;
 </pre></div>
 </div>
 </div>
@@ -315,25 +410,25 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Please, use your credentials to log into the platform:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">session</span><span class="o">.</span><span class="n">LoginSequence</span><span class="p">(</span>
-    <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
-    <span class="n">course_id</span><span class="o">=</span><span class="n">course_id</span><span class="p">,</span>
-    <span class="n">lab_id</span><span class="o">=</span><span class="n">lab</span><span class="p">,</span>
-    <span class="n">varname</span><span class="o">=</span><span class="s2">&quot;student&quot;</span>
-    <span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>session.LoginSequence(
+    endpoint=endpoint,
+    course_id=course_id,
+    lab_id=lab,
+    varname=&quot;student&quot;
+    );
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">ses</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
-<span class="n">teacher</span> <span class="o">=</span> <span class="n">ses</span><span class="o">.</span><span class="n">login</span><span class="p">(</span>
-        <span class="n">user_id</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;USER_ID&quot;</span><span class="p">],</span>
-        <span class="n">pwd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PASSWORD&quot;</span><span class="p">],</span>
-        <span class="n">course_id</span><span class="o">=</span><span class="n">course_id</span><span class="p">,</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import os
+ses = session.Session(endpoint)
+teacher = ses.login(
+        user_id=os.environ[&quot;USER_ID&quot;],
+        pwd=os.environ[&quot;PASSWORD&quot;],
+        course_id=course_id,
+        )
 </pre></div>
 </div>
 </div>
@@ -341,18 +436,18 @@ const thebe_selector_output = ".output, .cell_output"
 <p>First, let us import the required libraries:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Sequential</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Input</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras.losses</span> <span class="kn">import</span> <span class="n">BinaryCrossentropy</span><span class="p">,</span> <span class="n">binary_crossentropy</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">Adam</span>
-<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_olivetti_faces</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+import numpy as np
+from tqdm.notebook import tqdm
+import tensorflow as tf
+from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.layers import Dense, Input
+from tensorflow.keras.losses import BinaryCrossentropy, binary_crossentropy
+from tensorflow.keras.optimizers import Adam
+from sklearn.decomposition import PCA
+from sklearn.datasets import fetch_olivetti_faces
+from sklearn.preprocessing import StandardScaler
+from IPython.display import display
 </pre></div>
 </div>
 </div>
@@ -360,7 +455,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>In this lab, We’ll use the Olivetti Faces dataset, which contains a dataset of <code class="docutils literal notranslate"><span class="pre">(64,</span> <span class="pre">64)</span></code> gray scale images with different faces:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">fetch_olivetti_faces</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>X, _ = fetch_olivetti_faces(return_X_y=True)
 </pre></div>
 </div>
 </div>
@@ -368,12 +463,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s see some images of the dataset:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, axes = plt.subplots(3, 3, figsize=(10, 10))
+for i in range(3):
+    for j in range(3):
+        ax = axes[i, j]
+        idx = np.random.randint(X.shape[0])
+        ax.imshow(X[idx].reshape(64, 64), cmap=&quot;gray&quot;)
 </pre></div>
 </div>
 </div>
@@ -381,9 +476,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>First, let us train a <code class="docutils literal notranslate"><span class="pre">PCA</span></code> model with the images:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">components</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">components</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pca = PCA(n_components=128).fit(X)
+components = tf.constant(pca.components_)
+print(components.shape)
 </pre></div>
 </div>
 </div>
@@ -391,8 +486,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>This model can be seen as a classical autoencoder that encodes (<code class="docutils literal notranslate"><span class="pre">transform</span></code>) and decodes (<code class="docutils literal notranslate"><span class="pre">inverse_transform</span></code>), as follows:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X_t</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X_t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>X_t = pca.transform(X)
+print(X_t.shape)
 </pre></div>
 </div>
 </div>
@@ -400,8 +495,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Also, We can compute the reconstruction of the images:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X_r</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X_t</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X_r</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>X_r = pca.inverse_transform(X_t)
+print(X_r.shape)
 </pre></div>
 </div>
 </div>
@@ -409,17 +504,17 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s see a comparison between the original images and the reconstruction:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X_r</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, axes = plt.subplots(2, 5, figsize=(10, 5))
+for i in range(5):
+    idx = np.random.randint(X.shape[0])
+    ax = axes[0, i]
+    ax.imshow(X[idx].reshape(64, 64), cmap=&quot;gray&quot;)
+    ax = axes[1, i]
+    ax.imshow(X_r[idx].reshape(64, 64), cmap=&quot;gray&quot;)
 
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Original&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Reconstruction&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+axes[0, 0].set_ylabel(&quot;Original&quot;)
+axes[1, 0].set_ylabel(&quot;Reconstruction&quot;)
+fig.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -427,21 +522,21 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Internally, the <code class="docutils literal notranslate"><span class="pre">PCA</span></code> model is doing the following operations:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># transform</span>
-<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_std</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">X_s</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">X_t</span> <span class="o">=</span> <span class="n">X_s</span> <span class="o">@</span> <span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">T</span> <span class="c1"># transform</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X_t</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># transform
+scaler = StandardScaler(with_std=False).fit(X)
+X_s = scaler.transform(X)
+X_t = X_s @ pca.components_.T # transform
+print(X_t.shape)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># inverse transform</span>
-<span class="n">X_r</span> <span class="o">=</span> <span class="n">X_t</span> <span class="o">@</span> <span class="n">pca</span><span class="o">.</span><span class="n">components_</span>
-<span class="n">X_r</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X_r</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">X_r</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># inverse transform
+X_r = X_t @ pca.components_
+X_r = scaler.inverse_transform(X_r)
+print(X_r.shape)
 </pre></div>
 </div>
 </div>
@@ -449,30 +544,30 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s see that the results are equivalent:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X_r</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, axes = plt.subplots(2, 5, figsize=(10, 5))
+for i in range(5):
+    idx = np.random.randint(X.shape[0])
+    ax = axes[0, i]
+    ax.imshow(X[idx].reshape(64, 64), cmap=&quot;gray&quot;)
+    ax = axes[1, i]
+    ax.imshow(X_r[idx].reshape(64, 64), cmap=&quot;gray&quot;)
 
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Original&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Reconstruction&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+axes[0, 0].set_ylabel(&quot;Original&quot;)
+axes[1, 0].set_ylabel(&quot;Reconstruction&quot;)
+fig.tight_layout()
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig.show()
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="task-1">
-<h2>Task 1<a class="headerlink" href="#task-1" title="Permalink to this headline">¶</a></h2>
+<section id="task-1">
+<h2>Task 1<a class="headerlink" href="#task-1" title="Permalink to this heading">#</a></h2>
 <p>In this task, you must fit a decoder model for a variational autoencoder that replicates the <code class="docutils literal notranslate"><span class="pre">PCA</span></code> model, specifically, you have the following model:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -489,38 +584,38 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">variable_decoder</span><span class="p">(</span><span class="n">pca_components</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">VariableDecoder</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pca_components</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="nb">super</span><span class="p">(</span><span class="n">VariableDecoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="n">pca_components</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
-                <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">pca_components</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],)),</span>
-                <span class="n">Dense</span><span class="p">(</span>
-                    <span class="n">pca_components</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">,</span>
-                    <span class="n">use_bias</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="p">)</span>
-                <span class="p">])</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def variable_decoder(pca_components):
+    class VariableDecoder(Model):
+        def __init__(self, pca_components, *args, **kwargs):
+            super(VariableDecoder, self).__init__(*args, **kwargs)
+            self.components = pca_components
+            self.decoder = Sequential([
+                Input(shape=(pca_components.shape[0],)),
+                Dense(
+                    pca_components.shape[1], activation=&quot;sigmoid&quot;,
+                    use_bias = False
+                    )
+                ])
 
-        <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="c1"># YOUR CODE HERE</span>
-            <span class="o">...</span>
+        def encode(self, x):
+            # YOUR CODE HERE
+            ...
 
-        <span class="k">def</span> <span class="nf">reparameterize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">):</span>
-            <span class="c1"># YOUR CODE HERE</span>
-            <span class="o">...</span>
+        def reparameterize(self, mean):
+            # YOUR CODE HERE
+            ...
 
-        <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-            <span class="c1"># YOUR CODE HERE</span>
-            <span class="o">...</span>
+        def decode(self, z):
+            # YOUR CODE HERE
+            ...
             
-        <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
-            <span class="n">x_rec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">x_rec</span>
+        def call(self, x):
+            mu = self.encode(x)
+            z = self.reparameterize(mu)
+            x_rec = self.decoder(z)
+            return x_rec
 
-    <span class="k">return</span> <span class="n">VariableDecoder</span><span class="p">(</span><span class="n">pca_components</span><span class="p">)</span>
+    return VariableDecoder(pca_components)
 </pre></div>
 </div>
 </div>
@@ -528,20 +623,20 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s validate the model with a simple test case:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">components</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span>
-    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
-    <span class="p">[</span><span class="o">-</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">]</span>
-<span class="p">])</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span>
-    <span class="p">[</span><span class="mf">2.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">3.6</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
-<span class="p">])</span>
-<span class="n">m1</span> <span class="o">=</span> <span class="n">variable_decoder</span><span class="p">(</span><span class="n">components</span><span class="p">)</span>
-<span class="n">m1</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_weights</span><span class="p">((</span><span class="n">components</span><span class="p">,</span> <span class="p">))</span>
-<span class="n">m1</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">m1</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>components = tf.constant([
+    [1.0, 1.5],
+    [-2.3, 4.5],
+    [6.4, 3.2]
+])
+X = tf.constant([
+    [2.3, -1.2],
+    [3.6, 4.2],
+    [1.1, 0.2]
+])
+m1 = variable_decoder(components)
+m1.decoder.layers[-1].set_weights((components, ))
+m1.build(X.shape)
+m1.summary()
 </pre></div>
 </div>
 </div>
@@ -555,8 +650,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">m1</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mu = m1.encode(X)
+display(mu)
 </pre></div>
 </div>
 </div>
@@ -570,8 +665,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">m1</span><span class="o">.</span><span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>z = m1.reparameterize(mu)
+display(z)
 </pre></div>
 </div>
 </div>
@@ -585,7 +680,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">m1</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>display(m1.decode(mu))
 </pre></div>
 </div>
 </div>
@@ -593,9 +688,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Model definition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span> <span class="o">=</span> <span class="n">variable_decoder</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="p">)</span>
-<span class="n">m1</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">m1</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>m1 = variable_decoder(pca.components_)
+m1.build(X.shape)
+m1.summary()
 </pre></div>
 </div>
 </div>
@@ -603,10 +698,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s compile the model using the binary cross-entropy loss:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-        <span class="n">loss</span><span class="o">=</span><span class="n">BinaryCrossentropy</span><span class="p">(),</span>
-        <span class="n">optimizer</span><span class="o">=</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>m1.compile(
+        loss=BinaryCrossentropy(),
+        optimizer=Adam(learning_rate=1e-2)
+        )
 </pre></div>
 </div>
 </div>
@@ -614,9 +709,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can train the model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_std</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">X_s</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">m1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_s</span><span class="p">,</span> <span class="n">X_s</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>norm = StandardScaler(with_std = False)
+X_s = norm.fit_transform(X)
+m1.fit(X_s, X_s, epochs=100, batch_size=400)
 </pre></div>
 </div>
 </div>
@@ -624,16 +719,16 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Now, We can generate random images using the trained model, for this, we compute the mean of the latent representations and use this to generate random vectors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">X_s</span> <span class="o">@</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">components</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">random_vectors</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
-        <span class="n">mean</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">components</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="p">)</span>
-<span class="n">rec_imgs</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span>
-        <span class="n">m1</span>
-        <span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">random_vectors</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mu = tf.reduce_mean(X_s @ tf.transpose(components), axis=0)
+random_vectors = tf.random.normal(
+        mean=mu, stddev=1., shape=(9, components.shape[0])
+        )
+rec_imgs = norm.inverse_transform(
+        m1
+        .decoder(random_vectors)
+        .numpy()
+        .reshape(9, -1)
+        )
 </pre></div>
 </div>
 </div>
@@ -641,14 +736,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can visualize the generated images:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">cont</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rec_imgs</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-        <span class="n">cont</span> <span class="o">+=</span> <span class="mi">1</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, axes = plt.subplots(3, 3, figsize=(10, 10))
+cont = 0
+for i in range(3):
+    for j in range(3):
+        ax = axes[i, j]
+        ax.imshow(rec_imgs[cont].reshape(64, 64), cmap=&quot;gray&quot;)
+        ax.axis(&quot;off&quot;)
+        cont += 1
 </pre></div>
 </div>
 </div>
@@ -657,66 +752,66 @@ const thebe_selector_output = ".output, .cell_output"
 <a class="reference internal image-reference" href="../_images/pca_faces1.png"><img alt="../_images/pca_faces1.png" src="../_images/pca_faces1.png" style="width: 60%;" /></a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grader1</span><span class="p">(</span><span class="n">functions</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">caller_userid</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-    <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Sequential</span>
-    <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Input</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def grader1(functions, variables, caller_userid):
+    import numpy as np
+    import tensorflow as tf
+    from tensorflow.keras.models import Model, Sequential
+    from tensorflow.keras.layers import Dense, Input
 
-    <span class="n">namespace</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">exec</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
-    <span class="n">variable_decoder</span> <span class="o">=</span> <span class="n">namespace</span><span class="p">[</span><span class="s2">&quot;variable_decoder&quot;</span><span class="p">]</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Testing your code with 10 random cases.&lt;/br&gt;&quot;</span>
+    namespace = locals()
+    for f in functions.values():
+        exec(f, namespace)
+    variable_decoder = namespace[&quot;variable_decoder&quot;]
+    msg = &quot;Testing your code with 10 random cases.&lt;/br&gt;&quot;
 
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">variable_decoder</span><span class="p">(</span><span class="n">components</span><span class="p">)</span>
+    for _ in range(10):
+        x = tf.random.normal(shape=(10_000, 2))
+        components = tf.random.normal(shape=(2, 2))
+        model = variable_decoder(components)
 
-        <span class="n">encoded</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        encoded = model.encode(x)
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">encoded</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Your encode method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not isinstance(encoded, tf.Tensor):
+            msg += f&quot;&lt;b&gt;Your encode method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">encoded</span> <span class="o">=</span> <span class="n">encoded</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">encoded_teacher</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">@</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">components</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        encoded = encoded.numpy()
+        encoded_teacher = (x @ tf.transpose(components)).numpy()
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">encoded</span><span class="p">,</span> <span class="n">encoded_teacher</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wrong encode method.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not np.allclose(encoded, encoded_teacher):
+            msg += f&quot;&lt;b&gt;Wrong encode method.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">z</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">reparameterize</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span>
+        z = model.reparameterize(encoded)
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Your reparameterize method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not isinstance(z, tf.Tensor):
+            msg += f&quot;&lt;b&gt;Your reparameterize method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">sample</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">encoded</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        <span class="n">z_teacher</span> <span class="o">=</span> <span class="n">sample</span> <span class="o">+</span> <span class="n">encoded</span>
+        sample = tf.random.normal(mean=0., stddev=1., shape=encoded.shape)
+        z_teacher = sample + encoded
 
-        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">z_teacher</span> <span class="o">=</span> <span class="n">z_teacher</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        z = z.numpy()
+        z_teacher = z_teacher.numpy()
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">z_teacher</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wrong reparameterize method.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not np.allclose(z.mean(axis=0), z_teacher.mean(axis=0), atol=0.5):
+            msg += f&quot;&lt;b&gt;Wrong reparameterize method.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">decode</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        decode = model.decode(z)
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">decode</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Your reparameterize method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not isinstance(decode, tf.Tensor):
+            msg += f&quot;&lt;b&gt;Your reparameterize method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">decode</span> <span class="o">=</span> <span class="n">decode</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">decode_teacher</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        decode = decode.numpy()
+        decode_teacher = model.decoder(z).numpy()
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">decode</span><span class="p">,</span> <span class="n">decode_teacher</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wrong decode method.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not np.allclose(decode, decode_teacher):
+            msg += f&quot;&lt;b&gt;Wrong decode method.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
         
-    <span class="k">return</span> <span class="mi">5</span><span class="p">,</span> <span class="n">msg</span> <span class="o">+</span> <span class="s2">&quot;&lt;b&gt;Success!&lt;/b&gt;&quot;</span>
+    return 5, msg + &quot;&lt;b&gt;Success!&lt;/b&gt;&quot;
 </pre></div>
 </div>
 </div>
@@ -724,14 +819,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Use the following cell to grade your code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T1&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="task-2">
-<h2>Task 2<a class="headerlink" href="#task-2" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="task-2">
+<h2>Task 2<a class="headerlink" href="#task-2" title="Permalink to this heading">#</a></h2>
 <p>In this task, you must fit an encoder model for a variational autoencoder that replicates the <code class="docutils literal notranslate"><span class="pre">PCA</span></code> model, specifically, you have the following model:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -748,38 +843,38 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">variable_encoder</span><span class="p">(</span><span class="n">components</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">VariableEncoder</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">components</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="nb">super</span><span class="p">(</span><span class="n">VariableEncoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
-                <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">components</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],)),</span>
-                <span class="n">Dense</span><span class="p">(</span>
-                    <span class="n">components</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
-                    <span class="n">use_bias</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="p">)</span>
-                <span class="p">])</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="n">components</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def variable_encoder(components):
+    class VariableEncoder(Model):
+        def __init__(self, components, *args, **kwargs):
+            super(VariableEncoder, self).__init__(*args, **kwargs)
+            self.encoder = Sequential([
+                Input(shape=(components.shape[1],)),
+                Dense(
+                    components.shape[0] * 2, activation=&quot;linear&quot;,
+                    use_bias = False
+                    )
+                ])
+            self.components = components
 
-        <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="c1">#YOUR CODE HERE</span>
-            <span class="o">...</span>
+        def encode(self, x):
+            #YOUR CODE HERE
+            ...
 
-        <span class="k">def</span> <span class="nf">reparameterize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">):</span>
-            <span class="c1">#YOUR CODE HERE</span>
-            <span class="o">...</span>
+        def reparameterize(self, mu, log_var):
+            #YOUR CODE HERE
+            ...
 
-        <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-            <span class="c1">#YOUR CODE HERE</span>
-            <span class="o">...</span>
+        def decode(self, z):
+            #YOUR CODE HERE
+            ...
             
-        <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-        <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">)</span>
-            <span class="n">x_rec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">x_rec</span>
-    <span class="k">return</span> <span class="n">VariableEncoder</span><span class="p">(</span><span class="n">components</span><span class="p">)</span>
+        @tf.function
+        def call(self, x):
+            mu, log_var = self.encode(x)
+            z = self.reparameterize(mu, log_var)
+            x_rec = self.decode(z)
+            return x_rec
+    return VariableEncoder(components)
 </pre></div>
 </div>
 </div>
@@ -787,20 +882,20 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s validate the model with a simple test case:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">components</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span>
-    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
-    <span class="p">[</span><span class="o">-</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">6.4</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">]</span>
-<span class="p">])</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span>
-    <span class="p">[</span><span class="mf">2.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">3.6</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
-<span class="p">])</span>
-<span class="n">m2</span> <span class="o">=</span> <span class="n">variable_encoder</span><span class="p">(</span><span class="n">components</span><span class="p">)</span>
-<span class="n">m2</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_weights</span><span class="p">((</span><span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">components</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="p">))</span>
-<span class="n">m2</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">m2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>components = tf.constant([
+    [1.0, 1.5],
+    [-2.3, 4.5],
+    [6.4, 3.2]
+])
+X = tf.constant([
+    [2.3, -1.2],
+    [3.6, 4.2],
+    [1.1, 0.2]
+])
+m2 = variable_encoder(components)
+m2.encoder.layers[-1].set_weights((tf.concat([tf.transpose(components)] * 2, axis=1), ))
+m2.build(X.shape)
+m2.summary()
 </pre></div>
 </div>
 </div>
@@ -818,9 +913,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">m2</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">logvar</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mu, logvar = m2.encode(X)
+display(mu)
+display(logvar)
 </pre></div>
 </div>
 </div>
@@ -834,8 +929,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">m2</span><span class="o">.</span><span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>z = m2.reparameterize(mu, logvar)
+display(z)
 </pre></div>
 </div>
 </div>
@@ -849,7 +944,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>display(m2.decode(mu))
 </pre></div>
 </div>
 </div>
@@ -857,9 +952,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Model definition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m2</span> <span class="o">=</span> <span class="n">variable_encoder</span><span class="p">(</span><span class="n">components</span><span class="p">)</span>
-<span class="n">m2</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">m2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>m2 = variable_encoder(components)
+m2.build(X.shape)
+m2.summary()
 </pre></div>
 </div>
 </div>
@@ -867,10 +962,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s compile the model using the binary cross-entropy loss:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m2</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-        <span class="n">loss</span><span class="o">=</span><span class="n">BinaryCrossentropy</span><span class="p">(),</span>
-        <span class="n">optimizer</span><span class="o">=</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>m2.compile(
+        loss=BinaryCrossentropy(),
+        optimizer=Adam(learning_rate=1e-3)
+        )
 </pre></div>
 </div>
 </div>
@@ -878,9 +973,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can train the model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_std</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">X_s</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">m2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_s</span><span class="p">,</span> <span class="n">X_s</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>norm = StandardScaler(with_std = False)
+X_s = norm.fit_transform(X)
+m2.fit(X_s, X_s, epochs=100, batch_size=400)
 </pre></div>
 </div>
 </div>
@@ -888,14 +983,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Now, We can generate some images that are similar to a given image (in this case, the first image):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_test</span> <span class="o">=</span> <span class="n">X_s</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">x_test</span><span class="p">]</span> <span class="o">*</span> <span class="mi">9</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">x_rec</span> <span class="o">=</span> <span class="n">m2</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="n">rec_imgs</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span>
-        <span class="n">x_rec</span>
-        <span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x_test = X_s[:1]
+X_test = tf.concat([x_test] * 9, axis=0)
+x_rec = m2(X_test)
+rec_imgs = norm.inverse_transform(
+        x_rec
+        .numpy()
+        .reshape(9, -1)
+        )
 </pre></div>
 </div>
 </div>
@@ -903,24 +998,24 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s visualize them:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original Image&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots()
+ax.imshow(tf.reshape(X[:1], (64, 64)), cmap=&quot;gray&quot;)
+ax.axis(&quot;off&quot;)
+ax.set_title(&quot;Original Image&quot;)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">cont</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rec_imgs</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-        <span class="n">cont</span> <span class="o">+=</span> <span class="mi">1</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, axes = plt.subplots(3, 3, figsize=(10, 10))
+cont = 0
+for i in range(3):
+    for j in range(3):
+        ax = axes[i, j]
+        ax.imshow(rec_imgs[cont].reshape(64, 64), cmap=&quot;gray&quot;)
+        ax.axis(&quot;off&quot;)
+        cont += 1
 </pre></div>
 </div>
 </div>
@@ -929,80 +1024,80 @@ const thebe_selector_output = ".output, .cell_output"
 <a class="reference internal image-reference" href="../_images/pca_faces2.png"><img alt="../_images/pca_faces2.png" src="../_images/pca_faces2.png" style="width: 60%;" /></a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grader2</span><span class="p">(</span><span class="n">functions</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">caller_userid</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-    <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Sequential</span>
-    <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Input</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def grader2(functions, variables, caller_userid):
+    import numpy as np
+    import tensorflow as tf
+    from tensorflow.keras.models import Model, Sequential
+    from tensorflow.keras.layers import Dense, Input
 
-    <span class="n">namespace</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">exec</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
-    <span class="n">variable_encoder</span> <span class="o">=</span> <span class="n">namespace</span><span class="p">[</span><span class="s2">&quot;variable_encoder&quot;</span><span class="p">]</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Testing your code with 10 random cases.&lt;/br&gt;&quot;</span>
+    namespace = locals()
+    for f in functions.values():
+        exec(f, namespace)
+    variable_encoder = namespace[&quot;variable_encoder&quot;]
+    msg = &quot;Testing your code with 10 random cases.&lt;/br&gt;&quot;
 
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">variable_encoder</span><span class="p">(</span><span class="n">components</span><span class="p">)</span>
+    for _ in range(10):
+        x = tf.random.normal(shape=(10_000, 2))
+        components = tf.random.normal(shape=(2, 2))
+        model = variable_encoder(components)
 
-        <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        mu, log_var = model.encode(x)
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Your encode method must return a tuple of tensorflow&#39;s tensors.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not isinstance(mu, tf.Tensor):
+            msg += f&quot;&lt;b&gt;Your encode method must return a tuple of tensorflow&#39;s tensors.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">log_var</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Your encode method must return a tuple of tensorflow&#39;s tensors.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not isinstance(log_var, tf.Tensor):
+            msg += f&quot;&lt;b&gt;Your encode method must return a tuple of tensorflow&#39;s tensors.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">params</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">mu_teacher</span><span class="p">,</span> <span class="n">log_var_teacher</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
-                <span class="n">params</span><span class="p">,</span> <span class="n">num_or_size_splits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
-                <span class="p">)</span>
+        params = model.encoder(x)
+        mu_teacher, log_var_teacher = tf.split(
+                params, num_or_size_splits=2, axis=1
+                )
 
-        <span class="n">mu_student</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">log_var_student</span> <span class="o">=</span> <span class="n">log_var</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">mu_teacher</span> <span class="o">=</span> <span class="n">mu_teacher</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">log_var_teacher</span> <span class="o">=</span> <span class="n">log_var_teacher</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        mu_student = mu.numpy()
+        log_var_student = log_var.numpy()
+        mu_teacher = mu_teacher.numpy()
+        log_var_teacher = log_var_teacher.numpy()
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">mu_student</span><span class="p">,</span> <span class="n">mu_teacher</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wrong mu parameter in the encoder method.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">log_var_student</span><span class="p">,</span> <span class="n">log_var_teacher</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wrong log_var parameter en the encoder method.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not np.allclose(mu_student, mu_teacher):
+            msg += f&quot;&lt;b&gt;Wrong mu parameter in the encoder method.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
+        if not np.allclose(log_var_student, log_var_teacher):
+            msg += f&quot;&lt;b&gt;Wrong log_var parameter en the encoder method.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">z</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">)</span>
+        z = model.reparameterize(mu, log_var)
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Your reparameterize method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not isinstance(z, tf.Tensor):
+            msg += f&quot;&lt;b&gt;Your reparameterize method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">sample</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">mu</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        <span class="n">z_teacher</span> <span class="o">=</span> <span class="n">sample</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_var</span> <span class="o">*</span> <span class="mf">.5</span><span class="p">)</span> <span class="o">+</span> <span class="n">mu</span>
+        sample = tf.random.normal(mean=0., stddev=1., shape=mu.shape)
+        z_teacher = sample * tf.exp(log_var * .5) + mu
 
-        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">z_teacher</span> <span class="o">=</span> <span class="n">z_teacher</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        z = z.numpy()
+        z_teacher = z_teacher.numpy()
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">z_teacher</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">atol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wrong reparameterize method.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not np.allclose(z.mean(axis=0), z_teacher.mean(axis=0), atol=0.5):
+            msg += f&quot;&lt;b&gt;Wrong reparameterize method.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">decode</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        decode = model.decode(z)
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">decode</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Your reparameterize method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not isinstance(decode, tf.Tensor):
+            msg += f&quot;&lt;b&gt;Your reparameterize method must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">decode</span> <span class="o">=</span> <span class="n">decode</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">decode_teacher</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span> <span class="o">@</span> <span class="n">components</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        decode = decode.numpy()
+        decode_teacher = tf.sigmoid(z @ components).numpy()
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">decode</span><span class="p">,</span> <span class="n">decode_teacher</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wrong decode method.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not np.allclose(decode, decode_teacher):
+            msg += f&quot;&lt;b&gt;Wrong decode method.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
         
-    <span class="k">return</span> <span class="mi">5</span><span class="p">,</span> <span class="n">msg</span> <span class="o">+</span> <span class="s2">&quot;&lt;b&gt;Success!&lt;/b&gt;&quot;</span>
+    return 5, msg + &quot;&lt;b&gt;Success!&lt;/b&gt;&quot;
 </pre></div>
 </div>
 </div>
@@ -1010,14 +1105,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Use the following cell to grade your code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T2&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T2&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="task-3">
-<h2>Task 3<a class="headerlink" href="#task-3" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="task-3">
+<h2>Task 3<a class="headerlink" href="#task-3" title="Permalink to this heading">#</a></h2>
 <p>In this task you must implement the full VAE model which must perform the following operations:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1034,57 +1129,57 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vae</span><span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">input_size</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">Vae</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_components</span><span class="p">,</span> <span class="n">input_size</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="nb">super</span><span class="p">(</span><span class="n">Vae</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
-                <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="p">)),</span>
-                <span class="n">Dense</span><span class="p">(</span>
-                    <span class="mi">256</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span>
-                    <span class="p">),</span>
-                <span class="n">Dense</span><span class="p">(</span>
-                    <span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span>
-                    <span class="p">),</span>
-                <span class="n">Dense</span><span class="p">(</span>
-                    <span class="n">n_components</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span>
-                    <span class="n">use_bias</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="p">)</span>
-                <span class="p">])</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
-                <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="p">)),</span>
-                <span class="n">Dense</span><span class="p">(</span>
-                    <span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span>
-                    <span class="p">),</span>
-                <span class="n">Dense</span><span class="p">(</span>
-                    <span class="mi">256</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span>
-                    <span class="p">),</span>
-                <span class="n">Dense</span><span class="p">(</span>
-                    <span class="n">input_size</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">,</span>
-                    <span class="n">use_bias</span> <span class="o">=</span> <span class="kc">False</span>
-                    <span class="p">)</span>
-                <span class="p">])</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def vae(n_components, input_size):
+    class Vae(Model):
+        def __init__(self, n_components, input_size, *args, **kwargs):
+            super(Vae, self).__init__(*args, **kwargs)
+            self.encoder = Sequential([
+                Input(shape=(input_size, )),
+                Dense(
+                    256, activation=&quot;relu&quot;
+                    ),
+                Dense(
+                    128, activation=&quot;relu&quot;
+                    ),
+                Dense(
+                    n_components * 2, activation=&quot;linear&quot;,
+                    use_bias = False
+                    )
+                ])
+            self.decoder = Sequential([
+                Input(shape=(n_components, )),
+                Dense(
+                    128, activation=&quot;relu&quot;
+                    ),
+                Dense(
+                    256, activation=&quot;relu&quot;
+                    ),
+                Dense(
+                    input_size, activation=&quot;sigmoid&quot;,
+                    use_bias = False
+                    )
+                ])
 
-        <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="c1"># YOUR CODE HERE</span>
-            <span class="o">...</span>
+        def encode(self, x):
+            # YOUR CODE HERE
+            ...
 
-        <span class="k">def</span> <span class="nf">reparameterize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">):</span>
-            <span class="c1"># YOUR CODE HERE</span>
-            <span class="o">...</span>
+        def reparameterize(self, mu, log_var):
+            # YOUR CODE HERE
+            ...
 
-        <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-            <span class="c1"># YOUR CODE HERE</span>
-            <span class="o">...</span>
+        def decode(self, z):
+            # YOUR CODE HERE
+            ...
 
-        <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-        <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">)</span>
-            <span class="n">x_rec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">x_rec</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span>
+        @tf.function
+        def call(self, x):
+            mu, log_var = self.encode(x)
+            z = self.reparameterize(mu, log_var)
+            x_rec = self.decode(z)
+            return x_rec, z, mu, log_var
 
-    <span class="k">return</span> <span class="n">Vae</span><span class="p">(</span><span class="n">n_components</span><span class="p">,</span> <span class="n">input_size</span><span class="p">)</span>
+    return Vae(n_components, input_size)
 </pre></div>
 </div>
 </div>
@@ -1092,23 +1187,23 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Let’s validate the model with a simple test case:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span>
-    <span class="p">[</span><span class="mf">2.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.2</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">3.6</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">],</span>
-    <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
-<span class="p">])</span>
-<span class="n">m3</span> <span class="o">=</span> <span class="n">vae</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">input_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">m3</span><span class="o">.</span><span class="n">encoder</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-    <span class="n">weights</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()</span>
-    <span class="n">new_weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">]</span>
-    <span class="n">layer</span><span class="o">.</span><span class="n">set_weights</span><span class="p">(</span><span class="n">new_weights</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">m3</span><span class="o">.</span><span class="n">decoder</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-    <span class="n">weights</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()</span>
-    <span class="n">new_weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="n">weight</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">]</span>
-    <span class="n">layer</span><span class="o">.</span><span class="n">set_weights</span><span class="p">(</span><span class="n">new_weights</span><span class="p">)</span>
-<span class="n">m3</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">m3</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>X = tf.constant([
+    [2.3, -1.2],
+    [3.6, 4.2],
+    [1.1, 0.2]
+])
+m3 = vae(n_components=2, input_size=2)
+np.random.seed(0)
+for layer in m3.encoder.layers[1:]:
+    weights = layer.get_weights()
+    new_weights = [np.random.normal(size = weight.shape) for weight in weights]
+    layer.set_weights(new_weights)
+for layer in m3.decoder.layers[1:]:
+    weights = layer.get_weights()
+    new_weights = [np.random.normal(size = weight.shape) for weight in weights]
+    layer.set_weights(new_weights)
+m3.build(X.shape)
+m3.summary()
 </pre></div>
 </div>
 </div>
@@ -1126,9 +1221,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span> <span class="o">=</span> <span class="n">m3</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">logvar</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>mu, logvar = m3.encode(X)
+display(mu)
+display(logvar)
 </pre></div>
 </div>
 </div>
@@ -1142,8 +1237,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">m3</span><span class="o">.</span><span class="n">reparameterize</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>z = m3.reparameterize(mu, logvar)
+display(z)
 </pre></div>
 </div>
 </div>
@@ -1157,7 +1252,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">m3</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">mu</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>display(m3.decode(mu))
 </pre></div>
 </div>
 </div>
@@ -1165,9 +1260,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Model definition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m3</span> <span class="o">=</span> <span class="n">vae</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span> <span class="n">input_size</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">m3</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">m3</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>m3 = vae(n_components = 128, input_size = X.shape[1])
+m3.build(X.shape)
+m3.summary()
 </pre></div>
 </div>
 </div>
@@ -1175,8 +1270,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can train this model using the binary cross-entropy loss:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vae_loss</span> <span class="o">=</span> <span class="n">BinaryCrossentropy</span><span class="p">()</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>vae_loss = BinaryCrossentropy()
+optimizer = Adam(learning_rate=1e-3)
 </pre></div>
 </div>
 </div>
@@ -1184,16 +1279,16 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can train the model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_std</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">X_s</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">X_s</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">X_s</span><span class="p">)</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)):</span>
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
-        <span class="n">x_rec</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span> <span class="o">=</span> <span class="n">m3</span><span class="p">(</span><span class="n">X_s</span><span class="p">)</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">vae_loss</span><span class="p">(</span><span class="n">X_s</span><span class="p">,</span> <span class="n">x_rec</span><span class="p">)</span>
-        <span class="n">grads</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">m3</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">m3</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>norm = StandardScaler(with_std = False)
+X_s = norm.fit_transform(X)
+X_s = tf.constant(X_s)
+optimizer = Adam(learning_rate = 1e-4)
+for epoch in tqdm(range(100)):
+    with tf.GradientTape() as t:
+        x_rec, z, mu, log_var = m3(X_s)
+        loss = vae_loss(X_s, x_rec)
+        grads = t.gradient(loss, m3.trainable_variables)
+        optimizer.apply_gradients(zip(grads, m3.trainable_variables))
 </pre></div>
 </div>
 </div>
@@ -1201,12 +1296,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Now, We can generate random images using the trained model, for this, we generate random normal vectors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">random_vectors</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
-        <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
-        <span class="p">)</span>
-<span class="n">rec_imgs</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span>
-        <span class="n">m3</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">random_vectors</span><span class="p">)</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>random_vectors = tf.random.normal(
+        mean=0, stddev=1., shape=(9, 128)
+        )
+rec_imgs = norm.inverse_transform(
+        m3.decode(random_vectors)
+        )
 </pre></div>
 </div>
 </div>
@@ -1214,14 +1309,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can visualize the generated images:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">cont</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rec_imgs</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-        <span class="n">cont</span> <span class="o">+=</span> <span class="mi">1</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, axes = plt.subplots(3, 3, figsize=(10, 10))
+cont = 0
+for i in range(3):
+    for j in range(3):
+        ax = axes[i, j]
+        ax.imshow(rec_imgs[cont].reshape(64, 64), cmap=&quot;gray&quot;)
+        ax.axis(&quot;off&quot;)
+        cont += 1
 </pre></div>
 </div>
 </div>
@@ -1231,14 +1326,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Use the following cell to grade your code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T3&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T3&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="task-4">
-<h2>Task 4<a class="headerlink" href="#task-4" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="task-4">
+<h2>Task 4<a class="headerlink" href="#task-4" title="Permalink to this heading">#</a></h2>
 <p>In this task you must implement the loss function for a VAE:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1249,13 +1344,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p>You can use the following implementation of the normal’s pdf function that uses <span class="math notranslate nohighlight">\(\log{(\sigma ^ 2)}\)</span> (<code class="docutils literal notranslate"><span class="pre">logvar</span></code>) as parameter:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">log_normal_pdf</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
-    <span class="n">log2pi</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span>
-        <span class="o">-</span><span class="mf">.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">sample</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">logvar</span><span class="p">)</span> <span class="o">+</span> <span class="n">logvar</span> <span class="o">+</span> <span class="n">log2pi</span><span class="p">),</span>
-        <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@tf.function
+def log_normal_pdf(sample, mu, logvar):
+    log2pi = tf.math.log(2. * np.pi)
+    return tf.reduce_sum(
+        -.5 * ((sample - mu) ** 2. * tf.exp(-logvar) + logvar + log2pi),
+        axis=1
+        )
 </pre></div>
 </div>
 </div>
@@ -1268,13 +1363,13 @@ const thebe_selector_output = ".output, .cell_output"
 <code class="docutils literal notranslate"><span class="pre">log_var</span></code>: encoded log-variance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-<span class="k">def</span> <span class="nf">vae_loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_rec</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">):</span>
-    <span class="n">logits</span> <span class="o">=</span> <span class="n">binary_crossentropy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_rec</span><span class="p">)</span>
-    <span class="n">logpx_z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span>
-    <span class="n">logpz</span> <span class="o">=</span> <span class="n">log_normal_pdf</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
-    <span class="n">logqz_x</span> <span class="o">=</span> <span class="n">log_normal_pdf</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">)</span>
-    <span class="k">return</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">logpx_z</span> <span class="o">+</span> <span class="n">logpz</span> <span class="o">-</span> <span class="n">logqz_x</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>@tf.function
+def vae_loss(x, x_rec, z, mu, log_var):
+    logits = binary_crossentropy(x, x_rec)
+    logpx_z = tf.reduce_mean(logits)
+    logpz = log_normal_pdf(z, 0., 0.)
+    logqz_x = log_normal_pdf(z, mu, log_var)
+    return - tf.reduce_mean(logpx_z + logpz - logqz_x)
 </pre></div>
 </div>
 </div>
@@ -1282,7 +1377,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can train a new VAE using this loss function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>optimizer = Adam(learning_rate=1e-3)
 </pre></div>
 </div>
 </div>
@@ -1290,9 +1385,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Model definition:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m4</span> <span class="o">=</span> <span class="n">vae</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span> <span class="n">input_size</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">m4</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">m4</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>m4 = vae(n_components = 128, input_size = X.shape[1])
+m4.build(X.shape)
+m4.summary()
 </pre></div>
 </div>
 </div>
@@ -1300,16 +1395,16 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can train the model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">(</span><span class="n">with_std</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">X_s</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">X_s</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">X_s</span><span class="p">)</span>
-<span class="n">optimizer</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-4</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)):</span>
-    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
-        <span class="n">x_rec</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span> <span class="o">=</span> <span class="n">m4</span><span class="p">(</span><span class="n">X_s</span><span class="p">)</span>
-        <span class="n">loss</span> <span class="o">=</span> <span class="n">vae_loss</span><span class="p">(</span><span class="n">X_s</span><span class="p">,</span> <span class="n">x_rec</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">)</span>
-        <span class="n">grads</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">m4</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
-        <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">m4</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">))</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>norm = StandardScaler(with_std = False)
+X_s = norm.fit_transform(X)
+X_s = tf.constant(X_s)
+optimizer = Adam(learning_rate = 1e-4)
+for epoch in tqdm(range(100)):
+    with tf.GradientTape() as t:
+        x_rec, z, mu, log_var = m4(X_s)
+        loss = vae_loss(X_s, x_rec, z, mu, log_var)
+        grads = t.gradient(loss, m4.trainable_variables)
+        optimizer.apply_gradients(zip(grads, m4.trainable_variables))
 </pre></div>
 </div>
 </div>
@@ -1317,12 +1412,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Now, We can generate random images using the trained model, for this, we generate random normal vectors:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">random_vectors</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
-        <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
-        <span class="p">)</span>
-<span class="n">rec_imgs</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span>
-        <span class="n">m4</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">random_vectors</span><span class="p">)</span>
-        <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>random_vectors = tf.random.normal(
+        mean=0, stddev=1., shape=(9, 128)
+        )
+rec_imgs = norm.inverse_transform(
+        m4.decode(random_vectors)
+        )
 </pre></div>
 </div>
 </div>
@@ -1330,14 +1425,14 @@ const thebe_selector_output = ".output, .cell_output"
 <p>We can visualize the generated images:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">cont</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rec_imgs</span><span class="p">[</span><span class="n">cont</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
-        <span class="n">cont</span> <span class="o">+=</span> <span class="mi">1</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, axes = plt.subplots(3, 3, figsize=(10, 10))
+cont = 0
+for i in range(3):
+    for j in range(3):
+        ax = axes[i, j]
+        ax.imshow(rec_imgs[cont].reshape(64, 64), cmap=&quot;gray&quot;)
+        ax.axis(&quot;off&quot;)
+        cont += 1
 </pre></div>
 </div>
 </div>
@@ -1346,56 +1441,56 @@ const thebe_selector_output = ".output, .cell_output"
 <a class="reference internal image-reference" href="../_images/pca_faces4.png"><img alt="../_images/pca_faces4.png" src="../_images/pca_faces4.png" style="width: 60%;" /></a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">grader4</span><span class="p">(</span><span class="n">functions</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">caller_userid</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-    <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-    <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">Sequential</span>
-    <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Input</span>
-    <span class="kn">from</span> <span class="nn">tensorflow.keras.losses</span> <span class="kn">import</span> <span class="n">BinaryCrossentropy</span><span class="p">,</span> <span class="n">binary_crossentropy</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def grader4(functions, variables, caller_userid):
+    import numpy as np
+    import tensorflow as tf
+    from tensorflow.keras.models import Model, Sequential
+    from tensorflow.keras.layers import Dense, Input
+    from tensorflow.keras.losses import BinaryCrossentropy, binary_crossentropy
 
-    <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-    <span class="k">def</span> <span class="nf">log_normal_pdf</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">logvar</span><span class="p">):</span>
-        <span class="n">log2pi</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span>
-            <span class="o">-</span><span class="mf">.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">sample</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">logvar</span><span class="p">)</span> <span class="o">+</span> <span class="n">logvar</span> <span class="o">+</span> <span class="n">log2pi</span><span class="p">),</span>
-            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
-            <span class="p">)</span>
+    @tf.function
+    def log_normal_pdf(sample, mu, logvar):
+        log2pi = tf.math.log(2. * np.pi)
+        return tf.reduce_sum(
+            -.5 * ((sample - mu) ** 2. * tf.exp(-logvar) + logvar + log2pi),
+            axis=1
+            )
 
-    <span class="n">namespace</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">functions</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">exec</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
-    <span class="n">vae_loss</span> <span class="o">=</span> <span class="n">namespace</span><span class="p">[</span><span class="s2">&quot;vae_loss&quot;</span><span class="p">]</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Testing your code with 10 random cases.&lt;/br&gt;&quot;</span>
+    namespace = locals()
+    for f in functions.values():
+        exec(f, namespace)
+    vae_loss = namespace[&quot;vae_loss&quot;]
+    msg = &quot;Testing your code with 10 random cases.&lt;/br&gt;&quot;
 
-    <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
-    <span class="k">def</span> <span class="nf">vae_loss_teacher</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_rec</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">):</span>
-        <span class="n">logits</span> <span class="o">=</span> <span class="n">binary_crossentropy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_rec</span><span class="p">)</span>
-        <span class="n">logpx_z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span>
-        <span class="n">logpz</span> <span class="o">=</span> <span class="n">log_normal_pdf</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
-        <span class="n">logqz_x</span> <span class="o">=</span> <span class="n">log_normal_pdf</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">)</span>
-        <span class="k">return</span> <span class="o">-</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">logpx_z</span> <span class="o">+</span> <span class="n">logpz</span> <span class="o">-</span> <span class="n">logqz_x</span><span class="p">)</span>
+    @tf.function
+    def vae_loss_teacher(x, x_rec, z, mu, log_var):
+        logits = binary_crossentropy(x, x_rec)
+        logpx_z = tf.reduce_mean(logits)
+        logpz = log_normal_pdf(z, 0., 0.)
+        logqz_x = log_normal_pdf(z, mu, log_var)
+        return - tf.reduce_mean(logpx_z + logpz - logqz_x)
 
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-        <span class="n">x_rec</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">mu</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-        <span class="n">log_var</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    for _ in range(10):
+        x = tf.random.normal(shape=(10_000, 10))
+        x_rec = tf.random.normal(shape=(10_000, 10))
+        z = tf.random.normal(shape=(10_000, 2))
+        mu = tf.random.normal(shape=(10_000, 2))
+        log_var = tf.random.normal(shape=(10_000, 2))
 
-        <span class="n">loss_student</span> <span class="o">=</span> <span class="n">vae_loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_rec</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">)</span>
+        loss_student = vae_loss(x, x_rec, z, mu, log_var)
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">loss_student</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Your loss function must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not isinstance(loss_student, tf.Tensor):
+            msg += f&quot;&lt;b&gt;Your loss function must return a tensorflow&#39;s tensor.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
 
-        <span class="n">loss_student</span> <span class="o">=</span> <span class="n">loss_student</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-        <span class="n">loss_teacher</span> <span class="o">=</span> <span class="n">vae_loss_teacher</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_rec</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_var</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        loss_student = loss_student.numpy()
+        loss_teacher = vae_loss_teacher(x, x_rec, z, mu, log_var).numpy()
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">loss_student</span><span class="p">,</span> <span class="n">loss_teacher</span><span class="p">):</span>
-            <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wrong result.&lt;/b&gt;&lt;/br&gt;&quot;</span>
-            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">msg</span>
+        if not np.allclose(loss_student, loss_teacher):
+            msg += f&quot;&lt;b&gt;Wrong result.&lt;/b&gt;&lt;/br&gt;&quot;
+            return 0, msg
         
-    <span class="k">return</span> <span class="mi">5</span><span class="p">,</span> <span class="n">msg</span> <span class="o">+</span> <span class="s2">&quot;&lt;b&gt;Success!&lt;/b&gt;&quot;</span>
+    return 5, msg + &quot;&lt;b&gt;Success!&lt;/b&gt;&quot;
 </pre></div>
 </div>
 </div>
@@ -1403,13 +1498,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Use the following cell to grade your code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T4&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T4&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1423,7 +1518,7 @@ const thebe_selector_output = ".output, .cell_output"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
@@ -1431,30 +1526,87 @@ const thebe_selector_output = ".output, .cell_output"
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1">Task 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2">Task 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3">Task 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-4">Task 4</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-</div>
+          </div>
+          <footer class="bd-footer-content">
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
-      </div>
-    </div>
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

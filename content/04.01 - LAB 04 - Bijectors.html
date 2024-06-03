@@ -1,54 +1,72 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Lab 04.01.4: Bijectors &#8212; Probabilistic Programming for Machine Learning</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MBFEZ3PF64');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -57,280 +75,325 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/04.01 - LAB 04 - Bijectors';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MBFEZ3PF64');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo-tf-udea-unal.png" class="logo__image only-light" alt="Probabilistic Programming for Machine Learning - Home"/>
+    <script>document.write(`<img src="../_static/logo-tf-udea-unal.png" class="logo__image only-dark" alt="Probabilistic Programming for Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../intro.html">
-   Welcome
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="outline.html">
-   Course outline
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M1-videolist.html">
-   1 Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M2-videolist.html">
-   2 TF for Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M3-videolist.html">
-   3 Intuitions on Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M4-videolist.html">
-   4 Tensorflow Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M5-videolist.html">
-   5 Bayesian Modelling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="M6-videolist.html">
-   6 Variational Inference
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Course outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M1-videolist.html">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M2-videolist.html">2 TF for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M3-videolist.html">3 Intuitions on Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M4-videolist.html">4 Tensorflow Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M5-videolist.html">5 Bayesian Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="M6-videolist.html">6 Variational Inference</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/04.01 - LAB 04 - Bijectors.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/04.01 - LAB 04 - Bijectors.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/04.01 - LAB 04 - Bijectors.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 04.01.4: Bijectors</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Lab 04.01.4: Bijectors
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#custom-bijectors">
-     Custom Bijectors
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#task-1">
-     Task 1
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#todo-clarify-what-must-be-computed">
-   TODO: clarify what must be computed
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#task-2">
-     Task 2
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#clarify-that-x-will-be-a-tensor-with-any-dimension">
-   Clarify that x will be a tensor with any dimension
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#task-3">
-     Task 3
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lab 04.01.4: Bijectors</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-bijectors">Custom Bijectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1">Task 1</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-clarify-what-must-be-computed">TODO: clarify what must be computed</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2">Task 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clarify-that-x-will-be-a-tensor-with-any-dimension">Clarify that x will be a tensor with any dimension</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3">Task 3</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Lab 04.01.4: Bijectors</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Lab 04.01.4: Bijectors
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#custom-bijectors">
-     Custom Bijectors
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#task-1">
-     Task 1
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#todo-clarify-what-must-be-computed">
-   TODO: clarify what must be computed
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#task-2">
-     Task 2
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#clarify-that-x-will-be-a-tensor-with-any-dimension">
-   Clarify that x will be a tensor with any dimension
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#task-3">
-     Task 3
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># init repo notebook
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># init repo notebook
 !git clone https://github.com/rramosp/ppdl.git &gt; /dev/null 2&gt; /dev/null
 !mv -n ppdl/content/init.py ppdl/content/local . 2&gt; /dev/null
 !pip install -r ppdl/content/requirements.txt &gt; /dev/null
@@ -338,50 +401,50 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="lab-04-01-4-bijectors">
-<h1>Lab 04.01.4: Bijectors<a class="headerlink" href="#lab-04-01-4-bijectors" title="Permalink to this headline">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="lab-04-01-4-bijectors">
+<h1>Lab 04.01.4: Bijectors<a class="headerlink" href="#lab-04-01-4-bijectors" title="Permalink to this heading">#</a></h1>
 <p>In this lab, we will implement a custom bijector using tensorflow operations.</p>
 <p>First, let us import the required libraries:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inspect</span>
-<span class="kn">from</span> <span class="nn">rlxmoocapi</span> <span class="kn">import</span> <span class="n">submit</span><span class="p">,</span> <span class="n">session</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;ggplot&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import inspect
+from rlxmoocapi import submit, session
+import numpy as np
+import tensorflow as tf
+import tensorflow_probability as tfp
+import matplotlib.pyplot as plt
+from itertools import product
+plt.style.use(&quot;ggplot&quot;)
 
-<span class="n">tfd</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span>
-<span class="n">tfb</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span>
+tfd = tfp.distributions
+tfb = tfp.bijectors
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">course_id</span> <span class="o">=</span> <span class="s2">&quot;ppdl.v1&quot;</span>
-<span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;https://m5knaekxo6.execute-api.us-west-2.amazonaws.com/dev-v0001/rlxmooc&quot;</span>
-<span class="n">lab</span> <span class="o">=</span> <span class="s2">&quot;L04.01.04&quot;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>course_id = &quot;ppdl.v1&quot;
+endpoint = &quot;https://m5knaekxo6.execute-api.us-west-2.amazonaws.com/dev-v0001/rlxmooc&quot;
+lab = &quot;L04.01.04&quot;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">session</span><span class="o">.</span><span class="n">LoginSequence</span><span class="p">(</span>
-    <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span><span class="p">,</span>
-    <span class="n">course_id</span><span class="o">=</span><span class="n">course_id</span><span class="p">,</span>
-    <span class="n">lab_id</span><span class="o">=</span><span class="n">lab</span><span class="p">,</span>
-    <span class="n">varname</span><span class="o">=</span><span class="s2">&quot;student&quot;</span>
-    <span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>session.LoginSequence(
+    endpoint=endpoint,
+    course_id=course_id,
+    lab_id=lab,
+    varname=&quot;student&quot;
+    );
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="custom-bijectors">
-<h2>Custom Bijectors<a class="headerlink" href="#custom-bijectors" title="Permalink to this headline">¶</a></h2>
+<section id="custom-bijectors">
+<h2>Custom Bijectors<a class="headerlink" href="#custom-bijectors" title="Permalink to this heading">#</a></h2>
 <p>The general purpose of the <code class="docutils literal notranslate"><span class="pre">tfp.bijectors</span></code> module is to implement different bijective functions that may be used as random variables’ mappings to generate complex probability distributions from other distributions.</p>
 <p>Specifically, a bijector is defined from a function <span class="math notranslate nohighlight">\(f(\cdot)\)</span> and it’s inverse function <span class="math notranslate nohighlight">\(f^{-1}(\cdot)\)</span>, and given the change of variables rule in continuous random variables for the transformation <span class="math notranslate nohighlight">\(y=f(x)\)</span> of a random variable <span class="math notranslate nohighlight">\(x\)</span>, we obtain:</p>
 <div class="math notranslate nohighlight">
@@ -396,22 +459,22 @@ f^{-1}(y) = \frac{y}{2}
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ProductBijector</span><span class="p">(</span><span class="n">tfb</span><span class="o">.</span><span class="n">Bijector</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">ProductBijector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-                <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-                <span class="n">forward_min_event_ndims</span><span class="o">=</span><span class="mi">0</span>
-                <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>class ProductBijector(tfb.Bijector):
+    def __init__(self, value=2, *args, **kwargs):
+        self.value = value
+        super(ProductBijector, self).__init__(
+                *args, **kwargs,
+                forward_min_event_ndims=0
+                )
 
-    <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+    def _forward(self, x):
+        return x * self.value
 
-    <span class="k">def</span> <span class="nf">_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">y</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+    def _inverse(self, y):
+        return y / self.value
 
-    <span class="k">def</span> <span class="nf">_forward_log_det_jacobian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+    def _forward_log_det_jacobian(self, x):
+        return tf.constant(tf.math.log(2.), x.dtype)
 </pre></div>
 </div>
 </div>
@@ -425,13 +488,13 @@ f^{-1}(y) = \frac{y}{2}
 <p>Let’s see an application of this bijector:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bijector</span> <span class="o">=</span> <span class="n">ProductBijector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;product&quot;</span><span class="p">)</span>
-<span class="n">base_distro</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>bijector = ProductBijector(name=&quot;product&quot;)
+base_distro = tfd.Normal(loc=0, scale=1)
 
-<span class="n">transformed_distro</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">TransformedDistribution</span><span class="p">(</span>
-        <span class="n">base_distro</span><span class="p">,</span>
-        <span class="n">bijector</span>
-        <span class="p">)</span>
+transformed_distro = tfd.TransformedDistribution(
+        base_distro,
+        bijector
+        )
 </pre></div>
 </div>
 </div>
@@ -439,23 +502,23 @@ f^{-1}(y) = \frac{y}{2}
 <p>Let’s see a comparison between the pdf of the base distribution and the transformed distribution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
-<span class="n">pdf1</span> <span class="o">=</span> <span class="n">base_distro</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span>
-<span class="n">pdf2</span> <span class="o">=</span> <span class="n">transformed_distro</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x_range = tf.cast(tf.linspace(-10, 10, 100), &quot;float32&quot;)
+pdf1 = base_distro.prob(x_range)
+pdf2 = transformed_distro.prob(x_range)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">pdf1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Base&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">pdf2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots()
+ax.plot(x_range, pdf1, label=&quot;Base&quot;)
+ax.plot(x_range, pdf2, label=&quot;Transformed&quot;)
+ax.set_xlabel(&quot;$x$&quot;)
+ax.set_ylabel(&quot;PDF&quot;)
+ax.legend()
 
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;tmp.png&quot;</span><span class="p">)</span>
+fig.savefig(&quot;tmp.png&quot;)
 </pre></div>
 </div>
 </div>
@@ -463,48 +526,48 @@ f^{-1}(y) = \frac{y}{2}
 <p>We can also generate samples</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">transformed_distro</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sample = transformed_distro.sample(100).numpy()
+print(sample.mean())
+print(sample.std())
 </pre></div>
 </div>
 </div>
 </div>
 <p>As you can see, the rescaling the normally distributed variables just changes it’s standard deviation (that’s why it’s known as the scale parameter).</p>
-</div>
-<div class="section" id="task-1">
-<h2>Task 1<a class="headerlink" href="#task-1" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="task-1">
+<h2>Task 1<a class="headerlink" href="#task-1" title="Permalink to this heading">#</a></h2>
 <p>In this task you must implement the following bijector:</p>
 <div class="math notranslate nohighlight">
 \[
 f(x) = e^{x}
 \]</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="todo-clarify-what-must-be-computed">
-<h1>TODO: clarify what must be computed<a class="headerlink" href="#todo-clarify-what-must-be-computed" title="Permalink to this headline">¶</a></h1>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="todo-clarify-what-must-be-computed">
+<h1>TODO: clarify what must be computed<a class="headerlink" href="#todo-clarify-what-must-be-computed" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_exp_bijector</span><span class="p">():</span>
-    <span class="k">class</span> <span class="nc">ExpBijector</span><span class="p">(</span><span class="n">tfb</span><span class="o">.</span><span class="n">Bijector</span><span class="p">):</span>
-        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="nb">super</span><span class="p">(</span><span class="n">ExpBijector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-                    <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-                    <span class="n">forward_min_event_ndims</span><span class="o">=</span><span class="mi">0</span>
-                    <span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def get_exp_bijector():
+    class ExpBijector(tfb.Bijector):
+        def __init__(self, *args, **kwargs):
+            super(ExpBijector, self).__init__(
+                    *args, **kwargs,
+                    forward_min_event_ndims=0
+                    )
 
-        <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="c1"># Your code here</span>
-            <span class="o">...</span>
+        def _forward(self, x):
+            # Your code here
+            ...
 
-        <span class="k">def</span> <span class="nf">_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="c1"># Your code here</span>
-            <span class="o">...</span>
+        def _inverse(self, y):
+            # Your code here
+            ...
 
-        <span class="k">def</span> <span class="nf">_forward_log_det_jacobian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="c1"># Your code here</span>
-            <span class="o">...</span>
-    <span class="k">return</span> <span class="n">ExpBijector</span><span class="p">()</span>
+        def _forward_log_det_jacobian(self, x):
+            # Your code here
+            ...
+    return ExpBijector()
 </pre></div>
 </div>
 </div>
@@ -513,28 +576,28 @@ f(x) = e^{x}
 <p><img alt="exp bijector" src="../_images/exp_bijector.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base_distro</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>base_distro = tfd.Normal(loc=0, scale=1)
 
-<span class="n">bijector</span> <span class="o">=</span> <span class="n">get_exp_bijector</span><span class="p">()</span>
-<span class="n">transformed_distro</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">TransformedDistribution</span><span class="p">(</span><span class="n">base_distro</span><span class="p">,</span> <span class="n">bijector</span><span class="p">)</span>
+bijector = get_exp_bijector()
+transformed_distro = tfd.TransformedDistribution(base_distro, bijector)
 
-<span class="n">x_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;float32&quot;</span><span class="p">)</span>
-<span class="n">pdf1</span> <span class="o">=</span> <span class="n">base_distro</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span>
-<span class="n">pdf2</span> <span class="o">=</span> <span class="n">transformed_distro</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span>
+x_range = tf.cast(tf.linspace(-10, 10, 100), &quot;float32&quot;)
+pdf1 = base_distro.prob(x_range)
+pdf2 = transformed_distro.prob(x_range)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">pdf1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Base&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x_range</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">)),</span> <span class="n">pdf1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">pdf2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x_range</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">)),</span> <span class="n">pdf2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots()
+ax.plot(x_range, pdf1, label=&quot;Base&quot;)
+ax.fill_between(x_range, tf.zeros((x_range.shape[0], )), pdf1, alpha=0.3)
+ax.plot(x_range, pdf2, label=&quot;Transformed&quot;)
+ax.fill_between(x_range, tf.zeros((x_range.shape[0], )), pdf2, alpha=0.3)
+ax.set_xlabel(&quot;$x$&quot;)
+ax.set_ylabel(&quot;PDF&quot;)
+ax.legend()
 </pre></div>
 </div>
 </div>
@@ -542,13 +605,13 @@ f(x) = e^{x}
 <p>Use the following cell to grade your code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T1&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T1&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="task-2">
-<h2>Task 2<a class="headerlink" href="#task-2" title="Permalink to this headline">¶</a></h2>
+<section id="task-2">
+<h2>Task 2<a class="headerlink" href="#task-2" title="Permalink to this heading">#</a></h2>
 <p>In this task you must implement the following bijector:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -559,33 +622,33 @@ f(x) = \left\{
        \end{array}
        \right.
 \end{split}\]</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="clarify-that-x-will-be-a-tensor-with-any-dimension">
-<h1>Clarify that x will be a tensor with any dimension<a class="headerlink" href="#clarify-that-x-will-be-a-tensor-with-any-dimension" title="Permalink to this headline">¶</a></h1>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="clarify-that-x-will-be-a-tensor-with-any-dimension">
+<h1>Clarify that x will be a tensor with any dimension<a class="headerlink" href="#clarify-that-x-will-be-a-tensor-with-any-dimension" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_leaky_bijector</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
-    <span class="k">class</span> <span class="nc">LeakyReluBijector</span><span class="p">(</span><span class="n">tfb</span><span class="o">.</span><span class="n">Bijector</span><span class="p">):</span>
-        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="nb">super</span><span class="p">(</span><span class="n">LeakyReluBijector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-                    <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-                    <span class="n">forward_min_event_ndims</span><span class="o">=</span><span class="mi">1</span>
-                    <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def get_leaky_bijector(a=0.1):
+    class LeakyReluBijector(tfb.Bijector):
+        def __init__(self, a=0.1, *args, **kwargs):
+            super(LeakyReluBijector, self).__init__(
+                    *args, **kwargs,
+                    forward_min_event_ndims=1
+                    )
+            self.a = a
 
-        <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-            <span class="c1"># Your code here</span>
-            <span class="o">...</span>
+        def _forward(self, x):
+            # Your code here
+            ...
 
-        <span class="k">def</span> <span class="nf">_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="c1"># Your code here</span>
-            <span class="o">...</span>
+        def _inverse(self, y):
+            # Your code here
+            ...
 
-        <span class="k">def</span> <span class="nf">_inverse_log_det_jacobian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-            <span class="c1"># Your code here</span>
-            <span class="o">...</span>
-    <span class="k">return</span> <span class="n">LeakyReluBijector</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">)</span>
+        def _inverse_log_det_jacobian(self, y):
+            # Your code here
+            ...
+    return LeakyReluBijector(a=a)
 </pre></div>
 </div>
 </div>
@@ -594,37 +657,37 @@ f(x) = \left\{
 <p><img alt="leaky bijector" src="../_images/leaky_bijector.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base_distro</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>base_distro = tfd.Normal(loc=0, scale=1)
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+fig, axes = plt.subplots(3, 3, figsize=(10, 7))
 
-<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+a = np.linspace(0.1, 1, 9)
 
-<span class="n">acum</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
-        <span class="n">bijector</span> <span class="o">=</span> <span class="n">get_leaky_bijector</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">acum</span><span class="p">])</span>
-        <span class="n">transformed_distro</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">TransformedDistribution</span><span class="p">(</span><span class="n">base_distro</span><span class="p">,</span> <span class="n">bijector</span><span class="p">)</span>
+acum = 0
+for i in range(3):
+    for j in range(3):
+        ax = axes[i, j]
+        bijector = get_leaky_bijector(a=a[acum])
+        transformed_distro = tfd.TransformedDistribution(base_distro, bijector)
 
-        <span class="n">x_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span>
-                    <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
-                    <span class="s2">&quot;float32&quot;</span>
-                    <span class="p">)</span>
-        <span class="n">pdf1</span> <span class="o">=</span> <span class="n">base_distro</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span>
-        <span class="n">pdf2</span> <span class="o">=</span> <span class="n">transformed_distro</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span>
+        x_range = tf.cast(
+                    tf.linspace(-10, 10, 100),
+                    &quot;float32&quot;
+                    )
+        pdf1 = base_distro.prob(x_range)
+        pdf2 = transformed_distro.prob(x_range)
 
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">pdf1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Base&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x_range</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">)),</span> <span class="n">pdf1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">pdf2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Transformed&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x_range</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">)),</span> <span class="n">pdf2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">alpha=</span><span class="si">{</span><span class="n">a</span><span class="p">[</span><span class="n">acum</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-        <span class="n">acum</span> <span class="o">+=</span> <span class="mi">1</span>
+        ax.plot(x_range, pdf1, label=&quot;Base&quot;)
+        ax.fill_between(x_range, tf.zeros((x_range.shape[0], )), pdf1, alpha=0.3)
+        ax.plot(x_range, pdf2, label=&quot;Transformed&quot;)
+        ax.fill_between(x_range, tf.zeros((x_range.shape[0], )), pdf2, alpha=0.3)
+        ax.set_xlabel(&quot;$x$&quot;)
+        ax.set_ylabel(&quot;PDF&quot;)
+        ax.set_title(f&quot;$\\alpha={a[acum]:.2f}$&quot;)
+        ax.legend()
+        acum += 1
 
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+fig.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -632,13 +695,13 @@ f(x) = \left\{
 <p>Use the following cell to grade your code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T2&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T2&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="task-3">
-<h2>Task 3<a class="headerlink" href="#task-3" title="Permalink to this headline">¶</a></h2>
+<section id="task-3">
+<h2>Task 3<a class="headerlink" href="#task-3" title="Permalink to this heading">#</a></h2>
 <p>Compute a composite distribution that uses the following transformations:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -661,17 +724,17 @@ y = (f2 \circ f1)(x)
 \end{split}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_full_distro</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="n">bijectors</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">get_exp_bijector</span><span class="p">(),</span>
-        <span class="n">get_leaky_bijector</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-        <span class="p">]</span>
-    <span class="n">full_bijector</span> <span class="o">=</span> <span class="n">tfb</span><span class="o">.</span><span class="n">Chain</span><span class="p">(</span><span class="n">bijectors</span><span class="p">)</span>
-    <span class="n">base_distro</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
-    <span class="n">transformed_distro</span> <span class="o">=</span> <span class="n">tfd</span><span class="o">.</span><span class="n">TransformedDistribution</span><span class="p">(</span>
-        <span class="n">base_distro</span><span class="p">,</span> <span class="n">full_bijector</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">transformed_distro</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def get_full_distro(mu, sigma, a):
+    bijectors = [
+        get_exp_bijector(),
+        get_leaky_bijector(a)
+        ]
+    full_bijector = tfb.Chain(bijectors)
+    base_distro = tfd.Normal(loc=mu, scale=sigma)
+    transformed_distro = tfd.TransformedDistribution(
+        base_distro, full_bijector
+        )
+    return transformed_distro
 </pre></div>
 </div>
 </div>
@@ -680,26 +743,26 @@ y = (f2 \circ f1)(x)
 <p><img alt="full bijector" src="../_images/full_bijector.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_range</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span>
-    <span class="n">tf</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
-    <span class="s2">&quot;float32&quot;</span>
-    <span class="p">)</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>x_range = tf.cast(
+    tf.linspace(0, 10, 100),
+    &quot;float32&quot;
+    )
+mu = np.linspace(-1, 1, 3).astype(&quot;float32&quot;)
+sigma = np.array([0.5, 1]).astype(&quot;float32&quot;)
+a = np.array([0.1, 0.5]).astype(&quot;float32&quot;)
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">mu_i</span><span class="p">,</span> <span class="n">sigma_i</span><span class="p">,</span> <span class="n">a_i</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">a</span><span class="p">)):</span>
-    <span class="n">axi</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span><span class="p">]</span>
-    <span class="n">dist</span> <span class="o">=</span> <span class="n">get_full_distro</span><span class="p">(</span><span class="n">mu_i</span><span class="p">,</span> <span class="n">sigma_i</span><span class="p">,</span> <span class="n">a_i</span><span class="p">)</span>
-    <span class="n">pdf</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span>
+fig, ax = plt.subplots(3, 4, figsize=(15, 7))
+for i, (mu_i, sigma_i, a_i) in enumerate(product(mu, sigma, a)):
+    axi = ax[i // 4, i % 4]
+    dist = get_full_distro(mu_i, sigma_i, a_i)
+    pdf = dist.prob(x_range)
 
-    <span class="n">axi</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">pdf</span><span class="p">)</span>
-    <span class="n">axi</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x_range</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">)),</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="n">axi</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">)</span>
-    <span class="n">axi</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$P(y)$&quot;</span><span class="p">)</span>
-    <span class="n">axi</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">mu=</span><span class="si">{</span><span class="n">mu_i</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,</span><span class="se">\\</span><span class="s2">sigma=</span><span class="si">{</span><span class="n">sigma_i</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">,</span><span class="se">\\</span><span class="s2">alpha=</span><span class="si">{</span><span class="n">a_i</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    axi.plot(x_range, pdf)
+    axi.fill_between(x_range, tf.zeros((x_range.shape[0], )), pdf, alpha=0.3)
+    axi.set_xlabel(&quot;$y$&quot;)
+    axi.set_ylabel(&quot;$P(y)$&quot;)
+    axi.set_title(f&quot;$\\mu={mu_i:.2f},\\sigma={sigma_i:.2f},\\alpha={a_i:.2f}$&quot;)
+fig.tight_layout()
 </pre></div>
 </div>
 </div>
@@ -707,13 +770,13 @@ y = (f2 \circ f1)(x)
 <p>Use the following cell to grade your code:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">student</span><span class="o">.</span><span class="n">submit_task</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="nb">globals</span><span class="p">(),</span> <span class="n">task_id</span><span class="o">=</span><span class="s2">&quot;T3&quot;</span><span class="p">);</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>student.submit_task(namespace=globals(), task_id=&quot;T3&quot;);
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -727,7 +790,7 @@ y = (f2 \circ f1)(x)
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content"
         },
         predefinedOutput: true
@@ -735,30 +798,97 @@ y = (f2 \circ f1)(x)
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lab 04.01.4: Bijectors</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-bijectors">Custom Bijectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1">Task 1</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#todo-clarify-what-must-be-computed">TODO: clarify what must be computed</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2">Task 2</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clarify-that-x-will-be-a-tensor-with-any-dimension">Clarify that x will be a tensor with any dimension</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#task-3">Task 3</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-</div>
+          </div>
+          <footer class="bd-footer-content">
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
-      </div>
-    </div>
+<div class="bd-footer-content__inner container">
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

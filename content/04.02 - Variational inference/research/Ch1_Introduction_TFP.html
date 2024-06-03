@@ -1,54 +1,72 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Probabilistic Programming and Bayesian Methods for Hackers Chapter 1 &#8212; Probabilistic Programming for Machine Learning</title>
-    
-  <link href="../../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-exp.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-icons.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/spectre.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/xglobal.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-icons.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/spectre-exp.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/clipboard.min.js"></script>
     <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-MBFEZ3PF64');
+            </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -57,487 +75,344 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/04.02 - Variational inference/research/Ch1_Introduction_TFP';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-MBFEZ3PF64"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-MBFEZ3PF64');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../../index.html">
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../../../_static/logo-tf-udea-unal.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Probabilistic Programming for Machine Learning</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../../../_static/logo-tf-udea-unal.png" class="logo__image only-light" alt="Probabilistic Programming for Machine Learning - Home"/>
+    <script>document.write(`<img src="../../../_static/logo-tf-udea-unal.png" class="logo__image only-dark" alt="Probabilistic Programming for Machine Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../../intro.html">
-   Welcome
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../outline.html">
-   Course outline
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../M1-videolist.html">
-   1 Introduction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../M2-videolist.html">
-   2 TF for Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../M3-videolist.html">
-   3 Intuitions on Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../M4-videolist.html">
-   4 Tensorflow Probability
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../M5-videolist.html">
-   5 Bayesian Modelling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../M6-videolist.html">
-   6 Variational Inference
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../../outline.html">Course outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../M1-videolist.html">1 Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../M2-videolist.html">2 TF for Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../M3-videolist.html">3 Intuitions on Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../M4-videolist.html">4 Tensorflow Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../M5-videolist.html">5 Bayesian Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../M6-videolist.html">6 Variational Inference</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../../_sources/content/04.02 - Variational inference/research/Ch1_Introduction_TFP.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
         
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/04.02 - Variational inference/research/Ch1_Introduction_TFP.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rramosp/ppdl/blob/main/content/04.02 - Variational inference/research/Ch1_Introduction_TFP.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/04.02 - Variational inference/research/Ch1_Introduction_TFP.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probabilistic Programming and Bayesian Methods for Hackers Chapter 1</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#table-of-contents">
-   Table of Contents
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dependencies-prerequisites">
-   Dependencies &amp; Prerequisites
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-philosophy-of-bayesian-inference">
-   The Philosophy of Bayesian Inference
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-bayesian-state-of-mind">
-   The Bayesian state of mind
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-inference-in-practice">
-   Bayesian Inference in Practice
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#incorporating-evidence">
-     Incorporating evidence
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#are-frequentist-methods-incorrect-then">
-   Are frequentist methods incorrect then?
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-note-on-big-data">
-     A note on
-     <em>
-      Big Data
-     </em>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#our-bayesian-framework">
-   Our Bayesian framework
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-mandatory-coin-flip-example">
-   Example: Mandatory coin-flip example
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-bug-or-just-sweet-unintended-feature">
-   Example: Bug, or just sweet, unintended feature?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#probability-distributions">
-   Probability Distributions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#discrete-case">
-     Discrete Case
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#continuous-case">
-     Continuous Case
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#but-what-is-lambda">
-   But what is
-   <span class="math notranslate nohighlight">
-    \(\lambda \;\)
-   </span>
-   ?
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-inferring-behaviour-from-text-message-data">
-     Example: Inferring behaviour from text-message data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introducing-our-first-hammer-tensorflow-probability">
-   Introducing our first hammer: TensorFlow Probability
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#specify-the-joint-log-density">
-   Specify the joint log-density
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#specify-the-posterior-sampler">
-   Specify the posterior sampler
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-results">
-   Plot the Results
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interpretation">
-   Interpretation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#why-would-i-want-samples-from-the-posterior-anyways">
-     Why would I want samples from the posterior, anyways?
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   Exercises
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies-prerequisites">Dependencies &amp; Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-philosophy-of-bayesian-inference">The Philosophy of Bayesian Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-state-of-mind">The Bayesian state of mind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference-in-practice">Bayesian Inference in Practice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#incorporating-evidence">Incorporating evidence</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#are-frequentist-methods-incorrect-then">Are frequentist methods incorrect then?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-big-data">A note on <em>Big Data</em></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-bayesian-framework">Our Bayesian framework</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mandatory-coin-flip-example">Example: Mandatory coin-flip example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bug-or-just-sweet-unintended-feature">Example: Bug, or just sweet, unintended feature?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-case">Discrete Case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-case">Continuous Case</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#but-what-is-lambda">But what is <span class="math notranslate nohighlight">\(\lambda \;\)</span>?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-inferring-behaviour-from-text-message-data">Example: Inferring behaviour from text-message data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-our-first-hammer-tensorflow-probability">Introducing our first hammer: TensorFlow Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-joint-log-density">Specify the joint log-density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-posterior-sampler">Specify the posterior sampler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-would-i-want-samples-from-the-posterior-anyways">Why would I want samples from the posterior, anyways?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Probabilistic Programming and Bayesian Methods for Hackers Chapter 1</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#table-of-contents">
-   Table of Contents
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dependencies-prerequisites">
-   Dependencies &amp; Prerequisites
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-philosophy-of-bayesian-inference">
-   The Philosophy of Bayesian Inference
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-bayesian-state-of-mind">
-   The Bayesian state of mind
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bayesian-inference-in-practice">
-   Bayesian Inference in Practice
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#incorporating-evidence">
-     Incorporating evidence
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#are-frequentist-methods-incorrect-then">
-   Are frequentist methods incorrect then?
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-note-on-big-data">
-     A note on
-     <em>
-      Big Data
-     </em>
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#our-bayesian-framework">
-   Our Bayesian framework
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-mandatory-coin-flip-example">
-   Example: Mandatory coin-flip example
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-bug-or-just-sweet-unintended-feature">
-   Example: Bug, or just sweet, unintended feature?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#probability-distributions">
-   Probability Distributions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#discrete-case">
-     Discrete Case
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#continuous-case">
-     Continuous Case
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#but-what-is-lambda">
-   But what is
-   <span class="math notranslate nohighlight">
-    \(\lambda \;\)
-   </span>
-   ?
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-inferring-behaviour-from-text-message-data">
-     Example: Inferring behaviour from text-message data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introducing-our-first-hammer-tensorflow-probability">
-   Introducing our first hammer: TensorFlow Probability
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#specify-the-joint-log-density">
-   Specify the joint log-density
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#specify-the-posterior-sampler">
-   Specify the posterior sampler
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-results">
-   Plot the Results
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interpretation">
-   Interpretation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#why-would-i-want-samples-from-the-posterior-anyways">
-     Why would I want samples from the posterior, anyways?
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   Exercises
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
-  </a>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="probabilistic-programming-and-bayesian-methods-for-hackers-chapter-1">
-<h1>Probabilistic Programming and Bayesian Methods for Hackers Chapter 1<a class="headerlink" href="#probabilistic-programming-and-bayesian-methods-for-hackers-chapter-1" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="probabilistic-programming-and-bayesian-methods-for-hackers-chapter-1">
+<h1>Probabilistic Programming and Bayesian Methods for Hackers Chapter 1<a class="headerlink" href="#probabilistic-programming-and-bayesian-methods-for-hackers-chapter-1" title="Permalink to this heading">#</a></h1>
 <table class="tfo-notebook-buttons" align="left">
   <td>
     <a target="_blank" href="https://colab.research.google.com/github/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/blob/master/Chapter1_Introduction/Ch1_Introduction_TFP.ipynb"><img height="32px" src="https://colab.research.google.com/img/colab_favicon.ico" />Run in Google Colab</a>
@@ -553,8 +428,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>Ported to <a class="reference external" href="https://www.tensorflow.org/probability/">Tensorflow Probability</a> by Matthew McAteer (<a class="reference external" href="https://twitter.com/MatthewMcAteer0"><code class="docutils literal notranslate"><span class="pre">&#64;MatthewMcAteer0</span></code></a>) and Bryan Seybold, with help from the TFP team at  Google (<a class="reference external" href="mailto:tfprobability&#37;&#52;&#48;tensorflow&#46;org"><code class="docutils literal notranslate"><span class="pre">tfprobability&#64;tensorflow.org</span></code></a>).</p>
 <p>Welcome to Bayesian Methods for Hackers. The full Github repository is available at <a class="reference external" href="https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers">github/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers</a>. The other chapters can be found on the project’s <a class="reference external" href="https://camdavidsonpilon.github.io/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers/">homepage</a>. We hope you enjoy the book, and we encourage any contributions!</p>
 <hr class="docutils" />
-<div class="section" id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Dependencies &amp; Prerequisites</p></li>
 <li><p>The Philosophy of Bayesian Inference</p></li>
@@ -584,9 +459,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Exercises</p></li>
 <li><p>References</p></li>
 </ul>
-</div>
-<div class="section" id="dependencies-prerequisites">
-<h2>Dependencies &amp; Prerequisites<a class="headerlink" href="#dependencies-prerequisites" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="dependencies-prerequisites">
+<h2>Dependencies &amp; Prerequisites<a class="headerlink" href="#dependencies-prerequisites" title="Permalink to this heading">#</a></h2>
 <div class="alert alert-success">
     Tensorflow Probability is part of the colab default runtime, <b>so you don't need to install Tensorflow or Tensorflow Probability if you're running this in the colab</b>. 
     <br>
@@ -695,16 +570,16 @@ Again, if you are running this in a Colab, Tensorflow and TFP are already instal
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="the-philosophy-of-bayesian-inference">
-<h2>The Philosophy of Bayesian Inference<a class="headerlink" href="#the-philosophy-of-bayesian-inference" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="the-philosophy-of-bayesian-inference">
+<h2>The Philosophy of Bayesian Inference<a class="headerlink" href="#the-philosophy-of-bayesian-inference" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>You are a skilled programmer, but bugs still slip into your code. After a particularly difficult implementation of an algorithm, you decide to test your code on a trivial example. It passes. You test the code on a harder problem. It passes once again. And it passes the next, even more difficult, test too! You are starting to believe that there may be no bugs in this code…</p>
 </div></blockquote>
 <p>If you think this way, then congratulations, you already are thinking Bayesian! Bayesian inference is simply updating your beliefs after considering new evidence. A Bayesian can rarely be certain about a result, but he or she can be very confident. Just like in the example above, we can never be 100% sure that our code is bug-free unless we test it on every possible problem; something rarely possible in practice. Instead, we can test it on a large number of problems, and if it succeeds we can feel more confident about our code, but still not certain. Bayesian inference works identically: we update our beliefs about an outcome; rarely can we be absolutely sure unless we rule out all other alternatives.</p>
-</div>
-<div class="section" id="the-bayesian-state-of-mind">
-<h2>The Bayesian state of mind<a class="headerlink" href="#the-bayesian-state-of-mind" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="the-bayesian-state-of-mind">
+<h2>The Bayesian state of mind<a class="headerlink" href="#the-bayesian-state-of-mind" title="Permalink to this heading">#</a></h2>
 <p>Bayesian inference differs from more traditional statistical inference by preserving uncertainty. At first, this sounds like a bad statistical technique. Isn’t statistics all about deriving certainty from randomness? To reconcile this, we need to start thinking like Bayesians.</p>
 <p>The Bayesian world-view interprets probability as measure of believability in an event, that is, how confident we are in an event occurring. In fact, we will see in a moment that this is the natural interpretation of probability.</p>
 <p>For this to be clearer, we consider an alternative interpretation of probability: Frequentist, known as the more classical version of statistics, assume that probability is the long-run frequency of events (hence the bestowed title). For example, the probability of plane accidents under a frequentist philosophy is interpreted as the long-term frequency of plane accidents. This makes logical sense for many probabilities of events, but becomes more difficult to understand when events have no long-term frequency of occurrences. Consider: we often assign probabilities to outcomes of presidential elections, but the election itself only happens once! Frequentists get around this by invoking alternative realities and saying across all these realities, the frequency of occurrences defines the probability.</p>
@@ -718,42 +593,42 @@ Again, if you are running this in a Colab, Tensorflow and TFP are already instal
 <p>This philosophy of treating beliefs as probability is natural to humans. We employ it constantly as we interact with the world and only see partial truths, but gather evidence to form beliefs. Alternatively, you have to be trained to think like a frequentist.</p>
 <p>To align ourselves with traditional probability notation, we denote our belief about event <span class="math notranslate nohighlight">\(A\)</span> as <span class="math notranslate nohighlight">\(P(A)\)</span>. We call this quantity the prior probability.</p>
 <p>John Maynard Keynes, a great economist and thinker, said “When the facts change, I change my mind. What do you do, sir?” This quote reflects the way a Bayesian updates his or her beliefs after seeing evidence. Even — especially — if the evidence is counter to what was initially believed, the evidence cannot be ignored. We denote our updated belief as <span class="math notranslate nohighlight">\(P(A|X)\)</span>, interpreted as the probability of <span class="math notranslate nohighlight">\(A\)</span> given the evidence <span class="math notranslate nohighlight">\(X\)</span>. We call the updated belief the posterior probability so as to contrast it with the prior probability. For example, consider the posterior probabilities (read: posterior beliefs) of the above examples, after observing some evidence <span class="math notranslate nohighlight">\(X\)</span>:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(P(A)\)</span>: the coin has a 50 percent chance of being Heads. <span class="math notranslate nohighlight">\(P(A|X)\)</span>: You look at the coin, observe a Heads has landed, denote this information  <span class="math notranslate nohighlight">\(X\)</span>, and trivially assign probability 1.0 to Heads and 0.0 to Tails.</p></li>
 <li><p><span class="math notranslate nohighlight">\(P(A)\)</span>: This big, complex code likely has a bug in it. <span class="math notranslate nohighlight">\(P(A|X)\)</span>: The code passed all <span class="math notranslate nohighlight">\(X\)</span> tests; there still might be a bug, but its presence is less likely now.</p></li>
 <li><p><span class="math notranslate nohighlight">\(P(A)\)</span>: The patient could have any number of diseases. <span class="math notranslate nohighlight">\(P(A|X)\)</span>: Performing a blood test generated evidence <span class="math notranslate nohighlight">\(X\)</span>, ruling out some of the possible diseases from consideration.</p></li>
 </ol>
 <p>It’s clear that in each example we did not completely discard the prior belief after seeing new evidence <span class="math notranslate nohighlight">\(X\)</span>, but we re-weighted the prior to incorporate the new evidence (i.e. we put more weight, or confidence, on some beliefs versus others).</p>
 <p>By introducing prior uncertainty about events, we are already admitting that any guess we make is potentially very wrong. After observing data, evidence, or other information, we update our beliefs, and our guess becomes less wrong. This is the alternative side of the prediction coin, where typically we try to be more right.</p>
-</div>
-<div class="section" id="bayesian-inference-in-practice">
-<h2>Bayesian Inference in Practice<a class="headerlink" href="#bayesian-inference-in-practice" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="bayesian-inference-in-practice">
+<h2>Bayesian Inference in Practice<a class="headerlink" href="#bayesian-inference-in-practice" title="Permalink to this heading">#</a></h2>
 <p>If frequentist and Bayesian inference were programming functions, with inputs being statistical problems, then the two would be different in what they return to the user. The frequentist inference function would return a number, representing an estimate (typically a summary statistic like the sample average etc.), whereas the Bayesian function would return probabilities.</p>
 <p>For example, in our debugging problem above, calling the frequentist function with the argument “My code passed all <span class="math notranslate nohighlight">\(X\)</span> tests; is my code bug-free?” would return a YES. On the other hand, asking our Bayesian function “Often my code has bugs. My code passed all <span class="math notranslate nohighlight">\(X\)</span> tests; is my code bug-free?” would return something very different: probabilities of YES and NO. The function might return:</p>
 <blockquote>
 <div><p>YES, with probability 0.8; NO, with probability 0.2</p>
 </div></blockquote>
 <p>This is very different from the answer the frequentist function returned. Notice that the Bayesian function accepted an additional argument: “Often my code has bugs”. This parameter is the prior. By including the prior parameter, we are telling the Bayesian function to include our belief about the situation. Technically this parameter in the Bayesian function is optional, but we will see excluding it has its own consequences.</p>
-<div class="section" id="incorporating-evidence">
-<h3>Incorporating evidence<a class="headerlink" href="#incorporating-evidence" title="Permalink to this headline">¶</a></h3>
+<section id="incorporating-evidence">
+<h3>Incorporating evidence<a class="headerlink" href="#incorporating-evidence" title="Permalink to this heading">#</a></h3>
 <p>As we acquire more and more instances of evidence, our prior belief is washed out by the new evidence. This is to be expected. For example, if your prior belief is something ridiculous, like “I expect the sun to explode today”, and each day you are proved wrong, you would hope that any inference would correct you, or at least align your beliefs better. Bayesian inference will correct this belief.</p>
 <p>Denote <span class="math notranslate nohighlight">\(N\)</span> as the number of instances of evidence we possess. As we gather an infinite amount of evidence, say as <span class="math notranslate nohighlight">\(N→∞,\)</span> our Bayesian results (often) align with frequentist results. Hence for large N, statistical inference is more or less objective. On the other hand, for small <span class="math notranslate nohighlight">\(N\)</span>, inference is much more unstable: frequentist estimates have more variance and larger confidence intervals. This is where Bayesian analysis excels. By introducing a prior, and returning probabilities (instead of a scalar estimate), we preserve the uncertainty that reflects the instability of statistical inference of a small N dataset.</p>
-<p>One may think that for large <span class="math notranslate nohighlight">\(N\)</span>, one can be indifferent between the two techniques since they offer similar inference, and might lean towards the computationally-simpler, frequentist methods. An individual in this position should consider the following quote by Andrew Gelman (2005)<a class="reference external" href="#scrollTo=nDdph0r1ABCn">[1]</a>, before making such a decision:</p>
+<p>One may think that for large <span class="math notranslate nohighlight">\(N\)</span>, one can be indifferent between the two techniques since they offer similar inference, and might lean towards the computationally-simpler, frequentist methods. An individual in this position should consider the following quote by Andrew Gelman (2005)<span class="xref myst">[1]</span>, before making such a decision:</p>
 <p>Sample sizes are never large. If <span class="math notranslate nohighlight">\(N\)</span>, is too small to get a sufficiently-precise estimate, you need to get more data (or make more assumptions). But once <span class="math notranslate nohighlight">\(N\)</span>, is “large enough,” you can start subdividing the data to learn more (for example, in a public opinion poll, once you have a good estimate for the entire country, you can estimate among men and women, northerners and southerners, different age groups, etc.). <span class="math notranslate nohighlight">\(N\)</span>, is never enough because if it were “enough” you’d already be on to the next problem for which you need more data.</p>
-</div>
-</div>
-<div class="section" id="are-frequentist-methods-incorrect-then">
-<h2>Are frequentist methods incorrect then?<a class="headerlink" href="#are-frequentist-methods-incorrect-then" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="are-frequentist-methods-incorrect-then">
+<h2>Are frequentist methods incorrect then?<a class="headerlink" href="#are-frequentist-methods-incorrect-then" title="Permalink to this heading">#</a></h2>
 <p>No.</p>
 <p>Frequentist methods are still useful or state-of-the-art in many areas. Tools such as least squares linear regression, LASSO regression, and expectation-maximization algorithms are all powerful and fast. Bayesian methods complement these techniques by solving problems that these approaches cannot, or by illuminating the underlying system with more flexible modeling.</p>
-<div class="section" id="a-note-on-big-data">
-<h3>A note on <em>Big Data</em><a class="headerlink" href="#a-note-on-big-data" title="Permalink to this headline">¶</a></h3>
-<p>Paradoxically, big data’s predictive analytic problems are actually solved by relatively simple algorithms <a class="reference external" href="#scrollTo=nDdph0r1ABCn">[2]</a><a class="reference external" href="#scrollTo=nDdph0r1ABCn">[3]</a>. Thus we can argue that big data’s prediction difficulty does not lie in the algorithm used, but instead on the computational difficulties of storage and execution on big data. (One should also consider Gelman’s quote from above and ask “Do I really have big data?”)</p>
+<section id="a-note-on-big-data">
+<h3>A note on <em>Big Data</em><a class="headerlink" href="#a-note-on-big-data" title="Permalink to this heading">#</a></h3>
+<p>Paradoxically, big data’s predictive analytic problems are actually solved by relatively simple algorithms <span class="xref myst">[2]</span><span class="xref myst">[3]</span>. Thus we can argue that big data’s prediction difficulty does not lie in the algorithm used, but instead on the computational difficulties of storage and execution on big data. (One should also consider Gelman’s quote from above and ask “Do I really have big data?”)</p>
 <p>The much more difficult analytic problems involve medium data and, especially troublesome, really small data. Using a similar argument as Gelman’s above, if big data problems are big enough to be readily solved, then we should be more interested in the not-quite-big enough datasets.</p>
-</div>
-</div>
-<div class="section" id="our-bayesian-framework">
-<h2>Our Bayesian framework<a class="headerlink" href="#our-bayesian-framework" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="our-bayesian-framework">
+<h2>Our Bayesian framework<a class="headerlink" href="#our-bayesian-framework" title="Permalink to this heading">#</a></h2>
 <p>We are interested in beliefs, which can be interpreted as probabilities by thinking Bayesian. We have a prior belief in event A, beliefs formed by previous information, e.g., our prior belief about bugs being in our code before performing tests.</p>
 <p>Secondly, we observe our evidence. To continue our buggy-code example: if our code passes X tests, we want to update our belief to incorporate this. We call this new belief the posterior probability. Updating our belief is done via the following equation, known as Bayes’ Theorem, after its discoverer Thomas Bayes:</p>
 <div class="math notranslate nohighlight">
@@ -762,9 +637,9 @@ Again, if you are running this in a Colab, Tensorflow and TFP are already instal
 \[ P(A|X) \propto{P(X | A) P(A) } \]</div>
 <p>NOTE: (<span class="math notranslate nohighlight">\(\propto\)</span> is “proportional to”)</p>
 <p>The above formula is not unique to Bayesian inference: it is a mathematical fact with uses outside Bayesian inference. Bayesian inference merely uses it to connect prior probabilities <span class="math notranslate nohighlight">\(P(A)\)</span> with an updated posterior probabilities <span class="math notranslate nohighlight">\(P(A|X)\)</span>.</p>
-</div>
-<div class="section" id="example-mandatory-coin-flip-example">
-<h2>Example: Mandatory coin-flip example<a class="headerlink" href="#example-mandatory-coin-flip-example" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="example-mandatory-coin-flip-example">
+<h2>Example: Mandatory coin-flip example<a class="headerlink" href="#example-mandatory-coin-flip-example" title="Permalink to this heading">#</a></h2>
 <p>Every statistics text must contain a coin-flipping example, I’ll use it here to get it out of the way. Suppose, naively, that you are unsure about the probability of heads in a coin flip (spoiler alert: it’s 50%). You believe there is some true underlying ratio, call it p, but have no prior opinion on what p might be.</p>
 <p>We begin to flip a coin, and record the observations: either H or T. This is our observed data. An interesting question to ask is how our inference changes as we observe more and more data? More specifically, what do our posterior probabilities look like when we have little data, versus when we have lots of data.</p>
 <p>Below we plot a sequence of updating posterior probabilities as we observe increasing amounts of data (coin flips), while also demonstrating some of the best practices when it comes to evaluating tensors and plotting the data. First, the easy part: We define the values in our Tensorflow graph</p>
@@ -820,15 +695,15 @@ Again, if you are running this in a Colab, Tensorflow and TFP are already instal
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/Ch1_Introduction_TFP_14_0.png" src="../../../_images/Ch1_Introduction_TFP_14_0.png" />
+<img alt="../../../_images/9ec2f86559c9a969f334bc9306e8b88538618e5d49376fdc4f852762e41180f8.png" src="../../../_images/9ec2f86559c9a969f334bc9306e8b88538618e5d49376fdc4f852762e41180f8.png" />
 </div>
 </div>
 <p>The posterior probabilities are represented by the curves, and our uncertainty is proportional to the width of the curve. As the plot above shows, as we start to observe data our posterior probabilities start to shift and move around. Eventually, as we observe more and more data (coin-flips), our probabilities will tighten closer and closer around the true value of <span class="math notranslate nohighlight">\(p=0.5\)</span> (marked by a dashed line).</p>
 <p>Notice that the plots are not always peaked at 0.5. There is no reason it should be: recall we assumed we did not have a prior opinion of what p is. In fact, if we observe quite extreme data, say 8 flips and only 1 observed heads, our distribution would look very biased away from lumping around 0.5 (with no prior opinion, how confident would you feel betting on a fair coin after observing 8 tails and 1 head?). As more data accumulates, we would see more and more probability being assigned at <span class="math notranslate nohighlight">\(p=0.5\)</span>, though never all of it.</p>
 <p>The next example is a simple demonstration of the mathematics of Bayesian inference.</p>
-</div>
-<div class="section" id="example-bug-or-just-sweet-unintended-feature">
-<h2>Example: Bug, or just sweet, unintended feature?<a class="headerlink" href="#example-bug-or-just-sweet-unintended-feature" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="example-bug-or-just-sweet-unintended-feature">
+<h2>Example: Bug, or just sweet, unintended feature?<a class="headerlink" href="#example-bug-or-just-sweet-unintended-feature" title="Permalink to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> denote the event that our code has no bugs in it. Let <span class="math notranslate nohighlight">\(X\)</span> denote the event that the code passes all debugging tests. For now, we will leave the prior probability of no bugs as a variable, i.e. <span class="math notranslate nohighlight">\(P(A)=p\)</span>.</p>
 <p>We are interested in <span class="math notranslate nohighlight">\(P(A|X)\)</span>, i.e. the probability of no bugs, given our debugging tests <span class="math notranslate nohighlight">\(X\)</span>. To use the formula above, we need to compute some quantities.</p>
 <p>What is <span class="math notranslate nohighlight">\(P(X|A)\)</span>, i.e., the probability that the code passes <span class="math notranslate nohighlight">\(X\)</span> tests given there are no bugs? Well, it is equal to 1, for a code with no bugs will pass all tests.</p>
@@ -864,7 +739,7 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/Ch1_Introduction_TFP_19_0.png" src="../../../_images/Ch1_Introduction_TFP_19_0.png" />
+<img alt="../../../_images/87218b8459c71be28973ba95ba328987441d773e05e270e9414ddf7a90bd5f07.png" src="../../../_images/87218b8459c71be28973ba95ba328987441d773e05e270e9414ddf7a90bd5f07.png" />
 </div>
 </div>
 <p>We can see the biggest gains if we observe the <span class="math notranslate nohighlight">\(X\)</span> tests passed when the prior probability, <span class="math notranslate nohighlight">\(p\)</span>, is low. Let’s settle on a specific value for the prior. I’m a strong programmer (I think), so I’m going to give myself a realistic prior of 0.20, that is, there is a 20% chance that I write code bug-free. To be more realistic, this prior should be a function of how complicated and large the code is, but let’s pin it at 0.20. Then my updated belief that my code is bug-free is 0.33.</p>
@@ -895,14 +770,14 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/Ch1_Introduction_TFP_21_0.png" src="../../../_images/Ch1_Introduction_TFP_21_0.png" />
+<img alt="../../../_images/bb3495948cb4af02482ee43d4f76c1761bf1353f5fd5c66cc45bb72dc3eba9ff.png" src="../../../_images/bb3495948cb4af02482ee43d4f76c1761bf1353f5fd5c66cc45bb72dc3eba9ff.png" />
 </div>
 </div>
 <p>Notice that after we observed <span class="math notranslate nohighlight">\(X\)</span> occur, the probability of bugs being absent increased. By increasing the number of tests, we can approach confidence (probability 1) that there are no bugs present.</p>
 <p>This was a very simple example of Bayesian inference and Bayes rule. Unfortunately, the mathematics necessary to perform more complicated Bayesian inference only becomes more difficult, except for artificially constructed cases. We will later see that this type of mathematical analysis is actually unnecessary. First we must broaden our modeling tools. The next section deals with probability distributions. If you are already familiar, feel free to skip (or at least skim), but for the less familiar the next section is essential.</p>
-</div>
-<div class="section" id="probability-distributions">
-<h2>Probability Distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="probability-distributions">
+<h2>Probability Distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h2>
 <p>Let’s quickly recall what a probability distribution is: Let <span class="math notranslate nohighlight">\(Z\)</span> be some random variable. Then associated with <span class="math notranslate nohighlight">\(Z\)</span> is a probability distribution function that assigns probabilities to the different outcomes <span class="math notranslate nohighlight">\(Z\)</span> can take. Graphically, a probability distribution is a curve where the probability of an outcome is proportional to the height of the curve. You can see examples in the first figure of this chapter.</p>
 <p>We can divide random variables into three classifications:</p>
 <ul class="simple">
@@ -910,8 +785,8 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 <li><p><span class="math notranslate nohighlight">\(Z\)</span> is continuous: Continuous random variable can take on arbitrarily exact values. For example, temperature, speed, time, color are all modeled as continuous variables because you can progressively make the values more and more precise.</p></li>
 <li><p><span class="math notranslate nohighlight">\(Z\)</span> is mixed: Mixed random variables assign probabilities to both discrete and continuous random variables, i.e. it is a combination of the above two categories.</p></li>
 </ul>
-<div class="section" id="discrete-case">
-<h3>Discrete Case<a class="headerlink" href="#discrete-case" title="Permalink to this headline">¶</a></h3>
+<section id="discrete-case">
+<h3>Discrete Case<a class="headerlink" href="#discrete-case" title="Permalink to this heading">#</a></h3>
 <p>If <span class="math notranslate nohighlight">\(Z\)</span> is discrete, then its distribution is called a <em>probability mass function</em>, which measures the probability <span class="math notranslate nohighlight">\(Z\)</span> takes on the value <span class="math notranslate nohighlight">\(k\)</span>, denoted <span class="math notranslate nohighlight">\(P(Z=k)\)</span>. Note that the probability mass function completely describes the random variable <span class="math notranslate nohighlight">\(Z\)</span>, that is, if we know the mass function, we know how <span class="math notranslate nohighlight">\(Z\)</span> should behave. There are popular probability mass functions that consistently appear: we will introduce them as needed, but let’s introduce the first very useful probability mass function. We say <span class="math notranslate nohighlight">\(Z\)</span> is <em>Poisson</em>-distributed if:</p>
 <div class="math notranslate nohighlight">
 \[P(Z = k) =\frac{ \lambda^k e^{-\lambda} }{k!}, \; \; k=0,1,2, \dots \]</div>
@@ -956,12 +831,12 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/Ch1_Introduction_TFP_25_0.png" src="../../../_images/Ch1_Introduction_TFP_25_0.png" />
+<img alt="../../../_images/54d49f0fe8d521070eb57029e6f101a0e64418aee8c63a8ca6d369d259bca92e.png" src="../../../_images/54d49f0fe8d521070eb57029e6f101a0e64418aee8c63a8ca6d369d259bca92e.png" />
 </div>
 </div>
-</div>
-<div class="section" id="continuous-case">
-<h3>Continuous Case<a class="headerlink" href="#continuous-case" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="continuous-case">
+<h3>Continuous Case<a class="headerlink" href="#continuous-case" title="Permalink to this heading">#</a></h3>
 <p>Instead of a probability mass function, a continuous random variable has a <em>probability density function</em>. This might seem like unnecessary nomenclature, but the density function and the mass function are very different creatures. An example of continuous random variable is a random variable with <em>exponential density</em>. The density function for an exponential random variable looks like this:</p>
 <div class="math notranslate nohighlight">
 \[f_Z(z | \lambda) = \lambda e^{-\lambda z }, \;\; z\ge 0\]</div>
@@ -998,18 +873,18 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/Ch1_Introduction_TFP_27_0.png" src="../../../_images/Ch1_Introduction_TFP_27_0.png" />
+<img alt="../../../_images/5a297f821111acb92cefe74eae6693c034ac8d3e31f5df4d8806dfdb67cb9fa8.png" src="../../../_images/5a297f821111acb92cefe74eae6693c034ac8d3e31f5df4d8806dfdb67cb9fa8.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="but-what-is-lambda">
-<h2>But what is <span class="math notranslate nohighlight">\(\lambda \;\)</span>?<a class="headerlink" href="#but-what-is-lambda" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="but-what-is-lambda">
+<h2>But what is <span class="math notranslate nohighlight">\(\lambda \;\)</span>?<a class="headerlink" href="#but-what-is-lambda" title="Permalink to this heading">#</a></h2>
 <p><strong>This question is what motivates statistics</strong>. In the real world, <span class="math notranslate nohighlight">\(\lambda\)</span> is hidden from us. We see only <span class="math notranslate nohighlight">\(Z\)</span>, and must go backwards to try and determine <span class="math notranslate nohighlight">\(\lambda\)</span>. The problem is difficult because there is no one-to-one mapping from <span class="math notranslate nohighlight">\(Z\)</span> to <span class="math notranslate nohighlight">\(\lambda\)</span>. Many different methods have been created to solve the problem of estimating <span class="math notranslate nohighlight">\(\lambda\)</span>, but since <span class="math notranslate nohighlight">\(\lambda\)</span> is never actually observed, no one can say for certain which method is best!</p>
 <p>Bayesian inference is concerned with <em>beliefs</em> about what <span class="math notranslate nohighlight">\(\lambda\)</span> might be. Rather than try to guess <span class="math notranslate nohighlight">\(\lambda\)</span> exactly, we can only talk about what <span class="math notranslate nohighlight">\(\lambda\)</span> is likely to be by assigning a probability distribution to <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 <p>This might seem odd at first. After all, <span class="math notranslate nohighlight">\(\lambda\)</span> is fixed; it is not (necessarily) random! How can we assign probabilities to values of a non-random variable? Ah, we have fallen for our old, frequentist way of thinking. Recall that under Bayesian philosophy, we <em>can</em> assign probabilities if we interpret them as beliefs. And it is entirely acceptable to have <em>beliefs</em> about the parameter <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
-<div class="section" id="example-inferring-behaviour-from-text-message-data">
-<h3>Example: Inferring behaviour from text-message data<a class="headerlink" href="#example-inferring-behaviour-from-text-message-data" title="Permalink to this headline">¶</a></h3>
+<section id="example-inferring-behaviour-from-text-message-data">
+<h3>Example: Inferring behaviour from text-message data<a class="headerlink" href="#example-inferring-behaviour-from-text-message-data" title="Permalink to this heading">#</a></h3>
 <p>Let’s try to model a more interesting example, one that concerns the rate at which a user sends and receives text messages:</p>
 <blockquote>
 <div><p>You are given a series of daily text-message counts from a user of your system. The data, plotted over time, appears in the chart below. You are curious to know if the user’s text-messaging habits have changed over time, either gradually or suddenly. How can you model this? (This is in fact my own text-message data. Judge my popularity as you wish.)</p>
@@ -1039,7 +914,7 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/Ch1_Introduction_TFP_30_0.png" src="../../../_images/Ch1_Introduction_TFP_30_0.png" />
+<img alt="../../../_images/648eb04323bf087aff139d89ddd1bba20f841c199bda799466ce0cef94739f65.png" src="../../../_images/648eb04323bf087aff139d89ddd1bba20f841c199bda799466ce0cef94739f65.png" />
 </div>
 </div>
 <p>Before we start modeling, see what you can figure out just by looking at the chart above. Would you say there was a change in behaviour during this time period?</p>
@@ -1057,8 +932,8 @@ P(A | X) &amp;= \frac{1\cdot p}{ 1\cdot p +0.5 (1-p) } \\
 <p>If, in reality, no sudden change occurred and indeed <span class="math notranslate nohighlight">\(\lambda_1 = \lambda_2\)</span>, then the <span class="math notranslate nohighlight">\(\lambda\)</span>s posterior distributions should look about equal.</p>
 <p>We are interested in inferring the unknown <span class="math notranslate nohighlight">\(\lambda\)</span>s. To use Bayesian inference, we need to assign prior probabilities to the different possible values of <span class="math notranslate nohighlight">\(\lambda\)</span>. What would be good prior probability distributions for <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>? Recall that <span class="math notranslate nohighlight">\(\lambda\)</span> can be any positive number. As we saw earlier, the <em>exponential</em> distribution provides a continuous density function for positive numbers, so it might be a good choice for modeling <span class="math notranslate nohighlight">\(\lambda_i\)</span>. But recall that the exponential distribution takes a parameter of its own, so we’ll need to include that parameter in our model. Let’s call that parameter <span class="math notranslate nohighlight">\(\alpha\)</span>.
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-36010f1e-418a-4b8b-b735-8ee209094caa">
-<span class="eqno">()<a class="headerlink" href="#equation-36010f1e-418a-4b8b-b735-8ee209094caa" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3c00c867-b9fb-40a9-af57-6a26272edf40">
+<span class="eqno">()<a class="headerlink" href="#equation-3c00c867-b9fb-40a9-af57-6a26272edf40" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\lambda_1 \sim \text{Exp}( \alpha ) \\
 &amp;\lambda_2 \sim \text{Exp}( \alpha )
 \end{align}\]</div>
@@ -1068,31 +943,31 @@ $\alpha$ is called a *hyper-parameter* or *parent variable*. In literal terms, i
 <p>An alternative, and something I encourage the reader to try, would be to have two priors: one for each <span class="math notranslate nohighlight">\(\lambda_i\)</span>. Creating two exponential distributions with different <span class="math notranslate nohighlight">\(\alpha\)</span> values reflects our prior belief that the rate changed at some point during the observations.</p>
 <p>What about <span class="math notranslate nohighlight">\(\tau\)</span>? Because of the noisiness of the data, it’s difficult to pick out a priori when <span class="math notranslate nohighlight">\(\tau\)</span> might have occurred. Instead, we can assign a <em>uniform prior belief</em> to every possible day. This is equivalent to saying
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-75dc5fa5-bd48-45c2-a623-4b15753f0171">
-<span class="eqno">()<a class="headerlink" href="#equation-75dc5fa5-bd48-45c2-a623-4b15753f0171" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-828e0b47-1b7f-405d-b3ae-9c2a8743429f">
+<span class="eqno">()<a class="headerlink" href="#equation-828e0b47-1b7f-405d-b3ae-9c2a8743429f" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp; \tau \sim \text{DiscreteUniform(1,70) }\\
 &amp; \Rightarrow P( \tau = k ) = \frac{1}{70}
 \end{align}\]</div>
 <p>$$
 So after all this, what does our overall prior distribution for the unknown variables look like? Frankly, <em>it doesn’t matter</em>. What we should understand is that it’s an ugly, complicated mess involving symbols only a mathematician could love. And things will only get uglier the more complicated our models become. Regardless, all we really care about is the posterior distribution.</p>
 <p>We next turn to <a class="reference external" href="https://tensorflow.org/probability">TensorFlow Probability</a>, a Python library for performing Bayesian analysis that is undaunted by the mathematical monster we have created.</p>
-</div>
-</div>
-<div class="section" id="introducing-our-first-hammer-tensorflow-probability">
-<h2>Introducing our first hammer: TensorFlow Probability<a class="headerlink" href="#introducing-our-first-hammer-tensorflow-probability" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="introducing-our-first-hammer-tensorflow-probability">
+<h2>Introducing our first hammer: TensorFlow Probability<a class="headerlink" href="#introducing-our-first-hammer-tensorflow-probability" title="Permalink to this heading">#</a></h2>
 <p>TensorFlow Probability (TFP) is a Python library for programming Bayesian analysis. It is intended for data scientists, statisticians, machine learning practitioners, and scientists. Since it is built on the TensorFlow (TF) stack, it brings the runtime benefits of TF to Bayesian analysis. These include write-once run-many (ability to run your development model in production) and speedups via state-of-the-art hardware (GPUs and TPUs).</p>
 <p>Since TFP is relatively new, the TFP community is actively developing documentation,
 especially docs and examples that bridge the gap between beginner and hacker. One of this book’s main goals is to solve that problem, and also to demonstrate why TFP is so cool.</p>
 <p>We will model the problem above using TFP. This type of programming is called <em>probabilistic programming</em>, an unfortunate misnomer that invokes ideas of randomly-generated code and has likely confused and frightened users away from this field. The code is not random; it is probabilistic in the sense that we create probability models using programming variables as the model’s components.</p>
-<p>B. Cronin <a class="reference external" href="#scrollTo=nDdph0r1ABCn">[4]</a> has a very motivating description of probabilistic programming:</p>
+<p>B. Cronin <span class="xref myst">[4]</span> has a very motivating description of probabilistic programming:</p>
 <blockquote>
 <div><p>Another way of thinking about this: unlike a traditional program, which only runs in the forward directions, a probabilistic program is run in both the forward and backward direction. It runs forward to compute the consequences of the assumptions it contains about the world (i.e., the model space it represents), but it also runs backward from the data to constrain the possible explanations. In practice, many probabilistic programming systems will cleverly interleave these forward and backward operations to efficiently home in on the best explanations.</p>
 </div></blockquote>
 <p>Because of the confusion engendered by the term <em>probabilistic programming</em>, I’ll refrain from using it. Instead, I’ll simply say <em>programming</em>, since that’s what it really is.</p>
 <p>TFP code is easy to read. The only novel thing should be the syntax. Simply remember that we are representing the model’s components (<span class="math notranslate nohighlight">\(\tau, \lambda_1, \lambda_2\)</span> ) as variables.</p>
-</div>
-<div class="section" id="specify-the-joint-log-density">
-<h2>Specify the joint log-density<a class="headerlink" href="#specify-the-joint-log-density" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="specify-the-joint-log-density">
+<h2>Specify the joint log-density<a class="headerlink" href="#specify-the-joint-log-density" title="Permalink to this heading">#</a></h2>
 <p>We’ll assume the data is a consequence of the following generative model:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align*}
@@ -1139,9 +1014,9 @@ especially docs and examples that bridge the gap between beginner and hacker. On
 </div>
 </div>
 <p>Notice that the implementation is arguably very close to being a 1:1 translation of the mathematical model. The main difference is merely that once we’ve specified the probabilistic model, we return the sum of the log_probs.</p>
-</div>
-<div class="section" id="specify-the-posterior-sampler">
-<h2>Specify the posterior sampler<a class="headerlink" href="#specify-the-posterior-sampler" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="specify-the-posterior-sampler">
+<h2>Specify the posterior sampler<a class="headerlink" href="#specify-the-posterior-sampler" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wrap the mcmc sampling call in a @tf.function to speed it up</span>
@@ -1215,9 +1090,9 @@ final step size: 0.030197443440556526
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plot-the-results">
-<h2>Plot the Results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="plot-the-results">
+<h2>Plot the Results<a class="headerlink" href="#plot-the-results" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">12.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
@@ -1257,18 +1132,18 @@ final step size: 0.030197443440556526
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/Ch1_Introduction_TFP_41_0.png" src="../../../_images/Ch1_Introduction_TFP_41_0.png" />
+<img alt="../../../_images/b18375dfff9871303cbbf08566825cd343aea7e3710ab404e4372acff8ac6266.png" src="../../../_images/b18375dfff9871303cbbf08566825cd343aea7e3710ab404e4372acff8ac6266.png" />
 </div>
 </div>
-</div>
-<div class="section" id="interpretation">
-<h2>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="interpretation">
+<h2>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this heading">#</a></h2>
 <p>Recall that Bayesian methodology returns a <em>distribution</em>. Hence we now have distributions to describe the unknown <span class="math notranslate nohighlight">\(\lambda\)</span>s and <span class="math notranslate nohighlight">\(\tau\)</span>. What have we gained? Immediately, we can see the uncertainty in our estimates: the wider the distribution, the less certain our posterior belief should be. We can also see what the plausible values for the parameters are: <span class="math notranslate nohighlight">\(\lambda_1\)</span> is around 18 and <span class="math notranslate nohighlight">\(\lambda_2\)</span> is around 23. The posterior distributions of the two <span class="math notranslate nohighlight">\(\lambda\)</span>s are clearly distinct, indicating that it is indeed likely that there was a change in the user’s text-message behaviour.</p>
 <p>What other observations can you make? If you look at the original data again, do these results seem reasonable?</p>
 <p>Notice also that the posterior distributions for the <span class="math notranslate nohighlight">\(\lambda\)</span>s do not look like exponential distributions, even though our priors for these variables were exponential. In fact, the posterior distributions are not really of any form that we recognize from the original model. But that’s OK! This is one of the benefits of taking a computational point of view. If we had instead done this analysis using mathematical approaches, we would have been stuck with an analytically intractable (and messy) distribution. Our use of a computational approach makes us indifferent to mathematical tractability.</p>
 <p>Our analysis also returned a distribution for <span class="math notranslate nohighlight">\(\tau\)</span>. Its posterior distribution looks a little different from the other two because it is a discrete random variable, so it doesn’t assign probabilities to intervals. We can see that near day 45, there was a 50% chance that the user’s behaviour changed. Had no change occurred, or had the change been gradual over time, the posterior distribution of <span class="math notranslate nohighlight">\(\tau\)</span> would have been more spread out, reflecting that many days were plausible candidates for <span class="math notranslate nohighlight">\(\tau\)</span>. By contrast, in the actual results we see that only three or four days make any sense as potential transition points.</p>
-<div class="section" id="why-would-i-want-samples-from-the-posterior-anyways">
-<h3>Why would I want samples from the posterior, anyways?<a class="headerlink" href="#why-would-i-want-samples-from-the-posterior-anyways" title="Permalink to this headline">¶</a></h3>
+<section id="why-would-i-want-samples-from-the-posterior-anyways">
+<h3>Why would I want samples from the posterior, anyways?<a class="headerlink" href="#why-would-i-want-samples-from-the-posterior-anyways" title="Permalink to this heading">#</a></h3>
 <p>We will deal with this question for the remainder of the book, and it is an understatement to say that it will lead us to some amazing results. For now, let’s end this chapter with one more example.</p>
 <p>We’ll use the posterior samples to answer the following question: what is the expected number of texts at day <span class="math notranslate nohighlight">\(t, \; 0 \le t \le 70\)</span> ? Recall that the expected value of a Poisson variable is equal to its parameter <span class="math notranslate nohighlight">\(\lambda\)</span>. Therefore, the question is equivalent to <em>what is the expected value of <span class="math notranslate nohighlight">\(\lambda\)</span> at time <span class="math notranslate nohighlight">\(t\)</span></em>?</p>
 <p>In the code below, let <span class="math notranslate nohighlight">\(i\)</span> index samples from the posterior distributions. Given a day <span class="math notranslate nohighlight">\(t\)</span>, we average over all possible <span class="math notranslate nohighlight">\(\lambda_i\)</span> for that day <span class="math notranslate nohighlight">\(t\)</span>, using <span class="math notranslate nohighlight">\(\lambda_i = \lambda_{1,i}\)</span> if <span class="math notranslate nohighlight">\(t \lt \tau_i\)</span> (that is, if the behaviour change has not yet occurred), else we use <span class="math notranslate nohighlight">\(\lambda_i = \lambda_{2,i}\)</span>.</p>
@@ -1318,15 +1193,15 @@ final step size: 0.030197443440556526
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/Ch1_Introduction_TFP_43_0.png" src="../../../_images/Ch1_Introduction_TFP_43_0.png" />
+<img alt="../../../_images/131184600cc43b98788cfd52f9e9ac3ee3e79485c32c39693f3cac4a45c787cf.png" src="../../../_images/131184600cc43b98788cfd52f9e9ac3ee3e79485c32c39693f3cac4a45c787cf.png" />
 </div>
 </div>
 <p>Our analysis shows strong support for believing the user’s behavior did change (<span class="math notranslate nohighlight">\(\lambda_1\)</span> would have been close in value to <span class="math notranslate nohighlight">\(\lambda_2\)</span> had this not been true), and that the change was sudden rather than gradual (as demonstrated by <span class="math notranslate nohighlight">\(\tau\)</span>’s strongly peaked posterior distribution). We can speculate what might have caused this: a cheaper text-message rate, a recent weather-to-text subscription, or perhaps a new relationship. (In fact, the 45th day corresponds to Christmas, and I moved away to Toronto the next month, leaving a girlfriend behind.)</p>
-</div>
-</div>
-<div class="section" id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
+</section>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
 <li><p>Using <code class="docutils literal notranslate"><span class="pre">lambda_1_samples</span></code> and <code class="docutils literal notranslate"><span class="pre">lambda_2_samples</span></code>, what is the mean of the posterior distributions of <span class="math notranslate nohighlight">\(\lambda_1\)</span> and <span class="math notranslate nohighlight">\(\lambda_2\)</span>?</p></li>
 </ol>
 <div class="cell docutils container">
@@ -1336,7 +1211,7 @@ final step size: 0.030197443440556526
 </div>
 </div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="2">
 <li><p>What is the expected percentage increase in text-message rates? <code class="docutils literal notranslate"><span class="pre">hint:</span></code> compute the mean of <code class="docutils literal notranslate"><span class="pre">lambda_1_samples/lambda_2_samples</span></code>. Note that this quantity is very different from <code class="docutils literal notranslate"><span class="pre">lambda_1_samples.mean()/lambda_2_samples.mean()</span></code></p></li>
 </ol>
 <div class="cell docutils container">
@@ -1346,7 +1221,7 @@ final step size: 0.030197443440556526
 </div>
 </div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="3">
 <li><p>What is the mean of <span class="math notranslate nohighlight">\(\lambda_1\)</span> <strong>given</strong> that we know <span class="math notranslate nohighlight">\(\tau\)</span> is less than 45? That is, suppose we have been given new information that the change in behaviour occurred prior to day 45. What is the expected value of <span class="math notranslate nohighlight">\(\lambda_1\)</span> now? (You do not need to redo the TFP part. Just consider all instances where <code class="docutils literal notranslate"><span class="pre">tau_samples</span> <span class="pre">&lt;</span> <span class="pre">45</span></code>.)</p></li>
 </ol>
 <div class="cell docutils container">
@@ -1356,15 +1231,15 @@ final step size: 0.030197443440556526
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <p>[1] Gelman, Andrew. N.p.. Web. 22 Jan 2013. <a class="reference external" href="http://andrewgelman.com/2005/07/31/n_is_never_larg">N is never large enough</a></p>
 <p>[2] Norvig, Peter. 2009. <a class="reference external" href="http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/35179.pdf">The Unreasonable Effectiveness of Data</a>.</p>
 <p>[3] Jimmy Lin and Alek Kolcz. Large-Scale Machine Learning at Twitter. Proceedings of the 2012 ACM SIGMOD International Conference on Management of Data (SIGMOD 2012), pages 793-804, May 2012, Scottsdale, Arizona.</p>
 <p>[4] Cronin, Beau. “Why Probabilistic Programming Matters.” 24 Mar 2013. Google, Online Posting to Google . Web. 24 Mar. 2013. <a class="reference external" href="https://plus.google.com/u/0/107971134877020469960/posts/KpeRdJKR6Z1">https://plus.google.com/u/0/107971134877020469960/posts/KpeRdJKR6Z1</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1378,7 +1253,7 @@ final step size: 0.030197443440556526
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./content/04.02 - Variational inference/research"
         },
         predefinedOutput: true
@@ -1386,30 +1261,117 @@ final step size: 0.030197443440556526
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies-prerequisites">Dependencies &amp; Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-philosophy-of-bayesian-inference">The Philosophy of Bayesian Inference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-state-of-mind">The Bayesian state of mind</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-inference-in-practice">Bayesian Inference in Practice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#incorporating-evidence">Incorporating evidence</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#are-frequentist-methods-incorrect-then">Are frequentist methods incorrect then?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-note-on-big-data">A note on <em>Big Data</em></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-bayesian-framework">Our Bayesian framework</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mandatory-coin-flip-example">Example: Mandatory coin-flip example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-bug-or-just-sweet-unintended-feature">Example: Bug, or just sweet, unintended feature?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-case">Discrete Case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-case">Continuous Case</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#but-what-is-lambda">But what is <span class="math notranslate nohighlight">\(\lambda \;\)</span>?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-inferring-behaviour-from-text-message-data">Example: Inferring behaviour from text-message data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-our-first-hammer-tensorflow-probability">Introducing our first hammer: TensorFlow Probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-joint-log-density">Specify the joint log-density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-posterior-sampler">Specify the posterior sampler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-results">Plot the Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-would-i-want-samples-from-the-posterior-anyways">Why would I want samples from the posterior, anyways?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-</div>
+          </div>
+          <footer class="bd-footer-content">
             
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
-      </div>
-    </div>
+<div class="bd-footer-content__inner container">
   
-  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By Raúl Ramos / Universidad de Antioquia, Fabio González / Universidad Nacional de Colombia
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
